@@ -1,0 +1,47 @@
+*:not(i) {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+footer {
+  padding-top: 32px;
+  background-color: #181821;
+  color: #ecf0f1;
+  font-weight: 100;
+}
+
+.footer_title i{
+  margin-right: 4px;
+  font-size: 20px;
+}
+
+.footer__content {
+
+}
+
+.footer__item {
+  padding: 8px 0;
+}
+
+.logo {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 4px 8px;
+  box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.35);
+
+}
+
+.copyright {
+  padding: 12px 0;
+}
