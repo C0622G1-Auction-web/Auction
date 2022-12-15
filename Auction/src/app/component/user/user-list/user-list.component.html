@@ -1,1 +1,172 @@
-<p>user-list works!</p>
+<div class="container-fluid" style="height: 100%">
+
+  <div class="row">
+
+    <div class="col-lg-2 sidebar__left" style="height: 100vh">
+      <nav>
+        <ul class="menu">
+          <li class="menu__item">
+            <a class="menu__link" href="#">
+              <i class="menu__icon fa fa-home"></i>
+              Trang chủ
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="menu__item">
+            <a class="menu__link" href="#">
+              <i class="menu__icon fa-solid fa-book"></i>
+              Quản lý sản phẩm
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="menu__item">
+            <a class="menu__link" href="#">
+              <i class="menu__icon fa-solid fa-user-pen"></i>
+              Quản lý nhân viên
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="menu__item">
+            <a class="menu__link" href="#">
+              <i class="menu__icon fa-solid fa-handshake"></i>
+              Quản lý giao dịch
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="col-lg-10">
+      <h1 class="mt-5">Quản lý thành viên</h1>
+      <hr class="mb-5">
+
+      <div class="mt-2 row">
+
+        <div class="row">
+          <div class="col-2">
+            <div class="form-floating mb-4">
+              <input [(ngModel)]="idSearch" id="exampleFormControlInput0" type="email" placeholder="Mã thành viên:"
+                     id="floatingId" class="form-control form-control-underlined"/>
+              <label for="floatingId">Mã thành viên:</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-floating mb-4">
+              <input [(ngModel)]="nameSearch" id="exampleFormControlInput1" type="email" placeholder="Họ và tên:" id="floatingName"
+                     class="form-control form-control-underlined"/>
+              <label for="floatingName">Họ và tên:</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-floating mb-4">
+              <input [(ngModel)]="addressSearch" id="exampleFormControlInput2" type="email" placeholder="Địa chỉ:"
+                     id="floatingAddress"
+                     class="form-control form-control-underlined"/>
+              <label for="floatingAddress">Địa chỉ:</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-floating mb-4">
+              <input [(ngModel)]="emailSearch" id="exampleFormControlInput3" type="email" placeholder="Email:" id="floatingEmail"
+                     class="form-control form-control-underlined"/>
+              <label for="floatingEmail">Email:</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-floating mb-4">
+              <select [(ngModel)]="userTypeSearch" class="form-select form-control-underlined " style="padding-left: 3px"
+                      name="classroomSearch">
+                <option value="">--Chon--</option>
+                <option value="">Kim cương</option>
+                <option value="">Bạc kim</option>
+                <option value="">Vàng</option>
+                <option value="">Bạc</option>
+                <option value="">Đồng</option>
+              </select>
+              <label class="d-flex justify-content-start" style="padding-left: 0" for="floatingEmail">Xếp
+                hạng:</label>
+            </div>
+          </div>
+          <div class="col-1 ">
+            <input class="btn btn-info myMT " (click)="search()" type="submit" value="Lọc kết quả"/>
+          </div>
+        </div>
+
+        <div>
+          <a type="button" class="btn btn-danger">Xoá <i class="fa-regular fa-trash-can"></i> </a>
+          <a type="button" class="btn btn-danger">Khoá <i class="fa-solid fa-lock"></i> </a>
+          <a type="button" class="btn btn-danger">Mở khoá <i class="fa-solid fa-lock"></i> </a>
+          <a type="button" class="btn btn-danger">Thêm mới <i class="fa-solid fa-user-plus"></i> </a>
+
+
+        </div>
+
+        <div class=" mt-2 row container" style="padding-left: 2%;">
+          <table class="  mt-2 table table-striped table-bordered">
+            <thead>
+            <tr>
+              <th>
+                <div class="form-check">
+                  <input id="checkAll" class="form-check-input" type="checkbox" value=""/>
+                </div>
+              </th>
+              <th>STT</th>
+              <th>Tên thành viên</th>
+              <th>Địa chỉ</th>
+              <th>Xếp hạng</th>
+              <th>Email</th>
+              <th>SĐT</th>
+              <th>Lần đăng nhập cuối</th>
+              <th>Điểm cống hiến</th>
+              <th>Tính năng</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+              <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value=""/>
+                </div>
+              </td>
+              <td>1</td>
+              <td>Nguyễn Thanh Hải</td>
+              <td>Duy Trung, Duy Xuyên, Quảng Nam</td>
+              <td>Kim cương</td>
+              <td>hai@gmail.com</td>
+              <td>0826262626</td>
+              <td>2022-12-12 14:26:26</td>
+              <td>26</td>
+              <td><i class="fa-solid fa-trash-can" style="color: red"></i> |
+                <i class="fa-solid fa-pen-to-square" style="color: darkgoldenrod"></i></td>
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+<script>
+  $("#checkAll").click(function () {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+  });
+</script>
