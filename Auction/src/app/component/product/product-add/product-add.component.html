@@ -1,1 +1,147 @@
-<p>product-add works!</p>
+<div class="container bg-white h-100 d-flex flex-column">
+  <div class="  auction d-flex align-items-center">
+    <div class="row d-flex ms-auto me-5">
+
+      <div class="boxed shadow-md h-100 ms-auto">
+
+        <form class="form" [formGroup]="formCreateProduct"  (ngSubmit)="addNewProduct()">
+          <fieldset>
+            <legend>
+              <div class="mt-4 text-center">
+                <h1>Thêm mới sản phẩm</h1>
+              </div>
+            </legend>
+          </fieldset>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/interface-edit.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>
+            </div>
+            <input type="text" class="form-control" formControlName="name"/>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/people.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Mã người đăng<span style="color: red"> (*)</span>:</label>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+
+              <input style="width: 50%" type="text"  class="form-control"/>
+              <button class="btn btn-primary d-flex justify-content-center mx-3">
+                <object data="./icons/check-people.svg" width="20" height="20"
+                        class="me-2 slide"></object>
+                <p>
+                  Kiểm tra
+                </p>
+              </button>
+              <button style="width: 20%">
+                <object data="./icons/back.svg" width="20" height="20"></object>
+              </button>
+            </div>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/information.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Thông tin người đăng:</label>
+            </div>
+            <textarea class="form-control" formControlName="" disabled></textarea>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/dollar.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>
+            </div>
+            <input style="width: 40%" type="number" class="form-control"/>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/money-increase.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Mỗi lần tăng ít nhất<span
+                style="color: red"> (*)</span>:</label>
+            </div>
+            <select style="width: 40%" class="form-select" aria-label="Default select example">
+              <option value="1">50.000</option>
+              <option value="2">100.000</option>
+              <option value="3">150.000</option>
+              <option value="4">250.000</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/category.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Chủng loại<span style="color: red">(*)</span>:</label>
+            </div>
+            <select style="width: 40%" class="form-select" aria-label="Default select example">
+              <option value="1">Điện tử</option>
+              <option value="2">Đồ gia dụng</option>
+              <option value="3">Đồ chơi</option>
+              <option value="4">Chủng loại khác</option>
+            </select>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/image.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>
+            </div>
+            <input style="width: 100%" type="file" class="form-control"/>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/information.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Thông tin chi tiết<span
+                style="color: red">(*)</span>:</label>
+            </div>
+            <textarea class="form-control" formControlName=""></textarea>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/hour-end.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Thời gian bắt đầu<span
+                style="color: red"> (*)</span>:</label>
+            </div>
+            <input type="datetime-local" class="form-control"/>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="./icons/hour-start.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Thời gian kết thúc<span
+                style="color: red"> (*)</span>:</label>
+            </div>
+            <input type="datetime-local" class="form-control"/>
+          </div>
+
+          <div class="d-flex mt-3 mb-2 w-100">
+            <button style="margin-right: 5px" class="btn btn-primary d-flex justify-content-center">
+              <object data="./icons/legal-hammer.svg" width="20" height="20"
+                      class="me-2 slide"></object>
+              <p>
+                Thêm mới
+              </p>
+            </button>
+            <button style="margin-right: 5px" class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">
+              <object data="./icons/button-back.svg" width="20" height="20"
+                      class="me-2 slide"></object>
+              <p>Nhập lại</p>
+            </button>
+            <button class="btn btn-outline btn-warning ms-auto d-flex justify-content-center">
+              <object data="./icons/cancel.svg" width="20" height="20"
+                      class="me-2 slide"></object>
+              <p>Hủy</p>
+            </button>
+          </div>
+        </form>
+
+        <div class="mb-2">
+            <span style="font-size: 15px" class="fst-italic">
+              Trường có dấu <span style="color: red"> (*)</span> là bắt
+              buộc,không được bỏ trống
+            </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
