@@ -31,6 +31,7 @@ import { VerificationComponent } from './security/verification/verification.comp
 import { VerifyResetPasswordComponent } from './security/verify-reset-password/verify-reset-password.component';
 import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
+import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { MethodPaymentComponent } from './component/payment/method-payment/metho
     VerifyResetPasswordComponent,
     AddressPaymentComponent,
     MethodPaymentComponent
+    PaymentReceiptComponent
   ],
   imports: [
     BrowserModule,
