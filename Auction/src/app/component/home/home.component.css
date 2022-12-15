@@ -10,7 +10,9 @@ html {
 body {
   min-height: 1000px;
 }
-
+ul {
+  margin: 0;
+}
 ul,
 li {
   list-style-type: none;

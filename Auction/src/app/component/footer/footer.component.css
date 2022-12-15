@@ -16,6 +16,8 @@ a {
 
 footer {
   padding-top: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
   background-color: #181821;
   color: #ecf0f1;
   font-weight: 100;
@@ -43,5 +45,5 @@ footer {
 }
 
 .copyright {
-  padding: 12px 0;
+  padding: 12px;
 }

@@ -17,12 +17,14 @@ const routes: Routes = [
     component: ProductEditComponent
   },
 
-  {path:"aa", component: TransactionComponent}
+  {path:"aa", component: TransactionComponent},
 
   {
-
     path:"home",
     component: HomeComponent
+
+  },
+  {
     path: "user/list",
     component: UserListComponent
   },

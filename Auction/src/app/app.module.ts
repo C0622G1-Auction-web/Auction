@@ -64,10 +64,10 @@ import { TransactionComponent } from './component/transaction/transaction.compon
     VerifyResetPasswordComponent,
     PaymentCartComponent,
     AccountForgotPassComponent,
-    AccountResetPassComponent
+    AccountResetPassComponent,
     AddressPaymentComponent,
-    MethodPaymentComponent
-    PaymentReceiptComponent
+    MethodPaymentComponent,
+    PaymentReceiptComponent,
     TransactionComponent
   ],
   imports: [

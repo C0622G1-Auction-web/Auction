@@ -14,7 +14,7 @@ import {User} from '../../../model/user/user';
 })
 export class UserAddComponent implements OnInit {
 
-  addUser: User;
+  addUser: User[];
   addAddress: Address[];
   addUserType: UserType[];
   addAcountUser: Account[];
@@ -25,26 +25,27 @@ export class UserAddComponent implements OnInit {
   ngOnInit(): void {
     this.userSevice.getAllUser().subscribe(data => {
       this.addUser = data;
-      this.addUser = this.builder.group({
-        fisrtName: [],
-        lastName: [],
-        accountUser: [],
-        birthDay: [],
-        phone: [],
-        email: [],
-        idCard: [],
-        avatar: [],
-        pointDedication: [10.0],
-        username: [],
-        password: ['12345678'],
-        detailAddress: [],
-        town: [],
-        district: [],
-        city: [],
-        country: [],
-        statusLock: ['1'],
-        deleteStatus: ['1'],
-      });
+      // Viet doing...
+      // this.addUser = this.builder.group({
+      //   fisrtName: [],
+      //   lastName: [],
+      //   accountUser: [],
+      //   birthDay: [],
+      //   phone: [],
+      //   email: [],
+      //   idCard: [],
+      //   avatar: [],
+      //   pointDedication: [10.0],
+      //   username: [],
+      //   password: ['12345678'],
+      //   detailAddress: [],
+      //   town: [],
+      //   district: [],
+      //   city: [],
+      //   country: [],
+      //   statusLock: ['1'],
+      //   deleteStatus: ['1'],
+      // });
     });
   }
 }

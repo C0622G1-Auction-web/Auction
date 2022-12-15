@@ -1,14 +1,9 @@
 
-import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
 import {User} from '../../model/user/user';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {User} from "../../model/user/user";
-import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -21,7 +16,6 @@ export class UserService {
 
   getAllUser(): Observable<User[]> {
     return null;
-  constructor(private httpClient: HttpClient) {
   }
 
   findUserById(userId: number): Observable<User> {
