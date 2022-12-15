@@ -29,6 +29,9 @@ import { AuctionRequestComponent } from './component/auction-request/auction-req
 import { ProductDetailComponent } from './component/product/product-detail/product-detail.component';
 import { VerificationComponent } from './security/verification/verification.component';
 import { VerifyResetPasswordComponent } from './security/verify-reset-password/verify-reset-password.component';
+import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
+import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
+import { AccountResetPassComponent } from './component/account-reset-pass/account-reset-pass.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,10 @@ import { VerifyResetPasswordComponent } from './security/verify-reset-password/v
     AuctionRequestComponent,
     ProductDetailComponent,
     VerificationComponent,
-    VerifyResetPasswordComponent
+    VerifyResetPasswordComponent,
+    PaymentCartComponent,
+    AccountForgotPassComponent,
+    AccountResetPassComponent
   ],
   imports: [
     BrowserModule,
