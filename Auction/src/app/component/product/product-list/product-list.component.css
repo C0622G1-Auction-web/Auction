@@ -1,0 +1,60 @@
+#all{
+  margin-top: 8px;
+}
+
+.dropdown{
+  color: grey;
+  text-align: center;
+}
+
+a{
+  color: white;
+  text-decoration: none
+}
+
+#is {
+  background-color: #00FFFF;
+  animation-name: keyframes1;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+@keyframes keyframes1 {
+  0% {
+    background-color: #00FFFF;
+  }
+  50% {
+    background-color: #B0E0E6;
+  }
+  100% {
+    background-color: #AFEEEE;
+  }
+}
+
+#title{
+  display: block;
+  height: 200px;
+  margin-bottom: 50px;
+}
+
+button{
+  position: center;
+}
+
+#left{
+  overflow: scroll;
+  height: 400px;
+}
+
+#center{}
+
+#right{
+  overflow: scroll;
+  height: 400px;
+}
+
+body{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  url("https://demoda.vn/wp-content/uploads/2022/02/background-do-sang-trong-may-man-1.jpg");
+  background-size: cover;
+  position: relative;
+}

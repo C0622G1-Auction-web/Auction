@@ -5,4 +5,10 @@ export interface Auction {
   currentPrice?: string;
   auctionTime?: string;
   product?: Product;
+
+  id?: number,
+  currentPrice: number,
+  auctionTime: string,
+  auctionStatus: boolean,
+  deleteStatus: boolean
 }
