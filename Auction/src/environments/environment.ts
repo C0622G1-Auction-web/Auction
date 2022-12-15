@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  api_url_order_status: 'http://localhost:8080/api/v1/payments',
   categoryUrl: "http://localhost:8080/api/v1/products/category",
   priceStepUrl:  "http://localhost:8080/api/v1/products/priceStep",
 
