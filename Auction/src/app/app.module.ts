@@ -54,7 +54,7 @@ import { VerifyResetPasswordComponent } from './security/verify-reset-password/v
     AuctionRequestComponent,
     ProductDetailComponent,
     VerificationComponent,
-    VerifyResetPasswordComponent
+    VerifyResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
