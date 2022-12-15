@@ -5,6 +5,11 @@ import {AuctionStatus} from "./auction-status";
 import {ImgUrlProduct} from "./img-url-product";
 
 export interface Product {
+  nameProduct: String;
+  description: String;
+  RegisterDay: String;
+  Review: String;
+  IsDelete: String;
   id?: number,
   name?: string,
   description?: string,
@@ -19,5 +24,4 @@ export interface Product {
   imgUrlProducts?: ImgUrlProduct,
   maxCurrentPrice?: number
   // user?: User;
-
 }
