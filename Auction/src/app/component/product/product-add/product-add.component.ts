@@ -9,6 +9,7 @@ import {PriceStepService} from "../../../service/product/price-step.service";
 import {ReviewStatus} from "../../../model/product/review-status";
 import {AuctionStatus} from "../../../model/product/auction-status";
 import {User} from "../../../model/user/user";
+import {UserService} from "../../../service/user/user.service";
 
 @Component({
   selector: 'app-product-add',
@@ -21,12 +22,14 @@ export class ProductAddComponent implements OnInit {
   categoryList: Category[] = [];
   priceStepList: PriceStep[] = [];
   formCreateProduct: FormGroup;
-  user: User;
+  userFind: User;
+  userId:number;
 
   constructor(private formBuilder: FormBuilder,
               private productService: ProductService,
               private categoryService: CategoryService,
-              private priceStepService: PriceStepService) {
+              private priceStepService: PriceStepService,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -54,5 +57,12 @@ export class ProductAddComponent implements OnInit {
 
   addNewProduct() {
 
+  }
+
+  findUserById(value) {
+    this.userService.findUserById(value).subscribe(data=>{
+        this.userFind = data;
+      console.log(this.userFind)
+    })
   }
 }
