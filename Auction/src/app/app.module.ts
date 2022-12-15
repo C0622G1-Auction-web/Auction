@@ -59,7 +59,7 @@ import { PaymentReceiptComponent } from './component/payment-receipt/payment-rec
     VerificationComponent,
     VerifyResetPasswordComponent,
     AddressPaymentComponent,
-    MethodPaymentComponent
+    MethodPaymentComponent,
     PaymentReceiptComponent
   ],
   imports: [

@@ -1,9 +1,8 @@
-import {Payment} from "../payment/payment";
-import {Product} from "../product/product";
-import {User} from "../user/user";
+import {Payment} from '../payment/payment';
+import {Product} from '../product/product';
+import {User} from '../user/user';
 
 export interface Auction {
-
   id?: number;
   currentPrice?: number;
   auctionTime?: string;
@@ -13,5 +12,4 @@ export interface Auction {
   auctionDay?: string;
   user?: User;
   product?: Product;
-  payment?: Payment;
 }
