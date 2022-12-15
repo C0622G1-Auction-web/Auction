@@ -5,6 +5,14 @@
 export const environment = {
   production: false,
   api_url_order_status: 'http://localhost:8080/api/v1/payments',
+  categoryUrl: "http://localhost:8080/api/v1/products/category",
+  priceStepUrl:  "http://localhost:8080/api/v1/products/priceStep",
+
+  transactionUrl: "http://localhost:8080/auction/api/transaction",
+
+  productSearchUrl: "http://localhost:8080/api/v1/products/search"
+  userUrl: "http://localhost:8080/api/user/v1/"
+
 };
 
 /*
