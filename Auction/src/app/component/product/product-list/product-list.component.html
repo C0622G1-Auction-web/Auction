@@ -15,7 +15,6 @@
   </div>
 
 
-
   <div class="row" id="center">
     <table class="table table-primary table-striped-columns">
       <thead>
@@ -40,54 +39,33 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-between p-2" *ngIf="action">
-      <ngb-pagination
-        [collectionSize]="(total$ | async)!"
-        [(page)]="page"
-        [maxSize]="3"
-        [rotate]="true"
-        [pageSize]="pageSize"
-        [boundaryLinks]="true"
-        (pageChange)="findAll()">
-      </ngb-pagination>
-  </div>
+<!--      <ngb-pagination-->
+<!--        [collectionSize]="(total$ | async)!"-->
+<!--        [(page)]="page"-->
+<!--        [maxSize]="3"-->
+<!--        [rotate]="true"-->
+<!--        [pageSize]="pageSize"-->
+<!--        [boundaryLinks]="true"-->
+<!--        (pageChange)="findAll()">-->
+<!--      </ngb-pagination>-->
+    </div>
 
-  <div>
-    <script>
-      var index = 1;
-      changeImage = function () {
-        var imgs = ["https://static.daugiarongviet.vn/uploaded/slide/dau-gia-rong-viet-1_1663042382.jpg",
-          "https://hoc11.vn/wp-content/uploads/2021/11/tinh-nang-dau-gia-tren-shopee-live.png",
-          "https://i.ytimg.com/vi/z9iPlspJJ1U/maxresdefault.jpg",
-          "http://blog.abit.vn/wp-content/uploads/2020/04/cach-san-deal-tiki3-2.png",];
-        document.getElementById('img').src = imgs[index];
-        index++;
-        if (index == 4) {
-          index = 0;
+    <div>
+      <script>
+        var index = 1;
+        changeImage = function () {
+          var imgs = ["https://static.daugiarongviet.vn/uploaded/slide/dau-gia-rong-viet-1_1663042382.jpg",
+            "https://hoc11.vn/wp-content/uploads/2021/11/tinh-nang-dau-gia-tren-shopee-live.png",
+            "https://i.ytimg.com/vi/z9iPlspJJ1U/maxresdefault.jpg",
+            "http://blog.abit.vn/wp-content/uploads/2020/04/cach-san-deal-tiki3-2.png",];
+          document.getElementById('img').src = imgs[index];
+          index++;
+          if (index == 4) {
+            index = 0;
+          }
         }
-      }
-      setInterval(changeImage, 2000) ;
+        setInterval(changeImage, 2000)
+      </script>
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
