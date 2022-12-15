@@ -7,6 +7,7 @@ export const environment = {
   categoryUrl: "http://localhost:8080/api/v1/products/category",
   priceStepUrl:  "http://localhost:8080/api/v1/products/priceStep",
   productSearchUrl: "http://localhost:8080/api/v1/products/search"
+  userUrl: "http://localhost:8080/api/user/v1/"
 };
 
 /*
