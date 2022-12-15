@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ToastrModule} from "ngx-toastr";
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { ProductListComponent } from './component/product/product-list/product-list.component';
@@ -29,6 +29,7 @@ import { AuctionRequestComponent } from './component/auction-request/auction-req
 import { ProductDetailComponent } from './component/product/product-detail/product-detail.component';
 import { VerificationComponent } from './security/verification/verification.component';
 import { VerifyResetPasswordComponent } from './security/verify-reset-password/verify-reset-password.component';
+import { TransactionComponent } from './component/transaction/transaction.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { VerifyResetPasswordComponent } from './security/verify-reset-password/v
     AuctionRequestComponent,
     ProductDetailComponent,
     VerificationComponent,
-    VerifyResetPasswordComponent
+    VerifyResetPasswordComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
