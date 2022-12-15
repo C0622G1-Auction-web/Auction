@@ -1,5 +1,7 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {GuideListComponent} from "./component/guide/guide-list/guide-list.component";
+import {AuctionProductDetailComponent} from "./component/auction/auction-product-detail/auction-product-detail.component";
 import {ProductAddComponent} from "./component/product/product-add/product-add.component";
 import {ProductEditComponent} from "./component/product/product-edit/product-edit.component";
 import {TransactionComponent} from "./component/transaction/transaction.component";
@@ -31,10 +33,19 @@ const routes: Routes = [
   {
     path: "user/edit",
     component: UserEditComponent
-  }
+  },
+{
+  path: 'product/add',
+  component: ProductAddComponent
+}, {
+  path: 'guide',
+  component: GuideListComponent
+},
+  {
+    path: "auction/:productId", component: AuctionProductDetailComponent,
 
+  }];
 
-];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
