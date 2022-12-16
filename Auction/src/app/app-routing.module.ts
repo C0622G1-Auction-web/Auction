@@ -11,27 +11,27 @@ import {UserEditComponent} from "./component/user/user-edit/user-edit.component"
 
 const routes: Routes = [
   {
-    path: "product/create",
+    path: 'product/create',
     component: ProductAddComponent
   },
   {
-    path: "product/edit",
+    path: 'product/edit',
     component: ProductEditComponent
   },
 
-  {path:"aa", component: TransactionComponent},
+  {path:'aa', component: TransactionComponent},
 
   {
-    path:"home",
+    path:'home',
     component: HomeComponent
 
   },
   {
-    path: "user/list",
+    path: 'user/list',
     component: UserListComponent
   },
   {
-    path: "user/edit",
+    path: 'user/edit',
     component: UserEditComponent
   },
 {
@@ -42,7 +42,7 @@ const routes: Routes = [
   component: GuideListComponent
 },
   {
-    path: "auction/:productId", component: AuctionProductDetailComponent,
+    path: 'auction/:productId', component: AuctionProductDetailComponent,
 
   }];
 
