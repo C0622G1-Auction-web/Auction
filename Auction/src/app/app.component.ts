@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ToastrService} from "ngx-toastr";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,7 @@ import {ToastrService} from "ngx-toastr";
 })
 export class AppComponent {
   title = 'Auction';
+  // tslint:disable-next-line:variable-name
   constructor(private _toastService: ToastrService) {
   }
 
