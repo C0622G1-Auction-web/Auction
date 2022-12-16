@@ -1,31 +1,29 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../../model/product/product';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PriceStep} from '../../model/product/price-step';
 import {Category} from '../../model/product/category';
 import {User} from '../../model/user/user';
 import {ImgUrlProduct} from '../../model/product/img-url-product';
 import {environment} from '../../../environments/environment';
-import {DataResult} from '../../model/product/data_result';
-import {ProductDto} from '../../model/product/iProduct_dto';
-import {ReviewStatus} from '../../model/product/review-status';
-import {PageProduct} from '../../model/product/page-product';
+import {DataResult} from "../../model/product/data_result";
+import {ProductDto} from "../../model/product/iProduct_dto";
+import {ReviewStatus} from "../../model/product/review-status";
+import {PageProduct} from "../../model/product/page-product";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  // tslint:disable-next-line:variable-name
-  constructor(private _httpClient: HttpClient) {
-  }
 
   private product: Product[];
 
   private API_URL = '  http://localhost:8080/';
 
-  // constructor(private httpClient: HttpClient) { }
+  // @ts-ignore
+  constructor(private _httpClient: HttpClient) { }
 
   findAllPriceStep(): Observable<PriceStep[]> {
     return this._httpClient.get<PriceStep[]>(environment.api_url_list_price_step);
@@ -55,13 +53,15 @@ export class ProductService {
     return this._httpClient.get<ReviewStatus[]>(this.API_URL + 'listReviewStatus');
   }
 
+
   /**
    * Created: SangDD
    * Function: show page product and search
    * Date: 15/11/2022
    */
   getAllAndSearch(rfSearch: any): Observable<any> {
-    return this._httpClient.get(environment.productSearchUrl, rfSearch);
+    // return this._httpClient.get<PageProduct>(environment.productSearchUrl, rfSearch);
+    return this._httpClient.post<PageProduct>(environment.productSearchUrl, rfSearch);
   }
 
   /**
