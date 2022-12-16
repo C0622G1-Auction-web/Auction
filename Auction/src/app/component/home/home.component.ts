@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
       productAuctionStatus: ['']
     });
     this.gotoPage();
-    this.demo();
   }
 
   /**
@@ -50,9 +49,4 @@ export class HomeComponent implements OnInit {
    this.gotoPage();
   }
 
-  demo() {
-    this._productService.demo(this.rfSearch.value).subscribe(data => {
-      console.log(data);
-    });
-  }
 }

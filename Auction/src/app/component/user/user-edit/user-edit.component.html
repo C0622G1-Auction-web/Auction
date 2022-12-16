@@ -1,1 +1,223 @@
-<p>user-edit works!</p>
+
+<div class="container-fluid" style="background-color: #eee  ;height: 100vh">
+  <div class="row">
+
+    <div class="col-lg-2 sidebar__left" style="height: 100vh">
+      <nav>
+        <ul class="menu">
+          <li class="menu__item">
+            <a class="menu__link" href="#">
+              <i class="menu__icon fa fa-home"></i>
+              Trang chủ
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="menu__item">
+            <a class="menu__link" href="#">
+              <i class="menu__icon fa-solid fa-book"></i>
+              Quản lý sản phẩm
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="menu__item">
+            <a class="menu__link" href="#">
+              <i class="menu__icon fa-solid fa-user-pen"></i>
+              Quản lý nhân viên
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="menu__item">
+            <a class="menu__link" href="#">
+              <i class="menu__icon fa-solid fa-handshake"></i>
+              Quản lý giao dịch
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container col-10" style="width: 75%">
+      <div class="borderFull">
+        <div class="row" style="padding:32px 0">
+          <div class="profile row" style="background-color: white;border-radius: 20px">
+            <div class=" col-5 bgd d-flex align-items-center pl-0 " style="padding-left: 0">
+              <div class="h-100 w-100"
+                   style="background: url('https://images.pexels.com/photos/210661/pexels-photo-210661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; background-repeat: no-repeat;border-top-left-radius: 20px; border-bottom-left-radius: 20px">
+              </div>
+            </div>
+            <div class="col-7  p-3">
+              <div class="row">
+                <div class="text-center">
+                  <div class="row mb-3" style="font-size: 20px">
+                    <h3>Sửa hồ sơ cá nhân</h3>
+                  </div>
+                </div>
+                <div class="col-lg-3"></div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class=" input-group mb-3">
+                    <div class="form-floating flex-grow-1">
+                      <input type="text" class="form-control" id="floatingFistName"
+                             placeholder="Tên đăng nhập" value="Nguyễn"
+                             aria-label="Tên đăng nhập" aria-describedby="basic-addon2">
+                      <label for="floatingFistName">Họ</label>
+                    </div>
+                    <span class="input-group-text" id="basic-addon1">  <i
+                      class="fa-solid fa-user"></i></span>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class=" input-group mb-3">
+                    <div class=" form-floating flex-grow-1">
+                      <input type="text" class="form-control" id="floatingName"
+                             placeholder="Tên đăng nhập" value="Thanh Hải"
+                             aria-label="Tên đăng nhập" aria-describedby="basic-addon2">
+                      <label for="floatingName">Tên</label>
+                    </div>
+                    <span class="input-group-text" id="basic-addon2"><i
+                      class="fa-solid fa-user"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class=" input-group mb-3">
+                    <div class="form-floating flex-grow-1">
+                      <input type="text" class="form-control" id="floatingLogin"
+                             placeholder="Tên đăng nhập" value="HảiNT"
+                             aria-label="Tên đăng nhập" aria-describedby="basic-addon2">
+                      <label for="floatingLogin">Tên đăng nhập</label>
+                    </div>
+                    <span class="input-group-text" id="basic-addon3"><i
+                      class="fa-solid fa-user"></i></span>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class=" input-group mb-3">
+                    <div class="form-floating flex-grow-1">
+                      <input type="email" class="form-control" id="floatingId"
+                             placeholder="Email" value="2626"
+                             aria-label="Email" aria-describedby="basic-addon2">
+                      <label for="floatingId">Mã thành viên</label>
+                    </div>
+                    <span class="input-group-text" id="basic-addon4">
+                                            <i class="fa-solid fa-id-badge"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class=" input-group mb-3">
+                    <div class=" form-floating flex-grow-1">
+                      <input type="text" class="form-control" id="floatingDateOfBirth"
+                             placeholder="DateOfBirth" value="03/12/1999"
+                             aria-label="DateOfBirth" aria-describedby="basic-addon10">
+                      <label for="floatingDateOfBirth">Ngày sinh</label>
+                    </div>
+                    <span class="input-group-text" id="basic-addon5"><i
+                      class="fa-regular fa-calendar"></i></span>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class=" input-group mb-3">
+                    <div class="form-floating flex-grow-1">
+                      <input type="text" class="form-control" id="floatingIdCard"
+                             placeholder="IdCard" value="206262626">
+                      <label for="floatingIdCard">CMND</label>
+                    </div>
+                    <span class="input-group-text" id="basic-addon6"><i
+                      class="fa-regular fa-id-card"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class=" input-group mb-3">
+                    <div class="form-floating flex-grow-1">
+                      <input type="text" class="form-control" id="floatingPhone"
+                             placeholder="PhoneNumber" value="086262626"
+                             aria-label="PhoneNumber" aria-describedby="basic-addon2">
+                      <label for="floatingPhone">Số điện thoại</label>
+                    </div>
+                    <span class="input-group-text" id="basic-addon7"><i
+                      class="fa-solid fa-phone-flip"></i></span>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class=" input-group mb-3">
+                    <div class="form-floating flex-grow-1">
+                      <input type="email" class="form-control" id="floatingEmail"
+                             placeholder="Email" value="a@gmail.com"
+                             aria-label="Email" aria-describedby="basic-addon2">
+                      <label for="floatingEmail">Email</label>
+                    </div>
+                    <span class="input-group-text" id="basic-addon8"><i
+                      class="fa-solid fa-envelope"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-6">
+                  <div class="form-floating mb-3">
+                    <select class="form-select "
+                            id="city" aria-label=".form-select-sm">
+                      <option value="" selected>Quảng Nam</option>
+                    </select>
+                    <label class="d-flex justify-content-start"
+                           for="floatingEmail">Tỉnh /Thành phố:</label>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="district"
+                            aria-label=".form-select-sm">
+                      <option value="" selected>Duy Xuyên</option>
+                    </select>
+                    <label class="d-flex justify-content-start"
+                           for="floatingEmail">Huyện/Quận :</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-lg-5 ">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="ward" aria-label=".form-select-sm">
+                      <option value="" selected>Duy Trung</option>
+                    </select>
+                    <label class="d-flex justify-content-start"
+                           for="floatingEmail">Xã/Phường:</label>
+                  </div>
+                </div>
+                <div class="col-lg-7">
+                  <div class=" input-group mb-3">
+                    <div class="form-floating flex-grow-1">
+                      <input type="text" class="form-control" id="floatingAddress"
+                             placeholder="Address"
+                             value="26 Nguyễn Văn Linh, Duy Trung, Duy Xuyên, Quảng Nam"
+                             aria-label="Address" aria-describedby="basic-addon2">
+                      <label for="floatingAddress">Địa chỉ chi tiết</label>
+                    </div>
+                    <span class="input-group-text" id="basic-addon9"><i
+                      class="fa-solid fa-location-dot"></i></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="d-flex ">
+                  <button type="button" class="btn btn-primary mx-2">Cập nhật</button>
+                  <button type="button" class="btn btn-warning">Đặt lại</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
