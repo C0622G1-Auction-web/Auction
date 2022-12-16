@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuctionService} from "../../../service/auction/auction.service";
 import {Product} from "../../../model/product/product";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {Auction} from "../../../model/auction/auction";
 
 
 @Component({
@@ -15,6 +16,7 @@ export class AuctionProductDetailComponent implements OnInit {
   productDetail: Product;
   auctionPrice: number;
   rfAuction: FormGroup;
+  private newAuction: Auction;
 
   constructor(private _auctionService: AuctionService,
               private _formBuilder: FormBuilder) {
@@ -64,5 +66,14 @@ export class AuctionProductDetailComponent implements OnInit {
       return {"checkAuctionPrice": true};
     }
     return null;
+  }
+
+
+  onSubmit() {
+    this._auctionService.addNewAuction(this.rfAuction.value).subscribe(
+      data => {
+        this.newAuction = data;
+      }
+    )
   }
 }

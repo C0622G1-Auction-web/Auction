@@ -6,5 +6,5 @@ export interface Auction {
   auctionTime: string,
   auctionStatus: boolean,
   deleteStatus: boolean,
-  user:User
+  userId:number;
 }

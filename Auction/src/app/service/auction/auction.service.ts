@@ -19,7 +19,12 @@ export class AuctionService {
 
   getAuctionPageByProductId(idProduct: number, pageNumber: number): Observable<any> {
     return this._httpClient.get(environment.API_URL_AUCTION + '/product/'
-      + idProduct+'?page='+pageNumber);
+      + idProduct + '?page=' + pageNumber);
+  }
+
+  addNewAuction(auction: Auction): Observable<Auction> {
+    return this._httpClient.post<Auction>(environment.API_URL_AUCTION, auction);
+
   }
 }
 
