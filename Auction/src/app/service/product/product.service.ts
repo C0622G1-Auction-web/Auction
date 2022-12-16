@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Product} from '../../model/product/product';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PriceStep} from '../../model/product/price-step';
 import {Category} from '../../model/product/category';
@@ -10,6 +10,8 @@ import {environment} from '../../../environments/environment';
 import {DataResult} from "../../model/product/data_result";
 import {ProductDto} from "../../model/product/iProduct_dto";
 import {ReviewStatus} from "../../model/product/review-status";
+import {PageProduct} from "../../model/product/page-product";
+import * as Http from "http";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,7 @@ import {ReviewStatus} from "../../model/product/review-status";
 export class ProductService {
   private product: Product[];
 
+  // @ts-ignore
   constructor(private _httpClient: HttpClient) { }
   // constructor(private httpClient: HttpClient) { }
 
@@ -48,12 +51,16 @@ export class ProductService {
     return this._httpClient.get<ReviewStatus[]>(this.API_URL + 'listReviewStatus');
   }
 
+
   /**
    * Created: SangDD
    * Function: show page product and search
    * Date: 15/11/2022
    */
   getAllAndSearch(rfSearch: any): Observable<any> {
-    return this._httpClient.get(environment.productSearchUrl, rfSearch);
+    // return this._httpClient.get<PageProduct>(environment.productSearchUrl, rfSearch);
+    return this._httpClient.post<PageProduct>(environment.productSearchUrl, rfSearch);
   }
+
+
 }
