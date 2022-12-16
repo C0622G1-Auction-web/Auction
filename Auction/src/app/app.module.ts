@@ -33,6 +33,7 @@ import {AuctionComponent} from './component/auction/auction.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
+import { AuctionProductAddComponent } from './auction/auction-product-add/auction-product-add.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {InfomationAuctionSellerComponent} from './component/auction/infomation-a
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
     InfomationAuctionSellerComponent,
+    AuctionProductAddComponent,
   ],
   imports: [
     BrowserModule,
