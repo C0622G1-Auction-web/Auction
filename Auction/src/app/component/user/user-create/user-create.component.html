@@ -124,7 +124,9 @@
                       <div class="form-floating flex-grow-1">
                         <input type="text" class="form-control" id="floatingPhone"
                                placeholder="PhoneNumber"
-                               aria-label="PhoneNumber" aria-describedby="basic-addon2">
+                               aria-label="PhoneNumber" aria-describedby="basic-addon2"
+                               [ngClass]="(userCreateForm.controls['phone'].touched)?
+                                            userCreateForm.controls['phone'].invalid?'is-invalid':'is-valid':''">
                         <label for="floatingPhone">Số điện thoại</label>
                       </div>
                       <span class="input-group-text" id="basic-addon5"><i
