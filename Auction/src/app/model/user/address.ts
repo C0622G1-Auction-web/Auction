@@ -1,7 +1,5 @@
 import {User} from "./user";
 
-
-​
 export interface Address {
   id?: number;
   detailAddress?: string;
@@ -10,4 +8,5 @@ export interface Address {
   city?: string;
   country?: string;
   user?: User;
+
 }

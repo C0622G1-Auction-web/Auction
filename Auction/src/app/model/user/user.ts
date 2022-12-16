@@ -1,3 +1,4 @@
+
 import {Account} from "../account/account";
 import {UserType} from "./user-type";
 import {Address} from "./address";
@@ -15,4 +16,5 @@ export interface User {
   address:Address;
   userType:UserType;
   account: Account;
+
 }
