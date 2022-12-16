@@ -35,3 +35,10 @@ body {
 input[type="checkbox"] {
   zoom: 1.75;
 }
+
+.bg-orange{
+  background-image: linear-gradient(to bottom right, #fa6132, #d74836);
+}
+.text-orange{
+  color: #fa6132;
+}
