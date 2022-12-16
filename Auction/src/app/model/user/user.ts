@@ -1,5 +1,5 @@
-import { Address } from './address';
-import { UserType } from './user-type';
+import {Address} from "./address";
+import {UserType} from "./user-type";
 
 export interface User {
   id?:number,
