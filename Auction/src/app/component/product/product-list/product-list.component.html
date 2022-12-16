@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div>
   <div class="row" id="title">
     <marquee direction="right"
@@ -13,7 +14,6 @@
   <div div class="row">
     <h1 class="text-center text-" style="color: white">LỊCH SỬ ĐĂNG KÝ MẶT HÀNG ĐẤU GIÁ</h1>
   </div>
-
 
 
   <div class="row" id="center">
@@ -40,54 +40,37 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-between p-2" *ngIf="action">
-      <ngb-pagination
-        [collectionSize]="(total$ | async)!"
-        [(page)]="page"
-        [maxSize]="3"
-        [rotate]="true"
-        [pageSize]="pageSize"
-        [boundaryLinks]="true"
-        (pageChange)="findAll()">
-      </ngb-pagination>
-  </div>
+<!--      <ngb-pagination-->
+<!--        [collectionSize]="(total$ | async)!"-->
+<!--        [(page)]="page"-->
+<!--        [maxSize]="3"-->
+<!--        [rotate]="true"-->
+<!--        [pageSize]="pageSize"-->
+<!--        [boundaryLinks]="true"-->
+<!--        (pageChange)="findAll()">-->
+<!--      </ngb-pagination>-->
+    </div>
 
-  <div>
-    <script>
-      var index = 1;
-      changeImage = function () {
-        var imgs = ["https://static.daugiarongviet.vn/uploaded/slide/dau-gia-rong-viet-1_1663042382.jpg",
-          "https://hoc11.vn/wp-content/uploads/2021/11/tinh-nang-dau-gia-tren-shopee-live.png",
-          "https://i.ytimg.com/vi/z9iPlspJJ1U/maxresdefault.jpg",
-          "http://blog.abit.vn/wp-content/uploads/2020/04/cach-san-deal-tiki3-2.png",];
-        document.getElementById('img').src = imgs[index];
-        index++;
-        if (index == 4) {
-          index = 0;
+    <div>
+      <script>
+        var index = 1;
+        changeImage = function () {
+          var imgs = ["https://static.daugiarongviet.vn/uploaded/slide/dau-gia-rong-viet-1_1663042382.jpg",
+            "https://hoc11.vn/wp-content/uploads/2021/11/tinh-nang-dau-gia-tren-shopee-live.png",
+            "https://i.ytimg.com/vi/z9iPlspJJ1U/maxresdefault.jpg",
+            "http://blog.abit.vn/wp-content/uploads/2020/04/cach-san-deal-tiki3-2.png",];
+          document.getElementById('img').src = imgs[index];
+          index++;
+          if (index == 4) {
+            index = 0;
+          }
         }
-      }
-      setInterval(changeImage, 2000) ;
+        setInterval(changeImage, 2000)
+      </script>
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+=======
+<p>product-list works!</p>
+<p>Test firt time</p>
+>>>>>>> dev

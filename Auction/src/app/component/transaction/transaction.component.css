@@ -1,0 +1,59 @@
+.sidebar__left {
+  background: #535151;
+
+}
+.menu{
+  padding: 0;
+  padding-top: 24px;
+  background: #535151;
+  margin: 0;
+}
+.menu__item {
+  padding: 4px 12px;
+  list-style-type: none;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.menu__icon {
+  margin-right: 4px;
+}
+.menu__link {
+  text-decoration: none;
+  color: cornsilk;
+}
+
+.menu__link:hover {
+  color: cornsilk;
+
+}
+
+.menu__item:hover {
+  background-color: cornsilk;
+  opacity: 0.7;
+}
+.menu__item:hover .menu__link {
+  color: #0a0a0a;
+}
+.form-control:focus {
+  box-shadow: none;
+}
+
+/*search */
+.form-control-underlined {
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-radius: 0;
+  padding-left: 0;
+}
+
+.form-control::placeholder {
+  font-size: 0.95rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+}
+
