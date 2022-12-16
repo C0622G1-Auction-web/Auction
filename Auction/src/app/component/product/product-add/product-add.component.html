@@ -2,7 +2,7 @@
   <div class="  auction d-flex align-items-center">
     <div class="row d-flex ms-auto me-5">
       <div class="boxed shadow-md h-100 ms-auto">
-        <form *ngIf="formCreateProduct" class="form" [formGroup]="formCreateProduct"  (ngSubmit)="addNewProduct()">
+        <form *ngIf="formCreateProduct" class="form" [formGroup]="formCreateProduct" (ngSubmit)="addNewProduct()">
           <fieldset>
             <legend>
               <div class="mt-4 text-center">
@@ -24,13 +24,12 @@
             </div>
             <div class="d-flex align-items-center mb-2">
 
-              <input #testNum  style="width: 50%" type="number"  class="form-control"/>
-              <button class="btn btn-primary d-flex justify-content-center mx-3" (click)="findUserById(testNum.value)">
+              <input #testNum style="width: 50%" type="number" class="form-control"/>
+              <button type="button" class="btn btn-primary d-flex justify-content-center mx-3"
+                      (click)="findUserById(testNum.value)">
                 <object data="assets/icons/check-people.svg" width="20" height="20"
                         class="me-2 slide"></object>
-                <p>
-                  Kiểm tra
-                </p>
+                Kiểm tra
               </button>
               <button style="width: 20%">
                 <object data="assets/icons/back.svg" width="20" height="20"></object>
@@ -55,7 +54,7 @@
               <object data="assets/icons/dollar.svg" width="20" height="20"></object>
               <label class="form-label ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>
             </div>
-            <input style="width: 40%" type="number" class="form-control" formControlName="initialPrice"/>
+            <input  type="number" class="form-control" formControlName="initialPrice"/>
           </div>
           <div class="mb-2">
             <div class="d-flex align-items-center mb-2">
@@ -63,8 +62,9 @@
               <label class="form-label ms-2">Mỗi lần tăng ít nhất<span
                 style="color: red"> (*)</span>:</label>
             </div>
-            <select style="width: 40%" class="form-select" aria-label="Default select example" formControlName="priceStep">
-              <option *ngFor="let item of priceStepList" [ngValue]="item" >{{item.step}}</option>
+            <select  class="form-select" aria-label="Default select example"
+                    formControlName="priceStep">
+              <option *ngFor="let item of priceStepList" [ngValue]="item.id">{{item.step}}</option>
             </select>
           </div>
           <div class="mb-2">
@@ -72,8 +72,9 @@
               <object data="assets/icons/category.svg" width="20" height="20"></object>
               <label class="form-label ms-2">Chủng loại<span style="color: red">(*)</span>:</label>
             </div>
-            <select style="width: 40%" class="form-select" aria-label="Default select example" formControlName="category">
-              <option *ngFor="let item of categoryList" [ngValue]="item" >{{item.name}}</option>
+            <select class="form-select" aria-label="Default select example"
+                    formControlName="category">
+              <option *ngFor="let item of categoryList" [ngValue]="item.id">{{item.name}}</option>
             </select>
           </div>
 
@@ -82,9 +83,16 @@
               <object data="assets/icons/image.svg" width="20" height="20"></object>
               <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>
             </div>
-            <input style="width: 100%" type="file" class="form-control"/>
+            <input type="file" id="file"
+                   #userPhoto
+                   multiple
+                   (change)="showPreview($event)"
+                   name="image"
+                   autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
           </div>
-
+          <div *ngFor="let i of img" >
+            <img style="width: 10px;height: 10px" src="{{i}}"><button type="button" class="btn-close" disabled aria-label="Close"></button>
+          </div>
           <div class="mb-2">
             <div class="d-flex align-items-center mb-2">
               <object data="assets/icons/information.svg" width="20" height="20"></object>
@@ -119,17 +127,21 @@
                 Thêm mới
               </p>
             </button>
-            <button type="reset" style="margin-right: 5px" class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">
+
+            <button type="reset" style="margin-right: 5px"
+                    class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">
               <object data="assets/icons/button-back.svg" width="20" height="20"
                       class="me-2 slide"></object>
               <p>Nhập lại</p>
             </button>
+
             <button class="btn btn-outline btn-warning ms-auto d-flex justify-content-center">
               <object data="assets/icons/cancel.svg" width="20" height="20"
                       class="me-2 slide"></object>
               <p>Hủy</p>
             </button>
           </div>
+
         </form>
 
         <div class="mb-2">
@@ -138,7 +150,6 @@
               buộc,không được bỏ trống
             </span>
         </div>
-
       </div>
     </div>
   </div>

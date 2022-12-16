@@ -1,5 +1,7 @@
+import {Product} from "./product";
+
 export interface ImgUrlProduct {
   id?: number,
-  name?: string,
-  productId?: number
+  url?: string,
+  product?: number
 }

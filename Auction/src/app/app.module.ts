@@ -29,6 +29,9 @@ import { AuctionRequestComponent } from './component/auction-request/auction-req
 import { ProductDetailComponent } from './component/product/product-detail/product-detail.component';
 import { VerificationComponent } from './security/verification/verification.component';
 import { VerifyResetPasswordComponent } from './security/verify-reset-password/verify-reset-password.component';
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -63,7 +66,9 @@ import { VerifyResetPasswordComponent } from './security/verify-reset-password/v
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

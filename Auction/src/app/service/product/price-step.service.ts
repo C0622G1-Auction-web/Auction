@@ -10,9 +10,9 @@ import {HttpClient} from "@angular/common/http";
 })
 export class PriceStepService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) { }
 
   getListPriceStep(): Observable<PriceStep[]> {
-    return this.httpClient.get<PriceStep[]>(environment.priceStepUrl)
+    return this._httpClient.get<PriceStep[]>(environment.priceStepUrl)
   }
 }

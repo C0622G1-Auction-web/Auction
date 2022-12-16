@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Category} from "../../model/product/category";
+import {ImgUrlProduct} from "../../model/product/img-url-product";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class ImageProductService {
 
   constructor(private _httpClient: HttpClient) { }
 
-  getListCategory():Observable<Category[]> {
-    return this._httpClient.get<Category[]>(environment.categoryUrl)
+  create(image: ImgUrlProduct): Observable<ImgUrlProduct> {
+    return this._httpClient.post<ImgUrlProduct>(environment.imageUrl + "/create", image)
   }
 }
