@@ -1,3 +1,5 @@
+import { title } from 'process';
+
 export interface Guide {
   id?: number;
   title?: string;

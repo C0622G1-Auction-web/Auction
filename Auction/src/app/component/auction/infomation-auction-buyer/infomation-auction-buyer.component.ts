@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuctionService} from "../../../service/auction/auction.service";
+import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-product-id";
 
 @Component({
   selector: 'app-infomation-auction-buyer',
@@ -6,10 +8,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./infomation-auction-buyer.component.css']
 })
 export class InfomationAuctionBuyerComponent implements OnInit {
+  auctionPageByProductId: PageAuctionByProductId
+  productId: number;
+  private user: any;
 
-  constructor() { }
+
+  constructor(private auctionService: AuctionService) {
+  }
 
   ngOnInit(): void {
+    this.auctionService.getAuctionPageByProductId(2, 0).subscribe(
+      data => {
+        this.auctionPageByProductId = data;
+      }
+    )
+  }
+
+  /**
+   * Created by: TienBM,
+   * Date created: 16/12/2022
+   * Function: next page
+   * @param i : pageNumber
+   */
+  goToPage(i: number) {
+    this.auctionService.getAuctionPageByProductId(2, i).subscribe(
+      data => {
+        this.auctionPageByProductId = data;
+      }
+    )
   }
 
 }
