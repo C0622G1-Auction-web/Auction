@@ -6,6 +6,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
@@ -39,6 +40,12 @@ import { AddressPaymentComponent } from './component/payment/address-payment/add
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
+import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
+
+const googleLoginOptions = {
+  scope: 'profile email',
+  plugin_name: 'login'
+};
 
 @NgModule({
   declarations: [
@@ -86,7 +93,23 @@ import { TransactionComponent } from './component/transaction/transaction.compon
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '360980124241-cu5j4vb8mfob7il8h62oa320t8ldoi7l.apps.googleusercontent.com',
+              googleLoginOptions
+            )
+          },
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
