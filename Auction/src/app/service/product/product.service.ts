@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+=======
 import {Injectable} from '@angular/core';
 import {Product} from '../../model/product/product';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -11,12 +17,16 @@ import {DataResult} from "../../model/product/data_result";
 import {ProductDto} from "../../model/product/iProduct_dto";
 import {ReviewStatus} from "../../model/product/review-status";
 import {PageProduct} from "../../model/product/page-product";
+>>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
+<<<<<<< HEAD
+  constructor(private httpClient: HttpClient) { }
+=======
 
   private product: Product[];
 
@@ -54,12 +64,16 @@ export class ProductService {
   }
 
 
+>>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
   /**
    * Created: SangDD
    * Function: show page product and search
    * Date: 15/11/2022
    */
   getAllAndSearch(rfSearch: any): Observable<any> {
+<<<<<<< HEAD
+    return this.httpClient.get(environment.productSearchUrl, rfSearch);
+=======
     // return this._httpClient.get<PageProduct>(environment.productSearchUrl, rfSearch);
     return this._httpClient.post<PageProduct>(environment.productSearchUrl, rfSearch);
   }
@@ -79,5 +93,6 @@ export class ProductService {
     //     "auctionStatusName":""
     // }
     return this._httpClient.get<PageProduct>(environment.api_url_products);
+>>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
   }
 }
