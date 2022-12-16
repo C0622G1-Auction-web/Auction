@@ -25,7 +25,11 @@ export class UserCreateComponent implements OnInit {
                ) {
 
   }
-
+  /**
+   * Create by: TruongLH
+   * Date created: 13/12/2022
+   * Function: to create component user
+   */
   ngOnInit(): void {
     this.userCreateForm= this.formBuilder.group({
       // avatar:["",[Validators.required]],
