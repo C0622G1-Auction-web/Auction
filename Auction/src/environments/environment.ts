@@ -4,9 +4,6 @@
 
 export const environment = {
   production: false,
-<<<<<<< HEAD
-  URL_API: 'http://localhost:8080'
-=======
   api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
   api_url_list_category: 'http://localhost:8080/api/v1/category',
   api_url_list_user: 'http://localhost:8080/api/v1/users',
@@ -18,9 +15,8 @@ export const environment = {
   transactionUrl: "http://localhost:8080/auction/api/transaction",
   productSearchUrl: "http://localhost:8080/api/v1/products/search",
   userUrl: "http://localhost:8080/api/user/v1/"
-
->>>>>>> 7ecb9ed2a223946c54d9e14383e8bab095901e9f
-};
+  SIGN_IN_API: 'http://localhost:8080/api/v1/auth/signin'
+  GOOGLE_SIGN_IN_API: 'http://localhost:8080/api/v1/auth/google'
 
 /*
  * For easier debugging in development mode, you can import the following file

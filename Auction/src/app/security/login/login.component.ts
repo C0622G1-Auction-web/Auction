@@ -5,6 +5,8 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../service/security/auth.service";
 import {TokenService} from "../../service/security/token.service";
 import {MessageRespone} from "../../model/security/message-respone";
+import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
+import {Googletoken} from "../oauth2/googletoken";
 
 @Component({
   selector: 'app-login',
@@ -14,8 +16,10 @@ import {MessageRespone} from "../../model/security/message-respone";
 export class LoginComponent implements OnInit {
 
   rfLogin: FormGroup;
+  socialUser: SocialUser;
 
   constructor(
+    private authSocialService: SocialAuthService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
@@ -28,6 +32,12 @@ export class LoginComponent implements OnInit {
     this.getFormLogin();
   }
 
+  /**
+   * Created by: DucDH
+   * Date: 16/12/2022
+   * Function: To get login form
+   */
+
   getFormLogin() {
     this.rfLogin = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
@@ -35,6 +45,12 @@ export class LoginComponent implements OnInit {
       rememberMe: [false]
     })
   }
+
+  /**
+   * Created by: DucDH
+   * Date: 16/12/2022
+   * Function: To login using User account
+   */
 
   login() {
     this.authService.login(this.rfLogin.value).subscribe(data => {
@@ -70,6 +86,39 @@ export class LoginComponent implements OnInit {
         console.log('Đăng nhập thất bại')
       }
 
+    })
+  }
+
+  /**
+  * Created by: DucDH
+  * Date: 16/12/2022
+  * Function: To login using google oauth2
+  */
+
+  loginWithGoogle() {
+    this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+      this.socialUser = data;
+
+      const googleToken = new Googletoken(this.socialUser.idToken)
+
+      this.authService.googleLogin(googleToken).subscribe(req => {
+
+        if (req.token == null) {
+          const emailToRegister = req.email;
+
+          this.router.navigateByUrl('/signUp/' + emailToRegister)
+
+        } else {
+
+          this.tokenService.setTokenLocal(req.token);
+          this.tokenService.setRoleLocal(req.roles)
+
+          this.router.navigate(['/home']).then(() => {
+            location.reload();
+          })
+
+        }
+      })
     })
   }
 
