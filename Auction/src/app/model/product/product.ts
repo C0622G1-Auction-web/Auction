@@ -5,16 +5,18 @@ import {Category} from "./category";
 import {User} from "../user/user";
 
 export interface Product {
-  id: number,
-  name: string,
-  description: string,
-  initialPrice: number,
-  startTime: string,
-  endTime: string,
-  registerDay: string,
-  priceStep: PriceStep,
-  reviewStatus: ReviewStatus,
-  auctionStatus: AuctionStatus,
-  category: Category,
-  user: User;
+  id?: number;
+  description?: string;
+  initialPrice?: number;
+  startTime?: string;
+  endTime?: string;
+  deleteStatus?: boolean;
+  registerDay?: string;
+  priceStep?: string;
+  reviewStatus?: any;
+  auctionStatus?: any;
+  category?: any;
+  imgUrlProducts?: any;
+  auctions?: any;
+  user?: any;
 }

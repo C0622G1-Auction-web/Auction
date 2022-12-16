@@ -1,4 +1,5 @@
 <div class="app">
+  <button (click)="demo()">click me</button>
   <app-header></app-header>
   <form class="filter" *ngIf="rfSearch" [formGroup]="rfSearch" (ngSubmit)="gotoPage()">
     <div class="container-fluid">
