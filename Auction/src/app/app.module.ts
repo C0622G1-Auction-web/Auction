@@ -29,6 +29,12 @@ import { AuctionRequestComponent } from './component/auction-request/auction-req
 import { ProductDetailComponent } from './component/product/product-detail/product-detail.component';
 import { VerificationComponent } from './security/verification/verification.component';
 import { VerifyResetPasswordComponent } from './security/verify-reset-password/verify-reset-password.component';
+import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
+
+const googleLoginOptions = {
+  scope: 'profile email',
+  plugin_name: 'login'
+};
 
 @NgModule({
   declarations: [
@@ -65,7 +71,23 @@ import { VerifyResetPasswordComponent } from './security/verify-reset-password/v
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '360980124241-cu5j4vb8mfob7il8h62oa320t8ldoi7l.apps.googleusercontent.com',
+              googleLoginOptions
+            )
+          },
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  URL_API: 'http://localhost:8080'
+  SIGN_IN_API: 'http://localhost:8080/api/auth/signin'
+  GOOGLE_SIGN_IN_API: 'http://localhost:8080/api/auth/google'
 };
 
 /*
