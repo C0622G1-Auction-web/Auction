@@ -9,7 +9,6 @@ import {GuideService} from "../../../service/guide/guide.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
-import {ImgUrlGuideService} from "../../../service/guide/img-url-guide.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 
 @Component({
@@ -30,7 +29,6 @@ export class GuideAddComponent implements OnInit {
   constructor(private _guideService:GuideService,
               private _formBuilder: FormBuilder,
               private _storage:AngularFireStorage,
-              private _imgUrlGuideService: ImgUrlGuideService,
               private _activatedRouter: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -57,9 +55,9 @@ export class GuideAddComponent implements OnInit {
                 };
                 console.log(url);
                 console.log(image);
-                this._imgUrlGuideService.create(image).subscribe(() => {
-                  console.log('SUCCESSFULLY CREATE')
-                });
+                // this._imgUrlGuideService.create(image).subscribe(() => {
+                //   console.log('SUCCESSFULLY CREATE')
+                // });
               });
             })
           ).subscribe();

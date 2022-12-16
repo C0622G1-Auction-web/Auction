@@ -1,5 +1,5 @@
 import {Product} from "./product";
-import {Product} from './product';
+
 
 export interface ImgUrlProduct {
   id?: number;
