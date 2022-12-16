@@ -5,6 +5,10 @@ import {Category} from '../../../model/product/category';
 import {User} from '../../../model/user/user';
 import {ProductService} from '../../../service/product/product.service';
 import {ToastrService} from 'ngx-toastr';
+import {Product} from '../../../model/product/product';
+import {CategoryService} from '../../../service/product/category.service';
+import {PriceStepService} from '../../../service/product/price-step.service';
+import {UserService} from '../../../service/user/user.service';
 
 export const checkStartDay: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const startDay = new Date(control.get('startDay').value).getTime();
@@ -37,19 +41,32 @@ export class ProductAddComponent implements OnInit {
   priceStepList: PriceStep[];
   categoryList: Category[];
   userList: User[];
+  product: Product;
+  formCreateProduct: FormGroup;
+  userFind: User;
+  userId: number;
   private error: any;
 
-  constructor(private productService: ProductService,
+  constructor(private formBuilder: FormBuilder,
+              private productService: ProductService,
+              private categoryService: CategoryService,
               private toastService: ToastrService,
-              private formBuilder: FormBuilder) {
+              private priceStepService: PriceStepService,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.productService.findAllPriceStep().subscribe(data => {
       this.priceStepList = data;
     });
+    this.priceStepService.getListPriceStep().subscribe(data => {
+      this.priceStepList = data;
+    });
 
     this.productService.findAllCategory().subscribe(data => {
+      this.categoryList = data;
+    });
+    this.categoryService.getListCategory().subscribe(data => {
       this.categoryList = data;
     });
 
@@ -67,6 +84,21 @@ export class ProductAddComponent implements OnInit {
       categoryId: ['', [Validators.required]],
       userId: ['', [Validators.required]]
     });
+
+    this.formCreateProduct = this.formBuilder.group({
+      id: [],
+      name: [],
+      description: [],
+      initialPrice: [],
+      startTime: [],
+      endTime: [],
+      registerDay: [],
+      priceStep: [],
+      reviewStatus: [],
+      auctionStatus: [],
+      category: [],
+      user: []
+    });
   }
 
   createProduct() {
@@ -78,4 +110,15 @@ export class ProductAddComponent implements OnInit {
       });
   }
 
+
+  addNewProduct() {
+
+  }
+
+  findUserById(value) {
+    this.userService.findUserById(value).subscribe(data => {
+      this.userFind = data;
+      console.log(this.userFind);
+    });
+  }
 }

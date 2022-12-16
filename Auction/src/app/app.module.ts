@@ -1,12 +1,11 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ToastrModule} from "ngx-toastr";
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
@@ -33,7 +32,13 @@ import {AuctionComponent} from './component/auction/auction.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
-import { AuctionProductAddComponent } from './auction/auction-product-add/auction-product-add.component';
+import {PaymentCartComponent} from './component/payment/payment-cart/payment-cart.component';
+import {AccountForgotPassComponent} from './component/account-forgot-pass/account-forgot-pass.component';
+import {AccountResetPassComponent} from './component/account-reset-pass/account-reset-pass.component';
+import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
+import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
+import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
+import {TransactionComponent} from './component/transaction/transaction.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +69,14 @@ import { AuctionProductAddComponent } from './auction/auction-product-add/auctio
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
     InfomationAuctionSellerComponent,
-    AuctionProductAddComponent,
+    PaymentCartComponent,
+    AccountForgotPassComponent,
+    AccountResetPassComponent,
+    AddressPaymentComponent,
+    MethodPaymentComponent,
+    PaymentReceiptComponent,
+    TransactionComponent,
+    PaymentReceiptComponent
   ],
   imports: [
     BrowserModule,
@@ -78,4 +90,5 @@ import { AuctionProductAddComponent } from './auction/auction-product-add/auctio
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
