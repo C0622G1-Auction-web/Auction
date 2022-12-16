@@ -19,14 +19,25 @@ import {ImgUrlProductDto} from "../../../model/product/dto/img-url-product-dto";
 
 
 
+import {finalize} from "rxjs/operators";
+import {ImageProductService} from "../../../service/product/image-product.service";
+import {ImgUrlProduct} from "../../../model/product/img-url-product";
+import {AngularFireStorage} from "@angular/fire/storage";
+import {ProductDto} from "../../../model/product/product-dto";
+
 @Component({
   selector: 'app-product-add',
   templateUrl: './product-add.component.html',
   styleUrls: ['./product-add.component.css']
 })
 export class ProductAddComponent implements OnInit {
+<<<<<<< HEAD
   product: Product;
   productDto: ProductDto;
+=======
+
+  product: ProductDto;
+>>>>>>> 15fbba97fa97a0a6e00e561a2462e4cda7f49af3
   categoryList: Category[] = [];
   priceStepList: PriceStep[] = [];
   formCreateProduct: FormGroup;
@@ -65,9 +76,16 @@ export class ProductAddComponent implements OnInit {
   }
 
   addNewProduct() {
+<<<<<<< HEAD
     this.productDto = this.formCreateProduct.value;
     console.log(this.formCreateProduct.value)
     this._productService.save(this.productDto).subscribe(data => {
+=======
+   this.product = this.formCreateProduct.value;
+    console.log(this.formCreateProduct.value)
+    return this._productService.saveProduct(this.product).subscribe(data => {
+      console.log(data)
+>>>>>>> 15fbba97fa97a0a6e00e561a2462e4cda7f49af3
       if (this.selectedImages.length !== 0) {
         for (let i = 0; i < this.selectedImages.length; i++) {
           let selectedImage = this.selectedImages[i];
@@ -77,9 +95,15 @@ export class ProductAddComponent implements OnInit {
           this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
             finalize(() => {
               fileRef.getDownloadURL().subscribe(url => {
+<<<<<<< HEAD
                 const image: ImgUrlProductDto = {
                   url: url,
                   product: data.id
+=======
+                const image: ImgUrlProduct = {
+                  url: url,
+                  product: data
+>>>>>>> 15fbba97fa97a0a6e00e561a2462e4cda7f49af3
                 };
                 console.log(url);
                 console.log(image)
@@ -116,11 +140,18 @@ export class ProductAddComponent implements OnInit {
     } else {
       this.selectedImages = [];
     }
+<<<<<<< HEAD
     console.log(this.selectedImages)
     if (newSelectedImages.length !== 0) {
       for (let i = 0; i < newSelectedImages.length; i++) {
         let selectedImage = newSelectedImages[i];
         const n = Date.now();
+=======
+    if (newSelectedImages.length !== 0) {
+      for (let i = 0; i < newSelectedImages.length; i++) {
+        let selectedImage = newSelectedImages[i];
+        var n = Date.now();
+>>>>>>> 15fbba97fa97a0a6e00e561a2462e4cda7f49af3
         const filePath = `RoomsImages/${n}`;
         const fileRef = this._storage.ref(filePath);
         this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
