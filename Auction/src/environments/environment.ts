@@ -16,7 +16,9 @@ export const environment = {
   productSearchUrl: "http://localhost:8080/api/v1/products/search",
   userUrl: "http://localhost:8080/api/user/v1/"
   SIGN_IN_API: 'http://localhost:8080/api/v1/auth/signin'
-  GOOGLE_SIGN_IN_API: 'http://localhost:8080/api/v1/auth/google'
+  GOOGLE_SIGN_IN_API: 'http://localhost:8080/api/v1/auth/google',
+  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create",
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
