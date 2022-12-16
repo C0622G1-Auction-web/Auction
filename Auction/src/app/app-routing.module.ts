@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {ProductAddComponent} from './component/product/product-add/product-add.component';
@@ -57,8 +56,6 @@ const routes: Routes = [
     path: 'methodPayment', component: MethodPaymentComponent
   },
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
