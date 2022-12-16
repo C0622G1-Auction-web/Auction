@@ -30,6 +30,7 @@ import { ProductDetailComponent } from './component/product/product-detail/produ
 import { VerificationComponent } from './security/verification/verification.component';
 import { VerifyResetPasswordComponent } from './security/verify-reset-password/verify-reset-password.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
+import { LockaccountUserComponent } from './component/user/lockaccount-user/lockaccount-user.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { TransactionComponent } from './component/transaction/transaction.compon
     ProductDetailComponent,
     VerificationComponent,
     VerifyResetPasswordComponent,
-    TransactionComponent
+    TransactionComponent,
+    LockaccountUserComponent
   ],
   imports: [
     BrowserModule,

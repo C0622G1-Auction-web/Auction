@@ -1,15 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ProductService} from "../../../service/product/product.service";
-import {Product} from "../../../model/product/product";
-import {Category} from "../../../model/product/category";
-import {PriceStep} from "../../../model/product/price-step";
-import {CategoryService} from "../../../service/product/category.service";
-import {PriceStepService} from "../../../service/product/price-step.service";
-import {ReviewStatus} from "../../../model/product/review-status";
-import {AuctionStatus} from "../../../model/product/auction-status";
-import {User} from "../../../model/user/user";
-import {UserService} from "../../../service/user/user.service";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ProductService} from '../../../service/product/product.service';
+import {Product} from '../../../model/product/product';
+import {Category} from '../../../model/product/category';
+import {PriceStep} from '../../../model/product/price-step';
+import {CategoryService} from '../../../service/product/category.service';
+import {PriceStepService} from '../../../service/product/price-step.service';
+import {User} from '../../../model/user/user';
+import {UserService} from '../../../service/user/user.service';
 
 @Component({
   selector: 'app-product-add',
@@ -23,7 +21,7 @@ export class ProductAddComponent implements OnInit {
   priceStepList: PriceStep[] = [];
   formCreateProduct: FormGroup;
   userFind: User;
-  userId:number;
+  userId: number;
 
   constructor(private formBuilder: FormBuilder,
               private productService: ProductService,
@@ -33,12 +31,12 @@ export class ProductAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryService.getListCategory().subscribe(data=>{
-       this.categoryList = data;
-    })
-    this.priceStepService.getListPriceStep().subscribe(data=>{
+    this.categoryService.getListCategory().subscribe(data => {
+      this.categoryList = data;
+    });
+    this.priceStepService.getListPriceStep().subscribe(data => {
       this.priceStepList = data;
-    })
+    });
     this.formCreateProduct = this.formBuilder.group({
       id: [],
       name: [],
@@ -52,7 +50,7 @@ export class ProductAddComponent implements OnInit {
       auctionStatus: [],
       category: [],
       user: []
-    })
+    });
   }
 
   addNewProduct() {
@@ -60,9 +58,9 @@ export class ProductAddComponent implements OnInit {
   }
 
   findUserById(value) {
-    this.userService.findUserById(value).subscribe(data=>{
-        this.userFind = data;
-      console.log(this.userFind)
-    })
+    this.userService.findUserById(value).subscribe(data => {
+      this.userFind = data;
+      console.log(this.userFind);
+    });
   }
 }
