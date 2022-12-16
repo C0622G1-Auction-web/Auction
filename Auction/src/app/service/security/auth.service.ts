@@ -3,20 +3,35 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {LoginForm} from "../../model/security/login-form";
+import {Googletoken} from "../../security/oauth2/googletoken";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private URL_API = environment.URL_API;
-
   constructor(
     private httpClient: HttpClient
   ) { }
 
+  /**
+   * Created by: DucDH
+   * Date: 16/12/2022
+   * Function: To login using User account
+   */
+
   login(loginForm: LoginForm): Observable<any> {
-    return this.httpClient.post<any>(this.URL_API + '/api/auth/signin', loginForm);
+    return this.httpClient.post<any>(environment.SIGN_IN_API, loginForm);
+  }
+
+  /**
+   * Created by: DucDH
+   * Date: 16/12/2022
+   * Function: To login using google oauth2
+   */
+
+  googleLogin(googleToken: Googletoken): Observable<any> {
+    return this.httpClient.post<any>(environment.GOOGLE_SIGN_IN_API, googleToken)
   }
 
 }
