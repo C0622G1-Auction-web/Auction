@@ -1,1 +1,229 @@
-<p>home works!</p>
+<div class="app">
+  <app-header></app-header>
+  <form class="filter" *ngIf="rfSearch" [formGroup]="rfSearch" (ngSubmit)="gotoPage()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="filter">
+            <ul class="category">
+              <li class="category__item">
+                                    <span (click)="setValueCategorySearch('')" class="category_text">
+                                        Tất cả
+                                    </span>
+              </li>
+              <li class="category__item active">
+                                    <span class="category_text">
+                                        <i class="fa-solid fa-computer"></i>
+                                        <span class="label">Công nghệ</span>
+                                    </span>
+              </li>
+              <li class="category__item">
+                                    <span class="category_text">
+                                        <i class="fa-regular fa-image"></i>
+                                        <span class="label">Tranh ảnh</span>
+                                    </span>
+              </li>
+              <li class="category__item">
+                                    <span class="category_text">
+                                        <i class="fa-solid fa-couch"></i>
+                                        <span class="label">Gia dụng</span>
+                                    </span>
+              </li>
+              <li class="category__item">
+                                    <span class="category_text">
+                                        <i class="fa-solid fa-shapes"></i>
+                                       <span class="label">Khác</span>
+                                    </span>
+              </li>
+            </ul>
+            <form action="" class="form__filter d-flex">
+              <div class="form_search">
+                <input  type="text" class="input__search mx-2" placeholder="Bạn cần tìm gì?...">
+              </div>
+              <select class="select__price">
+                <option value="">--Chọn mức giá--</option>
+                <option value="">Nhỏ hơn 5 triệu</option>
+                <option value="">Từ 5 triệu đến 30 triệu</option>
+                <option value="">Lớn hơn 30 triệu</option>
+              </select>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
+              <div class="card product">
+                <img height="250" src="../../images/image1.jpg" class="d-block w-100 card-img" alt="">
+                <div class="card-body">
+                  <h5 class="mb-2">Bình cổ nhà Lê Mx-02</h5>
+
+                  <span class="product-status auctioning">Đang đấu giá</span>
+                  <p class="time mb-2">
+                    <span class="time__hh mx-2">09</span>
+                    <span class=" mx-2">:</span>
+                    <span class="time__hh mx-2">09</span>
+                    <span class=" mx-2">:</span>
+                    <span class="time__hh mx-2">09</span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <button href="#" class="w-100 btn__auction auctioning">Tham gia</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
+              <div class="card product">
+                <img height="250" src="../../images/image2.jpg" class="d-block w-100 card-img" alt="">
+                <div class="card-body">
+                  <h5 class="mb-2">Bình gốm bát tràng</h5>
+
+                  <span class="product-status">đ 99.999.999</span>
+                  <p class="time mb-2">
+                    <span class="time__hh mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__mm mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__ss mx-2">09</span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <button href="#" class="w-100 btn__auction">Đấu Giá</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
+              <div class="card product">
+                <img height="250" src="../../images/image3.jpg" class="d-block w-100 card-img" alt="">
+                <div class="card-body">
+                  <h5 class="mb-2">Bình bát tràng Mx-09</h5>
+
+                  <span class="product-status">đ 99.999.999</span>
+                  <p class="time mb-2">
+                    <span class="time__hh mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__mm mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__ss mx-2">09</span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <button href="#" class="w-100 btn__auction">Đấu Giá</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
+              <div class="card product">
+                <img height="250" src="../../images/iamge4.jpg" class="d-block w-100 card-img" alt="">
+                <div class="card-body">
+                  <h5 class="mb-2">Bình Cổ nhà Thanh</h5>
+
+                  <span class="product-status auctioned">Đã đấu giá</span>
+                  <p class="timed mb-2">
+                    <span class="time__hh mx-2">00</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__mm mx-2">00</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__ss mx-2">00</span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <button href="#" class="w-100 btn__auction auctioned">Xem thêm</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
+              <div class="card product">
+                <img height="250" src="../../images/image5.jpg" class="d-block w-100 card-img" alt="">
+                <div class="card-body">
+                  <h5 class="mb-2">Bộ ấm phú quý</h5>
+
+                  <span class="product-status">đ 650.000</span>
+                  <p class="time mb-2">
+                    <span class="time__hh mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__mm mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__ss mx-2">09</span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <button href="#" class="w-100 btn__auction">Đấu Giá</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
+              <div class="card product">
+                <img height="250" src="../../images/image6.jpg" class="d-block w-100 card-img" alt="">
+                <div class="card-body">
+                  <h5 class="mb-2">Bộ ấm men giả dạn</h5>
+
+                  <span class="product-status">đ 99.999.999</span>
+                  <p class="time mb-2">
+                    <span class="time__hh mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__mm mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__ss mx-2">09</span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <button href="#" class="w-100 btn__auction">Đấu Giá</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
+              <div class="card product">
+                <img height="250" src="../../images/image9.jpg" class="d-block w-100 card-img" alt="">
+                <div class="card-body">
+                  <h5 class="mb-2">Bộ ấm vinh hoa</h5>
+
+                  <span class="product-status">đ 999.999</span>
+                  <p class="time mb-2">
+                    <span class="time__hh mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__mm mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__ss mx-2">09</span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <button href="#" class="w-100 btn__auction">Đấu Giá</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
+              <div class="card product">
+                <img height="250" src="../../images/image2.jpg" class="d-block w-100 card-img" alt="">
+                <div class="card-body">
+                  <h5 class="mb-2">Bình bát tràng Mx-07</h5>
+
+                  <span class="product-status">đ 99.999.999</span>
+                  <p class="time mb-2">
+                    <span class="time__hh mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__mm mx-2">09</span>
+                    <span class="time__hh mx-2">:</span>
+                    <span class="time__ss mx-2">09</span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <button href="#" class="w-100 btn__auction">Đấu Giá</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

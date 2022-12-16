@@ -1,0 +1,23 @@
+
+form .row {
+  margin-bottom: 12px;
+}
+
+form label {
+  font-weight: bold;
+  color: #464646;
+}
+
+
+.center {
+  padding-top: 30px;
+}
+
+.guide {
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+#guideform {
+  padding: 32px;
+}

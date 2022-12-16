@@ -1,3 +1,5 @@
+import {Product} from '../product/product';
+import {Payment} from "../payment/payment";
 import {User} from "../user/user";
 
 export interface Auction {
@@ -8,4 +10,13 @@ export interface Auction {
   deleteStatus: boolean;
   fullName: string,
   user: User;
+  currentPrice?: number;
+  auctionTime?: string;
+  payStatus?: boolean;
+  auctionStatus?: boolean;
+  deleteStatus?: boolean;
+  auctionDay?: string;
+  user?: User;
+  product?: Product;
+  payment?: Payment;
 }

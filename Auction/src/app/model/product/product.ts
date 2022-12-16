@@ -1,7 +1,8 @@
-import {PriceStep} from "./price-step";
-import {ReviewStatus} from "./review-status";
-import {Category} from "./category";
-import {AuctionStatus} from "./auction-status";
+import {PriceStep} from './price-step';
+import {ReviewStatus} from './review-status';
+import {AuctionStatus} from '../auction/auction-status';
+import {Category} from './category';
+import {User} from '../user/user';
 import {ImgUrlProduct} from "./img-url-product";
 import {User} from "../user/user";
 
@@ -21,4 +22,7 @@ export interface Product {
   maxCurrentPrice?: number;
   user?: User;
 
+  registerDay?: string;
+  imgUrlProduct?: ImgUrlProduct;
+  user?: User;
 }
