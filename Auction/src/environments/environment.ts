@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   categoryUrl: "http://localhost:8080/api/v1/products/category",
   priceStepUrl:  "http://localhost:8080/api/v1/products/priceStep",
+  api_url_users:  "http://localhost:8080/api/v1/users/list",
+  api_url_userType:  "http://localhost:8080/api/v1/users/usersType",
 };
 
 /*

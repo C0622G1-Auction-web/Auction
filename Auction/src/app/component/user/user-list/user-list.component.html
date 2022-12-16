@@ -53,7 +53,8 @@
           </div>
           <div class="col-2">
             <div class="form-floating mb-4">
-              <input [(ngModel)]="nameSearch" id="exampleFormControlInput1" type="email" placeholder="Họ và tên:" id="floatingName"
+              <input [(ngModel)]="nameSearch" id="exampleFormControlInput1" type="email" placeholder="Họ và tên:"
+                     id="floatingName"
                      class="form-control form-control-underlined"/>
               <label for="floatingName">Họ và tên:</label>
             </div>
@@ -68,24 +69,21 @@
           </div>
           <div class="col-2">
             <div class="form-floating mb-4">
-              <input [(ngModel)]="emailSearch" id="exampleFormControlInput3" type="email" placeholder="Email:" id="floatingEmail"
+              <input [(ngModel)]="emailSearch" id="exampleFormControlInput3" type="email" placeholder="Email:"
+                     id="floatingEmail"
                      class="form-control form-control-underlined"/>
               <label for="floatingEmail">Email:</label>
             </div>
           </div>
           <div class="col-2">
             <div class="form-floating mb-4">
-              <select [(ngModel)]="userTypeSearch" class="form-select form-control-underlined " style="padding-left: 3px"
+              <select [(ngModel)]="userTypeSearch" class="form-select form-control-underlined "
+                      style="padding-left: 3px"
                       name="classroomSearch">
-                <option value="">--Chon--</option>
-                <option value="">Kim cương</option>
-                <option value="">Bạc kim</option>
-                <option value="">Vàng</option>
-                <option value="">Bạc</option>
-                <option value="">Đồng</option>
+                <option value="" selected>--Chọn--</option>
+                <option *ngFor="let item of userTypeList" value="{{item.name}}">{{item.name}}</option>
               </select>
-              <label class="d-flex justify-content-start" style="padding-left: 0" for="floatingEmail">Xếp
-                hạng:</label>
+              <label class="d-flex justify-content-start" style="padding-left: 0" for="floatingEmail">Xếp hạng:</label>
             </div>
           </div>
           <div class="col-1 ">
@@ -124,20 +122,21 @@
             </thead>
             <tbody>
 
-            <tr>
+            <tr *ngFor="let x of users  index as i ">
               <td>
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value=""/>
                 </div>
               </td>
-              <td>1</td>
-              <td>Nguyễn Thanh Hải</td>
-              <td>Duy Trung, Duy Xuyên, Quảng Nam</td>
-              <td>Kim cương</td>
-              <td>hai@gmail.com</td>
-              <td>0826262626</td>
-              <td>2022-12-12 14:26:26</td>
-              <td>26</td>
+              <td>{{i + 1}}</td>
+              <td>{{x.firstName}} {{x.lastName}}</td>
+              <td>{{x.address.town}}, {{x.address.district}},{{x.address.city}}</td>
+              <td>{{x.userType.name}}</td>
+              <td>{{x.email}}</td>
+              <td>{{x.phone}}</td>
+              <td></td>
+              <td>{{x.pointDedication}}</td>
+
               <td><i class="fa-solid fa-trash-can" style="color: red"></i> |
                 <i class="fa-solid fa-pen-to-square" style="color: darkgoldenrod"></i></td>
             </tbody>
@@ -145,13 +144,13 @@
           <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-end">
               <li class="page-item disabled">
-                <a class="page-link">Previous</a>
+                <a class="page-link" (click)="prviousPage()">Previous</a>
               </li>
               <li class="page-item"><a class="page-link" href="#">1</a></li>
               <li class="page-item"><a class="page-link" href="#">2</a></li>
               <li class="page-item"><a class="page-link" href="#">3</a></li>
               <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link" (click)="nextPage()">Next</a>
               </li>
             </ul>
           </nav>
@@ -165,8 +164,8 @@
 
 </div>
 
-<script>
-  $("#checkAll").click(function () {
-    $('input:checkbox').not(this).prop('checked', this.checked);
-  });
-</script>
+<!--<script>-->
+<!--  $("#checkAll").click(function () {-->
+<!--    $('input:checkbox').not(this).prop('checked', this.checked);-->
+<!--  });-->
+<!--</script>-->
