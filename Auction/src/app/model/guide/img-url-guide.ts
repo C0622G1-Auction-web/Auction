@@ -1,2 +1,5 @@
-export interface ImgUrlGuide {
+export interface ImgUrlGuideDto {
+  id?: number;
+  url?: string;
+  guideId?: number;
 }
