@@ -13,13 +13,12 @@ export interface Product {
   startTime?: string;
   endTime?: string;
   deleteStatus?: boolean;
-  imgUrlProducts?: any;
+  imgUrlProducts?: ImgUrlProduct[];
   auctions?: any;
   priceStep?: PriceStep;
   reviewStatus?: ReviewStatus;
   auctionStatus?: AuctionStatus;
   category?: Category;
   registerDay?: string;
-  imgUrlProduct?: ImgUrlProduct;
   user?: User;
 }
