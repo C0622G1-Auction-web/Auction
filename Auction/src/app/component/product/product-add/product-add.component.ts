@@ -1,22 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {PriceStep} from '../../../model/product/price-step';
-import {Category} from '../../../model/product/category';
-import {User} from '../../../model/user/user';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {ProductService} from '../../../service/product/product.service';
-import {ToastrService} from 'ngx-toastr';
-import {Product} from "../../../model/product/product";
-import {CategoryService} from "../../../service/product/category.service";
-import {PriceStepService} from "../../../service/product/price-step.service";
-import {UserService} from "../../../service/user/user.service";
+import {Product} from '../../../model/product/product';
+import {Category} from '../../../model/product/category';
+import {PriceStep} from '../../../model/product/price-step';
+import {CategoryService} from '../../../service/product/category.service';
+import {PriceStepService} from '../../../service/product/price-step.service';
+import {User} from '../../../model/user/user';
+import {UserService} from '../../../service/user/user.service';
+
 import {finalize} from "rxjs/operators";
 import {ImgUrlProduct} from "../../../model/product/img-url-product";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {ImageProductService} from "../../../service/product/image-product.service";
 import {ProductDto} from "../../../model/product/product-dto";
 import {ImgUrlProductDto} from "../../../model/product/dto/img-url-product-dto";
-
-
 
 
 @Component({
@@ -28,14 +26,14 @@ export class ProductAddComponent implements OnInit {
 
   product: Product;
   productDto: ProductDto;
-
   categoryList: Category[] = [];
   priceStepList: PriceStep[] = [];
   formCreateProduct: FormGroup;
   userFind: User;
   userId: number;
   selectedImages: any[] = [];
-  img: any[] =[];
+  img: any[] = [];
+
   constructor(private _formBuilder: FormBuilder,
               private _productService: ProductService,
               private _categoryService: CategoryService,
@@ -95,6 +93,7 @@ export class ProductAddComponent implements OnInit {
       }
     });
   }
+
   findUserById(value) {
     this._userService.findUserById(value).subscribe(data => {
       this.userFind = data;

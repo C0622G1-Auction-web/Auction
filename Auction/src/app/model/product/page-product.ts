@@ -1,7 +1,8 @@
 import {Product} from "./product";
+import {ProductDtoRoleAdmin} from './product-dto-role-admin';
 
 export interface PageProduct {
-  content: Product[],
+  content: ProductDtoRoleAdmin[],
   pageable: {
     sort: {
       empty: boolean,

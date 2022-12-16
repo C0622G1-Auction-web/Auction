@@ -5,6 +5,8 @@ import {Observable} from "rxjs";
 import {PriceStep} from "../../model/product/price-step";
 import {HttpClient} from "@angular/common/http";
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +16,8 @@ export class PriceStepService {
 
 
   getListPriceStep(): Observable<PriceStep[]> {
+
     return this._httpClient.get<PriceStep[]>(environment.priceStepUrl)
+
   }
 }

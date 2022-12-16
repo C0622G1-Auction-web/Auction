@@ -46,35 +46,56 @@
         <div class="row">
           <div class="col-2">
             <div class="form-floating mb-4">
-<!--              <input [(ngModel)]="idSearch" id="exampleFormControlInput0" type="email" placeholder="Mã thành viên:"-->
-                     id="floatingId" class="form-control form-control-underlined"/>
-<!--              <label for="floatingId">Mã thành viên:</label>-->
+
+              <input  id="exampleFormControlInput0" type="email" placeholder="Mã thành viên:">
+
             </div>
           </div>
           <div class="col-2">
             <div class="form-floating mb-4">
-<!--              <input [(ngModel)]="nameSearch" id="exampleFormControlInput1" type="email" placeholder="Họ và tên:" id="floatingName"-->
-<!--                     class="form-control form-control-underlined"/>-->
-<!--              <label for="floatingName">Họ và tên:</label>-->
+
+              <input  id="exampleFormControlInput1" type="email" placeholder="Họ và tên:" id="floatingName"
+                     class="form-control form-control-underlined"/>
+              <label for="floatingName">Họ và tên:</label>
+
             </div>
           </div>
           <div class="col-2">
             <div class="form-floating mb-4">
-<!--              <input [(ngModel)]="addressSearch" id="exampleFormControlInput2" type="email" placeholder="Địa chỉ:"-->
-<!--                     id="floatingAddress"-->
-<!--                     class="form-control form-control-underlined"/>-->
-<!--              <label for="floatingAddress">Địa chỉ:</label>-->
+              <input  id="exampleFormControlInput2" type="email" placeholder="Địa chỉ:"
+                     id="floatingAddress"
+                     class="form-control form-control-underlined"/>
+              <label for="floatingAddress">Địa chỉ:</label>
             </div>
           </div>
           <div class="col-2">
             <div class="form-floating mb-4">
-<!--              <input [(ngModel)]="emailSearch" id="exampleFormControlInput3" type="email" placeholder="Email:" id="floatingEmail"-->
-<!--                     class="form-control form-control-underlined"/>-->
-<!--              <label for="floatingEmail">Email:</label>-->
+
+              <input  id="exampleFormControlInput3" type="email" placeholder="Email:" id="floatingEmail"
+                     class="form-control form-control-underlined"/>
+              <label for="floatingEmail">Email:</label>
+
             </div>
           </div>
           <div class="col-2">
             <div class="form-floating mb-4">
+
+              <select  class="form-select form-control-underlined " style="padding-left: 3px"
+                      name="classroomSearch">
+                <option value="">--Chon--</option>
+                <option value="">Kim cương</option>
+                <option value="">Bạc kim</option>
+                <option value="">Vàng</option>
+                <option value="">Bạc</option>
+                <option value="">Đồng</option>
+              </select>
+              <label class="d-flex justify-content-start" style="padding-left: 0" for="floatingEmail">Xếp
+                hạng:</label>
+            </div>
+          </div>
+          <div class="col-1 ">
+            <input class="btn btn-info myMT "  type="submit" value="Lọc kết quả"/>
+=======
 <!--              <select [(ngModel)]="userTypeSearch" class="form-select form-control-underlined " style="padding-left: 3px"-->
 <!--                      name="classroomSearch">-->
 <!--                <option value="">&#45;&#45;Chon&#45;&#45;</option>-->
@@ -90,6 +111,7 @@
           </div>
           <div class="col-1 ">
 <!--            <input class="btn btn-info myMT " (click)="search()" type="submit" value="Lọc kết quả"/>-->
+>>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
           </div>
         </div>
 
@@ -162,8 +184,6 @@
     </div>
   </div>
 
-
-</div>
 
 <script>
   $("#checkAll").click(function () {

@@ -11,6 +11,7 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import {ImageProductService} from "../../../service/product/image-product.service";
 import {Product} from "../../../model/product/product";
 import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ImgUrlProduct} from "../../../model/product/img-url-product";
 
 @Component({
   selector: 'app-product-edit',
@@ -26,7 +27,7 @@ export class ProductEditComponent implements OnInit {
   productFind: Product;
   id: number;
   userFind: any;
-
+  imgs: ImgUrlProduct[] =[];
   equalsCategory(o1: Category, o2: Category) {
     return o1.id === o2.id;
   }
@@ -52,37 +53,46 @@ export class ProductEditComponent implements OnInit {
     this.getListPriceStep();
     this.getFormEdit();
   }
-  getFormEdit(){
+
+  getFormEdit() {
     this._activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get("id");
       this._productService.findById(this.id).subscribe(data => {
         this.productFind = data;
+        this.findUserById(data.user.id);
         console.log(this.productFind);
-        this.formEditProduct = this._formBuilder.group({
-          id: [data.id],
-          name: [data.name],
-          description: [data.description],
-          initialPrice: [data.initialPrice],
-          startTime: [data.startTime],
-          endTime: [data.endTime],
-          registerDay: [data.registerDay],
-          priceStep: [data.priceStep],
-          category: [data.category],
-          user: []
+        this._imageProductService.getListImgProductId(data.user.id).subscribe(data => {
+          this.imgs = data
         })
-      })
+          this.formEditProduct = this._formBuilder.group({
+            id: [data.id],
+            name: [data.name],
+            description: [data.description],
+            initialPrice: [data.initialPrice],
+            startTime: [data.startTime],
+            endTime: [data.endTime],
+            registerDay: [data.registerDay],
+            priceStep: [data.priceStep],
+            category: [data.category],
+            user: []
+          })
+        })
+
     })
   }
+
   getListCategory() {
     this._categoryService.getListCategory().subscribe(data => {
       this.categoryList = data;
     })
   }
+
   getListPriceStep() {
     this._priceStepService.getListPriceStep().subscribe(data => {
       this.priceStepList = data;
     })
   }
+
   findUserById(value) {
     this._userService.findUserById(value).subscribe(data => {
       this.userFind = data;

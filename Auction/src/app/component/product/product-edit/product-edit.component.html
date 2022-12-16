@@ -88,7 +88,9 @@
                    name="image"
                    autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
           </div>
-
+          <div *ngFor="let i of imgs">
+            <img style="width: 10px;height: 10px" src="{{i.url}}"><button type="button" class="btn-close" disabled aria-label="Close"></button>
+          </div>
           <div class="mb-2">
             <div class="d-flex align-items-center mb-2">
               <object data="assets/icons/information.svg" width="20" height="20"></object>

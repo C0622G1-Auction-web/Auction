@@ -20,7 +20,10 @@ export class ImageProductService {
   };
   constructor(private _httpClient: HttpClient) { }
   create(image): Observable<ImgUrlProduct> {
-    return this._httpClient.post<ImgUrlProduct>(environment.imageUrl + "/create", image, this.httpOptions)
+    return this._httpClient.post<ImgUrlProduct>(environment.imageUrl + "/create", image, this.httpOptions);
   }
 
+  getListImgProductId(id: number):Observable<ImgUrlProduct[]> {
+    return this._httpClient.get<ImgUrlProduct[]>(environment.imageUrl + "/" + id);
+  }
 }
