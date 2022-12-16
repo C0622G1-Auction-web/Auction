@@ -6,34 +6,10 @@
         <div class="col-lg-12">
           <div class="filter">
             <ul class="category">
-              <li class="category__item">
-                                    <span (click)="setValueCategorySearch('')" class="category_text">
-                                        Tất cả
-                                    </span>
-              </li>
-              <li class="category__item active">
-                                    <span class="category_text">
-                                        <i class="fa-solid fa-computer"></i>
-                                        <span class="label">Công nghệ</span>
-                                    </span>
-              </li>
-              <li class="category__item">
-                                    <span class="category_text">
-                                        <i class="fa-regular fa-image"></i>
-                                        <span class="label">Tranh ảnh</span>
-                                    </span>
-              </li>
-              <li class="category__item">
-                                    <span class="category_text">
-                                        <i class="fa-solid fa-couch"></i>
-                                        <span class="label">Gia dụng</span>
-                                    </span>
-              </li>
-              <li class="category__item">
-                                    <span class="category_text">
-                                        <i class="fa-solid fa-shapes"></i>
-                                       <span class="label">Khác</span>
-                                    </span>
+              <li class="category__item" *ngFor="let category of categorys">
+                <span (click)="setValueCategorySearch('')" class="category_text">
+                    {{category.name}}
+                </span>
               </li>
             </ul>
             <form action="" class="form__filter d-flex">
@@ -47,7 +23,6 @@
                 <option value="">Lớn hơn 30 triệu</option>
               </select>
             </form>
-
           </div>
         </div>
       </div>
@@ -59,6 +34,26 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="row">
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4" *ngFor="let product of pageProducts.content">
+              <div class="card product">
+                <img height="250" src="{{product.imgUrlProducts[0]?.url}}" class="d-block w-100 card-img" alt="">
+                <div class="card-body">
+                  <h5 class="mb-2">{{product.name}}</h5>
+
+                  <span class="product-status auctioning">Đang đấu giá</span>
+                  <p class="time mb-2">
+                    <span class="time__hh mx-2">09</span>
+                    <span class=" mx-2">:</span>
+                    <span class="time__hh mx-2">09</span>
+                    <span class=" mx-2">:</span>
+                    <span class="time__hh mx-2">09</span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <button href="#" class="w-100 btn__auction auctioning">Tham gia</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
               <div class="card product">
                 <img height="250" src="../../images/image1.jpg" class="d-block w-100 card-img" alt="">
@@ -68,10 +63,10 @@
                   <span class="product-status auctioning">Đang đấu giá</span>
                   <p class="time mb-2">
                     <span class="time__hh mx-2">09</span>
-                    <span class="time__hh mx-2">:</span>
-                    <span class="time__mm mx-2">09</span>
-                    <span class="time__hh mx-2">:</span>
-                    <span class="time__ss mx-2">09</span>
+                    <span class=" mx-2">:</span>
+                    <span class="time__hh mx-2">09</span>
+                    <span class=" mx-2">:</span>
+                    <span class="time__hh mx-2">09</span>
                   </p>
                   <div class="d-flex justify-content-between">
                     <button href="#" class="w-100 btn__auction auctioning">Tham gia</button>

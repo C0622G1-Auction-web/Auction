@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+<<<<<<< HEAD
   categoryUrl: 'http://localhost:8080/api/v1/products/category',
   priceStepUrl:  'http://localhost:8080/api/v1/products/priceStep',
   transactionUrl: 'http://localhost:8080/auction/api/transaction',
@@ -11,6 +12,20 @@ export const environment = {
   userUrl: 'http://localhost:8080/api/user/v1/',
   urlAddAccountUser: 'http://localhost:8080/api/user/v1/add'
 
+=======
+  api_url_products: 'http://localhost:8080/api/v1/products',
+  api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
+  api_url_list_category: 'http://localhost:8080/api/v1/category',
+  api_url_list_user: 'http://localhost:8080/api/v1/users',
+  api_url_list_img_url: 'http://localhost:8080/api/v1/users/{id}',
+  API_URL_AUCTION: 'http://localhost:8080/auction/api',
+  api_url_order_status: 'http://localhost:8080/api/v1/payments',
+  categoryUrl: "http://localhost:8080/api/v1/products/category",
+  priceStepUrl:  "http://localhost:8080/api/v1/products/priceStep",
+  transactionUrl: "http://localhost:8080/api/v1/auction/list",
+  productSearchUrl: "http://localhost:8080/api/v1/products/search",
+  userUrl: "http://localhost:8080/api/user/v1/"
+>>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
 };
 
 /*
