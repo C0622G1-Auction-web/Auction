@@ -33,6 +33,7 @@ import {AuctionComponent} from './component/auction/auction.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
+import {AppRoutingModule} from "./app-routing.module";
 import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
 import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
 import { AccountResetPassComponent } from './component/account-reset-pass/account-reset-pass.component';
@@ -86,12 +87,12 @@ const googleLoginOptions = {
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [
     {

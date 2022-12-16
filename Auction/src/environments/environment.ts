@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  API_URL_AUCTION: "http://localhost:8080/api/v1/auction",
   api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
   api_url_list_category: 'http://localhost:8080/api/v1/category',
   api_url_list_user: 'http://localhost:8080/api/v1/users',
