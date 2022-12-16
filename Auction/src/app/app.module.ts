@@ -74,8 +74,12 @@ import { TransactionComponent } from './component/transaction/transaction.compon
     AccountResetPassComponent,
     AddressPaymentComponent,
     MethodPaymentComponent,
+<<<<<<< HEAD
     PaymentReceiptComponent,
     TransactionComponent
+=======
+    PaymentReceiptComponent
+>>>>>>> 2b1b85a211f1209881fdd66cbe7c53bcef2e37a8
   ],
   imports: [
     BrowserModule,

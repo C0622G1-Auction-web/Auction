@@ -1,8 +1,16 @@
 import {Injectable} from '@angular/core';
+<<<<<<< HEAD
 import {Observable} from 'rxjs';
 import {PaymentDto} from '../../dto/payment-dto';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+=======
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs';
+import {Payment} from '../../model/payment/payment';
+import {PaymentDto} from "../../dto/payment-dto";
+>>>>>>> 2b1b85a211f1209881fdd66cbe7c53bcef2e37a8
 
 const URL_API = `${environment.api_url_order_status}`;
 
@@ -75,4 +83,17 @@ export class PaymentService {
   }
 
 
+<<<<<<< HEAD
+=======
+  constructor(private http: HttpClient) {
+  }
+
+  getListPayment(): Observable<PaymentDto[]> {
+    return this.http.get<PaymentDto[]>(URL_API + '/find-by-list-id');
+  }
+
+  getTotalBill(): Observable<PaymentDto>{
+    return this.http.get<PaymentDto>(URL_API + '/get-total-bill');
+  }
+>>>>>>> 2b1b85a211f1209881fdd66cbe7c53bcef2e37a8
 }
