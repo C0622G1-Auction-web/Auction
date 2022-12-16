@@ -5,8 +5,7 @@ import {AuctionProductDetailComponent} from "./component/auction/auction-product
 
 const routes: Routes = [
   {
-    path: "auction/:productId", component: AuctionProductDetailComponent,
-
+    path: "auction-detail/:productId", component: AuctionProductDetailComponent,
   }
 ];
 

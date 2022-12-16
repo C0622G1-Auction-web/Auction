@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuctionService} from "../../../service/auction/auction.service";
+import {Auction} from "../../../model/auction/auction";
+import {Product} from "../../../model/product/product";
 
 @Component({
   selector: 'app-infomation-auction-seller',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./infomation-auction-seller.component.css']
 })
 export class InfomationAuctionSellerComponent implements OnInit {
+  productAuction: Product;
 
-  constructor() { }
+  constructor(private _auctionService: AuctionService) {
+  }
 
   ngOnInit(): void {
+    this._auctionService.getAuctionByProductId(7).subscribe(
+      data => {
+        this.productAuction = data;
+      }
+    )
   }
 
 }

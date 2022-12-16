@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL_AUCTION: "http://localhost:8080/auction/api"
+  API_URL_AUCTION: "http://localhost:8080/api/v1/auction",
 };
 
 /*
