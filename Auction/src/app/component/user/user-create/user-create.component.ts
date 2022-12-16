@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {UserType} from "../../../model/user/user-type";
 import {UserService} from "../../../service/user/user.service";
 import {UserTypeService} from "../../../service/user/user-type.service";
@@ -22,31 +22,50 @@ export class UserCreateComponent implements OnInit {
                private userAccountService:AccountService,
                private router: Router,
                private formBuilder: FormBuilder
-               ) { }
+               ) {
+
+  }
 
   ngOnInit(): void {
-   this.userCreateForm= this.formBuilder.group({
-     avatar:["",[]],
-     firstName:["",[]],
-     lastName:["",[]],
-     username:["",[]],
-     email:["",[]],
-     phone:["",[]],
-     birthDay:["",[]],
-     city:["",[]],
-     district:["",[]],
-     town:["",[]],
-     detailAddress:["",[]],
-     idCard:["",[]],
-     password:["",[]]
-   })
+    this.userCreateForm= this.formBuilder.group({
+      // avatar:["",[Validators.required]],
+      // firstName:["",[Validators.required,Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
+      // lastName:["",[Validators.required,Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{3,30}$")]],
+      // username:["",[Validators.required]],
+      // email:["",[Validators.required,Validators.pattern("^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")]],
+      // phone:["",[Validators.required,Validators.pattern("[0][9][0]\\d{7}")]],
+      // birthDay:["",[Validators.required]],
+      // city:["",[Validators.required,Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
+      // district:["",[Validators.required,Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
+      // town:["",[Validators.required,Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
+      // idCard:["",[Validators.required,Validators.pattern("\\d{9}")]],
+      // password:["",[Validators.required]]
+      firstName:[],
+      lastName:[],
+      username:[],
+      avatar:[],
+      email:[],
+      phone:[],
+      birthDay:[],
+      city:[],
+      district:[],
+      town:[],
+      country:["viet nam"],
+      idCard:[],
+      password:[],
+      pointDedication:[10.0],
+      statusLock:[true],
+      deleteStatus:[true]
+    })
   }
+
+
   submitCreateUser() {
-    if (this.userCreateForm.valid) {
-      this.userService.createUser(this.userCreateForm.value).subscribe(data => {
-        this.router.navigateByUrl("");
+    if(this.userCreateForm.valid){
+      console.log(this.userCreateForm.value)
+      this.userService.createUser(this.userCreateForm.value).subscribe(value => {
+        this.router.navigateByUrl('');
       })
     }
   }
-
 }

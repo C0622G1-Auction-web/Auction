@@ -12,8 +12,9 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  createUser(user): Observable<User[]> {
-    return this.httpClient.post<User[]>(environment.uri_api_create_user_v1_user, user);
+  createUser(user: User): Observable<User> {
+    console.log(user)
+    return this.httpClient.post<User>('http://localhost:8080/api/v1/users/create', user);
   }
 
   updateUser(user: User): Observable<User> {

@@ -4,11 +4,8 @@
 
 export const environment = {
   production: false,
-<<<<<<< HEAD
-  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users"
-=======
-  URL_API: 'http://localhost:8080'
->>>>>>> 296209739d2932dd71ba0fb80eedf7be8303c142
+  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create",
+  URL_API:"http://localhost:8080/api/v1/users"
 };
 
 /*
