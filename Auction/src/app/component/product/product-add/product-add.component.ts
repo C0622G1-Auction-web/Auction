@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-<<<<<<< HEAD
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ProductService} from '../../../service/product/product.service';
 import {Product} from '../../../model/product/product';
@@ -9,39 +8,14 @@ import {CategoryService} from '../../../service/product/category.service';
 import {PriceStepService} from '../../../service/product/price-step.service';
 import {User} from '../../../model/user/user';
 import {UserService} from '../../../service/user/user.service';
-=======
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {PriceStep} from '../../../model/product/price-step';
-import {Category} from '../../../model/product/category';
-import {User} from '../../../model/user/user';
-import {ProductService} from '../../../service/product/product.service';
-import {ToastrService} from 'ngx-toastr';
-import {Product} from "../../../model/product/product";
-import {CategoryService} from "../../../service/product/category.service";
-import {PriceStepService} from "../../../service/product/price-step.service";
-import {UserService} from "../../../service/user/user.service";
->>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
 
-export const checkStartDay: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const startDay = new Date(control.get('startDay').value).getTime();
-  const dateNow = new Date().getTime();
-  console.log(dateNow);
-  if (startDay - dateNow < 24 * 60 * 60 * 1000) {
-    return {checkStartDay: true};
-  } else {
-    return null;
-  }
-};
+import {finalize} from "rxjs/operators";
+import {ImgUrlProduct} from "../../../model/product/img-url-product";
+import {AngularFireStorage} from "@angular/fire/storage";
+import {ImageProductService} from "../../../service/product/image-product.service";
+import {ProductDto} from "../../../model/product/product-dto";
+import {ImgUrlProductDto} from "../../../model/product/dto/img-url-product-dto";
 
-export const checkEndDay: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const startDay = new Date(control.get('startDay').value).getTime();
-  const endDay = new Date(control.get('endDay').value).getTime();
-  if (endDay - startDay < 24 * 60 * 60 * 1000) {
-    return {checkStartDay: true};
-  } else {
-    return null;
-  }
-};
 
 @Component({
   selector: 'app-product-add',
@@ -49,69 +23,34 @@ export const checkEndDay: ValidatorFn = (control: AbstractControl): ValidationEr
   styleUrls: ['./product-add.component.css']
 })
 export class ProductAddComponent implements OnInit {
-  newProduct: FormGroup;
-  priceStepList: PriceStep[];
-  categoryList: Category[];
-  userList: User[];
+
   product: Product;
+  productDto: ProductDto;
+  categoryList: Category[] = [];
+  priceStepList: PriceStep[] = [];
   formCreateProduct: FormGroup;
   userFind: User;
-<<<<<<< HEAD
   userId: number;
-=======
-  userId:number;
-  private error: any;
->>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
+  selectedImages: any[] = [];
+  img: any[] = [];
 
-  constructor(private formBuilder: FormBuilder,
-              private productService: ProductService,
-              private categoryService: CategoryService,
-              private toastService: ToastrService,
-
-              private priceStepService: PriceStepService,
-              private userService: UserService) {
+  constructor(private _formBuilder: FormBuilder,
+              private _productService: ProductService,
+              private _categoryService: CategoryService,
+              private _priceStepService: PriceStepService,
+              private _userService: UserService,
+              private _storage: AngularFireStorage,
+              private _imageProductService: ImageProductService) {
   }
 
   ngOnInit(): void {
-<<<<<<< HEAD
-    this.categoryService.getListCategory().subscribe(data => {
-      this.categoryList = data;
-    });
-    this.priceStepService.getListPriceStep().subscribe(data => {
-      this.priceStepList = data;
-    });
-=======
-    this.productService.findAllPriceStep().subscribe(data => {
-      this.priceStepList = data;
-    });
-    this.priceStepService.getListPriceStep().subscribe(data=>{
-      this.priceStepList = data;
-    });
-
-    this.productService.findAllCategory().subscribe(data => {
-      this.categoryList = data;
-    });
-    this.categoryService.getListCategory().subscribe(data=>{
+    this._categoryService.getListCategory().subscribe(data => {
       this.categoryList = data;
     })
-
-    this.productService.findAllUser().subscribe(data => {
-      this.userList = data;
-    });
-    this.newProduct = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      initialPrice: ['', [Validators.required]],
-      startDate: ['', [Validators.required]],
-      startTime: ['', [Validators.required]],
-      endTime: ['', [Validators.required]],
-      priceStepId: ['', [Validators.required]],
-      categoryId: ['', [Validators.required]],
-      userId: ['', [Validators.required]]
-    });
-
->>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
-    this.formCreateProduct = this.formBuilder.group({
+    this._priceStepService.getListPriceStep().subscribe(data => {
+      this.priceStepList = data;
+    })
+    this.formCreateProduct = this._formBuilder.group({
       id: [],
       name: [],
       description: [],
@@ -120,31 +59,80 @@ export class ProductAddComponent implements OnInit {
       endTime: [],
       registerDay: [],
       priceStep: [],
-      reviewStatus: [],
-      auctionStatus: [],
       category: [],
       user: []
-    });
+    })
   }
-
-  createProduct() {
-    this.productService.save(this.newProduct.value).subscribe(data => {
-        this.toastService.success('them moi thanh cong', 'them moi');
-      },
-      error => {
-        this.error = error.message;
-      });
-  }
-
 
   addNewProduct() {
-
+    this.productDto = this.formCreateProduct.value;
+    console.log(this.formCreateProduct.value)
+    this._productService.save(this.productDto).subscribe(data => {
+      if (this.selectedImages.length !== 0) {
+        for (let i = 0; i < this.selectedImages.length; i++) {
+          let selectedImage = this.selectedImages[i];
+          const n = Date.now();
+          const filePath = `RoomsImages/${n}`;
+          const fileRef = this._storage.ref(filePath);
+          this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().subscribe(url => {
+                const image: ImgUrlProductDto = {
+                  url: url,
+                  product: data.id
+                };
+                console.log(url);
+                console.log(image)
+                this._imageProductService.create(image).subscribe(() => {
+                  console.log('SUCCESSFULLY CREATE')
+                });
+              });
+            })
+          ).subscribe();
+        }
+      }
+    });
   }
 
   findUserById(value) {
-    this.userService.findUserById(value).subscribe(data => {
+    this._userService.findUserById(value).subscribe(data => {
       this.userFind = data;
-      console.log(this.userFind);
-    });
+      this.formCreateProduct.patchValue({user: this.userFind.id})
+      console.log(this.userFind)
+    })
+
+  }
+
+  showPreview(event: any) {
+    let newSelectedImages = [];
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      newSelectedImages = event.target.files;
+      for (let i = 0; i < event.target.files.length; i++) {
+        this.selectedImages.push(event.target.files[i]);
+      }
+    } else {
+      this.selectedImages = [];
+    }
+    console.log(this.selectedImages)
+    if (newSelectedImages.length !== 0) {
+      for (let i = 0; i < newSelectedImages.length; i++) {
+        let selectedImage = newSelectedImages[i];
+        const n = Date.now();
+        const filePath = `RoomsImages/${n}`;
+        const fileRef = this._storage.ref(filePath);
+        this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              this.img.push(url);
+              if (this.img.length == newSelectedImages.length) {
+              }
+            });
+          })
+        ).subscribe(() => {
+        });
+      }
+    }
   }
 }

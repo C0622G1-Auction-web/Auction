@@ -9,10 +9,8 @@ import {environment} from '../../../environments/environment';
 })
 export class CategoryService {
 
-  constructor(private httpClient: HttpClient) {
-  }
-
-  getListCategory(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(environment.categoryUrl);
+  constructor(private _httpClient: HttpClient) { }
+  getListCategory():Observable<Category[]> {
+    return this._httpClient.get<Category[]>(environment.categoryUrl)
   }
 }

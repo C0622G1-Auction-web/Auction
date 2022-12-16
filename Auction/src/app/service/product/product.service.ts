@@ -1,39 +1,53 @@
-<<<<<<< HEAD
-import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-=======
 import {Injectable} from '@angular/core';
 import {Product} from '../../model/product/product';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {PriceStep} from '../../model/product/price-step';
 import {Category} from '../../model/product/category';
 import {User} from '../../model/user/user';
 import {ImgUrlProduct} from '../../model/product/img-url-product';
 import {environment} from '../../../environments/environment';
 import {DataResult} from "../../model/product/data_result";
-import {ProductDto} from "../../model/product/iProduct_dto";
 import {ReviewStatus} from "../../model/product/review-status";
-import {PageProduct} from "../../model/product/page-product";
->>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
+import {catchError} from "rxjs/operators";
+import {ProductDto} from "../../model/product/product-dto";
+import { PageProduct } from 'src/app/model/product/page-product';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-<<<<<<< HEAD
-  constructor(private httpClient: HttpClient) { }
-=======
 
   private product: Product[];
 
+
+  constructor(private _httpClient: HttpClient) {
+  }
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    }),
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+  };
+
+  errorHandler(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = error.error.message;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
+  };
+
   private API_URL = '  http://localhost:8080/';
 
-  // @ts-ignore
-  constructor(private _httpClient: HttpClient) { }
 
   findAllPriceStep(): Observable<PriceStep[]> {
     return this._httpClient.get<PriceStep[]>(environment.api_url_list_price_step);
@@ -51,9 +65,19 @@ export class ProductService {
     return this._httpClient.get<ImgUrlProduct[]>(environment.api_url_list_img_url);
   }
 
-  save(product: Product): Observable<Product> {
-    return this._httpClient.post<Product>('http://localhost:8080/api/v1/products/create', product);
+  /**
+   * Created: HungNV
+   * Function: create new product
+   * Date: 16/11/2022
+   */
+  save(productDto): Observable<Product> {
+    return this._httpClient.post<Product>(environment.productUrl + "/create", JSON.stringify(productDto), this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      );
   }
+
+
 
   findAll(curPage: number, numberRecord: number): Observable<DataResult<ProductDto>> {
     return this._httpClient.get<DataResult<ProductDto>>(this.API_URL + 'list?page=' + (curPage - 1) + '&size=' + numberRecord);
@@ -64,16 +88,15 @@ export class ProductService {
   }
 
 
->>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
+
   /**
    * Created: SangDD
    * Function: show page product and search
    * Date: 15/11/2022
    */
   getAllAndSearch(rfSearch: any): Observable<any> {
-<<<<<<< HEAD
-    return this.httpClient.get(environment.productSearchUrl, rfSearch);
-=======
+
+    return this._httpClient.get(environment.productSearchUrl, rfSearch);
     // return this._httpClient.get<PageProduct>(environment.productSearchUrl, rfSearch);
     return this._httpClient.post<PageProduct>(environment.productSearchUrl, rfSearch);
   }
@@ -93,6 +116,15 @@ export class ProductService {
     //     "auctionStatusName":""
     // }
     return this._httpClient.get<PageProduct>(environment.api_url_products);
->>>>>>> 3b5547d1b981ef4353256cdb4c4f4146a90c546a
   }
+
+
+  saveProduct(product: ProductDto): Observable<number> {
+    return this._httpClient.post<number>(environment.productUrl + "/create", product)
+  }
+
+  findById(id: number): Observable<Product> {
+    return this._httpClient.get<Product>(environment.productUrl + "/" + id)
+  }
+
 }
