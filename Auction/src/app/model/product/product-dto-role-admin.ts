@@ -19,5 +19,4 @@ export interface ProductDtoRoleAdmin {
   category?: string;
   registerDay?: string;
   userName?: string;
-
 }
