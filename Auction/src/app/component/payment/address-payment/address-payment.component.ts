@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PaymentDto} from '../../../dto/payment-dto';
 import {PaymentService} from '../../../service/payment/payment.service';
-=======
-import {Component, OnInit} from '@angular/core';
-import {PaymentService} from '../../../service/payment/payment.service';
-import {Payment} from "../../../model/payment/payment";
-import {PaymentDto} from "../../../dto/payment-dto";
->>>>>>> 2b1b85a211f1209881fdd66cbe7c53bcef2e37a8
+import {Payment} from '../../../model/payment/payment';
+
 
 @Component({
   selector: 'app-address-payment',

@@ -1,19 +1,17 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-<<<<<<< HEAD
-import {GuideListComponent} from "./component/guide/guide-list/guide-list.component";
-import {AuctionProductDetailComponent} from "./component/auction/auction-product-detail/auction-product-detail.component";
-import {ProductAddComponent} from "./component/product/product-add/product-add.component";
-import {ProductEditComponent} from "./component/product/product-edit/product-edit.component";
-import {TransactionComponent} from "./component/transaction/transaction.component";
-import {HomeComponent} from "./component/home/home.component";
-import {UserListComponent} from "./component/user/user-list/user-list.component";
-import {UserEditComponent} from "./component/user/user-edit/user-edit.component";
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+
+import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
+import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
+import {ProductAddComponent} from './component/product/product-add/product-add.component';
+import {ProductEditComponent} from './component/product/product-edit/product-edit.component';
+import {TransactionComponent} from './component/transaction/transaction.component';
+import {HomeComponent} from './component/home/home.component';
+import {UserListComponent} from './component/user/user-list/user-list.component';
+import {UserEditComponent} from './component/user/user-edit/user-edit.component';
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
-=======
-import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
->>>>>>> 2b1b85a211f1209881fdd66cbe7c53bcef2e37a8
+
 
 const routes: Routes = [
   {
@@ -40,32 +38,27 @@ const routes: Routes = [
     path: 'user/edit',
     component: UserEditComponent
   },
-{
-  path: 'product/add',
-  component: ProductAddComponent
-}, {
-  path: 'guide',
-  component: GuideListComponent
-},
+  {
+    path: 'product/add',
+    component: ProductAddComponent
+  }, {
+    path: 'guide',
+    component: GuideListComponent
+  },
   {
     path: 'auction/:productId', component: AuctionProductDetailComponent,
 
   },
   {
-    path: 'confirmAddress', component : AddressPaymentComponent
+    path: 'confirmAddress', component: AddressPaymentComponent
   },
 
   {
-    path: 'methodPayment', component : MethodPaymentComponent
+    path: 'methodPayment', component: MethodPaymentComponent
   },
 ];
 
-<<<<<<< HEAD
-=======
-const routes: Routes = [
-  {path: 'confirmAddress', component : AddressPaymentComponent}
-];
->>>>>>> 2b1b85a211f1209881fdd66cbe7c53bcef2e37a8
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

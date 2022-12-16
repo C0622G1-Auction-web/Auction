@@ -12,19 +12,14 @@ export interface Product {
   initialPrice?: number;
   startTime?: string;
   endTime?: string;
-<<<<<<< HEAD
-=======
   registerDay?: string;
->>>>>>> 2b1b85a211f1209881fdd66cbe7c53bcef2e37a8
+
   priceStep?: PriceStep;
   reviewStatus?: ReviewStatus;
   auctionStatus?: AuctionStatus;
   category?: Category;
-<<<<<<< HEAD
-  registerDay?: string;
+
   imgUrlProduct?: ImgUrlProduct;
-=======
   imgs?: any;
->>>>>>> 2b1b85a211f1209881fdd66cbe7c53bcef2e37a8
   user?: User;
 }

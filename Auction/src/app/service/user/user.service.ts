@@ -1,9 +1,8 @@
-
 import {User} from '../../model/user/user';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -12,13 +11,14 @@ import {Observable} from "rxjs";
 export class UserService {
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   getAllUser(): Observable<User[]> {
     return null;
   }
 
   findUserById(userId: number): Observable<User> {
-    return this.httpClient.get<User>(environment.userUrl + userId)
+    return this.httpClient.get<User>(environment.userUrl + userId);
   }
 }
