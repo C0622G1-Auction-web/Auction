@@ -14,7 +14,32 @@ export class TransactionService {
 
   }
 
-  findAll(): Observable<TransactionAuction[]> {
-    return this._httpClient.get<TransactionAuction[]>(environment.transactionUrl)
+  /**
+   * Created HuyNV
+   * Date created 16/12/2022
+   * Function: List transaction
+   */
+  findAll(): Observable<TransactionAuction> {
+    return this._httpClient.get<TransactionAuction>(environment.transactionUrl)
+  }
+
+  /**
+   * Created HuyNV
+   * Date created 16/12/2022
+   * Function: search transaction
+   */
+  search(rfSearch: any): Observable<TransactionAuction[]> {
+    if (!(rfSearch.searchUserPost.length) && !(rfSearch.searchUserBuying.length)
+      && !(rfSearch.searchProductName.length)
+      && !(rfSearch.searchCurrentPrice.length)
+      && !(rfSearch.searchPayStatus.length)) {
+      return this._httpClient.get<TransactionAuction[]>(environment.transactionUrl);
+    }
+    return this._httpClient.get<TransactionAuction[]>(environment.transactionUrl +
+      '?product.user.firstName_like=' + rfSearch.searchUserPost +
+      '&auction.user.firstName_like=' + rfSearch.searchUserBuying +
+      '&product.name_like=' + rfSearch.searchProductName +
+      '&auction.currentPrice=' + rfSearch.searchCurrentPrice +
+      '&auction.auctionStatus_like=' + rfSearch.searchPayStatus);
   }
 }

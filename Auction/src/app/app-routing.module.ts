@@ -19,7 +19,7 @@ const routes: Routes = [
     component: ProductEditComponent
   },
 
-  {path:"aa", component: TransactionComponent},
+  {path:'transaction', component: TransactionComponent},
 
   {
     path:"home",

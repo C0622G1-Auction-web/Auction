@@ -1,3 +1,8 @@
+/**
+* Created HuyNV
+* Date created 16/12/2022
+* Function: List transaction
+*/
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-2 sidebar__left">
@@ -38,59 +43,77 @@
     </div>
     <div class="col-lg-10">
       <h1 style="text-align: center;" class="mt-5 mb-5">Quản lý giao dịch</h1>
-      <div class="search row" >
-        <div class="row">
-          <div class="col-4">
-            <div class="form-floating mb-4 form-inp">
-              <input type="text" placeholder="Người đăng" id="floatingPost"
-                     class="form-control form-control-underlined"/>
-              <label for="floatingPost">Người đăng</label>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="form-floating mb-4 form-inp">
-              <input type="text" placeholder="Người mua" id="floatingBuying"
-                     class="form-control form-control-underlined"/>
-              <label for="floatingBuying">Người mua</label>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="form-floating mb-4 form-inp">
-              <input type="text" placeholder="Tên sản phẩm" id="floatingName"
-                     class="form-control form-control-underlined"/>
-              <label for="floatingName">Tên sản phẩm</label>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-4">
-            <div class="form-floating mb-4 form-inp">
-              <input type="text" placeholder="Thành tiền" id="floatingMoney"
-                     class="form-control form-control-underlined"/>
-              <label for="floatingMoney">Thành tiền</label>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="form-floating mb-4 form-inp">
-              <select class="form-select form-select-underlined" id="floatingStatus">
-                <option value="">---- Tình trạng ----</option>
-                <option value=""> Thành công</option>
-                <option value=""> Thất tình</option>
-              </select>
-              <label for="floatingStatus">Tình trạng</label>
-            </div>
-          </div>
-          <div class="col-4" id="form-btn">
-            <button class="btn btn-primary" type="submit">
-              <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả
-            </button>
-            <button class="btn btn-success" type="submit">
-              Reset bộ lọc
-            </button>
-          </div>
-        </div>
+<!--        <div class="search row">-->
+<!--          <div class="row">-->
+<!--            <div class="col-4">-->
+<!--              <div class="form-floating mb-4 form-inp">-->
+<!--                <input type="text" placeholder="Người đăng" id="floatingPost"-->
+<!--                       class="form-control form-control-underlined"/>-->
+<!--                <label for="floatingPost">Người đăng</label>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-4">-->
+<!--              <div class="form-floating mb-4 form-inp">-->
+<!--                <input type="text" placeholder="Người mua" id="floatingBuying"-->
+<!--                       class="form-control form-control-underlined"/>-->
+<!--                <label for="floatingBuying">Người mua</label>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-4">-->
+<!--              <div class="form-floating mb-4 form-inp">-->
+<!--                <input type="text" placeholder="Tên sản phẩm" id="floatingName"-->
+<!--                       class="form-control form-control-underlined"/>-->
+<!--                <label for="floatingName">Tên sản phẩm</label>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="row">-->
+<!--            <div class="col-4">-->
+<!--              <div class="form-floating mb-4 form-inp">-->
+<!--                <input type="text" placeholder="Thành tiền" id="floatingMoney"-->
+<!--                       class="form-control form-control-underlined"/>-->
+<!--                <label for="floatingMoney">Thành tiền</label>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-4">-->
+<!--              <div class="form-floating mb-4 form-inp">-->
+<!--                <select class="form-select form-select-underlined" id="floatingStatus">-->
+<!--                  <option value="">&#45;&#45;&#45;&#45; Tình trạng &#45;&#45;&#45;&#45;</option>-->
+<!--                  <option value=""> Thành công</option>-->
+<!--                  <option value=""> Thất tình</option>-->
+<!--                </select>-->
+<!--                <label for="floatingStatus">Tình trạng</label>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-4" id="form-btn">-->
+<!--              <button class="btn btn-primary" type="submit">-->
+<!--                <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả-->
+<!--              </button>-->
+<!--              <button class="btn btn-success" type="submit">-->
+<!--                Reset bộ lọc-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
 
-      </div>
+<!--        </div>-->
+      <form [formGroup]="rfSearch" (ngSubmit)="onSearch()">
+        <label>
+          <input type="text" placeholder="Người đăng" formControlName="searchUserPost">
+        </label>
+        <label>
+          <input type="text" placeholder="Người mua" formControlName="searchUserBuying">
+        </label>
+        <label>
+          <input type="text" placeholder="Tên sản phẩm" formControlName="searchProductName">
+        </label>
+        <label>
+          <input type="number" placeholder="Thành tiền" formControlName="searchCurrentPrice">
+        </label>
+        <label>
+          <input type="text" placeholder="Tìm kiếm điểm đi" formControlName="searchPayStatus">
+        </label>
+        <input type="submit" value="Tìm kiếm">
+      </form>
       <div class="row">
         <div class="col-12">
           <div class="card border-black">
@@ -104,9 +127,7 @@
                   <th>Người đăng</th>
                   <th>Người mua</th>
                   <th>Tên sản phẩm</th>
-                  <th>Số lượng</th>
                   <th>Thành tiền(vnđ)</th>
-                  <th>Phí dịch vụ(vnđ)</th>
                   <th>Tình trạng giao dịch</th>
                   <th class="text-center">
                     <i class="fa-regular fa-trash-can delete-icon" style="color: red" data-bs-toggle="modal"
@@ -115,49 +136,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td class="text-end">1</td>
-                  <td class="text-end">132</td>
-                  <td class="text-end">22/06/2021</td>
-                  <td>Trần Thị Lý</td>
-                  <td>Nguyễn Văn Huy</td>
-                  <td>Nồi cơm điện</td>
-                  <td class="text-end">1</td>
-                  <td class="text-end">450000vnđ</td>
-                  <td class="text-end">50000vnđ</td>
-                  <td>Thành công</td>
-                  <td class="text-center">
-                    <input class="delete-checkbox" type="checkbox" value=""/>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="text-end">2</td>
-                  <td class="text-end">113</td>
-                  <td class="text-end">29/06/2021</td>
-                  <td>Lê Văn Thắng</td>
-                  <td>Trần Văn Hào</td>
-                  <td>Xe máy</td>
-                  <td class="text-end">1</td>
-                  <td class="text-end">500000vnđ</td>
-                  <td class="text-end">50000vnđ</td>
-                  <td>Thất bại</td>
-                  <td class="text-center">
-                    <input class="delete-checkbox" type="checkbox" value=""/>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="text-end">3</td>
-                  <td class="text-end">412</td>
-                  <td class="text-end">11/11/2021</td>
-                  <td>Nguyễn Văn Nam</td>
-                  <td>Lý Lợi</td>
-                  <td>Chiếc dép</td>
-                  <td class="text-end">1</td>
-                  <td class="text-end">4500000vnđ</td>
-                  <td class="text-end">50000vnđ</td>
-                  <td>Thành công</td>
+                <tr *ngFor="let item of listTransaction.content ; let i = index">
+                  <td class="text-end">{{i + 1}}</td>
+                  <td class="text-end">{{item.currentPrice}}</td>
+                  <td class="text-end">{{item.auctionTime}}</td>
+<!--                  <td>{{item.product.user.firstName}}</td>-->
+<!--                  <td>{{item.auction.user.firstName}}</td>-->
+<!--                  <td>{{item.product.name}}</td>-->
+<!--                  <td class="text-end">{{item.auction.currentPrice}}</td>-->
+<!--                  <td>{{item.auction.auctionStatus}}</td>-->
                   <td class="text-center">
                     <input class="delete-checkbox" type="checkbox" value=""/>
                   </td>
