@@ -33,9 +33,6 @@ import {AuctionComponent} from './component/auction/auction.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
-<<<<<<< HEAD
-import { AuctionProductAddComponent } from './auction/auction-product-add/auction-product-add.component';
-=======
 import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
 import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
 import { AccountResetPassComponent } from './component/account-reset-pass/account-reset-pass.component';
@@ -49,7 +46,6 @@ const googleLoginOptions = {
   scope: 'profile email',
   plugin_name: 'login'
 };
->>>>>>> 5b0680b8da7b10438bc4c2e23f0fb9612bfe8df3
 
 @NgModule({
   declarations: [
@@ -80,9 +76,6 @@ const googleLoginOptions = {
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
     InfomationAuctionSellerComponent,
-<<<<<<< HEAD
-    AuctionProductAddComponent,
-=======
     PaymentCartComponent,
     AccountForgotPassComponent,
     AccountResetPassComponent,
@@ -90,7 +83,6 @@ const googleLoginOptions = {
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent
->>>>>>> 5b0680b8da7b10438bc4c2e23f0fb9612bfe8df3
   ],
   imports: [
     BrowserModule,
