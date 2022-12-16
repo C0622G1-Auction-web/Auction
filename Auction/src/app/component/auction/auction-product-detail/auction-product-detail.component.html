@@ -118,12 +118,13 @@
         <div class="card mt-4">
           <p class="title-currency-1 card-text alert alert-info"
              style="color: white;background-color: #00434c">Bước Giá</p>
-          <h5 class="currency-1 card-title" style="color:#00434c;">{{productDetail.priceStep.step}}<sup>đ</sup></h5>
+          <h5 class="currency-1 card-title" style="color:#00434c">{{productDetail.priceStep.step}}<sup>đ</sup></h5>
         </div>
         <div class="input-group mt-4 d-flex align-items-center justify-content-center">
           <form *ngIf="rfAuction" [formGroup]="rfAuction" (ngSubmit)="onSubmit()">
             <button class="btn btn-outline-danger" type="button" style="font-size: 25px">-</button>
-
+            <input hidden formControlName="userId">
+            <input hidden formControlName="productId">
             <input [value]="auctionPrice" type="number" style="font-size: 25px" class="form-control"
                    formControlName="currentPrice"
                    [ngClass]="rfAuction.errors?.checkAuctionPrice?'is-invalid':''">

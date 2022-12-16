@@ -13,18 +13,38 @@ export class AuctionService {
   constructor(private _httpClient: HttpClient) {
   }
 
+  /**
+   * Created by: TienBM,
+   * Date created: 16/12/2022
+   * Function: Get Auction By Product Id
+   * @param productId
+   * @return product if productId exist or error if does not exist
+   */
   getAuctionByProductId(productId: number): Observable<Product> {
     return this._httpClient.get<Product>(environment.API_URL_AUCTION + '/auction-detail/' + productId);
   }
 
+  /**
+   * Created by: TienBM,
+   * Date created: 16/12/2022
+   * Function:  Get Auction Page By Product Id
+   * @param idProduct, pageNumber
+   * @return page auction if productId and pageNumber exist or error if does not exist
+   */
   getAuctionPageByProductId(idProduct: number, pageNumber: number): Observable<any> {
     return this._httpClient.get(environment.API_URL_AUCTION + '/product/'
       + idProduct + '?page=' + pageNumber);
   }
 
+  /**
+   * Created by: TienBM,
+   * Date created: 16/12/2022
+   * Function:  Add New Auction
+   * @param auction
+   * @return auction if auction valid or error if invalid
+   */
   addNewAuction(auction: Auction): Observable<Auction> {
     return this._httpClient.post<Auction>(environment.API_URL_AUCTION, auction);
-
   }
 }
 
