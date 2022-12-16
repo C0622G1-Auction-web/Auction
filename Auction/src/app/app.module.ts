@@ -39,6 +39,9 @@ import { AddressPaymentComponent } from './component/payment/address-payment/add
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
+import {environment} from "../environments/environment";
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFireModule} from "@angular/fire";
 
 @NgModule({
   declarations: [
@@ -84,7 +87,9 @@ import { TransactionComponent } from './component/transaction/transaction.compon
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
