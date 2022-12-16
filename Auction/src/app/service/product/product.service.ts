@@ -1,24 +1,19 @@
 import {Injectable} from '@angular/core';
-<<<<<<< HEAD
-import {Product} from '../../model/product/product';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+
+
 import {PriceStep} from '../../model/product/price-step';
 import {Category} from '../../model/product/category';
 import {User} from '../../model/user/user';
 import {ImgUrlProduct} from '../../model/product/img-url-product';
 import {environment} from '../../../environments/environment';
 import {DataResult} from "../../model/product/data_result";
-import {ProductDto} from "../../model/product/iProduct_dto";
 import {ReviewStatus} from "../../model/product/review-status";
 import {catchError} from "rxjs/operators";
-=======
 import {Product} from "../../model/product/product";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable, throwError} from "rxjs";
 import {ProductDto} from "../../model/product/product-dto";
->>>>>>> 15fbba97fa97a0a6e00e561a2462e4cda7f49af3
+
 
 @Injectable({
   providedIn: 'root'
@@ -96,10 +91,6 @@ export class ProductService {
     return this._httpClient.get(environment.productSearchUrl, rfSearch);
   }
 
-<<<<<<< HEAD
-=======
-  constructor(private _httpClient: HttpClient) {
-  }
 
   saveProduct(product: ProductDto): Observable<number> {
     return this._httpClient.post<number>(environment.productUrl + "/create", product)
@@ -108,5 +99,5 @@ export class ProductService {
   findById(id: number): Observable<Product> {
     return this._httpClient.get<Product>(environment.productUrl + "/" + id)
   }
->>>>>>> 15fbba97fa97a0a6e00e561a2462e4cda7f49af3
+
 }
