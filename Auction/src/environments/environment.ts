@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  categoryUrl: "http://localhost:8080/api/v1/products/category",
-  priceStepUrl:  "http://localhost:8080/api/v1/products/priceStep",
+  auctionWebSystemUrl: "http://localhost:8080",
+  productUrl: "/api/v1/products"
+  categoryUrl: "/api/v1/products/category",
+  priceStepUrl:  "/api/v1/products/priceStep",
 };
 
 /*
