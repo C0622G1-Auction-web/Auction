@@ -1,3 +1,4 @@
+
 import {Component, OnInit} from '@angular/core';
 import {PaymentService} from "../../../service/payment/payment.service";
 
@@ -7,6 +8,7 @@ import {PaymentService} from "../../../service/payment/payment.service";
   styleUrls: ['./payment-cart.component.css']
 })
 export class PaymentCartComponent implements OnInit {
+
   idList: string[] =['1','2','8'] ;
 
   constructor(private _paymentService: PaymentService) {
@@ -14,7 +16,6 @@ export class PaymentCartComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   sendId() {
     this._paymentService.sendId(this.idList).subscribe(data=>{
       console.log(data);

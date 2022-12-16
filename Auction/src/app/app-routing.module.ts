@@ -8,6 +8,9 @@ import {TransactionComponent} from './component/transaction/transaction.componen
 import {HomeComponent} from './component/home/home.component';
 import {UserListComponent} from './component/user/user-list/user-list.component';
 import {UserEditComponent} from './component/user/user-edit/user-edit.component';
+import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
+import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
+
 
 const routes: Routes = [
   {
@@ -44,8 +47,15 @@ const routes: Routes = [
   {
     path: 'auction/:productId', component: AuctionProductDetailComponent,
 
-  }];
+  },
+  {
+    path: 'confirmAddress', component: AddressPaymentComponent
+  },
 
+  {
+    path: 'methodPayment', component: MethodPaymentComponent
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

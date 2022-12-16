@@ -1,33 +1,92 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {PaymentDto} from '../../dto/payment-dto';
 import {environment} from '../../../environments/environment';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {Payment} from '../../model/payment/payment';
-import {PaymentDto} from '../../model/payment/payment-dto';
 
+const URL_API = `${environment.api_url_order_status}`;
 const API_URL_RECEIPT = `${environment.api_url_order_status}`;
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
-  private API_URL = 'http://localhost:8080/api/v1/payments';
+  paymentDtoList: PaymentDto[];
 
+  total: number;
 
   constructor(private _httpClient: HttpClient,
               private _toastrService: ToastrService) {
   }
 
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   * Function: to find payment by List id
+   *
+   * @param idList
+   * @return product list
+   */
+  getListPayment(): Observable<PaymentDto[]> {
+    return this._httpClient.get<PaymentDto[]>(URL_API + '/find-by-list-id');
+  }
+
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   * Function: get total bill
+   *
+   * @param idList
+   * @return product list
+   */
+  getTotalBill(): Observable<PaymentDto> {
+    return this._httpClient.get<PaymentDto>(URL_API + '/get-total-bill');
+  }
+
+
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   */
+  getPaymentList(paymentDtoList: PaymentDto[]) {
+    this.paymentDtoList = paymentDtoList;
+  }
+
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   */
+  getToTal(total: number) {
+    this.total = total;
+  }
+
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   */
+  getListPaymentDto(): PaymentDto[] {
+    return this.paymentDtoList;
+  }
+
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   */
+  getTotalBillDto(): number {
+    return this.total;
+  }
+
+  private API_URL = 'http://localhost:8080/api/v1/payments';
+
   sendId(idList: string[]): Observable<Payment[]> {
     const params = new HttpParams({
-      fromObject: {'id': idList }
+      fromObject: {'id': idList}
     });
     console.log(this.API_URL + params);
     return this._httpClient.get<Payment[]>(this.API_URL, {params});
   }
-
-
 
   findPaymentList(): Observable<PaymentDto[]> {
     return this._httpClient.get<PaymentDto[]>(API_URL_RECEIPT);

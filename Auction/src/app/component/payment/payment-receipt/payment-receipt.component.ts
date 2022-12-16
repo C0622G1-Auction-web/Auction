@@ -1,9 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+// @ts-ignore
 import {PaymentDto} from '../../model/payment/payment-dto';
-import {PaymentService} from '../../service/payment/payment.service';
-// @ts-ignore
 import {jsPDF} from 'jspdf';
-// @ts-ignore
 import html2canvas from 'html2canvas';
 
 @Component({
@@ -17,8 +15,7 @@ export class PaymentReceiptComponent implements OnInit {
 
   @ViewChild('content', {static: true}) ab: ElementRef<HTMLImageElement>;
 
-  // tslint:disable-next-line:variable-name
-  constructor(private _paymentService: PaymentService) {
+  constructor() {
   }
 
   ngOnInit(): void {
@@ -37,6 +34,5 @@ export class PaymentReceiptComponent implements OnInit {
       pdf.save('output.pdf');
     });
   }
-
 
 }

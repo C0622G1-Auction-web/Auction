@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {Observable} from "rxjs";
-import {GuideService} from "../../../service/guide/guide.service";
-import {Guide} from "../../../model/guide/guide";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {GuideService} from '../../../service/guide/guide.service';
+import {Guide} from '../../../model/guide/guide';
 
 @Component({
   selector: 'app-guide-add',
@@ -18,18 +18,21 @@ export class GuideAddComponent implements OnInit {
   guideForm: FormGroup;
   newGuide: Guide;
   downloadURL: Observable<string>;
-  constructor(private _guideService:GuideService,
-              private _formBuilder: FormBuilder) { }
+
+  constructor(private _guideService: GuideService,
+              private _formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
-    this.guideForm =this._formBuilder.group({
-      title:[''],
-      content:['']
-    })
+    this.guideForm = this._formBuilder.group({
+      title: [''],
+      content: ['']
+    });
   }
-    craeteGuide(){
-this._guideService.create(this.guideForm.value).subscribe(data=>{
-  console.log("sucesss")
-})
-    }
+
+  craeteGuide() {
+    this._guideService.create(this.guideForm.value).subscribe(data => {
+      console.log('sucesss');
+    });
+  }
 }
