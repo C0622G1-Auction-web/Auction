@@ -1,15 +1,16 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Product} from "../../model/product/product";
-import {environment} from "../../../environments/environment";
-import {Auction} from "../../model/auction/auction";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Product} from '../../model/product/product';
+import {environment} from '../../../environments/environment';
+import {Auction} from '../../model/auction/auction';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuctionService {
 
+  // tslint:disable-next-line:variable-name
   constructor(private _httpClient: HttpClient) {
   }
 
@@ -17,7 +18,6 @@ export class AuctionService {
    * Created by: TienBM,
    * Date created: 16/12/2022
    * Function: Get Auction By Product Id
-   * @param productId
    * @return product if productId exist or error if does not exist
    */
   getAuctionByProductId(productId: number): Observable<Product> {
@@ -40,7 +40,6 @@ export class AuctionService {
    * Created by: TienBM,
    * Date created: 16/12/2022
    * Function:  Add New Auction
-   * @param auction
    * @return auction if auction valid or error if invalid
    */
   addNewAuction(auction: Auction): Observable<Auction> {

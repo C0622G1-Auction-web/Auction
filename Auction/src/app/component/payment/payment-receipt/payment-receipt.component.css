@@ -1,18 +1,20 @@
-*{
+*:not(i) {
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 p{
   margin-left: 0;
 }
 .card{
-  background-color: #0d6efd;
+  background-image: linear-gradient(to bottom right, #fa6132, #d74836);
   color: white;
+  border-color: lightslategray;
 }
+
 img.center{
   display: block;
   margin-left: auto;
