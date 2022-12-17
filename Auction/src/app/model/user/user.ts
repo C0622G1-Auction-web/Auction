@@ -1,5 +1,5 @@
-import {Address} from "./address";
-import {UserType} from "./user-type";
+import {UserType} from './user-type';
+import {Address} from './address';
 
 export interface User {
   account?: Account;
@@ -15,5 +15,5 @@ export interface User {
   deleteStatus?: boolean;
   address?: Address;
   user?: User;
-  userType: UserType,
+  userType: UserType;
 }

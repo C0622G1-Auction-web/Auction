@@ -3,5 +3,5 @@ export interface Guide {
   title?: string;
   content?: string;
   deleteStatus?: boolean;
-  images?:any
+  images?: any;
 }
