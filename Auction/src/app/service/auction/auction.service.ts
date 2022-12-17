@@ -9,6 +9,7 @@ import {environment} from '../../../environments/environment';
 })
 export class AuctionService {
 
+  // tslint:disable-next-line:variable-name
   constructor(private _httpClient: HttpClient) {
   }
 

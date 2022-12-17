@@ -8,6 +8,8 @@ import {Payment} from '../../model/payment/payment';
 
 const URL_API = `${environment.api_url_order_status}`;
 const API_URL_RECEIPT = `${environment.api_url_order_status}`;
+const API_URL = 'http://localhost:8080/api/v1/payments';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,9 @@ export class PaymentService {
 
   total: number;
 
+  // tslint:disable-next-line:variable-name
   constructor(private _httpClient: HttpClient,
+              // tslint:disable-next-line:variable-name
               private _toastrService: ToastrService) {
   }
 
@@ -25,8 +29,6 @@ export class PaymentService {
    * Create by: BaoBC
    * Date created: 16/12/2022
    * Function: to find payment by List id
-   *
-   * @param idList
    * @return product list
    */
   getListPayment(): Observable<PaymentDto[]> {
@@ -37,8 +39,6 @@ export class PaymentService {
    * Create by: BaoBC
    * Date created: 16/12/2022
    * Function: get total bill
-   *
-   * @param idList
    * @return product list
    */
   getTotalBill(): Observable<PaymentDto> {
@@ -78,14 +78,13 @@ export class PaymentService {
     return this.total;
   }
 
-  private API_URL = 'http://localhost:8080/api/v1/payments';
 
   sendId(idList: string[]): Observable<Payment[]> {
     const params = new HttpParams({
-      fromObject: {'id': idList}
+      fromObject: {id: idList}
     });
-    console.log(this.API_URL + params);
-    return this._httpClient.get<Payment[]>(this.API_URL, {params});
+    console.log(API_URL + params);
+    return this._httpClient.get<Payment[]>(API_URL, {params});
   }
 
   findPaymentList(): Observable<PaymentDto[]> {

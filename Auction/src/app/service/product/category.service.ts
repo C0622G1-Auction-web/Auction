@@ -9,10 +9,11 @@ import {environment} from '../../../environments/environment';
 })
 export class CategoryService {
 
-  constructor(private httpClient: HttpClient) {
+  // tslint:disable-next-line:variable-name
+  constructor(private _httpClient: HttpClient) {
   }
 
   getListCategory(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(environment.categoryUrl);
+    return this._httpClient.get<Category[]>(environment.categoryUrl);
   }
 }

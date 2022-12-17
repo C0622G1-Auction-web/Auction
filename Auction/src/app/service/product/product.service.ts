@@ -17,6 +17,7 @@ import {ReviewStatus} from '../../model/product/review-status';
 export class ProductService {
   private product: Product[];
 
+  // tslint:disable-next-line:variable-name
   constructor(private _httpClient: HttpClient) {
   }
 

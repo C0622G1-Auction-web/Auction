@@ -11,7 +11,8 @@ import {Observable} from 'rxjs';
 export class UserService {
 
 
-  constructor(private httpClient: HttpClient) {
+  // tslint:disable-next-line:variable-name
+  constructor(private _httpClient: HttpClient) {
   }
 
   getAllUser(): Observable<User[]> {
@@ -19,6 +20,6 @@ export class UserService {
   }
 
   findUserById(userId: number): Observable<User> {
-    return this.httpClient.get<User>(environment.userUrl + userId);
+    return this._httpClient.get<User>(environment.userUrl + userId);
   }
 }

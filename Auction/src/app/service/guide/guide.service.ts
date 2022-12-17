@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class GuideService {
 
+  // tslint:disable-next-line:variable-name
   constructor(private _httpClient: HttpClient) {
   }
 
