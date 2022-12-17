@@ -57,15 +57,12 @@ export class LoginComponent implements OnInit {
       if(data.token != undefined) {
 
         if (this.rfLogin.value.rememberMe) {
-          this.tokenService.rememberMe(data.accountId, data.deleteStatus, data.statusLock, data.username,
-            data.token, data.role)
+          this.tokenService.rememberMe(data.token, data.account, data.roles, data.user)
         } else {
-          this.tokenService.setAccountIdSession(data.accountId);
-          this.tokenService.setDeleteStatusSession(data.deleteStatus);
-          this.tokenService.setStatusLockSession(data.statusLock);
-          this.tokenService.setUsernameSession(data.username);
+          this.tokenService.setAccountSession(data.account);
           this.tokenService.setTokenSession(data.token);
-          this.tokenService.setRoleSession(data.role);
+          this.tokenService.setUserSession(data.user);
+          this.tokenService.setRoleSession(data.roles)
         }
 
         this.router.navigate(['/home']).then(()=>{
@@ -106,11 +103,13 @@ export class LoginComponent implements OnInit {
         if (req.token == null) {
           const emailToRegister = req.email;
 
-          this.router.navigateByUrl('/signUp/' + emailToRegister)
+          this.router.navigateByUrl('/registerWithGoogle/' + emailToRegister)
 
         } else {
 
+          this.tokenService.setAccountLocal(req.account);
           this.tokenService.setTokenLocal(req.token);
+          this.tokenService.setUserLocal(req.user);
           this.tokenService.setRoleLocal(req.roles)
 
           this.router.navigate(['/home']).then(() => {

@@ -30,6 +30,7 @@ import { ProductDetailComponent } from './component/product/product-detail/produ
 import { VerificationComponent } from './security/verification/verification.component';
 import { VerifyResetPasswordComponent } from './security/verify-reset-password/verify-reset-password.component';
 import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
+import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -60,7 +61,8 @@ const googleLoginOptions = {
     AuctionRequestComponent,
     ProductDetailComponent,
     VerificationComponent,
-    VerifyResetPasswordComponent
+    VerifyResetPasswordComponent,
+    RegisterWithGoogleComponent,
   ],
   imports: [
     BrowserModule,
