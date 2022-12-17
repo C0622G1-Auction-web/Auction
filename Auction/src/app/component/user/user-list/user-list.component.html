@@ -42,65 +42,67 @@
       <hr class="mb-5">
 
       <div class="mt-2 row">
+        <form *ngIf="rfSearch && pageUsers" [formGroup]="rfSearch"
+              (ngSubmit)="goToPage(0)">
+          <div class="row">
+            <div class="col-2">
 
-        <div class="row">
-          <div class="col-2">
-            <div class="form-floating mb-4">
-              <input [(ngModel)]="idSearch" id="exampleFormControlInput0" type="email" placeholder="Mã thành viên:"
-                     id="floatingId" class="form-control form-control-underlined"/>
-              <label for="floatingId">Mã thành viên:</label>
+              <div class="form-floating mb-4">
+                <input formControlName="idSearch"
+                       type="text" placeholder="Mã thành viên:"
+                       id="floatingId" class="form-control form-control-underlined"/>
+                <label for="floatingId">Mã thành viên:</label>
+              </div>
             </div>
-          </div>
-          <div class="col-2">
-            <div class="form-floating mb-4">
-              <input [(ngModel)]="nameSearch" id="exampleFormControlInput1" type="email" placeholder="Họ và tên:"
-                     id="floatingName"
-                     class="form-control form-control-underlined"/>
-              <label for="floatingName">Họ và tên:</label>
 
+            <div class="col-2">
+              <div class="form-floating mb-4">
+                <input formControlName="nameSearch"
+                       id="floatingName" type="text" placeholder="Họ và tên:"
+                       class="form-control form-control-underlined"/>
+                <label for="floatingName">Họ và tên:</label>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-floating mb-4">
+                <input formControlName="addressSearch"
+                       id="floatingAddress" type="text" placeholder="Địa chỉ:"
+                       class="form-control form-control-underlined"/>
+                <label for="floatingAddress">Địa chỉ:</label>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-floating mb-4">
+                <input formControlName="emailSearch"
+                       id="floatingEmail" type="email" placeholder="Email:"
+                       class="form-control form-control-underlined"/>
+                <label for="floatingEmail">Email:</label>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-floating mb-4">
+                <select formControlName="userTypeSearch" class="form-select form-control-underlined "
+                        style="padding-left: 3px"
+                        name="classroomSearch">
+                  <option value="" selected>--Chọn--</option>
+                  <option *ngFor="let item of userTypeList" value="{{item.id}}">{{item.name}}</option>
+                </select>
+                <label class="d-flex justify-content-start" style="padding-left: 0" for="floatingEmail">Xếp
+                  hạng:</label>
+              </div>
+            </div>
+            <div class="col-1 ">
+              <input class="btn btn-info myMT" type="submit" value="Lọc kết quả"/>
             </div>
           </div>
-          <div class="col-2">
-            <div class="form-floating mb-4">
-              <input [(ngModel)]="addressSearch" id="exampleFormControlInput2" type="email" placeholder="Địa chỉ:"
-                     id="floatingAddress"
-                     class="form-control form-control-underlined"/>
-              <label for="floatingAddress">Địa chỉ:</label>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="form-floating mb-4">
-              <input [(ngModel)]="emailSearch" id="exampleFormControlInput3" type="email" placeholder="Email:"
-                     id="floatingEmail"
-                     class="form-control form-control-underlined"/>
-              <label for="floatingEmail">Email:</label>
 
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="form-floating mb-4">
-              <select [(ngModel)]="userTypeSearch" class="form-select form-control-underlined "
-                      style="padding-left: 3px"
-                      name="classroomSearch">
-                <option value="" selected>--Chọn--</option>
-                <option *ngFor="let item of userTypeList" value="{{item.name}}">{{item.name}}</option>
-              </select>
-              <label class="d-flex justify-content-start" style="padding-left: 0" for="floatingEmail">Xếp hạng:</label>
-
-            </div>
-          </div>
-          <div class="col-1 ">
-            <!--            <input class="btn btn-info myMT " (click)="search()" type="submit" value="Lọc kết quả"/>-->
-          </div>
-        </div>
+        </form>
 
         <div>
           <a type="button" class="btn btn-danger">Xoá <i class="fa-regular fa-trash-can"></i> </a>
           <a type="button" class="btn btn-danger">Khoá <i class="fa-solid fa-lock"></i> </a>
           <a type="button" class="btn btn-danger">Mở khoá <i class="fa-solid fa-lock"></i> </a>
           <a type="button" class="btn btn-danger">Thêm mới <i class="fa-solid fa-user-plus"></i> </a>
-
-
         </div>
 
         <div class=" mt-2 row container" style="padding-left: 2%;">
@@ -113,6 +115,7 @@
                 </div>
               </th>
               <th>STT</th>
+              <th>Mã thành viên</th>
               <th>Tên thành viên</th>
               <th>Địa chỉ</th>
               <th>Xếp hạng</th>
@@ -124,47 +127,52 @@
             </tr>
             </thead>
             <tbody *ngIf="pageUsers">
-            <tr *ngFor="let x of users  index as i ">
+            <tr *ngFor="let x of pageUsers.content; let i = index ">
               <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value=""/>
-                </div>
+                <div class="form-check"><input class="form-check-input" type="checkbox" value=""/></div>
               </td>
-              <td>{{i + 1}}</td>
+              <td>{{pageUsers.number * 3 + i + 1}}</td>
+              <td>{{x.id}}</td>
               <td>{{x.firstName}} {{x.lastName}}</td>
-              <td>{{x.address.town}}, {{x.address.district}},{{x.address.city}}</td>
+              <td>{{x.address.town}}, {{x.address.district}}, {{x.address.city}} </td>
               <td>{{x.userType.name}}</td>
               <td>{{x.email}}</td>
               <td>{{x.phone}}</td>
               <td></td>
               <td>{{x.pointDedication}}</td>
 
-              <td><i class="fa-solid fa-trash-can" style="color: red"></i> |
-                <i class="fa-solid fa-pen-to-square" style="color: darkgoldenrod"></i></td>
+              <td>
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDelete"
+                        [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-pen-to-square"
+                                                         style="color: darkgoldenrod"></i>
+                </button> |
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
+                        [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-lock "></i>
+                </button>
+              </td>
             </tbody>
           </table>
-
-          <nav  *ngIf="pageUsers" aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-
-              <li class="page-item " [ngClass]="pageUsers.number == 0 ? 'disabled': ''">
-                <a class="page-link" (click)="goToPage(pageUsers.number - 1)">Previous</a>
+          <nav aria-label="Page navigation example" class="p-0 d-flex justify-content-end">
+            <ul class="pagination">
+              <li class="page-item" [ngClass]="pageUsers.number == 0 ? 'disabled' : ''">
+        <span class="page-link" (click)="goToPage(pageUsers.number - 1)">
+          Previous
+        </span>
               </li>
-              <li class="page-item "
-                  *ngFor="let pageNumber of [].constructor(pageUsers.totalPages), let i = index"
-                  [ngClass]="pageUsers.number == i ?'active': ''">
-                <span class="page-link" (click)="goToPage(index)">{{index + 1}}</span>
+              <li *ngFor="let pageNumber of [].constructor(pageUsers.totalPages); let i = index" class="page-item"
+                  [ngClass]="i == pageUsers.number ? 'active' : ''">
+                <span (click)="goToPage(i)" class="page-link">{{i + 1}}</span>
               </li>
-              <li class="page-item"
-                  [ngClass]="pageUsers.number + 1 == pageUsers.totalPages ? 'disabled': ''">
-                <span class="page-link" (click)="goToPage(pageUsers.number + 1)">Next</span>
+              <li class="page-item" [ngClass]="pageUsers.totalPages == pageUsers.number+1 ? 'disabled' : ''">
+                <a class="page-link" (click)="goToPage(pageUsers.number + 1)">Next</a>
               </li>
             </ul>
           </nav>
-
         </div>
 
       </div>
+
     </div>
   </div>
 </div>
+

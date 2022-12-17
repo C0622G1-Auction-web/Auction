@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
+import {Product} from '../../../model/product/product';
+import {CategoryService} from '../../../service/product/category.service';
+import {PriceStepService} from '../../../service/product/price-step.service';
+import {UserService} from '../../../service/user/user.service';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {PriceStep} from '../../../model/product/price-step';
 import {Category} from '../../../model/product/category';
 import {User} from '../../../model/user/user';
 import {ProductService} from '../../../service/product/product.service';
 import {ToastrService} from 'ngx-toastr';
-import {Product} from "../../../model/product/product";
-import {CategoryService} from "../../../service/product/category.service";
-import {PriceStepService} from "../../../service/product/price-step.service";
-import {UserService} from "../../../service/user/user.service";
 
 export const checkStartDay: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const startDay = new Date(control.get('startDay').value).getTime();
@@ -44,7 +44,8 @@ export class ProductAddComponent implements OnInit {
   product: Product;
   formCreateProduct: FormGroup;
   userFind: User;
-  userId:number;
+  userId: number;
+
   private error: any;
 
   constructor(private formBuilder: FormBuilder,
@@ -57,6 +58,12 @@ export class ProductAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.categoryService.getListCategory().subscribe(data => {
+      this.categoryList = data;
+    });
+    this.priceStepService.getListPriceStep().subscribe(data => {
+      this.priceStepList = data;
+    });
     this.productService.findAllPriceStep().subscribe(data => {
       this.priceStepList = data;
     });
@@ -99,7 +106,7 @@ export class ProductAddComponent implements OnInit {
       auctionStatus: [],
       category: [],
       user: []
-    })
+    });
   }
 
   createProduct() {
@@ -117,9 +124,9 @@ export class ProductAddComponent implements OnInit {
   }
 
   findUserById(value) {
-    this.userService.findUserById(value).subscribe(data=>{
-        this.userFind = data;
-      console.log(this.userFind)
-    })
+    this.userService.findUserById(value).subscribe(data => {
+      this.userFind = data;
+      console.log(this.userFind);
+    });
   }
 }

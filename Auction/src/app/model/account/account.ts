@@ -4,4 +4,5 @@ export interface Account {
   password?: string;
   statusLock?: boolean;
   deleteStatus?: boolean;
+  pasword?: string;
 }

@@ -3,6 +3,7 @@ import {UserType} from "../../../model/user/user-type";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserService} from "../../../service/user/user.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {UserEditDto} from "../../../dto/user-edit-dto";
 
 @Component({
   selector: 'app-user-edit',
@@ -11,49 +12,56 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 })
 export class UserEditComponent implements OnInit {
 
-  userTypes: UserType[] = [];
   id: number;
-
+  user: UserEditDto
   rfUser: FormGroup;
 
-  equals(o1: UserType, o2: UserType) {
-    return o1.id === o2.id;
-  }
-
-  constructor(private userService: UserService,
-              private activatedRoute: ActivatedRoute,
-              private formBuiler: FormBuilder,
-              private router: Router) {
+  constructor(private _userService: UserService,
+              private _activatedRoute: ActivatedRoute,
+              private _formBuilder: FormBuilder,
+              private _router: Router) {
   }
 
   ngOnInit(): void {
-
-
-    this.userService.findAllUserType().subscribe(data => {
-      this.userTypes = data;
-    });
-
-    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+    this._activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
+      console.log("Id:" + this.id)
       this.getById(this.id);
     });
   }
 
   getById(id: number) {
-    return this.userService.findUserById(id).subscribe(data => {
-      // console.log(data)
-      // this.rfUser = this.formBuiler.group({
-      //   id: [data.id],
-      //   gia: [data.gia],
-      //   diemDi: [data.diemDi],
-      //   diemDen: [data.diemDen],
-      //   ngayKhoiHanh: [data.ngayKhoiHanh],
-      //   gioKhoiHanh: [data.gioKhoiHanh],
-      //   soLuong: [data.soLuong],
-      //   nhaXe: [data.nhaXe],
-      // });
+    return this._userService.findUserById(id).subscribe(data => {
+      console.log(data)
+      this.rfUser = this._formBuilder.group({
+        id: [data.id],
+        firstName: [data.firstName],
+        lastName: [data.lastName],
+        email: [data.email],
+        phone: [data.phone],
+        detailAddress: [data.address.detailAddress],
+        town: [data.address.town],
+        district: [data.address.district],
+        city: [data.address.city],
+        country: [data.address.country],
+        username: [data.account.username],
+        birthDay: [data.birthDay],
+        idCard: [data.idCard],
+
+      });
     });
   }
 
+  saveUser(id) {
+    this.user = this.rfUser.value;
+    this._userService.updateByAdim(id, this.user).subscribe(data => {
+      this._router.navigate(['/user/list']);
+    });
+  }
 
+  reset(id) {
+
+    this.ngOnInit();
+    this.getById(id);
+  }
 }
