@@ -36,6 +36,7 @@ import { AuctionProductAddComponent } from './component/auction/auction-product-
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import {AngularFireModule} from "@angular/fire";
 import { environment } from 'src/environments/environment';
+import { ProductAddComponent } from './component/product/product-add/product-add.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { environment } from 'src/environments/environment';
     ResetPasswordComponent,
     AuctionRequestComponent,
     ProductDetailComponent,
+    ProductAddComponent,
     VerificationComponent,
     VerifyResetPasswordComponent,
     AuctionComponent,

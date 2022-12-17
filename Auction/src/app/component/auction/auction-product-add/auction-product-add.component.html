@@ -29,7 +29,7 @@
               <object data="assets/icons/dollar.svg" width="20" height="20"></object>
               <label class="ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>
             </div>
-            <input formControlName="initialPrice" id="initialPrice" type="number" class="form-control"
+            <input formControlName="initialPrice" id="initialPrice" type="text" class="form-control"
                    placeholder="Nhập giá ban đầu"
                    [ngClass]="formCreateProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>
             <div class="invalid-feedback">
@@ -37,6 +37,9 @@
         && (formCreateProduct.controls['initialPrice'].touched)">
                 Không được bỏ trống
               </div>
+              <div *ngIf="formCreateProduct.controls['initialPrice'].hasError('pattern') || formCreateProduct.controls['initialPrice'].hasError('min')" style="color: red">
+             Giá ban đầu phải là số nguyên dương
+           </div>
             </div>
           </div>
           <div class="mb-2">
@@ -69,7 +72,7 @@
               <object data="assets/icons/dollar.svg" width="20" height="20"></object>
               <label class="ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>
             </div>
-            <input style="width: 60%" type="file" class="form-control"/>
+            <input style="width: 60%" type="file" class="form-control" (change)="showPreview($event)"/>
           </div>
 
           <div class="mb-2">

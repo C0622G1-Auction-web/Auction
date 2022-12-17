@@ -73,7 +73,7 @@ export class AuctionProductAddComponent implements OnInit {
         id: ['', [Validators.required]],
         name: ['', [Validators.required]],
         description: ['', [Validators.required]],
-        initialPrice: ['', [Validators.required]],
+        initialPrice: ['', [Validators.required, Validators.min(0), Validators.pattern("\\d+")]],
         startTime: ['', [Validators.required]],
         endTime: ['', [Validators.required]],
         registerDay: ['', [Validators.required]],
@@ -85,36 +85,36 @@ export class AuctionProductAddComponent implements OnInit {
   
     addNewProduct() {
       this.productDto = this.formCreateProduct.value;
-      console.log(this.formCreateProduct.value)
+      console.log(this.formCreateProduct.value);
       this._productService.save(this.productDto).subscribe(data => {
-        console.log(data);
-        if (this.selectedImages.length !== 0) {
-          for (let i = 0; i < this.selectedImages.length; i++) {
-            let selectedImage = this.selectedImages[i];
-            const n = Date.now();
-            const filePath = `RoomsImages/${n}`;
-            const fileRef = this._storage.ref(filePath);
-            this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
-              finalize(() => {
-                fileRef.getDownloadURL().subscribe(url => {
-                  const image: ImgUrlProductDto = {
-                    url: url,
-                    product: data.id
-                  };
-                  console.log(url);
-                  console.log(image)
-                  this._imageProductService.create(image).subscribe(() => {
-                    console.log('SUCCESSFULLY CREATE')
+          console.log(data);
+          if (this.selectedImages.length !== 0) {
+            for (let i = 0; i < this.selectedImages.length; i++) {
+              let selectedImage = this.selectedImages[i];
+              const n = Date.now();
+              const filePath = `RoomsImages/${n}`;
+              const fileRef = this._storage.ref(filePath);
+              this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
+                finalize(() => {
+                  fileRef.getDownloadURL().subscribe(url => {
+                    const image: ImgUrlProductDto = {
+                      url: url,
+                      product: data.id
+                    };
+                    console.log(url);
+                    console.log(image);
+                    this._imageProductService.create(image).subscribe(() => {
+                      console.log('SUCCESSFULLY CREATE');
+                    });
                   });
-                });
-              })
-            ).subscribe();
+                })
+              ).subscribe();
+            }
           }
-        }
-      }, 
-      error => {
-        this.error = error.message;
-      });
+        },
+        error => {
+          this.error = error.message;
+        });
     }
   
     findUserById(value) {
@@ -138,7 +138,7 @@ export class AuctionProductAddComponent implements OnInit {
       } else {
         this.selectedImages = [];
       }
-      console.log(this.selectedImages)
+      console.log(this.selectedImages);
       if (newSelectedImages.length !== 0) {
         for (let i = 0; i < newSelectedImages.length; i++) {
           let selectedImage = newSelectedImages[i];
@@ -149,6 +149,7 @@ export class AuctionProductAddComponent implements OnInit {
             finalize(() => {
               fileRef.getDownloadURL().subscribe(url => {
                 this.img.push(url);
+                console.log(url);
                 if (this.img.length == newSelectedImages.length) {
                 }
               });
@@ -159,5 +160,6 @@ export class AuctionProductAddComponent implements OnInit {
     }
 }
 
-
-
+function finalize(arg0: () => void): import("rxjs").OperatorFunction<import("firebase").default.storage.UploadTaskSnapshot, unknown> {
+  throw new Error('Function not implemented.');
+}
