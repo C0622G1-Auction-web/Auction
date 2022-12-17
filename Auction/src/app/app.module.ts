@@ -39,6 +39,7 @@ import { AddressPaymentComponent } from './component/payment/address-payment/add
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
+import { AuctionProductAddComponent } from './auction/auction-product-add/auction-product-add.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { TransactionComponent } from './component/transaction/transaction.compon
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent
+    AuctionProductAddComponent,
   ],
   imports: [
     BrowserModule,
