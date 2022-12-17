@@ -1,4 +1,3 @@
-  import { Injectable } from '@angular/core';
 import {Injectable} from '@angular/core';
 import {Product} from '../../model/product/product';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
