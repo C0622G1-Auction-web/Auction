@@ -10,8 +10,8 @@ import {environment} from '../../../environments/environment';
 import {DataResult} from "../../model/product/data_result";
 import {ReviewStatus} from "../../model/product/review-status";
 import {catchError} from "rxjs/operators";
-import {ProductDto} from "../../model/product/product-dto";
 import { PageProduct } from 'src/app/model/product/page-product';
+import {ProductDto} from "../../model/product/iProduct_dto";
 
 
 
@@ -127,4 +127,7 @@ export class ProductService {
     return this._httpClient.get<Product>(environment.productUrl + "/" + id)
   }
 
+  update(productDto: ProductDto, id: number):Observable<Product> {
+  return this._httpClient.put<Product>(environment.productUrl + "/update/" + id, productDto)
+  }
 }

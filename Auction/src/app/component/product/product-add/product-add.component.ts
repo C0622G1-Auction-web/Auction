@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProductService} from '../../../service/product/product.service';
 import {Product} from '../../../model/product/product';
 import {Category} from '../../../model/product/category';
@@ -13,8 +13,8 @@ import {finalize} from "rxjs/operators";
 import {ImgUrlProduct} from "../../../model/product/img-url-product";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {ImageProductService} from "../../../service/product/image-product.service";
-import {ProductDto} from "../../../model/product/product-dto";
 import {ImgUrlProductDto} from "../../../model/product/dto/img-url-product-dto";
+import {ProductDto} from "../../../model/product/dto/product-dto";
 
 
 @Component({
@@ -31,8 +31,9 @@ export class ProductAddComponent implements OnInit {
   formCreateProduct: FormGroup;
   userFind: User;
   userId: number;
-  selectedImages: any[] = [];
-  img: any[] = [];
+  selectedFile: any[] = [];
+  imgs: any[] = [];
+  message = "";
 
   constructor(private _formBuilder: FormBuilder,
               private _productService: ProductService,
@@ -52,87 +53,79 @@ export class ProductAddComponent implements OnInit {
     })
     this.formCreateProduct = this._formBuilder.group({
       id: [],
-      name: [],
-      description: [],
-      initialPrice: [],
-      startTime: [],
-      endTime: [],
+      name: ["",[Validators.required]],
+      description: ["",[Validators.required]],
+      initialPrice: ["",[Validators.required]],
+      startTime: ["",[Validators.required]],
+      endTime: ["",[Validators.required]],
       registerDay: [],
-      priceStep: [],
-      category: [],
-      user: []
-    })
+      priceStep: ["",[Validators.required]],
+      category: ["",[Validators.required]],
+      user: ["",[Validators.required]]
+    });
   }
 
   addNewProduct() {
     this.productDto = this.formCreateProduct.value;
     console.log(this.formCreateProduct.value)
     this._productService.save(this.productDto).subscribe(data => {
-      if (this.selectedImages.length !== 0) {
-        for (let i = 0; i < this.selectedImages.length; i++) {
-          let selectedImage = this.selectedImages[i];
-          const n = Date.now();
-          const filePath = `RoomsImages/${n}`;
-          const fileRef = this._storage.ref(filePath);
-          this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
-            finalize(() => {
-              fileRef.getDownloadURL().subscribe(url => {
-                const image: ImgUrlProductDto = {
-                  url: url,
-                  product: data.id
-                };
-                console.log(url);
-                console.log(image)
-                this._imageProductService.create(image).subscribe(() => {
-                  console.log('SUCCESSFULLY CREATE')
-                });
-              });
-            })
-          ).subscribe();
+      if (this.imgs.length !== 0) {
+        for (let i = 0; i < this.imgs.length; i++) {
+          const image: ImgUrlProductDto = {
+            url: this.imgs[i],
+            product: data.id
+          };
+          console.log(image);
+          this._imageProductService.create(image).subscribe(() => {
+            console.log('SUCCESSFULLY CREATE');
+          })
         }
       }
     });
   }
 
-  findUserById(value) {
-    this._userService.findUserById(value).subscribe(data => {
+  findUserById(testNum) {
+    testNum.setAttribute('disabled',true);
+    this._userService.findUserById(testNum.value).subscribe(data => {
       this.userFind = data;
       this.formCreateProduct.patchValue({user: this.userFind.id})
-      console.log(this.userFind)
+      console.log(this.userFind);
     })
-
   }
 
   showPreview(event: any) {
-    let newSelectedImages = [];
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
-      newSelectedImages = event.target.files;
-      for (let i = 0; i < event.target.files.length; i++) {
-        this.selectedImages.push(event.target.files[i]);
-      }
+      this.selectedFile = event.target.files;
     } else {
-      this.selectedImages = [];
+      this.selectedFile = [];
     }
-    console.log(this.selectedImages)
-    if (newSelectedImages.length !== 0) {
-      for (let i = 0; i < newSelectedImages.length; i++) {
-        let selectedImage = newSelectedImages[i];
+    console.log(this.selectedFile)
+    if (this.selectedFile.length !== 0) {
+      for (let i = 0; i < this.selectedFile.length; i++) {
+        let selectedImage = this.selectedFile[i];
         const n = Date.now();
         const filePath = `RoomsImages/${n}`;
         const fileRef = this._storage.ref(filePath);
         this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe(url => {
-              this.img.push(url);
-              if (this.img.length == newSelectedImages.length) {
-              }
+              this.imgs.push(url);
             });
           })
         ).subscribe(() => {
         });
       }
     }
+  }
+
+  deleteImageNew(index) {
+    this.imgs.splice(index, 1)
+    console.log(index)
+  }
+
+  resetFindUserById(testNum) {
+    testNum.removeAttribute('disabled')
   }
 }

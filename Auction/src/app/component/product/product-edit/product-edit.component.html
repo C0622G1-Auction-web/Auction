@@ -2,7 +2,7 @@
   <div class="auction d-flex align-items-center">
     <div class="row d-flex ms-auto me-5">
       <div class="boxed shadow-md h-100 ms-auto">
-        <form *ngIf="formEditProduct" class="form" [formGroup]="formEditProduct" (ngSubmit)="updateProduct()">
+        <form *ngIf="formEditProduct" class="form" [formGroup]="formEditProduct" (ngSubmit)="updateProduct(id)">
           <fieldset>
             <legend>
               <div class="mt-4 text-center">
@@ -11,6 +11,8 @@
             </legend>
           </fieldset>
           <input type="text" class="form-control" formControlName="id" hidden>
+          <input formControlName="reviewStatus" hidden>
+          <input formControlName="auctionStatus" hidden>
           <div class="mb-2">
             <div class="d-flex align-items-center mb-2">
               <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>
@@ -24,14 +26,14 @@
               <label class="form-label ms-2">Mã người đăng<span style="color: red"> (*)</span>:</label>
             </div>
             <div class="d-flex align-items-center mb-2">
-              <input #testNum formControlName="user" style="width: 50%" type="number"  class="form-control"/>
-              <button type="button"  class="btn btn-primary d-flex justify-content-center mx-3"
-                      (click)="findUserById(testNum.value)">
+              <input #testNum formControlName="user" style="width: 50%" type="number" class="form-control"/>
+              <button type="button" class="btn btn-primary d-flex justify-content-center mx-3"
+                      (click)="findUserById(testNum)">
                 <object data="assets/icons/check-people.svg" width="20" height="20"
                         class="me-2 slide"></object>
                 Kiểm tra
               </button>
-              <button style="width: 20%">
+              <button type="button" style="width: 20%" (click)="resetFindUserById(testNum)">
                 <object data="assets/icons/back.svg" width="20" height="20"></object>
               </button>
             </div>
@@ -62,7 +64,7 @@
               <label class="form-label ms-2">Mỗi lần tăng ít nhất<span
                 style="color: red"> (*)</span>:</label>
             </div>
-            <select [compareWith]="equalsPriceStep"  class="form-select" aria-label="Default select example"
+            <select  class="form-select" aria-label="Default select example"
                     formControlName="priceStep">
               <option *ngFor="let item of priceStepList" [ngValue]="item.id">{{item.step}}</option>
             </select>
@@ -72,7 +74,8 @@
               <object data="assets/icons/category.svg" width="20" height="20"></object>
               <label class="form-label ms-2">Chủng loại<span style="color: red">(*)</span>:</label>
             </div>
-            <select [compareWith]="equalsCategory" formControlName="category"  class="form-select" aria-label="Default select example">
+            <select  formControlName="category" class="form-select"
+                    aria-label="Default select example">
               <option *ngFor="let item of categoryList" [ngValue]="item.id">{{item.name}}</option>
             </select>
           </div>
@@ -82,14 +85,18 @@
               <object data="assets/icons/image.svg" width="20" height="20"></object>
               <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>
             </div>
-            <input type="file" id="file"
+            <input type="file"
                    multiple
                    (change)="showPreview($event)"
-                   name="image"
-                   autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
+                   autocomplete="off" class="custom-file-input form-control">
           </div>
-          <div *ngFor="let i of imgs">
-            <img style="width: 10px;height: 10px" src="{{i.url}}"><button type="button" class="btn-close" disabled aria-label="Close"></button>
+          <div *ngFor="let img of imgs,let i = index">
+            <img style="width: 100px;height: 100px" src="{{img.url}}">
+            <button (click)="deleteImage(i,img)" type="button" class="btn-close" aria-label="Close"></button>
+          </div>
+          <div *ngFor="let img of imgCreate,let i = index">
+            <img style="width: 100px;height: 100px" src="{{img}}">
+            <button (click)="deleteImageNew(i)" type="button" class="btn-close" aria-label="Close"></button>
           </div>
           <div class="mb-2">
             <div class="d-flex align-items-center mb-2">
@@ -125,7 +132,8 @@
                 Cập nhật
               </p>
             </button>
-            <button style="margin-right: 5px" class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">
+            <button style="margin-right: 5px"
+                    class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">
               <object data="assets/icons/button-back.svg" width="20" height="20"
                       class="me-2 slide"></object>
               <p>Nhập lại</p>
