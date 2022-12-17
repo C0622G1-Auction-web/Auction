@@ -3,13 +3,15 @@
 * Create Date: 16/12/2022
 * */
 
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {GuideService} from "../../../service/guide/guide.service";
-import {AngularFireStorage} from "@angular/fire/storage";
-import {finalize} from "rxjs/operators";
-import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {GuideService} from '../../../service/guide/guide.service';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {finalize} from 'rxjs/operators';
+import {ImgUrlGuideDto} from '../../../model/guide/img-url-guide';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Observable} from 'rxjs';
+import {Guide} from '../../../model/guide/guide';
 
 @Component({
   selector: 'app-guide-add',
@@ -23,37 +25,48 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 * */
 export class GuideAddComponent implements OnInit {
   guideForm: FormGroup;
+  newGuide: Guide;
+  downloadURL: Observable<string>;
+
   selectedImages: any[] = [];
   imgs: any[] = [];
   id: number;
-  constructor(private _guideService:GuideService,
+
+  // tslint:disable-next-line:variable-name
+  constructor(private _guideService: GuideService,
+              // tslint:disable-next-line:variable-name
               private _formBuilder: FormBuilder,
-              private _storage:AngularFireStorage,
-              private _activatedRouter: ActivatedRoute) { }
+              // tslint:disable-next-line:variable-name
+              private _storage: AngularFireStorage,
+              // tslint:disable-next-line:variable-name
+              private _activatedRouter: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.guideForm =this._formBuilder.group({
-      title:[''],
-      content:['']
-    })
+    this.guideForm = this._formBuilder.group({
+      title: [''],
+      content: ['']
+    });
   }
-  craeteGuide(){
+
+  craeteGuide() {
     this._guideService.create(this.guideForm.value).subscribe(data => {
-      console.log(data)
+      console.log(data);
       if (this.selectedImages.length !== 0) {
+        // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < this.selectedImages.length; i++) {
-          let selectedImage = this.selectedImages[i];
+          const selectedImage = this.selectedImages[i];
           const n = Date.now();
           const filePath = `RoomsImages/${n}`;
           const fileRef = this._storage.ref(filePath);
           this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
             finalize(() => {
-              fileRef.getDownloadURL().subscribe(url => {
+              fileRef.getDownloadURL().subscribe(urlx => {
                 const image: ImgUrlGuideDto = {
-                  url: url,
+                  url: urlx,
                   guideId: data.id
                 };
-                console.log(url);
+                console.log(urlx);
                 console.log(image);
                 // this._imgUrlGuideService.create(image).subscribe(() => {
                 //   console.log('SUCCESSFULLY CREATE')
@@ -72,6 +85,7 @@ export class GuideAddComponent implements OnInit {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       newSelectedImages = event.target.files;
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < event.target.files.length; i++) {
         this.selectedImages.push(event.target.files[i]);
       }
@@ -79,8 +93,9 @@ export class GuideAddComponent implements OnInit {
       this.selectedImages = [];
     }
     if (newSelectedImages.length !== 0) {
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < newSelectedImages.length; i++) {
-        let selectedImage = newSelectedImages[i];
+        const selectedImage = newSelectedImages[i];
         const n = Date.now();
         const filePath = `RoomsImages/${n}`;
         const fileRef = this._storage.ref(filePath);
@@ -88,14 +103,15 @@ export class GuideAddComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe(url => {
               this.imgs.push(url);
-              if (this.imgs.length == newSelectedImages.length) {
+              if (this.imgs.length === newSelectedImages.length) {
               }
             });
           })
         ).subscribe(() => {
         });
       }
-      console.log(this.imgs)
+      console.log(this.imgs);
     }
   }
+
 }

@@ -3,7 +3,7 @@ import {ReviewStatus} from './review-status';
 import {AuctionStatus} from '../auction/auction-status';
 import {Category} from './category';
 import {User} from '../user/user';
-import {ImgUrlProduct} from "./img-url-product";
+import {ImgUrlProduct} from './img-url-product';
 
 export interface Product {
   id?: number;
@@ -19,7 +19,7 @@ export interface Product {
   category?: Category;
   imgUrlProducts?: any;
   maxCurrentPrice?: number;
-
   imgUrlProduct?: ImgUrlProduct;
+  imgs?: any;
   user?: User;
 }

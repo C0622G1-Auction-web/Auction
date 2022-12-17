@@ -7,6 +7,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'Auction';
   // tslint:disable-next-line:variable-name
   constructor(private _toastService: ToastrService) {
