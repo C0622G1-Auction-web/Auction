@@ -5,6 +5,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
@@ -20,26 +24,27 @@ import {GuideEditComponent} from './component/guide/guide-edit/guide-edit.compon
 import {GuideDeleteComponent} from './component/guide/guide-delete/guide-delete.component';
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
 import {HomeComponent} from './component/home/home.component';
-import {LoginComponent} from './security/login/login.component';
-import {RegisterComponent} from './security/register/register.component';
-import {ResetPasswordComponent} from './security/reset-password/reset-password.component';
+import {LoginComponent} from './component/security/login/login.component';
+import {RegisterComponent} from './component/security/register/register.component';
 import {AuctionRequestComponent} from './component/auction-request/auction-request.component';
 import {ProductDetailComponent} from './component/product/product-detail/product-detail.component';
-import {VerificationComponent} from './security/verification/verification.component';
-import {VerifyResetPasswordComponent} from './security/verify-reset-password/verify-reset-password.component';
+import {VerificationComponent} from './component/security/verification/verification.component';
 import {AuctionComponent} from './component/auction/auction.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
 import {AppRoutingModule} from "./app-routing.module";
+import { AccountResetPassComponent } from './component/security/account-reset-pass/account-reset-pass.component';
+// @ts-ignore
 import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
+// @ts-ignore
 import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
-import { AccountResetPassComponent } from './component/account-reset-pass/account-reset-pass.component';
 import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
-import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
+import { PaymentReceiptComponent } from './component/payment/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
-import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
+// @ts-ignore
+import {GoogleLoginProvider, SocialAuthServiceConfig} from 'angularx-social-login';
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -66,11 +71,9 @@ const googleLoginOptions = {
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ResetPasswordComponent,
     AuctionRequestComponent,
     ProductDetailComponent,
     VerificationComponent,
-    VerifyResetPasswordComponent,
     AuctionComponent,
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
@@ -82,6 +85,8 @@ const googleLoginOptions = {
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent,
+    PaymentReceiptComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
