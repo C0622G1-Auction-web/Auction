@@ -1,16 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from "./security/login/login.component";
-import {GuideListComponent} from "./component/guide/guide-list/guide-list.component";
-import {AuctionProductDetailComponent} from "./component/auction/auction-product-detail/auction-product-detail.component";
-import {ProductAddComponent} from "./component/product/product-add/product-add.component";
-import {ProductEditComponent} from "./component/product/product-edit/product-edit.component";
-import {TransactionComponent} from "./component/transaction/transaction.component";
-import {HomeComponent} from "./component/home/home.component";
-import {UserListComponent} from "./component/user/user-list/user-list.component";
-import {UserEditComponent} from "./component/user/user-edit/user-edit.component";
-
-import {Routes, RouterModule} from '@angular/router';
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
 import {
   AuctionProductDetailComponent
@@ -23,8 +12,7 @@ import {UserListComponent} from './component/user/user-list/user-list.component'
 import {UserEditComponent} from './component/user/user-edit/user-edit.component';
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
-// @ts-ignore
-import {LoginComponent} from './security/login/login.component';
+import {LoginComponent} from "./component/security/login/login.component";
 
 const routes: Routes = [
   {
@@ -64,7 +52,7 @@ const routes: Routes = [
     component: GuideListComponent
   },
   {
-    path: 'auction/:productId', component: AuctionProductDetailComponent,
+    path: 'auction-detail/:productId', component: AuctionProductDetailComponent,
   },
   {
     path: 'confirmAddress', component: AddressPaymentComponent
@@ -72,7 +60,7 @@ const routes: Routes = [
 
   {
     path: 'methodPayment', component: MethodPaymentComponent
-  },  {path: 'login', component: LoginComponent}
+  }, {path: 'login', component: LoginComponent}
 
 ];
 
