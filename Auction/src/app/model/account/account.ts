@@ -1,5 +1,8 @@
 export interface Account {
   id?: number;
-  userName?: string;
+  username?: string;
+  password?: string;
+  statusLock?: boolean;
+  deleteStatus?: boolean;
   pasword?: string;
 }

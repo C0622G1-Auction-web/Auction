@@ -1,9 +1,7 @@
 import {NgModule} from '@angular/core';
-
-import {RouterModule, Routes} from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
-
 import {ProductAddComponent} from './component/product/product-add/product-add.component';
 import {ProductEditComponent} from './component/product/product-edit/product-edit.component';
 import {TransactionComponent} from './component/transaction/transaction.component';
@@ -14,9 +12,7 @@ import {UserAddComponent} from './component/user/user-add/user-add.component';
 import {LockaccountUserComponent} from './component/user/lockaccount-user/lockaccount-user.component';
 import {ListProductsComponent} from './component/product/list-products/list-products.component';
 
-
 const routes: Routes = [
-
   {
     path: 'products',
     component: ListProductsComponent,
@@ -29,8 +25,10 @@ const routes: Routes = [
     path: "product/edit/:id",
     component: ProductEditComponent
   },
-
-
+  {
+    path: 'transaction',
+    component: TransactionComponent
+  },
   {
     path: 'aa',
     component: TransactionComponent
@@ -38,22 +36,19 @@ const routes: Routes = [
 
   {path: 'transaction', component: TransactionComponent},
 
-
   {
     path: 'home',
     component: HomeComponent
-
   },
   {
     path: 'user/list',
     component: UserListComponent
   },
   {
-    path: 'user/edit',
+    path: 'user/edit/:id',
     component: UserEditComponent
   },
   {
-
     path: 'user/add',
     component: UserAddComponent
   },
