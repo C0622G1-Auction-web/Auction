@@ -5,10 +5,10 @@ import {Category} from '../../../model/product/category';
 import {User} from '../../../model/user/user';
 import {ProductService} from '../../../service/product/product.service';
 import {ToastrService} from 'ngx-toastr';
-import {Product} from "../../../model/product/product";
-import {CategoryService} from "../../../service/product/category.service";
-import {PriceStepService} from "../../../service/product/price-step.service";
-import {UserService} from "../../../service/user/user.service";
+import {Product} from '../../../model/product/product';
+import {CategoryService} from '../../../service/product/category.service';
+import {PriceStepService} from '../../../service/product/price-step.service';
+import {UserService} from '../../../service/user/user.service';
 
 @Component({
   selector: 'app-product-add',
@@ -23,14 +23,13 @@ export class ProductAddComponent implements OnInit {
   product: Product;
   formCreateProduct: FormGroup;
   userFind: User;
-  userId:number;
+  userId: number;
   private error: any;
 
   constructor(private formBuilder: FormBuilder,
               private productService: ProductService,
               private categoryService: CategoryService,
               private toastService: ToastrService,
-
               private priceStepService: PriceStepService,
               private userService: UserService) {
   }
@@ -39,16 +38,16 @@ export class ProductAddComponent implements OnInit {
     this.productService.findAllPriceStep().subscribe(data => {
       this.priceStepList = data;
     });
-    this.priceStepService.getListPriceStep().subscribe(data=>{
+    this.priceStepService.getListPriceStep().subscribe(data => {
       this.priceStepList = data;
     });
 
     this.productService.findAllCategory().subscribe(data => {
       this.categoryList = data;
     });
-    this.categoryService.getListCategory().subscribe(data=>{
+    this.categoryService.getListCategory().subscribe(data => {
       this.categoryList = data;
-    })
+    });
 
     this.productService.findAllUser().subscribe(data => {
       this.userList = data;
@@ -78,7 +77,7 @@ export class ProductAddComponent implements OnInit {
       auctionStatus: [],
       category: [],
       user: []
-    })
+    });
   }
 
   createProduct() {
@@ -96,10 +95,10 @@ export class ProductAddComponent implements OnInit {
   }
 
   findUserById(value) {
-    this.userService.findUserById(value).subscribe(data=>{
-        this.userFind = data;
-      console.log(this.userFind)
-    })
+    this.userService.findUserById(value).subscribe(data => {
+      this.userFind = data;
+      console.log(this.userFind);
+    });
   }
 }
 
