@@ -20,6 +20,7 @@ export class InfomationAuctionBuyerComponent implements OnInit {
     this.auctionService.getAuctionPageByProductId(2, 0).subscribe(
       data => {
         this.auctionPageByProductId = data;
+        console.log(this.auctionPageByProductId);
       }
     )
   }
