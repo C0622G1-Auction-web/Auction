@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/model/product/category';
+import { PriceStep } from 'src/app/model/product/price-step';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class PriceStepService {
 
   constructor(private _httpClient: HttpClient) {}
 
-  getListCategory():Observable<Category[]> {
-    return this._httpClient.get<Category[]>(environment.api_url_list_category);
+  getListPriceStep(): Observable<PriceStep[]> {
+
+    return this._httpClient.get<PriceStep[]>(environment.api_url_list_price_step);
+
   }
 }

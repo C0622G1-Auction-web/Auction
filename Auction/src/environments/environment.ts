@@ -4,11 +4,23 @@
 
 export const environment = {
   production: false,
+  firebaseConfig:{
+    apiKey: 'AIzaSyDV8RZyn7riFw087ES5nA05z4ON5axBO28',
+    authDomain: 'test-42050.firebaseapp.com',
+    databaseURL: 'https://test-42050-default-rtdb.asia-southeast1.firebasedatabase.app',
+    projectId: 'test-42050',
+    storageBucket: 'test-42050.appspot.com',
+    messagingSenderId: '902879698828',
+    appId: '1:902879698828:web:2d7346b0c1c599d08540a9',
+    measurementId: 'G-XEHPX24EFX'
+  },
   api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
   api_url_list_category: 'http://localhost:8080/api/v1/category',
   api_url_list_user: 'http://localhost:8080/api/v1/users',
-  api_url_list_img_url: 'http://localhost:8080/api/v1/users/{id}',
-  API_URL_AUCTION: "http://localhost:8080/auction/api"
+  API_URL_AUCTION: "http://localhost:8080/auction/api",
+  api_url_create_img_url: 'http://localhost:8080/auction/api/v1/products/img/create',
+  api_url_list_img_url: 'http://localhost:8080/auction/api/v1/products/img',
+  userUrl: 'http://localhost:8080/api/v1/users/'
 };
 
 /*

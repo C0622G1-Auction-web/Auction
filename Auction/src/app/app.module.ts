@@ -10,7 +10,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
-import {ProductAddComponent} from './component/product/product-add/product-add.component';
 import {ProductDeleteComponent} from './component/product/product-delete/product-delete.component';
 import {ProductEditComponent} from './component/product/product-edit/product-edit.component';
 import {UserListComponent} from './component/user/user-list/user-list.component';
@@ -33,15 +32,16 @@ import {AuctionComponent} from './component/auction/auction.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
-import { AuctionProductAddComponent } from './auction/auction-product-add/auction-product-add.component';
-
+import { AuctionProductAddComponent } from './component/auction/auction-product-add/auction-product-add.component';
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFireModule} from "@angular/fire";
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     ProductListComponent,
-    ProductAddComponent,
     ProductDeleteComponent,
     ProductEditComponent,
     UserListComponent,
@@ -64,7 +64,7 @@ import { AuctionProductAddComponent } from './auction/auction-product-add/auctio
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
     InfomationAuctionSellerComponent,
-    AuctionProductAddComponent,
+    AuctionProductAddComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +73,9 @@ import { AuctionProductAddComponent } from './auction/auction-product-add/auctio
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
   providers: [],
   bootstrap: [AppComponent]
