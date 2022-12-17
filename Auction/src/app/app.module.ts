@@ -31,6 +31,10 @@ import {AuctionComponent} from './component/auction/auction.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
+<<<<<<< HEAD
+=======
+import {AppRoutingModule} from "./app-routing.module";
+>>>>>>> 6bd734d874cfce6b5e82a6bd66c5ded1511afde5
 import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
 import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
 import { AccountResetPassComponent } from './component/account-reset-pass/account-reset-pass.component';
@@ -38,6 +42,7 @@ import { AddressPaymentComponent } from './component/payment/address-payment/add
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
+<<<<<<< HEAD
 import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
 import {AppRoutingModule} from "./app-routing.module";
 
@@ -45,6 +50,9 @@ const googleLoginOptions = {
   scope: 'profile email',
   plugin_name: 'login'
 };
+=======
+import { AuctionProductAddComponent } from './auction/auction-product-add/auction-product-add.component';
+>>>>>>> 6bd734d874cfce6b5e82a6bd66c5ded1511afde5
 
 @NgModule({
   declarations: [
@@ -82,6 +90,10 @@ const googleLoginOptions = {
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent
+<<<<<<< HEAD
+=======
+    AuctionProductAddComponent,
+>>>>>>> 6bd734d874cfce6b5e82a6bd66c5ded1511afde5
   ],
   imports: [
     BrowserModule,
