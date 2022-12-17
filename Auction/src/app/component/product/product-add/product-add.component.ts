@@ -1,21 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ProductService} from '../../../service/product/product.service';
-import {Product} from '../../../model/product/product';
-import {Category} from '../../../model/product/category';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {PriceStep} from '../../../model/product/price-step';
-import {CategoryService} from '../../../service/product/category.service';
-import {PriceStepService} from '../../../service/product/price-step.service';
+import {Category} from '../../../model/product/category';
 import {User} from '../../../model/user/user';
-import {UserService} from '../../../service/user/user.service';
-
-import {finalize} from "rxjs/operators";
-import {ImgUrlProduct} from "../../../model/product/img-url-product";
-import {AngularFireStorage} from "@angular/fire/storage";
-import {ImageProductService} from "../../../service/product/image-product.service";
-import {ImgUrlProductDto} from "../../../model/product/dto/img-url-product-dto";
-import {ProductDto} from "../../../model/product/dto/product-dto";
-
+import {ProductService} from '../../../service/product/product.service';
+import {ToastrService} from 'ngx-toastr';
+import {Product} from "../../../model/product/product";
+import {CategoryService} from "../../../service/product/category.service";
+import {PriceStepService} from "../../../service/product/price-step.service";
+import {UserService} from "../../../service/user/user.service";
 
 @Component({
   selector: 'app-product-add',
@@ -23,105 +16,90 @@ import {ProductDto} from "../../../model/product/dto/product-dto";
   styleUrls: ['./product-add.component.css']
 })
 export class ProductAddComponent implements OnInit {
-
+  newProduct: FormGroup;
+  priceStepList: PriceStep[];
+  categoryList: Category[];
+  userList: User[];
   product: Product;
-  productDto: ProductDto;
-  categoryList: Category[] = [];
-  priceStepList: PriceStep[] = [];
   formCreateProduct: FormGroup;
   userFind: User;
-  userId: number;
-  selectedFile: any[] = [];
-  imgs: any[] = [];
-  message = "";
+  userId:number;
+  private error: any;
 
-  constructor(private _formBuilder: FormBuilder,
-              private _productService: ProductService,
-              private _categoryService: CategoryService,
-              private _priceStepService: PriceStepService,
-              private _userService: UserService,
-              private _storage: AngularFireStorage,
-              private _imageProductService: ImageProductService) {
+  constructor(private formBuilder: FormBuilder,
+              private productService: ProductService,
+              private categoryService: CategoryService,
+              private toastService: ToastrService,
+
+              private priceStepService: PriceStepService,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this._categoryService.getListCategory().subscribe(data => {
+    this.productService.findAllPriceStep().subscribe(data => {
+      this.priceStepList = data;
+    });
+    this.priceStepService.getListPriceStep().subscribe(data=>{
+      this.priceStepList = data;
+    });
+
+    this.productService.findAllCategory().subscribe(data => {
+      this.categoryList = data;
+    });
+    this.categoryService.getListCategory().subscribe(data=>{
       this.categoryList = data;
     })
-    this._priceStepService.getListPriceStep().subscribe(data => {
-      this.priceStepList = data;
-    })
-    this.formCreateProduct = this._formBuilder.group({
-      id: [],
-      name: ["",[Validators.required]],
-      description: ["",[Validators.required]],
-      initialPrice: ["",[Validators.required]],
-      startTime: ["",[Validators.required]],
-      endTime: ["",[Validators.required]],
-      registerDay: [],
-      priceStep: ["",[Validators.required]],
-      category: ["",[Validators.required]],
-      user: ["",[Validators.required]]
+
+    this.productService.findAllUser().subscribe(data => {
+      this.userList = data;
     });
+    this.newProduct = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      initialPrice: ['', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      startTime: ['', [Validators.required]],
+      endTime: ['', [Validators.required]],
+      priceStepId: ['', [Validators.required]],
+      categoryId: ['', [Validators.required]],
+      userId: ['', [Validators.required]]
+    });
+
+    this.formCreateProduct = this.formBuilder.group({
+      id: [],
+      name: [],
+      description: [],
+      initialPrice: [],
+      startTime: [],
+      endTime: [],
+      registerDay: [],
+      priceStep: [],
+      reviewStatus: [],
+      auctionStatus: [],
+      category: [],
+      user: []
+    })
   }
 
+  createProduct() {
+    this.productService.save(this.newProduct.value).subscribe(data => {
+        this.toastService.success('them moi thanh cong', 'them moi');
+      },
+      error => {
+        this.error = error.message;
+      });
+  }
+
+
   addNewProduct() {
-    this.productDto = this.formCreateProduct.value;
-    console.log(this.formCreateProduct.value)
-    this._productService.save(this.productDto).subscribe(data => {
-      if (this.imgs.length !== 0) {
-        for (let i = 0; i < this.imgs.length; i++) {
-          const image: ImgUrlProductDto = {
-            url: this.imgs[i],
-            product: data.id
-          };
-          console.log(image);
-          this._imageProductService.create(image).subscribe(() => {
-            console.log('SUCCESSFULLY CREATE');
-          })
-        }
-      }
-    });
+
   }
 
   findUserById(value) {
-    this._userService.findUserById(value).subscribe(data => {
-      this.userFind = data;
-      this.formCreateProduct.patchValue({user: this.userFind.id})
-      console.log(this.userFind);
+    this.userService.findUserById(value).subscribe(data=>{
+        this.userFind = data;
+      console.log(this.userFind)
     })
-  }
-
-  showPreview(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedFile = event.target.files;
-    } else {
-      this.selectedFile = [];
-    }
-    console.log(this.selectedFile)
-    if (this.selectedFile.length !== 0) {
-      for (let i = 0; i < this.selectedFile.length; i++) {
-        let selectedImage = this.selectedFile[i];
-        const n = Date.now();
-        const filePath = `RoomsImages/${n}`;
-        const fileRef = this._storage.ref(filePath);
-        this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe(url => {
-              this.imgs.push(url);
-            });
-          })
-        ).subscribe(() => {
-        });
-      }
-    }
-  }
-
-  deleteImageNew(index) {
-    this.imgs.splice(index, 1)
-    console.log(index)
   }
 }
 

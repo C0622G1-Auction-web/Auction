@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+  import { Injectable } from '@angular/core';
 import {Product} from '../../model/product/product';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
@@ -17,7 +17,8 @@ import {ReviewStatus} from "../../model/product/review-status";
 export class ProductService {
   private product: Product[];
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) { }
+  // constructor(private httpClient: HttpClient) { }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -41,30 +42,38 @@ export class ProductService {
   private API_URL = '  http://localhost:8080/';
 
   findAllPriceStep(): Observable<PriceStep[]> {
-    return this.httpClient.get<PriceStep[]>(environment.api_url_list_price_step);
+    return this._httpClient.get<PriceStep[]>(environment.api_url_list_price_step);
   }
 
   findAllCategory(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(environment.api_url_list_category);
+    return this._httpClient.get<Category[]>(environment.api_url_list_category);
   }
 
   findAllUser(): Observable<User[]> {
-    return this.httpClient.get<User[]>(environment.api_url_list_user);
+    return this._httpClient.get<User[]>(environment.api_url_list_user);
   }
 
   findAllImageProduct(): Observable<ImgUrlProduct[]> {
-    return this.httpClient.get<ImgUrlProduct[]>(environment.api_url_list_img_url);
+    return this._httpClient.get<ImgUrlProduct[]>(environment.api_url_list_img_url);
   }
 
-  save(product: ProductDto): Observable<Product> {
-    return this.httpClient.post<Product>('http://localhost:8080/api/v1/products/create', product);
+  save(productDto: ProductDto): Observable<Product> {
+    return this._httpClient.post<Product>('http://localhost:8080/api/v1/products/create', productDto);
   }
 
   findAll(curPage: number, numberRecord: number): Observable<DataResult<ProductDto>> {
-    return this.httpClient.get<DataResult<ProductDto>>(this.API_URL + 'list?page=' + (curPage - 1) + '&size=' + numberRecord );
+    return this._httpClient.get<DataResult<ProductDto>>(this.API_URL + 'list?page=' + (curPage - 1) + '&size=' + numberRecord );
   }
   findAllReview(): Observable<ReviewStatus[]> {
-    return this.httpClient.get<ReviewStatus[]>(this.API_URL + 'listReviewStatus');
+    return this._httpClient.get<ReviewStatus[]>(this.API_URL + 'listReviewStatus');
   }
 
+  /**
+   * Created: SangDD
+   * Function: show page product and search
+   * Date: 15/11/2022
+   */
+  getAllAndSearch(rfSearch: any): Observable<any> {
+    return this._httpClient.get(environment.productSearchUrl, rfSearch);
+  }
 }

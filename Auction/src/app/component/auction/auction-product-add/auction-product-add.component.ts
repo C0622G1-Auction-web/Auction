@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 import { Category } from 'src/app/model/product/category';
 import { ImgUrlProductDto } from 'src/app/model/product/dto/img-url-product-dto';
 import { ProductDto } from 'src/app/model/product/dto/product-dto';
@@ -158,8 +159,4 @@ export class AuctionProductAddComponent implements OnInit {
         }
       }
     }
-}
-
-function finalize(arg0: () => void): import("rxjs").OperatorFunction<import("firebase").default.storage.UploadTaskSnapshot, unknown> {
-  throw new Error('Function not implemented.');
 }

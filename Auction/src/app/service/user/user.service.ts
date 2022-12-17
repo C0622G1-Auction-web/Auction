@@ -9,15 +9,21 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  /**
-   * Create by: SonPT
-   * Date created: 15/12/2022
-   * @return User
-   */
+  createUser(user: User): Observable<User> {
+    console.log(user)
+    return this.httpClient.post<User>('http://localhost:8080/api/v1/users/create', user);
+  }
 
-   findUserById (value : number) : Observable<User>{
-    return this._httpClient.get<User>(environment.userUrl + "find/"  + value);
+  getAllUser(): Observable<User[]> {
+    return null;
+  }
+
+    updateUser(user: User): Observable<User> {
+      return this.httpClient.patch<User>(environment.uri_api_create_user_v1_user + '/' + user.id, user);
+    }
+  findUserById(userId: number): Observable<User> {
+    return this.httpClient.get<User>(environment.userUrl + userId)
   }
 }

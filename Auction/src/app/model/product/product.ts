@@ -19,6 +19,5 @@ export interface Product {
   reviewStatus?: ReviewStatus;
   auctionStatus?: AuctionStatus;
   category?: Category;
-  registerDay?: string;
   user?: User;
 }
