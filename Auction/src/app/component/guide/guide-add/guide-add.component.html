@@ -1,1 +1,34 @@
-<p>guide-add works!</p>
+<!--Created by QuangND
+    Screen: Add new guide of auction web
+    DateCreate: 15/12/2022
+-->
+
+<div class="container ">
+  <h3 class="center">Tạo Mới Hướng Dẫn</h3>
+  <div class="guide w-50" style=" box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.35);">
+    <form [formGroup]="guideForm" id="guideform" (ngSubmit)="craeteGuide()" >
+      <div class="row">
+        <label for="title" class="form-label">Chủ đề (<span style="color: red">*</span>)</label>
+        <input formControlName="title" id="title" type="text" placeholder=" Chọn chủ đề" class="form-control" >
+      </div>
+
+      <div class="row">
+        <label for="floatingTextarea">Nội dung (<span style="color: red">*</span>)</label>
+
+        <textarea formControlName="content" class="form-control" rows="6" placeholder="Ghi nội dung ở đây"
+                  id="floatingTextarea" ></textarea>
+      </div>
+
+      <div class="row">
+        <label for="formFile" class="form-label">Chọn hình ảnh</label>
+        <input class="form-control" type="file" id="formFile">
+      </div>
+      <div class="center">
+        <button class="btn btn-primary w-100" type="submit">
+          Thêm Hướng dẫn
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div>
