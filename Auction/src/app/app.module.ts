@@ -42,6 +42,9 @@ import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-logi
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
+import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
+import {UserCreateComponent} from "./component/user/user-create/user-create.component";
+
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -73,6 +76,7 @@ const googleLoginOptions = {
     ProductDetailComponent,
     VerificationComponent,
     VerifyResetPasswordComponent,
+    RegisterWithGoogleComponent,
     AuctionComponent,
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
@@ -86,7 +90,7 @@ const googleLoginOptions = {
     TransactionComponent,
     UserCreateComponent,
     UserUpdateComponent
-
+    UserCreateComponent
   ],
   imports: [
     ReactiveFormsModule,
