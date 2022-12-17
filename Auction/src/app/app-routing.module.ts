@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from "./security/login/login.component";
 import {GuideListComponent} from "./component/guide/guide-list/guide-list.component";
 import {AuctionProductDetailComponent} from "./component/auction/auction-product-detail/auction-product-detail.component";
-import {InfomationAuctionBuyerComponent} from "./component/auction/infomation-auction-buyer/infomation-auction-buyer.component";
 import {ProductAddComponent} from "./component/product/product-add/product-add.component";
 import {ProductEditComponent} from "./component/product/product-edit/product-edit.component";
 import {TransactionComponent} from "./component/transaction/transaction.component";
@@ -10,10 +10,12 @@ import {HomeComponent} from "./component/home/home.component";
 import {UserListComponent} from "./component/user/user-list/user-list.component";
 import {UserEditComponent} from "./component/user/user-edit/user-edit.component";
 
+
 const routes: Routes = [
   {
     path: "auction-detail/:productId", component: AuctionProductDetailComponent,
   },
+
 
   {
     path: "product/create",
@@ -49,13 +51,14 @@ const routes: Routes = [
   {
     path: "auction/:productId", component: AuctionProductDetailComponent,
 
-  }];
+  }, {path: 'login', component: LoginComponent}
 
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-
 export class AppRoutingModule {
 }
+

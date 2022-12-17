@@ -14,5 +14,4 @@ export interface User {
   avatar?: string;
   address: Address;
   account: Account;
-
 }
