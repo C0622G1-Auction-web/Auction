@@ -45,8 +45,8 @@ export class AuctionProductDetailComponent implements OnInit {
    * Function: Transfer of seller and buyer information boards
    */
   onChangeInfoSeller() {
-    this.changeBuyer = !this.changeBuyer;
-    this.changeSeller = !this.changeSeller;
+    this.changeBuyer = true;
+    this.changeSeller = false;
     let titleSeller = document.getElementById("title-seller");
     let titleBuyer = document.getElementById("title-buyer");
     titleBuyer.style.backgroundColor = "#ffffff";
@@ -59,8 +59,8 @@ export class AuctionProductDetailComponent implements OnInit {
    * Function: Transfer of seller and buyer information boards
    */
   onChangeInfoAuction() {
-    this.changeBuyer = !this.changeBuyer;
-    this.changeSeller = !this.changeSeller;
+    this.changeBuyer = false;
+    this.changeSeller = true;
     let titleSeller = document.getElementById("title-seller");
     let titleBuyer = document.getElementById("title-buyer");
     titleBuyer.style.backgroundColor = "transparent";
