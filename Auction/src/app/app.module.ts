@@ -5,10 +5,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ToastrModule} from 'ngx-toastr';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
@@ -36,15 +32,17 @@ import {InfomationAuctionSellerComponent} from './component/auction/infomation-a
 import {AppRoutingModule} from "./app-routing.module";
 import { AccountResetPassComponent } from './component/security/account-reset-pass/account-reset-pass.component';
 // @ts-ignore
-import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
+import { PaymentCartComponent } from './component/payment/payment-cart/payment-cart.component';
 // @ts-ignore
-import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
+import { AccountForgotPassComponent } from './component/security/account-forgot-pass/account-forgot-pass.component';
 import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
-// @ts-ignore
-import {GoogleLoginProvider, SocialAuthServiceConfig} from 'angularx-social-login';
+import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -57,7 +55,6 @@ const googleLoginOptions = {
     HeaderComponent,
     FooterComponent,
     ProductListComponent,
-    ProductAddComponent,
     ProductDeleteComponent,
     ProductEditComponent,
     UserListComponent,
@@ -73,6 +70,7 @@ const googleLoginOptions = {
     RegisterComponent,
     AuctionRequestComponent,
     ProductDetailComponent,
+    ProductAddComponent,
     VerificationComponent,
     AuctionComponent,
     AuctionProductDetailComponent,
@@ -85,8 +83,6 @@ const googleLoginOptions = {
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent,
-    PaymentReceiptComponent,
-    TransactionComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +91,9 @@ const googleLoginOptions = {
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
   providers: [
     {
@@ -112,7 +110,7 @@ const googleLoginOptions = {
           },
         ]
       } as SocialAuthServiceConfig,
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

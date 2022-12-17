@@ -10,27 +10,6 @@ import {CategoryService} from '../../../service/product/category.service';
 import {PriceStepService} from '../../../service/product/price-step.service';
 import {UserService} from '../../../service/user/user.service';
 
-export const checkStartDay: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const startDay = new Date(control.get('startDay').value).getTime();
-  const dateNow = new Date().getTime();
-  console.log(dateNow);
-  if (startDay - dateNow < 24 * 60 * 60 * 1000) {
-    return {checkStartDay: true};
-  } else {
-    return null;
-  }
-};
-
-export const checkEndDay: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const startDay = new Date(control.get('startDay').value).getTime();
-  const endDay = new Date(control.get('endDay').value).getTime();
-  if (endDay - startDay < 24 * 60 * 60 * 1000) {
-    return {checkStartDay: true};
-  } else {
-    return null;
-  }
-};
-
 @Component({
   selector: 'app-product-add',
   templateUrl: './product-add.component.html',
@@ -122,3 +101,10 @@ export class ProductAddComponent implements OnInit {
     });
   }
 }
+
+
+
+
+
+
+
