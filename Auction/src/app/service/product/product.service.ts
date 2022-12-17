@@ -1,17 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Product} from '../../model/product/product';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Product} from '../../model/product/product';
 import {PriceStep} from '../../model/product/price-step';
 import {Category} from '../../model/product/category';
 import {User} from '../../model/user/user';
 import {ImgUrlProduct} from '../../model/product/img-url-product';
-import {environment} from '../../../environments/environment';
 import {DataResult} from "../../model/product/data_result";
 import {ReviewStatus} from "../../model/product/review-status";
+import {PageProduct} from "../../model/product/page-product";
 import {catchError} from "rxjs/operators";
 import {ProductDto} from "../../model/product/product-dto";
-import { PageProduct } from 'src/app/model/product/page-product';
 
 
 
@@ -88,16 +88,12 @@ export class ProductService {
   }
 
 
-
   /**
    * Created: SangDD
    * Function: show page product and search
    * Date: 15/11/2022
    */
   getAllAndSearch(rfSearch: any): Observable<any> {
-
-    return this._httpClient.get(environment.productSearchUrl, rfSearch);
-    // return this._httpClient.get<PageProduct>(environment.productSearchUrl, rfSearch);
     return this._httpClient.post<PageProduct>(environment.productSearchUrl, rfSearch);
   }
 
@@ -107,14 +103,6 @@ export class ProductService {
    * Date: 15/11/2022
    */
   getAll(): Observable<PageProduct> {
-    // let param = {
-    //   "productName" : "",
-    //     "categoryName":"",
-    //     "sellerName":"",
-    //     "minPrice":0,
-    //     "maxPrice":111111111,
-    //     "auctionStatusName":""
-    // }
     return this._httpClient.get<PageProduct>(environment.api_url_products);
   }
 

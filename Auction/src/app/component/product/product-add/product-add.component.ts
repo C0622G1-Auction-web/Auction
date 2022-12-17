@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
 import {ProductService} from '../../../service/product/product.service';
 import {Product} from '../../../model/product/product';
-import {Category} from '../../../model/product/category';
-import {PriceStep} from '../../../model/product/price-step';
 import {CategoryService} from '../../../service/product/category.service';
 import {PriceStepService} from '../../../service/product/price-step.service';
-import {User} from '../../../model/user/user';
 import {UserService} from '../../../service/user/user.service';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {PriceStep} from '../../../model/product/price-step';
+import {Category} from '../../../model/product/category';
+import {User} from '../../../model/user/user';
 
 import {finalize} from "rxjs/operators";
 import {ImgUrlProduct} from "../../../model/product/img-url-product";
@@ -31,6 +31,8 @@ export class ProductAddComponent implements OnInit {
   formCreateProduct: FormGroup;
   userFind: User;
   userId: number;
+
+  private error: any;
   selectedImages: any[] = [];
   img: any[] = [];
 
@@ -44,6 +46,7 @@ export class ProductAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this._categoryService.getListCategory().subscribe(data => {
       this.categoryList = data;
     })
