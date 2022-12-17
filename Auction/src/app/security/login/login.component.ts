@@ -5,8 +5,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../service/security/auth.service";
 import {TokenService} from "../../service/security/token.service";
 import {MessageRespone} from "../../model/security/message-respone";
-// @ts-ignore
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
+import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {Googletoken} from "../oauth2/googletoken";
 
 @Component({
@@ -121,6 +120,5 @@ export class LoginComponent implements OnInit {
       })
     })
   }
-
 
 }

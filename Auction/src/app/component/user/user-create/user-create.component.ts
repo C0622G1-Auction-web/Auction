@@ -59,7 +59,8 @@ export class UserCreateComponent implements OnInit {
       password:[],
       pointDedication:[10.0],
       statusLock:[true],
-      deleteStatus:[true]
+      deleteStatus:[true],
+      userTypeId:[5]
     })
   }
 

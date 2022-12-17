@@ -5,8 +5,6 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
@@ -41,6 +39,9 @@ import { MethodPaymentComponent } from './component/payment/method-payment/metho
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
 import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
+import {UserCreateComponent} from "./component/user/user-create/user-create.component";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -82,13 +83,16 @@ const googleLoginOptions = {
     AddressPaymentComponent,
     MethodPaymentComponent,
     PaymentReceiptComponent,
-    TransactionComponent
+    TransactionComponent,
+    UserCreateComponent,
+    UserUpdateComponent
+
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()

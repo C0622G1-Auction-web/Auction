@@ -1,3 +1,4 @@
+<form *ngIf="updateUserForm" [formGroup]="updateUserForm" (ngSubmit)="updateUser(id)">
 <div  style="background-color: #eee">
   <div class="container">
     <div class="borderFull">
@@ -29,7 +30,7 @@
                   <div class="form-floating flex-grow-1">
                     <input type="text" class="form-control" id="floatingFistName"
                            placeholder="Tên đăng nhập"
-                           aria-label="Tên đăng nhập" aria-describedby="basic-addon2">
+                           aria-label="Tên đăng nhập" aria-describedby="basic-addon2" formControlName="firstName">
                     <label for="floatingFistName">Họ</label>
                   </div>
                   <span class="input-group-text" id="basic-addon14"><i
@@ -40,7 +41,7 @@
                 <div class=" input-group mb-3">
                   <div class=" form-floating flex-grow-1">
                     <input type="text" class="form-control" id="floatingName"
-                           placeholder="Name">
+                           placeholder="Name"formControlName="lastName">
                     <label for="floatingName">Tên</label>
                   </div>
                   <span class="input-group-text" id="basic-addon2"><i
@@ -54,7 +55,8 @@
                   <div class="form-floating flex-grow-1">
                     <input type="text" class="form-control" id="floatingLogin"
                            placeholder="Tên đăng nhập"
-                           aria-label="Tên đăng nhập" aria-describedby="basic-addon2">
+                           aria-label="Tên đăng nhập" aria-describedby="basic-addon2"
+                     formControlName="username">
                     <label for="floatingLogin">Tên đăng nhập</label>
                   </div>
                   <span class="input-group-text" id="basic-addon1"><i
@@ -66,7 +68,8 @@
                   <div class="form-floating flex-grow-1">
                     <input type="email" class="form-control" id="floatingEmail"
                            placeholder="Email"
-                           aria-label="Email" aria-describedby="basic-addon2">
+                           aria-label="Email" aria-describedby="basic-addon2"
+                    formControlName="email">
                     <label for="floatingEmail">Email</label>
                   </div>
                   <span class="input-group-text" id="basic-addon3"><i
@@ -80,7 +83,7 @@
                   <div class="form-floating flex-grow-1">
                     <input type="text" class="form-control" id="floatingPhone"
                            placeholder="PhoneNumber"
-                           aria-label="PhoneNumber" aria-describedby="basic-addon2">
+                           aria-label="PhoneNumber" aria-describedby="basic-addon2" formControlName="phone">
                     <label for="floatingPhone">Số điện thoại</label>
                   </div>
                   <span class="input-group-text" id="basic-addon5"><i
@@ -91,7 +94,7 @@
                 <div class=" input-group mb-3">
                   <div class=" form-floating flex-grow-1">
                     <input type="text" class="form-control" id="floatingDateOfBirth"
-                           placeholder="DateOfBirth">
+                           placeholder="DateOfBirth" formControlName="birthday">
                     <label for="floatingDateOfBirth">Ngày sinh</label>
                   </div>
                   <span class="input-group-text" id="basic-addon4"><i
@@ -128,7 +131,7 @@
                   <div class="form-floating flex-grow-1">
                     <input type="text" class="form-control" id="floatingAddress"
                            placeholder="Address"
-                           aria-label="Address" aria-describedby="basic-addon2">
+                           aria-label="Address" aria-describedby="basic-addon2" formControlName="detailAddress">
                     <label for="floatingAddress">Địa chỉ chi tiết</label>
                   </div>
                   <span class="input-group-text" id="basic-addon7"><i
@@ -139,7 +142,7 @@
                 <div class=" input-group mb-3">
                   <div class="form-floating flex-grow-1">
                     <input type="text" class="form-control" id="floatingIdCard"
-                           placeholder="IdCard">
+                           placeholder="IdCard" formControlName="idCard">
                     <label for="floatingIdCard">CMND</label>
                   </div>
                   <span class="input-group-text" id="basic-addon6"><i
@@ -153,7 +156,7 @@
                   <div class="form-floating flex-grow-1">
                     <input type="password" class="form-control" id="floatingPassword"
                            placeholder="name@example.com"
-                           aria-label="name@example.com" aria-describedby="basic-addon2">
+                           aria-label="name@example.com" aria-describedby="basic-addon2" formControlName="password">
                     <label for="floatingPassword">Mật khẩu hiện tại</label>
                   </div>
                   <span class="input-group-text" id="basic-addon8"><i
@@ -189,8 +192,8 @@
             <div class="row" style="height: 10px"></div>
             <div class="row">
               <div class="d-flex ">
-                <button type="button" class="btn btn-primary mx-2">Cập nhật</button>
-                <button type="button" class="btn btn-warning">Đặt lại</button>
+                <button type="submit" class="btn btn-primary mx-2">Cập nhật</button>
+                <button type="reset" class="btn btn-warning">Đặt lại</button>
               </div>
             </div>
           </div>
@@ -199,46 +202,4 @@
     </div>
   </div>
 </div>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>-->
-<!--<script>-->
-<!--  let citis = document.getElementById("city");-->
-<!--  let districts = document.getElementById("district");-->
-<!--  let wards = document.getElementById("ward");-->
-<!--  let Parameter = {-->
-<!--    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",-->
-<!--    method: "GET",-->
-<!--    responseType: "application/json",-->
-<!--  };-->
-<!--  let promise = axios(Parameter);-->
-<!--  promise.then(function (result) {-->
-<!--    renderCity(result.data);-->
-<!--  });-->
-
-<!--  function renderCity(data) {-->
-<!--    for (const x of data) {-->
-<!--      citis.options[citis.options.length] = new Option(x.Name, x.Id);-->
-<!--    }-->
-<!--    citis.onchange = function () {-->
-<!--      district.length = 1;-->
-<!--      ward.length = 1;-->
-<!--      if (this.value !== "") {-->
-<!--        const result = data.filter(n => n.Id === this.value);-->
-
-<!--        for (const k of result[0].Districts) {-->
-<!--          district.options[district.options.length] = new Option(k.Name, k.Id);-->
-<!--        }-->
-<!--      }-->
-<!--    };-->
-<!--    district.onchange = function () {-->
-<!--      ward.length = 1;-->
-<!--      const dataCity = data.filter((n) => n.Id === citis.value);-->
-<!--      if (this.value !== "") {-->
-<!--        const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;-->
-
-<!--        for (const w of dataWards) {-->
-<!--          wards.options[wards.options.length] = new Option(w.Name, w.Id);-->
-<!--        }-->
-<!--      }-->
-<!--    };-->
-<!--  }-->
-<!--</script>-->
+</form>
