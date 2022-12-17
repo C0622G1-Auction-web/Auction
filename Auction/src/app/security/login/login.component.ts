@@ -1,11 +1,12 @@
- import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {AuthService} from "../../service/security/auth.service";
 import {TokenService} from "../../service/security/token.service";
 import {MessageRespone} from "../../model/security/message-respone";
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
+// @ts-ignore
+import {GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
 import {Googletoken} from "../oauth2/googletoken";
 
 @Component({
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.rfLogin.value).subscribe(data => {
-      if(data.token != undefined) {
+      if (data.token != undefined) {
 
         if (this.rfLogin.value.rememberMe) {
           this.tokenService.rememberMe(data.token, data.account, data.roles, data.user)
@@ -65,12 +66,12 @@ export class LoginComponent implements OnInit {
           this.tokenService.setRoleSession(data.roles)
         }
 
-        this.router.navigate(['/home']).then(()=>{
+        this.router.navigate(['/home']).then(() => {
           location.reload();
         })
 
       }
-    },error => {
+    }, error => {
 
       const messageRespone: MessageRespone = error;
 
@@ -86,10 +87,10 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-  * Created by: DucDH
-  * Date: 16/12/2022
-  * Function: To login using google oauth2
-  */
+   * Created by: DucDH
+   * Date: 16/12/2022
+   * Function: To login using google oauth2
+   */
 
   loginWithGoogle() {
     this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
