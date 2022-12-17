@@ -11,10 +11,12 @@ import {UserEditDto} from "../../dto/user-edit-dto";
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
 
   constructor(private _httpClient: HttpClient) {
   }
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -55,8 +57,22 @@ export class UserService {
    * @param id
    * return  user by id
    */
-  findUserById(id: number): Observable<User> {
-    return this._httpClient.get<User>(environment.api_url_list_user + '/' + id,this.httpOptions)
+  findUserEditById(id: number): Observable<User> {
+    return this._httpClient.get<User>(environment.api_url_list_user + '/' + id, this.httpOptions)
+  }
+
+  /**
+   * Create by: HungNV
+   * Date created: 16/12/2022
+   * @return User
+   */
+  findUserById(value: number): Observable<User> {
+    return this._httpClient.get<User>(environment.userUrl + "find/" + value);
+  }
+
+
+  getAllUser(): Observable<User[]> {
+    return null;
   }
 
 
@@ -65,15 +81,25 @@ export class UserService {
    * Date created: 15/12/2022
    * @return User
    */
-  saveaddAcountUser(user: User): Observable<User> {
+  saveaddAcountUser(user
+                      :
+                      User
+  ):
+    Observable<User> {
     console.log(user);
     return this._httpClient.post<User>('http://localhost:8080/api/user/v1/add', user);
   }
 
 
+  /**
+   * Create by: HaiNT
+   * Date created: 16/12/2022
+   * @return User
+   */
   updateByAdim(id: any, user: any): Observable<UserEditDto> {
     return this._httpClient.put<UserEditDto>(environment.api_url_list_user + '/' + id, user);
-
   }
+
+
 }
 

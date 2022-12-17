@@ -14,7 +14,6 @@ import {ListProductsComponent} from './component/product/list-products/list-prod
 
 const routes: Routes = [
   {
-
     path: 'products',
     component: ListProductsComponent,
   },
@@ -23,10 +22,17 @@ const routes: Routes = [
     component: ProductAddComponent
   },
   {
-    path: 'product/edit',
+    path: "product/edit/:id",
     component: ProductEditComponent
   },
-
+  {
+    path: 'transaction',
+    component: TransactionComponent
+  },
+  {
+    path: 'aa',
+    component: TransactionComponent
+  },
 
   {path: 'transaction', component: TransactionComponent},
 
@@ -49,7 +55,8 @@ const routes: Routes = [
   {
     path: 'user/lockaccount',
     component: LockaccountUserComponent
-  }, {
+  },
+  {
     path: 'product/add',
     component: ProductAddComponent
   }, {

@@ -47,6 +47,7 @@
           <div class="row">
             <div class="col-2">
 
+              <<<<<<< HEAD
               <div class="form-floating mb-4">
                 <input formControlName="idSearch"
                        type="text" placeholder="Mã thành viên:"
@@ -97,82 +98,85 @@
           </div>
 
         </form>
+      </div>
+    </div>
 
-        <div>
-          <a type="button" class="btn btn-danger">Xoá <i class="fa-regular fa-trash-can"></i> </a>
-          <a type="button" class="btn btn-danger">Khoá <i class="fa-solid fa-lock"></i> </a>
-          <a type="button" class="btn btn-danger">Mở khoá <i class="fa-solid fa-lock"></i> </a>
-          <a type="button" class="btn btn-danger">Thêm mới <i class="fa-solid fa-user-plus"></i> </a>
-        </div>
+  </div>
 
-        <div class=" mt-2 row container" style="padding-left: 2%;">
-          <table class="  mt-2 table table-striped table-bordered">
-            <thead>
-            <tr>
-              <th>
-                <div class="form-check">
-                  <input id="checkAll" class="form-check-input" type="checkbox" value=""/>
-                </div>
-              </th>
-              <th>STT</th>
-              <th>Mã thành viên</th>
-              <th>Tên thành viên</th>
-              <th>Địa chỉ</th>
-              <th>Xếp hạng</th>
-              <th>Email</th>
-              <th>SĐT</th>
-              <th>Lần đăng nhập cuối</th>
-              <th>Điểm cống hiến</th>
-              <th>Tính năng</th>
-            </tr>
-            </thead>
-            <tbody *ngIf="pageUsers">
-            <tr *ngFor="let x of pageUsers.content; let i = index ">
-              <td>
-                <div class="form-check"><input class="form-check-input" type="checkbox" value=""/></div>
-              </td>
-              <td>{{pageUsers.number * 3 + i + 1}}</td>
-              <td>{{x.id}}</td>
-              <td>{{x.firstName}} {{x.lastName}}</td>
-              <td>{{x.address.town}}, {{x.address.district}}, {{x.address.city}} </td>
-              <td>{{x.userType.name}}</td>
-              <td>{{x.email}}</td>
-              <td>{{x.phone}}</td>
-              <td></td>
-              <td>{{x.pointDedication}}</td>
+  <div>
+    <a type="button" class="btn btn-danger">Xoá <i class="fa-regular fa-trash-can"></i> </a>
+    <a type="button" class="btn btn-danger">Khoá <i class="fa-solid fa-lock"></i> </a>
+    <a type="button" class="btn btn-danger">Mở khoá <i class="fa-solid fa-lock"></i> </a>
+    <a type="button" class="btn btn-danger">Thêm mới <i class="fa-solid fa-user-plus"></i> </a>
+  </div>
 
-              <td>
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDelete"
-                        [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-pen-to-square"
-                                                         style="color: darkgoldenrod"></i>
-                </button> |
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
-                        [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-lock "></i>
-                </button>
-              </td>
-            </tbody>
-          </table>
-          <nav aria-label="Page navigation example" class="p-0 d-flex justify-content-end">
-            <ul class="pagination">
-              <li class="page-item" [ngClass]="pageUsers.number == 0 ? 'disabled' : ''">
+  <div class=" mt-2 row container" style="padding-left: 2%;">
+    <table class="  mt-2 table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>
+          <div class="form-check">
+            <input id="checkAll" class="form-check-input" type="checkbox" value=""/>
+          </div>
+        </th>
+        <th>STT</th>
+        <th>Mã thành viên</th>
+        <th>Tên thành viên</th>
+        <th>Địa chỉ</th>
+        <th>Xếp hạng</th>
+        <th>Email</th>
+        <th>SĐT</th>
+        <th>Lần đăng nhập cuối</th>
+        <th>Điểm cống hiến</th>
+        <th>Tính năng</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="pageUsers">
+      <tr *ngFor="let x of pageUsers.content; let i = index ">
+        <td>
+          <div class="form-check"><input class="form-check-input" type="checkbox" value=""/></div>
+        </td>
+        <td>{{pageUsers.number * 3 + i + 1}}</td>
+        <td>{{x.id}}</td>
+        <td>{{x.firstName}} {{x.lastName}}</td>
+        <td>{{x.address.town}}, {{x.address.district}}, {{x.address.city}} </td>
+        <td>{{x.userType.name}}</td>
+        <td>{{x.email}}</td>
+        <td>{{x.phone}}</td>
+        <td></td>
+        <td>{{x.pointDedication}}</td>
+
+        <td>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDelete"
+                  [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-pen-to-square"
+                                                        style="color: darkgoldenrod"></i>
+          </button>
+          |
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
+                  [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-lock "></i>
+          </button>
+        </td>
+      </tbody>
+    </table>
+    <nav aria-label="Page navigation example" class="p-0 d-flex justify-content-end">
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="pageUsers.number == 0 ? 'disabled' : ''">
         <span class="page-link" (click)="goToPage(pageUsers.number - 1)">
           Previous
         </span>
-              </li>
-              <li *ngFor="let pageNumber of [].constructor(pageUsers.totalPages); let i = index" class="page-item"
-                  [ngClass]="i == pageUsers.number ? 'active' : ''">
-                <span (click)="goToPage(i)" class="page-link">{{i + 1}}</span>
-              </li>
-              <li class="page-item" [ngClass]="pageUsers.totalPages == pageUsers.number+1 ? 'disabled' : ''">
-                <a class="page-link" (click)="goToPage(pageUsers.number + 1)">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
-      </div>
-
-    </div>
+        </li>
+        <li *ngFor="let pageNumber of [].constructor(pageUsers.totalPages); let i = index" class="page-item"
+            [ngClass]="i == pageUsers.number ? 'active' : ''">
+          <span (click)="goToPage(i)" class="page-link">{{i + 1}}</span>
+        </li>
+        <li class="page-item" [ngClass]="pageUsers.totalPages == pageUsers.number+1 ? 'disabled' : ''">
+          <a class="page-link" (click)="goToPage(pageUsers.number + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
   </div>
+
 </div>
+
+
 

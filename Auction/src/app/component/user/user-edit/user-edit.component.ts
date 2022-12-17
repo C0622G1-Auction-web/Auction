@@ -31,7 +31,7 @@ export class UserEditComponent implements OnInit {
   }
 
   getById(id: number) {
-    return this._userService.findUserById(id).subscribe(data => {
+    return this._userService.findUserEditById(id).subscribe(data => {
       console.log(data)
       this.rfUser = this._formBuilder.group({
         id: [data.id],

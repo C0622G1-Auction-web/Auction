@@ -18,18 +18,71 @@ export class UserAddComponent implements OnInit {
    * Date created: 13/12/2022
    * Add account user
    */
+
   addAddress: Address[];
   addUserType: UserType[];
   addAcountUser: Account[];
 
   addUser: FormGroup;
+
   constructor(private userSevice: UserService, private router: Router, private builder: FormBuilder) {
   }
 
   ngOnInit(): void {
-
+    this.getAddUserform();
   }
 
+  getAddUserform() {
+    // this.addUser = this.builder.group({
+    //   fisrtName: [],
+    //   lastName: [],
+    //   birthDay: [],
+    //   phone: [],
+    //   email: [],
+    //   idCard: [],
+    //   avatar: ['ok'],
+    //   pointDedication: [10.0],
+    //   username: [],
+    //   password: ['12345678'],
+    //   detailAddress: [],
+    //   town: [],
+    //   district: [],
+    //   city: [],
+    //   country: ['Viet Nam'],
+    //   statusLock: [true],
+    //   deleteStatus: [true],
+    //   this.userSevice.getAllUser().subscribe(data => {
+    //     this.addUser = data;
+    //     // Viet doing...
+    //     // this.addUser = this.builder.group({
+    //     //   fisrtName: [],
+    //     //   lastName: [],
+    //     //   accountUser: [],
+    //     //   birthDay: [],
+    //     //   phone: [],
+    //     //   email: [],
+    //     //   idCard: [],
+    //     //   avatar: [],
+    //     //   pointDedication: [10.0],
+    //     //   username: [],
+    //     //   password: ['12345678'],
+    //     //   detailAddress: [],
+    //     //   town: [],
+    //     //   district: [],
+    //     //   city: [],
+    //     //   country: [],
+    //     //   statusLock: ['1'],
+    //     //   deleteStatus: ['1'],
+    //     // });
+    //   });
+    // }
+  }
 
+  addAccountUser() {
+    if (this.addUser.valid) {
+      this.userSevice.saveaddAcountUser(this.addUser.value).subscribe(() =>
+        this.router.navigateByUrl(''));
+    }
+  }
 }
 
