@@ -63,7 +63,6 @@ export class UserCreateComponent implements OnInit {
     })
   }
 
-
   submitCreateUser() {
     if(this.userCreateForm.valid){
       console.log(this.userCreateForm.value)

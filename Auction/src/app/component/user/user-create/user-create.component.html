@@ -57,7 +57,7 @@
                     <div class=" input-group mb-3">
                       <div class=" form-floating flex-grow-1">
                         <input type="text" class="form-control" id="floatingName"
-                               placeholder="Name">
+                               placeholder="Name" formControlName="lastName">
 <!--                               [ngClass]="(userCreateForm.controls['lastName'].touched)?-->
 <!--                                            userCreateForm.controls['lastName'].invalid?'is-invalid':'is-valid':''">-->
                         <label for="floatingName">Tên</label>
@@ -81,7 +81,8 @@
                       <div class="form-floating flex-grow-1">
                         <input type="text" class="form-control" id="floatingLogin"
                                placeholder="Tên đăng nhập"
-                               aria-label="Tên đăng nhập" aria-describedby="basic-addon2">
+                               aria-label="Tên đăng nhập" aria-describedby="basic-addon2"
+                               formControlName="username">
 <!--                               [ngClass]="(userCreateForm.controls['username'].touched)?-->
 <!--                                            userCreateForm.controls['username'].invalid?'is-invalid':'is-valid':''">-->
                         <label for="floatingLogin">Tên đăng nhập</label>
@@ -103,7 +104,8 @@
                       <div class="form-floating flex-grow-1">
                         <input type="email" class="form-control" id="floatingEmail"
                                placeholder="Email"
-                               aria-label="Email" aria-describedby="basic-addon2">
+                               aria-label="Email" aria-describedby="basic-addon2"
+                               formControlName="email">
 <!--                               [ngClass]="(userCreateForm.controls['email'].touched)?-->
 <!--                                            userCreateForm.controls['email'].invalid?'is-invalid':'is-valid':''">-->
                         <label for="floatingEmail">Email</label>
@@ -127,7 +129,8 @@
                       <div class="form-floating flex-grow-1">
                         <input type="text" class="form-control" id="floatingPhone"
                                placeholder="PhoneNumber"
-                               aria-label="PhoneNumber" aria-describedby="basic-addon2">
+                               aria-label="PhoneNumber" aria-describedby="basic-addon2"
+                               formControlName="phone">
 <!--                               [ngClass]="(userCreateForm.controls['phone'].touched)?-->
 <!--                                            userCreateForm.controls['phone'].invalid?'is-invalid':'is-valid':''">-->
                         <label for="floatingPhone">Số điện thoại</label>
@@ -148,7 +151,8 @@
                     <div class=" input-group mb-3">
                       <div class=" form-floating flex-grow-1">
                         <input type="text" class="form-control" id="floatingDateOfBirth"
-                               placeholder="DateOfBirth">
+                               placeholder="DateOfBirth"
+                               formControlName="birthday">
 <!--                               [ngClass]="(userCreateForm.controls['birthday'].touched)?-->
 <!--                                            userCreateForm.controls['birthday'].invalid?'is-invalid':'is-valid':''">-->
                         <label for="floatingDateOfBirth">Ngày sinh</label>
@@ -195,7 +199,8 @@
                       <div class="form-floating flex-grow-1">
                         <input type="text" class="form-control" id="floatingAddress"
                                placeholder="Address"
-                               aria-label="Address" aria-describedby="basic-addon2">
+                               aria-label="Address" aria-describedby="basic-addon2"
+                               formControlName="detailAddress">
 <!--                               [ngClass]="(userCreateForm.controls['detailAddress'].touched)?-->
 <!--                                            userCreateForm.controls['detailAddress'].invalid?'is-invalid':'is-valid':''">-->
                         <label for="floatingAddress">Địa chỉ chi tiết</label>
@@ -216,7 +221,8 @@
                     <div class=" input-group mb-3">
                       <div class="form-floating flex-grow-1">
                         <input type="text" class="form-control" id="floatingIdCard"
-                               placeholder="IdCard">
+                               placeholder="IdCard"
+                               formControlName="idCard">
 <!--                               [ngClass]="(userCreateForm.controls['idCard'].touched)?-->
 <!--                                            userCreateForm.controls['idCard'].invalid?'is-invalid':'is-valid':''">-->
                         <label for="floatingIdCard">CMND</label>
@@ -240,7 +246,8 @@
                       <div class="form-floating flex-grow-1">
                         <input type="password" class="form-control" id="floatingPassword"
                                placeholder="Password"
-                               aria-label="Password" aria-describedby="basic-addon2">
+                               aria-label="Password" aria-describedby="basic-addon2"
+                               formControlName="password">
 <!--                               [ngClass]="(userCreateForm.controls['password'].touched)?-->
 <!--                                            userCreateForm.controls['password'].invalid?'is-invalid':'is-valid':''">-->
                         <label for="floatingPassword">Mật khẩu</label>
