@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
@@ -75,12 +75,11 @@ export class LoginComponent implements OnInit {
       const messageRespone: MessageRespone = error;
 
       if (messageRespone.message) {
-        this.toastr.error('Không tìm thấy người dùng')
-        this.router.navigateByUrl('/login')
+        this.toastr.error('Không tìm thấy người dùng');
+        this.router.navigateByUrl('/login');
       } else {
-        this.toastr.error('Đăng nhập thất bại')
-        this.router.navigateByUrl('/login')
-        console.log('Đăng nhập thất bại')
+        this.toastr.error('Đăng nhập thất bại');
+        this.router.navigateByUrl('/login');
       }
 
     })
@@ -96,7 +95,7 @@ export class LoginComponent implements OnInit {
     this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
       this.socialUser = data;
 
-      const googleToken = new Googletoken(this.socialUser.idToken)
+      const googleToken = new Googletoken(this.socialUser.idToken);
 
       this.authService.googleLogin(googleToken).subscribe(req => {
 
@@ -110,7 +109,7 @@ export class LoginComponent implements OnInit {
           this.tokenService.setAccountLocal(req.account);
           this.tokenService.setTokenLocal(req.token);
           this.tokenService.setUserLocal(req.user);
-          this.tokenService.setRoleLocal(req.roles)
+          this.tokenService.setRoleLocal(req.roles);
 
           this.router.navigate(['/home']).then(() => {
             location.reload();

@@ -13,6 +13,5 @@ export interface User {
   avatar?:string,
   address:Address,
   userType:UserType,
-  account: Account,
-
+  account: Account
 }

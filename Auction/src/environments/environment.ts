@@ -17,7 +17,8 @@ export const environment = {
   productSearchUrl: "http://localhost:8080/api/v1/products/search",
   userUrl: "http://localhost:8080/api/user/v1/",
   LOGIN_API: 'http://localhost:8080/api/auth/login',
-  GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google'
+  GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
+  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create",
 }
 
 /*
