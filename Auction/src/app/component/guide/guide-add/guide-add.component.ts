@@ -1,8 +1,3 @@
-/*Create By QuangND
-* Component create guide
-* Create Date: 16/12/2022
-* */
-
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {GuideService} from "../../../service/guide/guide.service";
@@ -39,7 +34,7 @@ export class GuideAddComponent implements OnInit {
       content:['']
     })
   }
-  craeteGuide(){
+  createGuide(){
     this._guideService.create(this.guideForm.value).subscribe(data => {
       console.log(data)
       if (this.selectedImages.length !== 0) {
@@ -69,20 +64,17 @@ export class GuideAddComponent implements OnInit {
   }
 
   showPreview(event: any) {
-    let newSelectedImages = [];
+
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
-      newSelectedImages = event.target.files;
-      for (let i = 0; i < event.target.files.length; i++) {
-        this.selectedImages.push(event.target.files[i]);
-      }
+      this.selectedImages = event.target.files;
     } else {
       this.selectedImages = [];
     }
-    if (newSelectedImages.length !== 0) {
-      for (let i = 0; i < newSelectedImages.length; i++) {
-        let selectedImage = newSelectedImages[i];
+    if (this.selectedImages.length !== 0) {
+      for (let i = 0; i < this.selectedImages.length; i++) {
+        let selectedImage = this.selectedImages[i];
         const n = Date.now();
         const filePath = `RoomsImages/${n}`;
         const fileRef = this._storage.ref(filePath);
@@ -90,7 +82,7 @@ export class GuideAddComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe(url => {
               this.imgs.push(url);
-              if (this.imgs.length == newSelectedImages.length) {
+              if (this.imgs.length == this.selectedImages.length) {
               }
             });
           })

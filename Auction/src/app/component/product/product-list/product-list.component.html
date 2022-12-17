@@ -40,15 +40,15 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-between p-2" *ngIf="action">
-      <ngb-pagination
-        [collectionSize]="(total$ | async)!"
-        [(page)]="page"
-        [maxSize]="3"
-        [rotate]="true"
-        [pageSize]="pageSize"
-        [boundaryLinks]="true"
-        (pageChange)="findAll()">
-      </ngb-pagination>
+<!--      <ngb-pagination-->
+<!--        [collectionSize]="(total$ | async)!"-->
+<!--        [(page)]="page"-->
+<!--        [maxSize]="3"-->
+<!--        [rotate]="true"-->
+<!--        [pageSize]="pageSize"-->
+<!--        [boundaryLinks]="true"-->
+<!--        (pageChange)="findAll()">-->
+<!--      </ngb-pagination>-->
   </div>
 
   <div>
@@ -66,8 +66,11 @@
         }
       }
       setInterval(changeImage, 2000) ;
+      </script>
   </div>
 </div>
+</div>
+
 
 
 

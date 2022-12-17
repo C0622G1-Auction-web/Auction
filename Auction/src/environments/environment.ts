@@ -8,7 +8,18 @@ export const environment = {
   api_url_list_category: 'http://localhost:8080/api/v1/category',
   api_url_list_user: 'http://localhost:8080/api/v1/users',
   api_url_list_img_url: 'http://localhost:8080/api/v1/users/{id}',
-  API_URL_AUCTION: "http://localhost:8080/auction/api"
+  API_URL_AUCTION: "http://localhost:8080/auction/api",
+  API_URL_GUIDE:'http://localhost:8080/auction/v1/api/guide',
+  firebaseConfig: {
+    apiKey: "AIzaSyBFqqq1BOcFnqRPAx_Vq8ewdQiAUPkJbrE",
+    authDomain: "eng-cogency-370914.firebaseapp.com",
+    databaseURL: "https://eng-cogency-370914-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "eng-cogency-370914",
+    storageBucket: "eng-cogency-370914.appspot.com",
+    messagingSenderId: "985488924079",
+    appId: "1:985488924079:web:28e91f3779f4563b42235a",
+    measurementId: "G-M2T7R4CP93"
+  }
 };
 
 /*

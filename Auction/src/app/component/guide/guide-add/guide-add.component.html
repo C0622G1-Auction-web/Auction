@@ -6,7 +6,7 @@
 <div class="container ">
   <h3 class="center">Tạo Mới Hướng Dẫn</h3>
   <div class="guide w-50" style=" box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.35);">
-    <form [formGroup]="guideForm" id="guideform" (ngSubmit)="craeteGuide()">
+    <form [formGroup]="guideForm" id="guideform" (ngSubmit)="createGuide()">
       <div class="row">
         <label for="title" class="form-label">Chủ đề (<span style="color: red">*</span>)</label>
         <input formControlName="title" id="title" type="text" placeholder=" Chọn chủ đề" class="form-control">
@@ -38,6 +38,5 @@
         </button>
       </div>
     </form>
-    <a [routerLink]="['/guide/edit',42]" > show</a>
   </div>
 </div>
