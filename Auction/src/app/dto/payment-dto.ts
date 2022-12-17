@@ -10,6 +10,5 @@ export interface PaymentDto {
   country?: string;
   town?: string;
   description?: string;
-
   totalBill?: number;
 }
