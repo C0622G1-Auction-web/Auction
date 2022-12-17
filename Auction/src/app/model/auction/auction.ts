@@ -3,7 +3,6 @@ import {Product} from '../product/product';
 import {User} from '../user/user';
 export interface Auction {
   id?: number;
-  fullName: string,
   fullName?: string;
   currentPrice?: number;
   auctionTime?: string;

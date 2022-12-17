@@ -2,13 +2,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
@@ -34,23 +30,23 @@ import {AuctionProductDetailComponent} from './component/auction/auction-product
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
 import {AppRoutingModule} from "./app-routing.module";
-import { AccountResetPassComponent } from './component/security/account-reset-pass/account-reset-pass.component';
-// @ts-ignore
-import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
-// @ts-ignore
-import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
-import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
-import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
-import { PaymentReceiptComponent } from './component/payment/payment-receipt/payment-receipt.component';
-import { TransactionComponent } from './component/transaction/transaction.component';
-// @ts-ignore
+import {AccountResetPassComponent} from './component/security/account-reset-pass/account-reset-pass.component';
+import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
+import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
+import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
+import {TransactionComponent} from './component/transaction/transaction.component';
 import {GoogleLoginProvider, SocialAuthServiceConfig} from 'angularx-social-login';
+import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
+import {AccountForgotPassComponent} from "./component/security/account-forgot-pass/account-forgot-pass.component";
+import {environment} from "../environments/environment";
+import {FIREBASE_OPTIONS} from "@angular/fire";
 
 const googleLoginOptions = {
   scope: 'profile email',
   plugin_name: 'login'
 };
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +82,8 @@ const googleLoginOptions = {
     PaymentReceiptComponent,
     TransactionComponent,
     PaymentReceiptComponent,
-    TransactionComponent
+    TransactionComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -112,7 +109,8 @@ const googleLoginOptions = {
           },
         ]
       } as SocialAuthServiceConfig,
-    }
+    },
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig}
   ],
   bootstrap: [AppComponent]
 })

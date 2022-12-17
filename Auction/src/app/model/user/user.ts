@@ -14,18 +14,6 @@ export interface User {
   avatar?: string;
   address: Address;
   account: Account;
-  account?: Account;
-  id?: number;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  phone?: string;
-  pointDedication?: number;
-  birthDay?: string;
-  idCard?: string;
-  avatar?: string;
   deleteStatus?: boolean;
-  address?: Address;
   user?: User;
-  userType: UserType;
 }
