@@ -32,7 +32,7 @@ export class AuctionService {
    * @return page auction if productId and pageNumber exist or error if does not exist
    */
   getAuctionPageByProductId(idProduct: number, pageNumber: number): Observable<any> {
-    return this._httpClient.get(environment.API_URL_AUCTION + '/product/'
+    return this._httpClient.get(environment.API_URL_AUCTION + '/auction-product/'
       + idProduct + '?page=' + pageNumber);
   }
 
