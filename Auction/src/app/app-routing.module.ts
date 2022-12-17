@@ -1,4 +1,15 @@
 import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from "./security/login/login.component";
+import {GuideListComponent} from "./component/guide/guide-list/guide-list.component";
+import {AuctionProductDetailComponent} from "./component/auction/auction-product-detail/auction-product-detail.component";
+import {ProductAddComponent} from "./component/product/product-add/product-add.component";
+import {ProductEditComponent} from "./component/product/product-edit/product-edit.component";
+import {TransactionComponent} from "./component/transaction/transaction.component";
+import {HomeComponent} from "./component/home/home.component";
+import {UserListComponent} from "./component/user/user-list/user-list.component";
+import {UserEditComponent} from "./component/user/user-edit/user-edit.component";
+
 import {Routes, RouterModule} from '@angular/router';
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
 import {

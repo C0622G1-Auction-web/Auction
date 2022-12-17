@@ -12,13 +12,13 @@ export interface Product {
   initialPrice?: number;
   startTime?: string;
   endTime?: string;
-  registerDay?: string;
   priceStep?: PriceStep;
   reviewStatus?: ReviewStatus;
   auctionStatus?: AuctionStatus;
   category?: Category;
   imgUrlProducts?: any;
   maxCurrentPrice?: number;
+  registerDay?: string;
   imgUrlProduct?: ImgUrlProduct;
   imgs?: any;
   user?: User;
