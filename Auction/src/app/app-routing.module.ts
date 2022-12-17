@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from "./security/login/login.component";
+import {RegisterWithGoogleComponent} from "./security/register-with-google/register-with-google.component";
 import {GuideListComponent} from "./component/guide/guide-list/guide-list.component";
 import {AuctionProductDetailComponent} from "./component/auction/auction-product-detail/auction-product-detail.component";
 import {ProductAddComponent} from "./component/product/product-add/product-add.component";
@@ -45,7 +46,8 @@ const routes: Routes = [
   {
     path: "auction/:productId", component: AuctionProductDetailComponent,
 
-  },{path: 'login', component: LoginComponent}
+  },  {path: 'login', component: LoginComponent},
+  {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
 
 ];
 
