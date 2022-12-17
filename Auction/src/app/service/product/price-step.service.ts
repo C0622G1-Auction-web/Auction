@@ -6,13 +6,13 @@ import {PriceStep} from "../../model/product/price-step";
 import {HttpClient} from "@angular/common/http";
 
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class PriceStepService {
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) {
+  }
 
 
   getListPriceStep(): Observable<PriceStep[]> {
