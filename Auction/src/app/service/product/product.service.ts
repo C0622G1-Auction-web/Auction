@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../../model/product/product';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PriceStep} from '../../model/product/price-step';
 import {Category} from '../../model/product/category';
 import {User} from '../../model/user/user';
 import {ImgUrlProduct} from '../../model/product/img-url-product';
 import {environment} from '../../../environments/environment';
-import {DataResult} from "../../model/product/data_result";
-import {ProductDto} from "../../model/product/iProduct_dto";
-import {ReviewStatus} from "../../model/product/review-status";
-import {PageProduct} from "../../model/product/page-product";
+import {DataResult} from '../../model/product/data_result';
+import {ProductDto} from '../../model/product/iProduct_dto';
+import {ReviewStatus} from '../../model/product/review-status';
+import {PageProduct} from '../../model/product/page-product';
+import {SearchProductDtoRoleAdmin} from '../../model/product/search-product-dto-role-admin';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class ProductService {
   private API_URL = '  http://localhost:8080/';
 
   // @ts-ignore
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) {
+  }
 
   findAllPriceStep(): Observable<PriceStep[]> {
     return this._httpClient.get<PriceStep[]>(environment.api_url_list_price_step);
@@ -66,18 +68,10 @@ export class ProductService {
 
   /**
    * Created: GiangLBH
-   * Function: get all products
+   * Function: get all and search Products
    * Date: 15/11/2022
    */
-  getAll(): Observable<PageProduct> {
-    // let param = {
-    //   "productName" : "",
-    //     "categoryName":"",
-    //     "sellerName":"",
-    //     "minPrice":0,
-    //     "maxPrice":111111111,
-    //     "auctionStatusName":""
-    // }
-    return this._httpClient.get<PageProduct>(environment.api_url_products);
+  getAll(searchProduct: SearchProductDtoRoleAdmin): Observable<PageProduct> {
+    return this._httpClient.post<PageProduct>(environment.api_url_products, searchProduct);
   }
 }

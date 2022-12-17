@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../../service/product/product.service';
-import {Product} from '../../../model/product/product';
 import {NotificationService} from '../../../service/notification/notification.service';
 import {PageProduct} from '../../../model/product/page-product';
+import {SearchProductDtoRoleAdmin} from '../../../model/product/search-product-dto-role-admin';
 
 @Component({
   selector: 'app-list-products',
@@ -14,6 +14,7 @@ export class ListProductsComponent implements OnInit {
   count = 5;
 
   pageProducts: PageProduct;
+  searchProduct: SearchProductDtoRoleAdmin;
 
   constructor(private _productService: ProductService,
               private _notificationService: NotificationService) {
@@ -23,8 +24,17 @@ export class ListProductsComponent implements OnInit {
     this.getAll();
   }
 
+
   getAll() {
-    this._productService.getAll().subscribe(data => {
+    this.searchProduct = {
+      productName: '',
+      categoryName: '',
+      sellerName: '',
+      minPrice: 0,
+      maxPrice: 40000000,
+      auctionStatusName: ''
+    };
+    this._productService.getAll(this.searchProduct).subscribe(data => {
       this.pageProducts = data;
       console.log(this.pageProducts);
     }, error => {

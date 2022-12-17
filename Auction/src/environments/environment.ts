@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_url_products: 'http://localhost:8080/api/v1/products',
+  api_url_products: 'http://localhost:8080/api/v1/products/search-by-admin',
   api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
   api_url_list_category: 'http://localhost:8080/api/v1/category',
   api_url_list_user: 'http://localhost:8080/api/v1/users',

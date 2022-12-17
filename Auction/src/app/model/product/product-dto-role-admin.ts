@@ -1,10 +1,3 @@
-import {PriceStep} from './price-step';
-import {ReviewStatus} from './review-status';
-import {AuctionStatus} from '../auction/auction-status';
-import {Category} from './category';
-import {ImgUrlProduct} from './img-url-product';
-import {User} from '../user/user';
-
 export interface ProductDtoRoleAdmin {
   id?: number;
   deleteStatus?: boolean;

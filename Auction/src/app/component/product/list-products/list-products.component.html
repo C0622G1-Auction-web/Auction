@@ -126,17 +126,17 @@
           </thead>
           <tbody>
           <tr *ngFor="let item of pageProducts.content; index as i ">
-            <td>{{count * (p - 1) + i + 1}}</td>
-<!--            <td>{{item.id}}</td>-->
-<!--            <td><a type="button" class="view" data-bs-toggle="modal" href="#" data-bs-target="#reviewModal">-->
-<!--              <span class="text-decoration-underline">{{item.name}}</span></a>-->
-<!--            </td>-->
-<!--            <td>{{item.category}}</td>-->
-<!--            <td>{{item.user}}</td>-->
+            <td>{{pageProducts.size * pageProducts.number + i + 1}}</td>
+            <td>{{item.id}}</td>
+            <td><a type="button" class="view" data-bs-toggle="modal" href="#" data-bs-target="#reviewModal">
+              <span class="text-decoration-underline">{{item.name}}</span></a>
+            </td>
+            <td>{{item.category}}</td>
+            <td>{{item.userName}}</td>
             <td>{{item.initialPrice}}</td>
-<!--            <td>{{item.reviewStatus}}</td>-->
-<!--            <td>{{item.startTime}}</td>-->
-<!--            <td>{{item.auctionStatus}}</td>-->
+            <td>{{item.reviewStatus}}</td>
+            <td>{{item.startTime}}</td>
+            <td>{{item.auctionStatus}}</td>
             <td class="text-center"><a href="#"><i class="fa-regular fa-pen-to-square edit-icon"></i></a></td>
             <td class="text-center">
               <input class="delete-checkbox" type="checkbox" value=""/>
@@ -152,14 +152,19 @@
               <i class="fa-solid fa-square-plus"></i> Thêm sản phẩm
             </a>
           </div>
-          <div>
+          <div *ngIf="pageProducts">
             <nav aria-label="Page navigation example">
               <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item"><a class="page-link" href="#"
+                                         [ngClass]="pageProducts.number == pageProducts.first ? 'disabled': ''">First</a></li>
+                <li class="page-item"><a class="page-link" href="#"
+                                         [ngClass]="pageProducts.number == pageProducts.first ? 'disabled': ''">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">
+                  {{pageProducts.number + 1}}/{{pageProducts.totalPages}}</a></li>
+                <li class="page-item"><a class="page-link" href="#"
+                                         [ngClass]="pageProducts.number == pageProducts.last ? 'disabled': ''">Next</a></li>
+                <li class="page-item"><a class="page-link" href="#"
+                                         [ngClass]="pageProducts.number == pageProducts.last ? 'disabled': ''">Last</a></li>
               </ul>
             </nav>
           </div>
