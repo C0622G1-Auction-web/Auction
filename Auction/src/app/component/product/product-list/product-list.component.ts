@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit {
    * @return list Product , page
    */
 
-  private findAll() {
+  public findAll() {
     this.productService.findAll(this.page, this.pageSize).subscribe(value => {
       console.log("a")
       if (value != null) {

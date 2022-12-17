@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -33,8 +32,18 @@ import {AuctionComponent} from './component/auction/auction.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
+<<<<<<< HEAD
 import {FIREBASE_OPTIONS} from "@angular/fire";
 import {environment} from "../environments/environment";
+=======
+import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
+import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
+import { AccountResetPassComponent } from './component/account-reset-pass/account-reset-pass.component';
+import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
+import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
+import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
+import { TransactionComponent } from './component/transaction/transaction.component';
+>>>>>>> 065895db232f2f4d6433ce4bb4678cfc6bef0af7
 
 @NgModule({
   declarations: [
@@ -65,6 +74,13 @@ import {environment} from "../environments/environment";
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
     InfomationAuctionSellerComponent,
+    PaymentCartComponent,
+    AccountForgotPassComponent,
+    AccountResetPassComponent,
+    AddressPaymentComponent,
+    MethodPaymentComponent,
+    PaymentReceiptComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
