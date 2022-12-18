@@ -41,6 +41,8 @@ import { AddressPaymentComponent } from './component/payment/address-payment/add
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
+import { ChatUserComponent } from './component/chat/chat-user/chat-user.component';
+import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,9 @@ import { TransactionComponent } from './component/transaction/transaction.compon
     AddressPaymentComponent,
     MethodPaymentComponent,
     PaymentReceiptComponent,
-    TransactionComponent
+    TransactionComponent,
+    ChatUserComponent,
+    ChatAdminComponent
   ],
   imports: [
     BrowserModule,

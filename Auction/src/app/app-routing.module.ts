@@ -10,6 +10,8 @@ import {TransactionComponent} from "./component/transaction/transaction.componen
 import {HomeComponent} from "./component/home/home.component";
 import {UserListComponent} from "./component/user/user-list/user-list.component";
 import {UserEditComponent} from "./component/user/user-edit/user-edit.component";
+import {ChatUserComponent} from "./component/chat/chat-user/chat-user.component";
+import {ChatAdminComponent} from "./component/chat/chat-admin/chat-admin.component";
 
 const routes: Routes = [
   {
@@ -55,6 +57,14 @@ const routes: Routes = [
   {
     path: "auction/:productId", component: AuctionProductDetailComponent,
 
+  },
+  {
+    path:'auction/chat/user',
+    component: ChatUserComponent
+  },
+  {
+    path:'auction/chat/support',
+    component: ChatAdminComponent
   }];
 
 
