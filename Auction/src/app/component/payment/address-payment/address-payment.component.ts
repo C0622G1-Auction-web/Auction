@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {PaymentDto} from '../../../dto/payment-dto';
 import {PaymentService} from '../../../service/payment/payment.service';
-import {Payment} from "../../../model/payment/payment";
-import {PaymentDto} from "../../../dto/payment-dto";
+import {Payment} from '../../../model/payment/payment';
+
 
 @Component({
   selector: 'app-address-payment',
@@ -9,7 +10,6 @@ import {PaymentDto} from "../../../dto/payment-dto";
   styleUrls: ['./address-payment.component.css']
 })
 export class AddressPaymentComponent implements OnInit {
-
   paymentDtoList: PaymentDto[];
 
   total: number;

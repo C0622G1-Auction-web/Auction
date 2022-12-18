@@ -1,1 +1,76 @@
+
+<div>
+  <div class="row" id="title">
+    <marquee direction="right"
+             direction="left"
+             behavior="alternate">
+      <img width="70%" height="200px" id="img" onclick="changeImage()"
+           src="https://static.daugiarongviet.vn/uploaded/slide/dau-gia-rong-viet-1_1663042382.jpg"
+           alt="">
+
+    </marquee>
+  </div>
+
+  <div div class="row">
+    <h1 class="text-center text-" style="color: white">LỊCH SỬ ĐĂNG KÝ MẶT HÀNG ĐẤU GIÁ</h1>
+  </div>
+
+
+  <div class="row" id="center">
+    <table class="table table-primary table-striped-columns">
+      <thead>
+      <tr class="text-center">
+        <th>STT</th>
+        <th>Tên Sản Phẩm</th>
+        <th>Thông Tin Sản Phẩm</th>
+        <th>Ngày Đăng Ký</th>
+        <th>Tình Trạng</th>
+        <!--          <th>Hủy Đăng Ký</th>-->
+      </tr>
+      </thead>
+      <h3 class="text-danger text-center" *ngIf="!action">Không có dữ liệu</h3>
+      <tbody class="text-center">
+      <tr *ngFor="let item of (iproductDto$|async);index as i">
+        <td class="text-center">{{i + 1 + (page - 1) * pageSize}}</td>
+        <td>{{item.nameProduct}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.RegisterDay}}</td>
+        <td>{{item.Review}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2" *ngIf="action">
+<!--      <ngb-pagination-->
+<!--        [collectionSize]="(total$ | async)!"-->
+<!--        [(page)]="page"-->
+<!--        [maxSize]="3"-->
+<!--        [rotate]="true"-->
+<!--        [pageSize]="pageSize"-->
+<!--        [boundaryLinks]="true"-->
+<!--        (pageChange)="findAll()">-->
+<!--      </ngb-pagination>-->
+    </div>
+
+    <div>
+      <script>
+        var index = 1;
+        changeImage = function () {
+          var imgs = ["https://static.daugiarongviet.vn/uploaded/slide/dau-gia-rong-viet-1_1663042382.jpg",
+            "https://hoc11.vn/wp-content/uploads/2021/11/tinh-nang-dau-gia-tren-shopee-live.png",
+            "https://i.ytimg.com/vi/z9iPlspJJ1U/maxresdefault.jpg",
+            "http://blog.abit.vn/wp-content/uploads/2020/04/cach-san-deal-tiki3-2.png",];
+          document.getElementById('img').src = imgs[index];
+          index++;
+          if (index == 4) {
+            index = 0;
+          }
+        }
+        setInterval(changeImage, 2000)
+      </script>
+    </div>
+  </div>
+</div>
+
 <p>product-list works!</p>
+<p>Test firt time</p>
+

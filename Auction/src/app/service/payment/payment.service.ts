@@ -1,25 +1,50 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
+import {PaymentDto} from '../../dto/payment-dto';
+import {environment} from '../../../environments/environment';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {ToastrService} from 'ngx-toastr';
 import {Payment} from '../../model/payment/payment';
-import {PaymentDto} from "../../dto/payment-dto";
 
 const URL_API = `${environment.api_url_order_status}`;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
+  paymentDtoList: PaymentDto[];
 
-  constructor(private http: HttpClient) {
+  total: number;
+
+  // tslint:disable-next-line:variable-name
+  constructor(private _httpClient: HttpClient,
+  ) {
   }
 
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   * Function: to find payment by List id
+   *
+   * @param idList
+   * @return product list
+   */
   getListPayment(): Observable<PaymentDto[]> {
-    return this.http.get<PaymentDto[]>(URL_API + '/find-by-list-id');
+    return this._httpClient.get<PaymentDto[]>(URL_API + '/find-by-list-id');
   }
 
-  getTotalBill(): Observable<PaymentDto>{
-    return this.http.get<PaymentDto>(URL_API + '/get-total-bill');
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   * Function: get total bill
+   *
+   * @param idList
+   * @return product list
+   */
+  getTotalBill(): Observable<PaymentDto> {
+    return this._httpClient.get<PaymentDto>(URL_API + '/get-total-bill');
   }
+
 }
+

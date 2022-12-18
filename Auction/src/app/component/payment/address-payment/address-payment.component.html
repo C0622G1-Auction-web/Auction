@@ -1,53 +1,44 @@
-
+<body>
 <div class="row">
   <div class="col-lg-4">
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-3" style="padding-left: 60px">
     <h2>Thanh Toán</h2>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-5">
   </div>
 </div>
 
-<!--<div class="row">-->
-<!--  <div class="col-lg-2">-->
-
-<!--  </div>-->
-<!--  <div class="col-lg-2">-->
-<!--    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"-->
-<!--            data-bs-target="#pills-home" type="button" role="tab"-->
-<!--            aria-controls="pills-home" aria-selected="true">Địa chỉ thanh toán-->
-<!--    </button>-->
-<!--  </div>-->
-
-<!--  <div class="col-lg-2">-->
-<!--    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"-->
-<!--            data-bs-target="#pills-profile" type="button" role="tab"-->
-<!--            aria-controls="pills-profile" aria-selected="false" style="padding-left: 20px">Hình thức giao hàng-->
-<!--    </button>-->
-<!--  </div>-->
-
-<!--  <div class="col-lg-2">-->
-<!--    <button class="nav-link " id="pills-contact-tab" data-bs-toggle="pill"-->
-<!--            data-bs-target="#pills-contact" type="button" role="tab"-->
-<!--            aria-controls="pills-contact" aria-selected="false">Tình trạng đơn hàng-->
-<!--    </button>-->
-<!--  </div>-->
-<!--</div>-->
 
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-1">
-    </div>
-    <div class="col-lg-8"
-         style="border: solid darkgray 1px;padding-top: 20px;padding-bottom: 20px">
-      <div class="row" *ngIf="paymentDtoList[0] != undefined">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <div style="padding-left: 30px">
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+            <label class="btn btn-outline-danger" for="btnradio1">Địa Chỉ Thanh Toán</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" disabled>
+            <label class="btn btn-outline-danger" for="btnradio2"  >Hình Thức Giao Hàng</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" disabled>
+            <label class="btn btn-outline-danger" for="btnradio3">Tình Trạng Đơn Hàng</label></div>
+          </div>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+      <div  style="border: orangered solid 1px;padding: 20px; margin: 10px">
+      <div class="row" *ngIf="paymentDtoList[0] != undefined" >
         <div class="col-lg-6">
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="ten"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].lastName}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2" readonly value="{{paymentDtoList[0].lastName}}">
             <label for="ten"><span style="color: red"> * </span>Tên</label>
             <span class="input-group-text"><i
               class="fa-solid fa-user"></i></span>
@@ -57,7 +48,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="ho"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].firstName}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2" readonly value="{{paymentDtoList[0].firstName}}">
             <label for="ho"><span style="color: red"> * </span>Họ</label>
             <span class="input-group-text"><i
               class="fa-solid fa-user"></i></span>
@@ -68,7 +59,7 @@
         <div class="col-lg-6">
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="floatingPhone" placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].phone}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2" readonly value="{{paymentDtoList[0].phone}}">
             <label for="floatingPhone"><span style="color: red"> * </span>Số điện thoại</label>
             <span class="input-group-text"><i class="fa-solid fa-phone-flip"></i></span>
           </div>
@@ -77,7 +68,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="email" class="form-control" id="mail"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].email}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2" readonly value="{{paymentDtoList[0].email}}">
             <label for="mail"><span style="color: red"> * </span>Email</label>
             <span class="input-group-text" id="basic-addon6"><i
               class="fa-solid fa-envelope"></i></span>
@@ -89,7 +80,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="quocgia"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].country}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2" readonly value="{{paymentDtoList[0].country}}">
             <label for="quocgia"><span style="color: red"> * </span>Quốc Gia</label>
             <span class="input-group-text" id="basic-addon0"><i class="fa-solid fa-earth-africa"></i></span>
           </div>
@@ -98,7 +89,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="thanhpho"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].city}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2" readonly value="{{paymentDtoList[0].city}}">
             <label for="thanhpho"><span style="color: red"> * </span>Thành Phố/Tỉnh</label>
             <span class="input-group-text"><i
               class="fa-solid fa-location-dot"></i></span>
@@ -110,7 +101,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="quanhuyen"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].district}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2" readonly value="{{paymentDtoList[0].district}}">
             <label for="quanhuyen"><span style="color: red"> * </span>Quận/Huyện</label>
             <span class="input-group-text"><i
               class="fa-solid fa-location-dot"></i></span>
@@ -120,7 +111,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="phuongxa"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].town}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2" readonly value="{{paymentDtoList[0].town}}">
             <label for="phuongxa"><span style="color: red"> * </span>Phường /Xã</label>
             <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
           </div>
@@ -131,14 +122,13 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="floatingAddress"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].detailAddress}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2" readonly value="{{paymentDtoList[0].detailAddress}}">
             <label for="floatingAddress"><span style="color: red"> * </span>Địa Chỉ</label>
             <span class="input-group-text" id="basic-addon7"><i
               class="fa-solid fa-location-dot"></i></span>
           </div>
         </div>
       </div>
-
       <div class="row">
         <div class="col-lg-12">
           <div class=" input-group form-floating mb-3">
@@ -151,32 +141,36 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-12">
-          <button type="button" class="btn btn-primary" routerLink="/methodPayment">Xác Nhận</button>
+        <div class="col-lg-12" style="text-align: center">
+          <button type="button" class="btn  mx-2" routerLink="/home" style="background: #e74c3c;color: white">Giỏ Hàng</button>
+          <button type="button" class="btn " routerLink="/methodPayment"
+                  style="background: #e74c3c;color: white">Xác Nhận</button>
         </div>
       </div>
     </div>
+    </div>
     <div class="col-lg-3">
       <div class="row">
-        <div class="card border-primary mb-3" style="max-width: 18rem;padding: 0">
-          <div class="card-body text-light" style="background-color: blue">
+        <div class="card mb-3" style="max-width: 18rem;padding: 0">
+          <div class="card-body text-light" style="background-color: #e74c3c;color: white">
             <h4 class="card-title">Có câu hỏi?</h4>
             <p class="card-text">Vui lòng liên hệ bộ phận hỗ trợ 24 giờ của chúng tôi.</p>
           </div>
-          <div class="card-footer text-primary bg-light border-primary"><h6>SĐT.(028)-090123090</h6></div>
+          <div class="card-footer bg-light"><h6 style="color: #e74c3c">SĐT.(028)-090123090</h6></div>
         </div>
       </div>
       <div class="row">
-        <div class="card border-primary mb-3" style="max-width: 18rem;padding: 0;">
-          <h4 class="card-title text-light" style="background-color: blue">Tổng Kết Đơn Hàng</h4>
-
-          <div class="card-body text-primary" >
-            <h6>Giao hàng tiêu chuẩn : 49.000</h6>
+        <div class="card mb-3" style="max-width: 18rem;padding: 0">
+          <div class="card-body text-light" style="background-color: #e74c3c;color: white">
+            <h4 class="card-title">Tổng kết đơn hàng</h4>
+            <p class="card-text">Giao hàng tiêu chuẩn : 50,000 vnd</p>
+            <p class="card-text">Tổng tiền mặt hàng : {{total | number}} vnd</p>
           </div>
-          <div class="card-footer bg-light border-success" style="color: red"><h6>Tổng số tiền cần thanh toán: {{total | number}} vnd</h6></div>
+          <div class="card-footer bg-light"><h6 style="color: #e74c3c">Tổng số tiền cần thanh toán: {{(total + 50000) | number}} vnd</h6></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+</body>
