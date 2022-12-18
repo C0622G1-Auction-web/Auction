@@ -14,19 +14,22 @@ export class UserService {
 
   createUser(user: User): Observable<User> {
     console.log(user)
-    return this.httpClient.post<User>('http://localhost:8080/api/v1/users/create', user);
+    return this.httpClient.post<User>(environment.uri_api_create_user_v1_user, user);
   }
 
   getAllUser(): Observable<User[]> {
     return null;
   }
 
-  updateUser(user: User): Observable<User> {
-    return this.httpClient.patch<User>(environment.uri_api_create_user_v1_user + '/' + user.id, user);
+  updateUser(id: number, user: User): Observable<User> {
+    return this.httpClient.put<User>(environment.uri_api_update_user_v1_user + '/' + user.id, user);
   }
 
   findUserById(userId: number): Observable<User> {
     return this.httpClient.get<User>(environment.userUrl + userId);
+  }
+  findUserByIdServer(userId: number): Observable<User> {
+    return this.httpClient.get<User>(environment.uri_api_find_by_id_user_v1_user + userId);
   }
 
   createUser(user: User): Observable<User> {

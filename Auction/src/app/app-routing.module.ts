@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from "./security/login/login.component";
 import {RegisterWithGoogleComponent} from "./security/register-with-google/register-with-google.component";
 import {GuideListComponent} from "./component/guide/guide-list/guide-list.component";
@@ -10,6 +10,8 @@ import {TransactionComponent} from "./component/transaction/transaction.componen
 import {HomeComponent} from "./component/home/home.component";
 import {UserListComponent} from "./component/user/user-list/user-list.component";
 import {UserEditComponent} from "./component/user/user-edit/user-edit.component";
+import {UserCreateComponent} from "./component/user/user-create/user-create.component";
+import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
 
 const routes: Routes = [
   {
@@ -44,9 +46,13 @@ const routes: Routes = [
     component: GuideListComponent
   },
   {
-    path: "auction/:productId", component: AuctionProductDetailComponent,
-
+    path: "auction/:productId", component: AuctionProductDetailComponent},
+  {
+    path:"user/create",component:UserCreateComponent
   },
+  {
+    path:'user/update/:id', component: UserUpdateComponent
+  },  
   {path: 'login', component: LoginComponent},
   {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
 ];
