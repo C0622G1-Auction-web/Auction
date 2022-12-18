@@ -52,7 +52,7 @@ const routes: Routes = [
     path:"user/create",component:UserCreateComponent
   },
   {
-    path:'user/update',component:UserUpdateComponent
+    path:'user/update/:id', component: UserUpdateComponent
   }
 
 ];

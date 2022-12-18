@@ -42,6 +42,9 @@ import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-logi
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
+import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFireModule} from "@angular/fire";
+import {environment} from "../environments/environment";
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -95,7 +98,11 @@ const googleLoginOptions = {
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
+
+
   ],
   providers: [
     {

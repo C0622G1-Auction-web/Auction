@@ -20,8 +20,17 @@
             </div>
             <div class="row" style="height: 10px"></div>
             <div class="row">
-              <div class="col-lg-3" style="padding-left: 42%;"><div class="avatar" data-label="DC"></div></div>
-
+              <div class="col-lg-3" style="padding-left: 42%;">
+                <input  type="file" id="file" style=" font-size: 35px;width: 3em;height: 3em;border-radius: 50%;background: #008578;"
+                        #userPhoto
+                        multiple
+                        (change)="showPreview($event)"
+                        name="image"
+                        autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
+              </div>
+              <div *ngFor=" let item of imgs">
+                <img style="height: 200px; width: 200px" src="{{item}}">
+              </div>
             </div>
             <div class="row" style="height: 25px"></div>
             <div class="row">
@@ -94,7 +103,7 @@
                 <div class=" input-group mb-3">
                   <div class=" form-floating flex-grow-1">
                     <input type="text" class="form-control" id="floatingDateOfBirth"
-                           placeholder="DateOfBirth" formControlName="birthday">
+                           placeholder="DateOfBirth" formControlName="birthDay">
                     <label for="floatingDateOfBirth">Ngày sinh</label>
                   </div>
                   <span class="input-group-text" id="basic-addon4"><i
@@ -105,8 +114,8 @@
             <div class="row">
               <div class="col-lg-4">
                 <div>
-                  <select class="form-control" id="city" aria-label=".form-select-sm">
-                    <option value="" selected>Chọn tỉnh thành</option>
+                  <select class="form-control"id="city" aria-label=".form-select-sm" >
+                    <option formControlName="city" value="city" selected>Chọn tỉnh thành</option>
                   </select>
                 </div>
               </div>

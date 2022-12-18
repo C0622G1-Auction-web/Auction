@@ -1,11 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {UserType} from "../../../model/user/user-type";
 import {UserService} from "../../../service/user/user.service";
-import {UserTypeService} from "../../../service/user/user-type.service";
-import {Address} from "../../../model/user/address";
-import {AccountService} from "../../../service/account/account.service";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {finalize} from "rxjs/operators";
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-user-create',
@@ -13,25 +11,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
+  selectedImages: any[] = [];
+  imgs: any;
   userCreateForm: FormGroup;
-  userTypeCreateList: UserType[] = [];
-  userAddressCreateList: Address[] = [];
-  userAccountCreateList: Account[] = [];
-  constructor( private userService:UserService,
-               private userTypeService:UserTypeService,
-               private userAccountService:AccountService,
-               private router: Router,
-               private formBuilder: FormBuilder
-               ) {
+  captchaString: string;
+  // cities: City[] = [];
+  // districts: District[];
+  // wards: Ward[];
+  // cityIdSelected: number;
+  // districtIdSelected: number;
+  // wardIdSelected: number;
+  // currentCity: string;
+  // currentDistrcit: string;
+  // currentWard: string;
+
+  constructor(private userService: UserService,
+              private router: Router,
+              private formBuilder: FormBuilder,
+              private _storage: AngularFireStorage) {
 
   }
+
   /**
    * Create by: TruongLH
    * Date created: 13/12/2022
    * Function: to create component user
    */
   ngOnInit(): void {
-    this.userCreateForm= this.formBuilder.group({
+    this.userCreateForm = this.formBuilder.group({
       // avatar:["",[Validators.required]],
       // firstName:["",[Validators.required,Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
       // lastName:["",[Validators.required,Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{3,30}$")]],
@@ -44,32 +51,85 @@ export class UserCreateComponent implements OnInit {
       // town:["",[Validators.required,Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
       // idCard:["",[Validators.required,Validators.pattern("\\d{9}")]],
       // password:["",[Validators.required]]
-      firstName:[],
-      lastName:[],
-      username:[],
-      avatar:[],
-      email:[],
-      phone:[],
-      birthDay:[],
-      city:[],
-      district:[],
-      town:[],
-      country:["viet nam"],
-      idCard:[],
-      password:[],
-      pointDedication:[10.0],
-      statusLock:[true],
-      deleteStatus:[true],
-      userTypeId:[5]
-    })
+      firstName: [],
+      lastName: [],
+      username: [],
+      avatar: [],
+      email: [],
+      phone: [],
+      birthDay: [],
+      city: [],
+      district: [],
+      town: [],
+      country: ["viet nam"],
+      idCard: [],
+      password: [],
+      pointDedication: [10.0],
+      statusLock: [true],
+      deleteStatus: [true],
+      userTypeId: [5]
+    });
   }
 
   submitCreateUser() {
-    if(this.userCreateForm.valid){
-      console.log(this.userCreateForm.value)
-      this.userService.createUser(this.userCreateForm.value).subscribe(value => {
-        this.router.navigateByUrl('');
-      })
+    this.userService.createUser(this.userCreateForm.value).subscribe(data => {
+      this.router.navigateByUrl('');
+    });
+
+  }
+
+  showPreview(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImages = event.target.files;
+    } else {
+      this.selectedImages = [];
+    }
+    if (this.selectedImages.length !== 0) {
+      for (let i = 0; i < this.selectedImages.length; i++) {
+        let selectedImage = this.selectedImages[i];
+        const n = Date.now();
+        const filePath = `RoomsImages/${n}`;
+        const fileRef = this._storage.ref(filePath);
+        this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              this.userCreateForm.patchValue({avatar: url})
+            });
+          })
+        ).subscribe(() => {
+        });
+      }
+    }
+  }
+
+  generate() {
+    let captcha;
+    document.getElementById("submit").setAttribute('value', '');
+    captcha = document.getElementById("image");
+    this.captchaString = "";
+    const random =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 1; i < 6; i++) {
+      this.captchaString += random.charAt(
+        Math.random() * random.length)
+    }
+    captcha.innerHTML = this.captchaString;
+  }
+
+  printd() {
+    // @ts-ignore
+    const usr_input = $('#submit').val();
+    console.log(usr_input);
+    if (usr_input == this.captchaString) {
+      let s = document.getElementById("key")
+        .innerHTML = "Mã chính xác";
+      this.generate();
+    } else {
+      let s = document.getElementById("key")
+        .innerHTML = "Mã không chính xác";
+      this.generate();
     }
   }
 }
