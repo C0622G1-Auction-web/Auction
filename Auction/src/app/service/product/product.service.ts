@@ -64,8 +64,6 @@ export class ProductService {
     return this._httpClient.post<Product>('http://localhost:8080/api/v1/products/create', productDto);
   }
 
-  private API_URL = '  http://localhost:8080/';
-
   findAll(curPage: number, numberRecord: number): Observable<DataResult<ProductDto>> {
     return this._httpClient.get<DataResult<ProductDto>>(this.API_URL + 'list?page=' + (curPage - 1) + '&size=' + numberRecord);
   }

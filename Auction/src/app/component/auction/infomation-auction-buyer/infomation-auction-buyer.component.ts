@@ -17,7 +17,7 @@ export class InfomationAuctionBuyerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.auctionService.getAuctionPageByProductId(2, 0).subscribe(
+    this.auctionService.getAuctionPageByProductId(1, 0).subscribe(
       data => {
         this.auctionPageByProductId = data;
         console.log(this.auctionPageByProductId);
@@ -32,7 +32,7 @@ export class InfomationAuctionBuyerComponent implements OnInit {
    * @param i : pageNumber
    */
   goToPage(i: number) {
-    this.auctionService.getAuctionPageByProductId(2, i).subscribe(
+    this.auctionService.getAuctionPageByProductId(1, i).subscribe(
       data => {
         this.auctionPageByProductId = data;
       }
