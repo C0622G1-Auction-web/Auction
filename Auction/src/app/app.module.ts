@@ -39,12 +39,14 @@ import { MethodPaymentComponent } from './component/payment/method-payment/metho
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
 import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
-import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
 import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/storage";
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
+import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
+import {UserCreateComponent} from "./component/user/user-create/user-create.component";
+
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -76,6 +78,7 @@ const googleLoginOptions = {
     ProductDetailComponent,
     VerificationComponent,
     VerifyResetPasswordComponent,
+    RegisterWithGoogleComponent,
     AuctionComponent,
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
@@ -88,8 +91,8 @@ const googleLoginOptions = {
     PaymentReceiptComponent,
     TransactionComponent,
     UserCreateComponent,
-    UserUpdateComponent
-
+    UserUpdateComponent,
+    UserCreateComponent
   ],
   imports: [
     ReactiveFormsModule,

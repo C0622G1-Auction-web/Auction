@@ -1,4 +1,3 @@
-
 $( document ).ready(function() {
   let captcha;
 
@@ -19,20 +18,6 @@ $( document ).ready(function() {
     console.log(2333);
     generate();
   }
-
-  // function print() {
-  //   const usr_input = document
-  //     .getElementById("submit").value;
-  //   if (usr_input === captcha.innerHTML) {
-  //     let s = document.getElementById("key")
-  //       .innerHTML = "Mã chính xác";
-  //     generate();
-  //   } else {
-  //     let s = document.getElementById("key")
-  //       .innerHTML = "Mã không chính xác";
-  //     generate();
-  //   }
-  // }
 
   let citis = document.getElementById("city");
   let districts = document.getElementById("district");

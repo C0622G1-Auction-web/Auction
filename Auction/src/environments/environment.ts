@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+
   api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
   api_url_list_category: 'http://localhost:8080/api/v1/category',
   api_url_list_user: 'http://localhost:8080/api/v1/users',
@@ -17,6 +18,7 @@ export const environment = {
   userUrl: "http://localhost:8080/api/user/v1/",
   SIGN_IN_API: 'http://localhost:8080/api/v1/auth/signin',
   GOOGLE_SIGN_IN_API: 'http://localhost:8080/api/v1/auth/google',
+<<<<<<< HEAD
   uri_api_create_user_v1_user: "http://localhost:8080/api/v1/users/create",
   uri_api_update_user_v1_user: "http://localhost:8080/api/v1/users/update",
   uri_api_find_by_id_user_v1_user: "http://localhost:8080/api/v1/users/find/",
@@ -29,6 +31,11 @@ export const environment = {
     appId: "1:680493532790:web:4d7b3923a9e9d4f00ac157",
     measurementId: "G-YRDCYMF4H9"
   }
+=======
+  LOGIN_API: 'http://localhost:8080/api/auth/login',
+  GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
+  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create",
+>>>>>>> 7afde3a6592926f7a6eae999604392a1fddb9aa6
 }
 
 /*

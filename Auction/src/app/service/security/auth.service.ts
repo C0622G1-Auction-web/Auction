@@ -21,7 +21,7 @@ export class AuthService {
    */
 
   login(loginForm: LoginForm): Observable<any> {
-    return this.httpClient.post<any>(environment.SIGN_IN_API, loginForm);
+    return this.httpClient.post<any>(environment.LOGIN_API, loginForm);
   }
 
   /**
@@ -31,7 +31,7 @@ export class AuthService {
    */
 
   googleLogin(googleToken: Googletoken): Observable<any> {
-    return this.httpClient.post<any>(environment.GOOGLE_SIGN_IN_API, googleToken)
+    return this.httpClient.post<any>(environment.GOOGLE_LOGIN_API, googleToken)
   }
 
 }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import {User} from "../../model/user/user";
+import {Account} from "../../model/account/account";
 
 const TOKEN_KEY = 'Token_key';
 const ROLE_KEY = 'Role_key';
-const ACCOUNTID_KEY = 'AccountId_key';
-const USERNAME_KEY = 'Username_key';
-const STATUSLOCK_KEY = 'StatusLock_key';
-const DELETESTATUS_KEY = 'DeleteStatus_key'
+const USER_KEY = 'User_key';
+const ACCOUNT_KEY = 'Account_key';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,8 @@ export class TokenService {
 
   roles = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   public setTokenLocal(token: string) {
     localStorage.removeItem(TOKEN_KEY);
@@ -34,75 +35,39 @@ export class TokenService {
     }
   }
 
-  public setAccountIdLocal(accountId: number) {
-    localStorage.removeItem(ACCOUNTID_KEY);
-    localStorage.setItem(ACCOUNTID_KEY, String(accountId))
+  public setUserLocal(user: User) {
+    localStorage.removeItem(USER_KEY);
+    localStorage.setItem(USER_KEY, JSON.stringify(user))
   }
 
-  public setAccountIdSession(accountId: number) {
-    sessionStorage.removeItem(ACCOUNTID_KEY);
-    sessionStorage.setItem(ACCOUNTID_KEY, String(accountId))
+  public setUserSession(user: User) {
+    sessionStorage.removeItem(USER_KEY);
+    sessionStorage.setItem(USER_KEY, JSON.stringify(user))
   }
 
-  public getAccountId(): string {
-    if (localStorage.getItem(ACCOUNTID_KEY) !== null) {
-      return <string>localStorage.getItem(ACCOUNTID_KEY);
+  public getUser(): string {
+    if (localStorage.getItem(USER_KEY) !== null) {
+      return localStorage.getItem(USER_KEY);
     } else {
-      return <string>sessionStorage.getItem(ACCOUNTID_KEY);
+      return sessionStorage.getItem(USER_KEY);
     }
   }
 
-  public setUsernameLocal(username: string) {
-    localStorage.removeItem(USERNAME_KEY);
-    localStorage.setItem(USERNAME_KEY, String(username))
+  public setAccountLocal(account: Account) {
+    localStorage.removeItem(ACCOUNT_KEY);
+    localStorage.setItem(ACCOUNT_KEY, JSON.stringify(account))
   }
 
-  public setUsernameSession(username: string) {
-    sessionStorage.removeItem(USERNAME_KEY);
-    sessionStorage.setItem(USERNAME_KEY, String(username))
+  public setAccountSession(account: Account) {
+    sessionStorage.removeItem(ACCOUNT_KEY);
+    sessionStorage.setItem(ACCOUNT_KEY, JSON.stringify(account))
   }
 
-  public getUsername(): string {
-    if (localStorage.getItem(USERNAME_KEY) !== null) {
-      return <string>localStorage.getItem(USERNAME_KEY);
+  public getAccount(): string {
+    if (localStorage.getItem(ACCOUNT_KEY) !== null) {
+      return  localStorage.getItem(ACCOUNT_KEY);
     } else {
-      return <string>sessionStorage.getItem(USERNAME_KEY);
-    }
-  }
-
-  public setStatusLockLocal(statusLock: boolean) {
-    localStorage.removeItem(STATUSLOCK_KEY);
-    localStorage.setItem(STATUSLOCK_KEY, String(statusLock))
-  }
-
-  public setStatusLockSession(statusLock: boolean) {
-    sessionStorage.removeItem(STATUSLOCK_KEY);
-    sessionStorage.setItem(STATUSLOCK_KEY, String(statusLock))
-  }
-
-  public getStatusLock(): string {
-    if (localStorage.getItem(STATUSLOCK_KEY) !== null) {
-      return <string>localStorage.getItem(STATUSLOCK_KEY);
-    } else {
-      return <string>sessionStorage.getItem(STATUSLOCK_KEY);
-    }
-  }
-
-  public setDeleteStatusLocal(deleteStatus: boolean) {
-    localStorage.removeItem(DELETESTATUS_KEY);
-    localStorage.setItem(DELETESTATUS_KEY, String(deleteStatus))
-  }
-
-  public setDeleteStatusSession(deleteStatus: boolean) {
-    sessionStorage.removeItem(DELETESTATUS_KEY);
-    sessionStorage.setItem(DELETESTATUS_KEY, String(deleteStatus))
-  }
-
-  public getDeleteStatus(): string {
-    if (localStorage.getItem(DELETESTATUS_KEY) !== null) {
-      return <string>localStorage.getItem(DELETESTATUS_KEY);
-    } else {
-      return <string>sessionStorage.getItem(DELETESTATUS_KEY);
+      return  sessionStorage.getItem(ACCOUNT_KEY);
     }
   }
 
@@ -135,20 +100,16 @@ export class TokenService {
     window.sessionStorage.clear();
   }
 
+  public rememberMe(token: string, account: Account, roles: string[], user: User) {
+    this.logOut();
+    this.setAccountLocal(account);
+    this.setRoleLocal(roles);
+    this.setUserLocal(user);
+    this.setTokenLocal(token);
+  }
 
   public isLogged(): boolean {
     return !(window.sessionStorage.getItem(TOKEN_KEY) == null && window.localStorage.getItem(TOKEN_KEY) == null);
-  }
-
-  public rememberMe(accountId: number, deleteStatus: boolean, statusLock: boolean, username: string,
-                    token: string, role: string[]) {
-    this.logOut();
-    this.setAccountIdLocal(accountId);
-    this.setDeleteStatusLocal(deleteStatus);
-    this.setStatusLockLocal(statusLock);
-    this.setUsernameLocal(username);
-    this.setTokenLocal(token);
-    this.setRoleLocal(role);
   }
 
 }
