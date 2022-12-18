@@ -29,7 +29,6 @@ import {AuctionComponent} from './component/auction/auction.component';
 import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
-<<<<<<< HEAD
 import {AppRoutingModule} from "./app-routing.module";
 import {FIREBASE_OPTIONS} from "@angular/fire";
 
@@ -38,31 +37,21 @@ import { AccountResetPassComponent } from './component/security/account-reset-pa
 import { PaymentCartComponent } from './component/payment/payment-cart/payment-cart.component';
 // @ts-ignore
 import { AccountForgotPassComponent } from './component/security/account-forgot-pass/account-forgot-pass.component';
-=======
-import {FIREBASE_OPTIONS} from "@angular/fire";
-import {environment} from "../environments/environment";
-import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
-import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
-import { AccountResetPassComponent } from './component/account-reset-pass/account-reset-pass.component';
->>>>>>> 5d7f77c59acf7ddf622cf16a4ab0428f1f3e4ebe
 import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
-<<<<<<< HEAD
 import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { ChatUserComponent } from './component/chat/chat-user/chat-user.component';
+import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.component';
 
 const googleLoginOptions = {
   scope: 'profile email',
   plugin_name: 'login'
 };
-=======
-import { ChatUserComponent } from './component/chat/chat-user/chat-user.component';
-import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.component';
->>>>>>> 5d7f77c59acf7ddf622cf16a4ab0428f1f3e4ebe
 
 @NgModule({
   declarations: [
@@ -98,14 +87,10 @@ import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.compo
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent,
-<<<<<<< HEAD
     PaymentReceiptComponent,
     TransactionComponent,
-
-=======
     ChatUserComponent,
     ChatAdminComponent
->>>>>>> 5d7f77c59acf7ddf622cf16a4ab0428f1f3e4ebe
   ],
   imports: [
     BrowserModule,
@@ -137,12 +122,6 @@ import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.compo
     },
     { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig}
   ],
-<<<<<<< HEAD
-=======
-  providers: [
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig}
-  ],
->>>>>>> 5d7f77c59acf7ddf622cf16a4ab0428f1f3e4ebe
   bootstrap: [AppComponent]
 })
 export class AppModule {
