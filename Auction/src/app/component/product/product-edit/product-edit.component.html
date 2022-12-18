@@ -1,1 +1,158 @@
-<p>product-edit works!</p>
+<div class="container bg-white h-100 d-flex flex-column">
+  <div class="auction d-flex align-items-center">
+    <div class="row d-flex ms-auto me-5">
+      <div class="boxed shadow-md h-100 ms-auto">
+        <form *ngIf="formEditProduct" class="form" [formGroup]="formEditProduct" (ngSubmit)="updateProduct(id)">
+          <fieldset>
+            <legend>
+              <div class="mt-4 text-center">
+                <h1>Cập nhật sản phẩm</h1>
+              </div>
+            </legend>
+          </fieldset>
+          <input type="text" class="form-control" formControlName="id" hidden>
+          <input formControlName="reviewStatus" hidden>
+          <input formControlName="auctionStatus" hidden>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>
+            </div>
+            <input type="text" class="form-control" formControlName="name"/>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/icon-people.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Mã người đăng<span style="color: red"> (*)</span>:</label>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <input #testNum formControlName="user" style="width: 50%" type="number" class="form-control"/>
+              <button type="button" class="btn btn-primary d-flex justify-content-center mx-3"
+                      (click)="findUserById(testNum)">
+                <object data="assets/icons/check-people.svg" width="20" height="20"
+                        class="me-2 slide"></object>
+                Kiểm tra
+              </button>
+              <button type="button" style="width: 20%" (click)="resetFindUserById(testNum)">
+                <object data="assets/icons/back.svg" width="20" height="20"></object>
+              </button>
+            </div>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/information.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Thông tin người đăng:</label>
+            </div>
+            <textarea *ngIf="userFind" class="form-control" disabled>
+              {{userFind.id}}
+              {{userFind.firstName}} {{userFind.lastName}}
+            </textarea>
+            <textarea *ngIf="!userFind" class="form-control" disabled>
+             Không tìm thấy thông tin người đăng
+            </textarea>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/dollar.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>
+            </div>
+            <input type="number" class="form-control" formControlName="initialPrice"/>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/money-increase.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Mỗi lần tăng ít nhất<span
+                style="color: red"> (*)</span>:</label>
+            </div>
+            <select  class="form-select" aria-label="Default select example"
+                    formControlName="priceStep">
+              <option *ngFor="let item of priceStepList" [ngValue]="item.id">{{item.step}}</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/category.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Chủng loại<span style="color: red">(*)</span>:</label>
+            </div>
+            <select  formControlName="category" class="form-select"
+                    aria-label="Default select example">
+              <option *ngFor="let item of categoryList" [ngValue]="item.id">{{item.name}}</option>
+            </select>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/image.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>
+            </div>
+            <input type="file"
+                   multiple
+                   (change)="showPreview($event)"
+                   autocomplete="off" class="custom-file-input form-control">
+          </div>
+          <div *ngFor="let img of imgs,let i = index">
+            <img style="width: 100px;height: 100px" src="{{img.url}}">
+            <button (click)="deleteImage(i,img)" type="button" class="btn-close" aria-label="Close"></button>
+          </div>
+          <div *ngFor="let img of imgCreate,let i = index">
+            <img style="width: 100px;height: 100px" src="{{img}}">
+            <button (click)="deleteImageNew(i)" type="button" class="btn-close" aria-label="Close"></button>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/information.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Thông tin chi tiết<span
+                style="color: red">(*)</span>:</label>
+            </div>
+            <textarea class="form-control" formControlName="description"></textarea>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/hour-end.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Thời gian bắt đầu<span
+                style="color: red"> (*)</span>:</label>
+            </div>
+            <input type="datetime-local" class="form-control" formControlName="startTime"/>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/hour-start.svg" width="20" height="20"></object>
+              <label class="form-label ms-2">Thời gian kết thúc<span
+                style="color: red"> (*)</span>:</label>
+            </div>
+            <input type="datetime-local" class="form-control" formControlName="endTime"/>
+          </div>
+
+          <div class="d-flex mt-3 mb-2 w-100">
+            <button style="margin-right: 5px" class="btn btn-primary d-flex justify-content-center">
+              <object data="assets/icons/legal-hammer.svg" width="20" height="20"
+                      class="me-2 slide"></object>
+              <p>
+                Cập nhật
+              </p>
+            </button>
+            <button style="margin-right: 5px"
+                    class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">
+              <object data="assets/icons/button-back.svg" width="20" height="20"
+                      class="me-2 slide"></object>
+              <p>Nhập lại</p>
+            </button>
+            <button class="btn btn-outline btn-warning ms-auto d-flex justify-content-center">
+              <object data="assets/icons/cancel.svg" width="20" height="20"
+                      class="me-2 slide"></object>
+              <p>Hủy</p>
+            </button>
+          </div>
+        </form>
+
+        <div class="mb-2">
+            <span style="font-size: 15px" class="fst-italic">
+              Trường có dấu <span style="color: red"> (*)</span> là bắt
+              buộc,không được bỏ trống
+            </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
