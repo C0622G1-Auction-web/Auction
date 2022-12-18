@@ -16,6 +16,11 @@ export const environment = {
   transactionUrl: 'http://localhost:8080/auction/api/transaction',
   productSearchUrl: 'http://localhost:8080/api/v1/products/search',
   userUrl: 'http://localhost:8080/api/user/v1/',
+  api_url_list_price_range: 'http://localhost:8080/api/v1/product-properties/price-range',
+  api_url_list_auction_status: 'http://localhost:8080/api/v1/product-properties/auction-status',
+  api_url_search_by_list_id: 'http://localhost:8080/api/v1/products/find-by-list-id',
+  api_url_remove_products: 'http://localhost:8080/api/v1/products/remove',
+
 
 };
 

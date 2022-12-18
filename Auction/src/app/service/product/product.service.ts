@@ -11,7 +11,7 @@ import {DataResult} from '../../model/product/data_result';
 import {ProductDto} from '../../model/product/iProduct_dto';
 import {ReviewStatus} from '../../model/product/review-status';
 import {PageProduct} from '../../model/product/page-product';
-import {SearchProductDtoRoleAdmin} from '../../model/product/search-product-dto-role-admin';
+import {ProductDelete} from '../../model/product/product-delete';
 
 @Injectable({
   providedIn: 'root'
@@ -71,7 +71,22 @@ export class ProductService {
    * Function: get all and search Products
    * Date: 15/11/2022
    */
-  getAll(searchProduct: SearchProductDtoRoleAdmin): Observable<PageProduct> {
-    return this._httpClient.post<PageProduct>(environment.api_url_products, searchProduct);
+  getPageProductRoleAdmin(searchProduct: any, pageNumber): Observable<PageProduct> {
+    return this._httpClient.post<PageProduct>(
+      environment.api_url_products + '?page=' + pageNumber,
+      searchProduct);
+  }
+
+  /**
+   * Created: GiangLBH
+   * Function: find product by selected ids
+   * Date: 15/11/2022
+   */
+  findByListId(deleteIds: number[]): Observable<ProductDelete[]> {
+    return this._httpClient.post<ProductDelete[]>(environment.api_url_search_by_list_id, deleteIds);
+  }
+
+  delete(deleteIds: number[]): Observable<any> {
+    return this._httpClient.post<any>(environment.api_url_remove_products, deleteIds);
   }
 }

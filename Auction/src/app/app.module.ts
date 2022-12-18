@@ -21,7 +21,7 @@ import {LoginComponent} from './security/login/login.component';
 import {RegisterComponent} from './security/register/register.component';
 import {ResetPasswordComponent} from './security/reset-password/reset-password.component';
 import {AuctionRequestComponent} from './component/auction-request/auction-request.component';
-import {ProductDetailComponent} from './component/product/product-detail/product-detail.component';
+import {ProductReviewComponent} from './component/product/product-review/product-review.component';
 import {VerificationComponent} from './security/verification/verification.component';
 import {VerifyResetPasswordComponent} from './security/verify-reset-password/verify-reset-password.component';
 import {AuctionComponent} from './component/auction/auction.component';
@@ -63,7 +63,7 @@ import {ToastrModule} from 'ngx-toastr';
     RegisterComponent,
     ResetPasswordComponent,
     AuctionRequestComponent,
-    ProductDetailComponent,
+    ProductReviewComponent,
     VerificationComponent,
     VerifyResetPasswordComponent,
     AuctionComponent,
