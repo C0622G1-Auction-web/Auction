@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {UserType} from "../../../model/user/user-type";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../service/user/user.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {UserEditDto} from "../../../dto/user-edit-dto";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-user-edit',
@@ -19,7 +20,9 @@ export class UserEditComponent implements OnInit {
   constructor(private _userService: UserService,
               private _activatedRoute: ActivatedRoute,
               private _formBuilder: FormBuilder,
-              private _router: Router) {
+              private _toast: ToastrService,
+              private _router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -35,19 +38,30 @@ export class UserEditComponent implements OnInit {
       console.log(data)
       this.rfUser = this._formBuilder.group({
         id: [data.id],
-        firstName: [data.firstName],
-        lastName: [data.lastName],
-        email: [data.email],
-        phone: [data.phone],
-        detailAddress: [data.address.detailAddress],
-        town: [data.address.town],
-        district: [data.address.district],
-        city: [data.address.city],
-        country: [data.address.country],
-        username: [data.account.username],
-        birthDay: [data.birthDay],
-        idCard: [data.idCard],
-
+        firstName: [data.firstName,
+          [Validators.required]],
+        lastName: [data.lastName,
+          [Validators.required]],
+        email: [data.email,
+          [Validators.required]],
+        phone: [data.phone,
+          [Validators.required]],
+        detailAddress: [data.address.detailAddress,
+          [Validators.required]],
+        town: [data.address.town,
+          [Validators.required]],
+        district: [data.address.district,
+          [Validators.required]],
+        city: [data.address.city,
+          [Validators.required]],
+        country: [data.address.country,
+          [Validators.required]],
+        username: [data.account.username,
+          [Validators.required]],
+        birthDay: [data.birthDay,
+          [Validators.required]],
+        idCard: [data.idCard,
+          [Validators.required]],
       });
     });
   }
@@ -56,11 +70,11 @@ export class UserEditComponent implements OnInit {
     this.user = this.rfUser.value;
     this._userService.updateByAdim(id, this.user).subscribe(data => {
       this._router.navigate(['/user/list']);
+      this._toast.success("Chỉnh sửa thành công")
     });
   }
 
   reset(id) {
-
     this.ngOnInit();
     this.getById(id);
   }

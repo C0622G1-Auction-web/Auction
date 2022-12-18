@@ -6,6 +6,7 @@ import {UserListDto} from "../../dto/user-list-dto";
 import {User} from '../../model/user/user';
 import {Observable} from 'rxjs';
 import {UserEditDto} from "../../dto/user-edit-dto";
+import {UnlockUsers} from "../../model/user/unlock-users";
 
 
 @Injectable({
@@ -61,6 +62,7 @@ export class UserService {
     return this._httpClient.get<User>(environment.api_url_list_user + '/' + id, this.httpOptions)
   }
 
+
   /**
    * Create by: HungNV
    * Date created: 16/12/2022
@@ -81,10 +83,7 @@ export class UserService {
    * Date created: 15/12/2022
    * @return User
    */
-  saveaddAcountUser(user
-                      :
-                      User
-  ):
+  saveaddAcountUser(user: User):
     Observable<User> {
     console.log(user);
     return this._httpClient.post<User>('http://localhost:8080/api/user/v1/add', user);
@@ -101,5 +100,22 @@ export class UserService {
   }
 
 
+  // findByListId(unlockIds: number[]): Observable<UnlockUsers[]> {
+  //   console.log(unlockIds);
+  //   return this._httpClient.put<UserEditDto[]>(environment.api_url_list_user + '/Unlock' , unlockIds);
+  // }
+
+  unlock(unlockIds: number[]): Observable<any> {
+    console.log(unlockIds)
+    return this._httpClient.post<UserEditDto[]>(environment.api_url_list_user + '/unlockUser' , unlockIds);
+  }
+
+  delete(unlockIds: number[]): Observable<any> {
+    return this._httpClient.post<any>(environment.api_url_list_user + '/Unlock', unlockIds);
+  }
+
+  findByListId(unlockIds: number[]): Observable<UnlockUsers[]> {
+    return this._httpClient.post<UnlockUsers[]>(environment.api_url_list_user_list_id, unlockIds);
+  }
 }
 

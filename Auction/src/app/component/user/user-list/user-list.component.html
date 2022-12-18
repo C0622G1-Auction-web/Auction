@@ -99,9 +99,8 @@
         </form>
 
         <div>
-          <a type="button" class="btn btn-danger">Xoá <i class="fa-regular fa-trash-can"></i> </a>
           <a type="button" class="btn btn-danger">Khoá <i class="fa-solid fa-lock"></i> </a>
-          <a type="button" class="btn btn-danger">Mở khoá <i class="fa-solid fa-lock"></i> </a>
+
           <a type="button" class="btn btn-danger">Thêm mới <i class="fa-solid fa-user-plus"></i> </a>
         </div>
 
@@ -111,7 +110,10 @@
             <tr>
               <th>
                 <div class="form-check">
-                  <input id="checkAll" class="form-check-input" type="checkbox" value=""/>
+                  <button class="btn" (click)="addAllToDelete()">
+                    <i class="fa-regular fa-trash-can delete-group-icon"></i>
+                  </button>
+<!--                  <input id="checkAll" class="form-check-input" type="checkbox" value=""/>-->
                 </div>
               </th>
               <th>STT</th>
@@ -129,11 +131,15 @@
             <tbody *ngIf="pageUsers">
             <tr *ngFor="let x of pageUsers.content; let i = index ">
               <td>
-                <div class="form-check"><input class="form-check-input" type="checkbox" value=""/></div>
+                <div class="form-check">
+                  <input class=" form-check"  type="checkbox"
+                         (click)="addToDelete(x.id)"/>
+<!--                  [checked]="unlockIds.includes(x.id)"-->
+                </div>
               </td>
               <td>{{pageUsers.number * 3 + i + 1}}</td>
               <td>{{x.id}}</td>
-              <td>{{x.firstName}} {{x.lastName}}</td>
+              <td>{{x.lastName}} {{x.firstName}} </td>
               <td>{{x.address.town}}, {{x.address.district}}, {{x.address.city}} </td>
               <td>{{x.userType.name}}</td>
               <td>{{x.email}}</td>
@@ -145,14 +151,22 @@
                 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDelete"
                         [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-pen-to-square"
                                                               style="color: darkgoldenrod"></i>
-                </button> |
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
-                        [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-lock "></i>
                 </button>
+                |
+                <button *ngIf="x.account.statusLock ; else no" type="button" class="btn btn-danger"
+                        data-bs-toggle="modal" data-bs-target="#modalLock"
+                        (click)="modalById(x.id)"><i class="fa-solid fa-lock "></i>
+                </button>
+                <ng-template #no>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUnlock"
+                          (click)="modalById(x.id)"><i class="fa-solid fa-unlock"></i>
+                  </button>
+                </ng-template>
+
               </td>
             </tbody>
           </table>
-
+          <!--Phân trang-->
           <nav aria-label="Page navigation example" class="p-0 d-flex justify-content-end">
             <ul class="pagination">
               <li class="page-item" [ngClass]="pageUsers.number == 0 ? 'disabled' : ''">
@@ -171,8 +185,92 @@
           </nav>
 
         </div>
+        <div>
+          <button class="btn btn-danger" data-bs-toggle="modal"
+                  (click)="sendToDeleteGroupModal()" data-bs-target="#deleteGroupModal">
+            <i class="fa-regular fa-trash-can delete-icon"></i> Xoá
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
 
+<!--Modal Khoá-->
+<div *ngIf="user" class="modal fade" id="modalLock" tabindex="-1" aria-labelledby="exampleModalLabel-lock"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel-lock">Xác nhận</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn khoá tài khoản có mã thành viên: <strong>{{user.id}}</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+        <button class="btn btn-danger" data-bs-dismiss="modal" type="submit"
+        >Xac nhan
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Modal mở Khoá-->
+<div *ngIf="unlockUsers" class="modal fade" id="modalUnlock" tabindex="-1" aria-labelledby="exampleModalLabel-Unlock"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel-Unlock">Xác nhận</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let x of unlockUsers">
+          Xóa sản phẩm <strong style="color: red">{{x.name}}</strong>?
+        </div>
+        <p>Bạn có muốn mở khoá tài khoản có <strong>mã thành viên: </strong> <strong>{{user.id}}</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+        <button class="btn btn-danger" data-bs-dismiss="modal" type="submit"
+                (click)="unlock()">Xác nhận
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ Delete Modal
+<div class="modal fade" id="deleteGroupModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Xóa sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let x of unlockUsers">
+          Xóa sản phẩm <strong style="color: red">{{x.name}}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button id="deleteCancel" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ bỏ</button>
+          <button id="deleteAccept" class="btn btn-warning" data-bs-dismiss="modal"
+                  (click)="delete()">Xác nhận
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
