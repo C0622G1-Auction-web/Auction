@@ -1,0 +1,36 @@
+<button type="button" class="open-chatbox" (click)="openForm()">
+  <i style="font-size: 24px" class="fa-solid fa-message"></i>
+</button>
+<div class="chatbox" id="myForm">
+  <div class="chatbox__header d-flex justify-content-between">
+    <p>Hỗ trợ 0957465734</p>
+    <span (click)="closeForm()">
+        <i class="fa-solid fa-window-minimize" id="minimize"></i>
+    </span>
+  </div>
+  <div action="" class="chatbox__body" id="scroll">
+    <div class="admin__message">
+      <p>C0622G1 xin chào, bất cứ một lời nhắn nào, hãy gửi cho chúng tôi</p>
+    </div>
+    <div class="me__box" *ngFor="let chat of chats">
+      <span class="date-time">{{chat.timestamp | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+      <textarea readonly *ngIf="chat.username ==='admin'" class="admin__message">
+        {{chat.message}}
+      </textarea>
+      <textarea readonly *ngIf="chat.username ==='user'" class="me__message">
+        {{chat.message}}
+      </textarea>
+    </div>
+  </div>
+  <div class="chatbox__Footer">
+    <form [formGroup]="form" *ngIf="form" (ngSubmit)="onChatSubmit(form.value)" action="" class="form__input__message">
+      <input formControlName="message" type="text" class="input__mesage" placeholder="Lời nhắn của bạn..">
+      <button style="border:solid whitesmoke 0.1px;background-color: white  " [disabled]="!form.valid" class="send"
+              (click)="onChatSubmit(form.value)">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
+</div>
+
+
