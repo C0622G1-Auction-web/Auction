@@ -13,7 +13,9 @@ export const environment = {
   api_url_order_status: 'http://localhost:8080/api/v1/payments',
   categoryUrl: "http://localhost:8080/api/v1/products/category",
   priceStepUrl:  "http://localhost:8080/api/v1/products/priceStep",
-  transactionUrl: "http://localhost:8080/api/v1/auction/list",
+  transactionUrl: 'http://localhost:8080/api/v1/auction/transaction',
+  transactionDeleteUrl: 'http://localhost:8080/api/v1/auction/delete',
+  transactionFindByListIdUrl: 'http://localhost:8080/api/v1/auction/find-by-list-id',
   productSearchUrl: "http://localhost:8080/api/v1/products/search",
   userUrl: "http://localhost:8080/api/user/v1/"
 };
