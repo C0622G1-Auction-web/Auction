@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-<<<<<<< HEAD
 import {ProductService} from '../../../service/product/product.service';
 import {Product} from '../../../model/product/product';
-
-=======
 import {ProductDto} from '../../../model/product/iProduct_dto';
-import {ProductService} from '../../../service/product/product.service';
->>>>>>> 1c04260d79ced8bb06fc31fbbc4f0d73d4a42edc
+import {TokenService} from '../../../service/security/token.service';
+
+
 
 @Component({
   selector: 'app-product-list',
@@ -19,10 +17,11 @@ export class ProductListComponent implements OnInit {
   pageSize = 5;
   action: boolean;
 
+
   total$: Observable<number>;
   iproductDto$: BehaviorSubject<Product[]>;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, tokenService: TokenService) {
   }
 
   ngOnInit(): void {
@@ -38,22 +37,19 @@ export class ProductListComponent implements OnInit {
 
   public findAll() {
     this.productService.findAll(this.page, this.pageSize).subscribe(value => {
-<<<<<<< HEAD
-      console.log('aaa');
       if (value != null) {
         this.action = true;
         this.total$ = new BehaviorSubject<number>(value.totalElements);
         this.iproductDto$ = new BehaviorSubject<Product[]>(value.content);
-=======
+
       console.log('a');
       if (value != null) {
         this.action = true;
         this.total$ = new BehaviorSubject<number>(value.totalElements);
         this.iproductDto$ = new BehaviorSubject<ProductDto[]>(value.content);
->>>>>>> 1c04260d79ced8bb06fc31fbbc4f0d73d4a42edc
+
       } else {
         this.action = false;
       }
-    });
   }
 }
