@@ -8,7 +8,7 @@
           <div class="mt-4 card card-body w-50" style="margin-right: 22px">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner" *ngFor="let item of productDetail.imgUrlProducts, let i = index">
-                <div class="carousel-item" [ngClass]=" 1<2? 'active' : ''">
+<!--                <div class="carousel-item" [ngClass]=" 1<2? 'active' : ''">-->
                   <img
                     [src]="item.url"
                     class="d-block w-100" alt="...">
@@ -121,13 +121,13 @@
           <h5 class="currency-1 card-title" style="color:#00434c">{{productDetail.priceStep.step}}<sup>đ</sup></h5>
         </div>
         <div class="input-group mt-4 d-flex align-items-center justify-content-center">
-          <form *ngIf="rfAuction" [formGroup]="rfAuction" (ngSubmit)="onSubmit()">
+<!--          <form *ngIf="rfAuction" [formGroup]="rfAuction" (ngSubmit)="onSubmit()">-->
             <button class="btn btn-outline-danger" type="button" style="font-size: 25px">-</button>
             <input hidden formControlName="userId">
             <input hidden formControlName="productId">
-            <input [value]="auctionPrice" type="number" style="font-size: 25px" class="form-control"
-                   formControlName="currentPrice"
-                   [ngClass]="rfAuction.errors?.checkAuctionPrice?'is-invalid':''">
+<!--            <input [value]="auctionPrice" type="number" style="font-size: 25px" class="form-control"-->
+<!--                   formControlName="currentPrice"-->
+<!--                   [ngClass]="rfAuction.errors?.checkAuctionPrice?'is-invalid':''">-->
             <button class="btn btn-outline-danger" type="button" style="font-size: 25px"
                     (click)="increaseAuctionPriceByPriceStep()">+
             </button>
@@ -141,7 +141,7 @@
                 The bid price must be one step greater than the current price
               </div>
             </div>
-          </form>
+<!--          </form>-->
 
 
         </div>
@@ -180,7 +180,7 @@
       </div>
     </div>
   </div>
-</div>
+<!--</div>-->
 
 
 <!--<script>-->

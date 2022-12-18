@@ -39,7 +39,7 @@ export class AddressPaymentComponent implements OnInit {
   }
 
   redirectPayment() {
-    this.paymentService.getPaymentList(this.paymentDtoList);
+    // this.paymentService.getPaymentList(this.paymentDtoList);
     this.paymentService.getToTal(this.total);
   }
 }
