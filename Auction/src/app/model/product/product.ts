@@ -11,6 +11,8 @@ export interface Product {
   initialPrice?: number;
   startTime?: string;
   endTime?: string;
+  deleteStatus?: boolean;
+  auctions?: any;
   priceStep?: PriceStep;
   reviewStatus?: ReviewStatus;
   auctionStatus?: AuctionStatus;

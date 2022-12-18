@@ -30,16 +30,21 @@ import {AuctionProductDetailComponent} from './component/auction/auction-product
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
 import {AppRoutingModule} from "./app-routing.module";
-import {AccountResetPassComponent} from './component/security/account-reset-pass/account-reset-pass.component';
-import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
-import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
-import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
-import {TransactionComponent} from './component/transaction/transaction.component';
-import {GoogleLoginProvider, SocialAuthServiceConfig} from 'angularx-social-login';
-import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
-import {AccountForgotPassComponent} from "./component/security/account-forgot-pass/account-forgot-pass.component";
-import {environment} from "../environments/environment";
 import {FIREBASE_OPTIONS} from "@angular/fire";
+
+import { AccountResetPassComponent } from './component/security/account-reset-pass/account-reset-pass.component';
+// @ts-ignore
+import { PaymentCartComponent } from './component/payment/payment-cart/payment-cart.component';
+// @ts-ignore
+import { AccountForgotPassComponent } from './component/security/account-forgot-pass/account-forgot-pass.component';
+import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
+import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
+import { PaymentReceiptComponent } from './component/payment/payment-receipt/payment-receipt.component';
+import { TransactionComponent } from './component/transaction/transaction.component';
+import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -52,7 +57,6 @@ const googleLoginOptions = {
     HeaderComponent,
     FooterComponent,
     ProductListComponent,
-    ProductAddComponent,
     ProductDeleteComponent,
     ProductEditComponent,
     UserListComponent,
@@ -68,6 +72,7 @@ const googleLoginOptions = {
     RegisterComponent,
     AuctionRequestComponent,
     ProductDetailComponent,
+    ProductAddComponent,
     VerificationComponent,
     AuctionComponent,
     AuctionProductDetailComponent,
@@ -93,6 +98,8 @@ const googleLoginOptions = {
     ToastrModule.forRoot(),
     AppRoutingModule,
 
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
   providers: [
     {
