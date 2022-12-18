@@ -2,7 +2,7 @@
   <div class="auction d-flex align-items-center">
     <div class="row d-flex ms-auto me-5">
       <div class="boxed shadow-md h-100 ms-auto">
-        <form class="form" [formGroup]="newProduct" *ngIf="newProduct" (ngSubmit)="createProduct()">
+<!--        <form class="form" [formGroup]="newProduct" *ngIf="newProduct" (ngSubmit)="createProduct()">-->
           <fieldset>
             <legend>
               <div class="mt-4 text-center">
@@ -15,8 +15,8 @@
               <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>
               <label class="ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>
             </div>
-            <input formControlName="name" id="name" type="text" class="form-control" placeholder="Nhập tên sản phẩm"
-                   [ngClass]="newProduct.controls['name'].invalid ?'is-invalid':'is-valid'"/>
+<!--            <input formControlName="name" id="name" type="text" class="form-control" placeholder="Nhập tên sản phẩm"-->
+<!--                   [ngClass]="newProduct.controls['name'].invalid ?'is-invalid':'is-valid'"/>-->
             <div class="invalid-feedback">
               <div *ngIf="newProduct.controls['name'].errors?.required
         && (newProduct.controls['name'].touched)">
@@ -29,12 +29,12 @@
               <object data="assets/icons/dollar.svg" width="20" height="20"></object>
               <label class="ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>
             </div>
-            <input formControlName="initialPrice" id="initialPrice" type="number" class="form-control"
-                   placeholder="Nhập giá ban đầu"
-                   [ngClass]="newProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>
+<!--            <input formControlName="initialPrice" id="initialPrice" type="number" class="form-control"-->
+<!--                   placeholder="Nhập giá ban đầu"-->
+<!--                   [ngClass]="newProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>-->
             <div class="invalid-feedback">
-              <div *ngIf="newProduct.controls['initialPrice'].errors?.required
-        && (newProduct.controls['initialPrice'].touched)">
+<!--              <div *ngIf="newProduct.controls['initialPrice'].errors?.required-->
+<!--        && (newProduct.controls['initialPrice'].touched)">-->
                 Không được bỏ trống
               </div>
             </div>
@@ -77,8 +77,8 @@
               <object data="assets/icons/information.svg" width="20" height="20"></object>
               <label class="ms-2">Thông tin chi tiết<span style="color: red">(*)</span>:</label>
             </div>
-            <textarea formControlName="description" id="description" class="form-control"
-                      [ngClass]="newProduct.controls['description'].invalid ?'is-invalid':'is-valid'"></textarea>
+<!--            <textarea formControlName="description" id="description" class="form-control"-->
+<!--                      [ngClass]="newProduct.controls['description'].invalid ?'is-invalid':'is-valid'"></textarea>-->
             <div class="invalid-feedback">
               <div *ngIf="newProduct.controls['description'].errors?.required
         && (newProduct.controls['description'].touched)">
@@ -92,8 +92,8 @@
               <object data="assets/icons/hour-end.svg" width="20" height="20"></object>
               <label class="ms-2">Thời gian bắt đầu<span style="color: red"> (*)</span>:</label>
             </div>
-            <input formControlName="startTime" type="date" class="form-control" placeholder="start Day.."
-                   [ngClass]="newProduct.controls['startTime'].invalid ?'is-invalid':'is-valid'"/>
+<!--            <input formControlName="startTime" type="date" class="form-control" placeholder="start Day.."-->
+<!--                   [ngClass]="newProduct.controls['startTime'].invalid ?'is-invalid':'is-valid'"/>-->
             <div class="invalid-feedback">
               <div *ngIf="newProduct.errors?.checkStartDay
                     && (newProduct.controls['startTime'].touched)">
@@ -110,8 +110,8 @@
               <object data="assets/icons/hour-start.svg" width="20" height="20"></object>
               <label class="ms-2">Thời gian kết thúc<span style="color: red"> (*)</span>:</label>
             </div>
-            <input formControlName="endTime" type="date" class="form-control"
-                   [ngClass]="newProduct.controls['endTime'].invalid ?'is-invalid':'is-valid'"/>
+<!--            <input formControlName="endTime" type="date" class="form-control"-->
+<!--                   [ngClass]="newProduct.controls['endTime'].invalid ?'is-invalid':'is-valid'"/>-->
             <div class="invalid-feedback">
               <div *ngIf="newProduct.errors?.checkEndDay
                     && (newProduct.controls['endTime'].touched)">
@@ -138,7 +138,7 @@
               <p>Nhập lại</p>
             </button>
           </div>
-        </form>
+<!--        </form>-->
         <div class="mb-2">
             <span style="font-size: 15px" class="fst-italic">
               Trường có dấu <span style="color: red"> (*)</span> là bắt
@@ -148,7 +148,8 @@
       </div>
     </div>
 
-
+  </div>
+<!--</div>-->
 <!--<div class="container bg-white h-100 d-flex flex-column">-->
 <!--  <div class="auction d-flex align-items-center">-->
 <!--    <div class="row d-flex ms-auto me-5">-->

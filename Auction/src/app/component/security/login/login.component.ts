@@ -2,16 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
-// @ts-ignore
-import {AuthService} from '../../service/security/auth.service';
-// @ts-ignore
-import {TokenService} from '../../service/security/token.service';
+
 // @ts-ignore
 import {MessageRespone} from '../../model/security/message-respone';
 // @ts-ignore
 import {GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
-// @ts-ignore
-import {Googletoken} from '../oauth2/googletoken';
+
+import {AuthService} from "../../../service/security/auth.service";
+import {TokenService} from "../../../service/security/token.service";
+import {Googletoken} from "../../../security/oauth2/googletoken";
 
 @Component({
   selector: 'app-login',
