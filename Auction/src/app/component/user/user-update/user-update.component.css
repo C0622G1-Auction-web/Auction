@@ -1,0 +1,39 @@
+.border{
+  border: solid darkgray 1px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.avatar{
+  font-size: 27px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #009578;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar::after{
+  content: attr(data-label);
+  font-family: 'Readex Pro',sans-serif;
+  color: #ffffff;
+}
+.profile {
+  padding: 0 !important;
+  margin-top: 32px;
+  display: flex;
+  box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.35);
+}
+.avatar{
+  font-size: 35px;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  background: #008578;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar::after{
+  content: attr(data-label);
+}

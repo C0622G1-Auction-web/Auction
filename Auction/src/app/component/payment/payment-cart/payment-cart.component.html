@@ -1,0 +1,221 @@
+
+<div class="container-fluid bg-light mb-5">
+  <div class="row mt-5" style="min-height: 75vh">
+    <div class="col-lg-7 ">
+      <div class="container ps-0 pe-0">
+        <nav class="navbar navbar-expand-lg bg-orange">
+          <div class="container">
+            <a class="navbar-brand text-light" href="#">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="fw-bold">Giỏ hàng</span>
+            </a>
+          </div>
+
+        </nav>
+      </div>
+      <div class="main-part">
+        <div class="row bg-orange text-light ms-0 me-0">
+          <div class="w-50 float-start" style="padding-left: 2%">
+                        <span><input type="checkbox" id="checkAll" class="mt-1 me-1 ms-1" value= 0><label
+                          class="h6">Sản phẩm</label></span>
+
+
+          </div>
+          <div class="w-50 float-end mt-2" style="padding-left: 30%">
+            Giá thành phần
+          </div>
+        </div>
+
+        <div class="row bg-light text-orange mt-2 mb-2 ms-0 me-0">
+          <div style="padding-left: 2%">
+            Sản phẩm sẽ được giao vào thứ 5 ngày 8/12/2022
+          </div>
+
+        </div>
+        <div>
+          <div class="card mb-3  border shadow-lg ">
+            <div class="row g-0">
+              <div class="col-md-1" style="text-align: center">
+                <input style="margin-top: 212%" type="checkbox" value=2359000>
+              </div>
+              <div class="col-md-4 mt-2">
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS4L9eboCZ5vgQ6JjF4hTfWcVMKrPl6297_HEu9ja8F5zJEkElzh3ipE4E7z3s8sJ3ggw7kNgPZcpYn1VhiMRUWtsR3O19kznXwn2obsbhzI2XWC37gMYKOiOMO&usqp=CAE"
+                     class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <h5 class="card-title text-orange fw-bold">Nike Force 1 LE</h5>
+                  <p> This is what legends are made of. The Nike Force 1 LE brings back the '82
+                    hardwood icon into an everyday style in all-white or all-black.
+                    Let the durability, cushioning and feel introduce little feet to a classic.<br>
+                    <strong>Colour Shown:</strong> Black/Black<br>
+                    <strong>Style:</strong> DH2925-001</p>
+
+                  <div class="clearfix">
+                    <h6 class="col-5 float-start"><span class="text-orange">Số lượng:</span> x1
+                    </h6>
+                    <h6 class="col-5 float-end price">&#8363;2,359,000</h6>
+                  </div>
+                  <p class="card-text"><small class="text-muted">Cập nhật lần cuối 3 phút
+                    trước</small></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!--Ảnh tiếp theo-->
+
+          <div class="card mb-3 border shadow-lg">
+            <div class="row g-0">
+              <div class="col-md-1" style="text-align: center">
+                <input style="margin-top: 212%" type="checkbox" value=3239000>
+              </div>
+              <div class="col-md-4 mt-2">
+                <img src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/80105a68-30e9-4108-8e18-f3825e6bbe2d/air-force-1-07-se-shoes-QVPN01.png"
+                     class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+
+                  <h5 class="card-title text-orange fw-bold">Nike Air Max 90 G Golf Shoes
+                    White</h5>
+                  <p class="card-text">Celebrating 40 years of pushing sport and fashion
+                    boundaries,
+                    this commemorative AF-1 mixes elements from beloved launches to highlight
+                    the
+                    timeless design's place in sneaker history. Happy anniversary!<br>
+                    <strong>Colour Shown:</strong> Team Orange<br>
+                    <strong>Style:</strong> DQ7582-700</p>
+
+
+                  <div class="clearfix">
+                    <h6 class="col-5 float-start"><span class="text-orange">Số lượng:</span> x1
+                    </h6>
+                    <h6 class="col-5 float-end price">&#8363;3,239,000</h6>
+                  </div>
+
+
+                  <small class="col-12 card-text text-muted">Cập nhật lần cuối 3 phút
+                    trước</small>
+
+
+                </div>
+              </div>
+            </div>
+
+            <!--hết ảnh-->
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-5 left-side">
+      <table class="table table-borderless">
+        <thead>
+        <tr>
+          <td>
+            <span class="text-orange h4"> <i class="fa-solid fa-note-sticky"></i> Tóm tắt </span>
+          </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Tổng tiền hàng</td>
+          <td class="text-end text-orange fw-bolder" id="total">0
+          </td>
+        </tr>
+        <tr>
+          <td>Giao hàng</td>
+          <td class="text-end text-orange fw-bolder" id="shipping">0</td>
+
+        </tr>
+        <tr>
+          <td>Tổng</td>
+          <td class="text-end text-orange fw-bolder fs-5"><span class="fs-6">&#8363;</span><span id="totalPrice"></span></td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="row px-3">
+        <button type="button" class="btn bg-orange text-light btn-lg" (click)="sendId()">Thanh toán ngay</button>
+      </div>
+      <div class="row pt-3">
+        <span class=" px-3"><i class="fa-solid fa-truck text-orange"></i><span class="text-muted"> Giao hàng toàn quốc | từ &#8363;49,000 </span></span>
+      </div>
+      <div class="row pt-3 d-inline-block">
+        <img style="width: 15%; border-radius: 50%"
+             src="https://nganhangaz.com/wp-content/uploads/2022/01/vietcombank-logo.png">
+        <img style="width: 15%; border-radius: 50%"
+             src="https://developers.momo.vn/v3/assets/images/circle-logo-custom-16cb24e3ed26349c467cb2e932000fde.png">
+        <img style="width: 15%; border-radius: 50%"
+             src="https://cdn-icons-png.flaticon.com/512/1377/1377239.png">
+      </div>
+      <div class="row pt-3 pb-3">
+        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/2bbcfa99737217.5ef9be3dbb9a9.jpg">
+      </div>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col-lg-4">
+      <div class="h5">Khi nào chúng tôi được nhận hàng?</div>
+      <div class="text-muted">Trong vòng 1-3 ngày làm việc</div>
+    </div>
+    <div class="col-lg-4">
+      <div class="h5">Điều khoản hoàn trả là gì?</div>
+      <div class="text-muted">Nếu bạn không hài lòng với kiện hàng, bạn có thể hoàn lại trong vòng 30 ngày</div>
+    </div>
+    <div class="col-lg-4">
+      <div class="h5">Thay đổi đơn hàng?</div>
+      <div class="text-muted">Gọi cho chúng tôi theo số (028)-362-222-222</div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  let totalPrice = 0;
+  let total = 0;
+  let shipping =0;
+  $("#checkAll").change(function () {
+    if(this.checked === true && $('input:checkbox').not(this).prop('checked') === false ){
+      $('input:checkbox').not(this).click();
+
+    }
+    if(this.checked === false && $('input:checkbox').not(this).prop('checked') === true ){
+      $('input:checkbox').not(this).click();
+    }
+
+
+    // $('input:checkbox').not(this).prop('checked', this.checked);
+
+
+  });
+
+  $("input[type='checkbox']").change(function () {
+
+    if (this.checked === true) {
+      totalPrice = totalPrice +parseInt(this.value);
+    }
+    if (this.checked === false) {
+      totalPrice = totalPrice - this.value;
+    }
+    let nfObject = new Intl.NumberFormat('en-US');
+
+    if(totalPrice ===0){
+      total = 0;
+      shipping = 0;
+    }else {
+      total = totalPrice + 50000;
+      shipping = 50000;
+    }
+    let output = nfObject.format(totalPrice);
+    let output1 = nfObject.format(total);
+    let output2 = nfObject.format(shipping);
+    $('#total').text(output);
+    $('#totalPrice').text(output1);
+    $('#shipping').text(output2);
+  })
+
+
+
+
+</script>
