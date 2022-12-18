@@ -5,9 +5,8 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../service/security/auth.service";
 import {TokenService} from "../../service/security/token.service";
 import {MessageRespone} from "../../model/security/message-respone";
-// @ts-ignore
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
 import {Googletoken} from "../oauth2/googletoken";
+import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 
 @Component({
   selector: 'app-login',
@@ -20,12 +19,12 @@ export class LoginComponent implements OnInit {
   socialUser: SocialUser;
 
   constructor(
-    private authSocialService: SocialAuthService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
     private authService: AuthService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private socialAuthService: SocialAuthService
   ) {
   }
 
@@ -44,7 +43,7 @@ export class LoginComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(5)]],
       rememberMe: [false]
-    })
+    });
   }
 
   /**
@@ -63,12 +62,12 @@ export class LoginComponent implements OnInit {
           this.tokenService.setAccountSession(data.account);
           this.tokenService.setTokenSession(data.token);
           this.tokenService.setUserSession(data.user);
-          this.tokenService.setRoleSession(data.roles)
+          this.tokenService.setRoleSession(data.roles);
         }
 
         this.router.navigate(['/home']).then(() => {
           location.reload();
-        })
+        });
 
       }
     }, error => {
@@ -81,8 +80,8 @@ export class LoginComponent implements OnInit {
       } else {
         this.toastr.error('Đăng nhập thất bại');
         this.router.navigateByUrl('/login');
+        console.log('Đăng nhập thất bại');
       }
-
     })
   }
 
@@ -93,7 +92,7 @@ export class LoginComponent implements OnInit {
    */
 
   loginWithGoogle() {
-    this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
       this.socialUser = data;
 
       const googleToken = new Googletoken(this.socialUser.idToken);
@@ -103,7 +102,7 @@ export class LoginComponent implements OnInit {
         if (req.token == null) {
           const emailToRegister = req.email;
 
-          this.router.navigateByUrl('/registerWithGoogle/' + emailToRegister)
+          this.router.navigateByUrl('/registerWithGoogle/' + emailToRegister);
 
         } else {
 
@@ -114,11 +113,11 @@ export class LoginComponent implements OnInit {
 
           this.router.navigate(['/home']).then(() => {
             location.reload();
-          })
+          });
 
         }
-      })
-    })
+      });
+    });
   }
 
 
