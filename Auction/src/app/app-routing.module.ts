@@ -46,20 +46,15 @@ const routes: Routes = [
     component: GuideListComponent
   },
   {
-    path: "auction/:productId", component: AuctionProductDetailComponent,
-
-
-  }, {path: 'login', component: LoginComponent},
+    path: "auction/:productId", component: AuctionProductDetailComponent},
   {
     path:"user/create",component:UserCreateComponent
   },
   {
     path:'user/update/:id', component: UserUpdateComponent
-  }
-
-  },  {path: 'login', component: LoginComponent},
+  },  
+  {path: 'login', component: LoginComponent},
   {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
-
 ];
 
 @NgModule({
