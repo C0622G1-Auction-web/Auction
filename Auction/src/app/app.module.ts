@@ -45,6 +45,8 @@ import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-logi
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { ChatUserComponent } from './component/chat/chat-user/chat-user.component';
+import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.component';
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -87,7 +89,8 @@ const googleLoginOptions = {
     TransactionComponent,
     PaymentReceiptComponent,
     TransactionComponent,
-
+    ChatUserComponent,
+    ChatAdminComponent
   ],
   imports: [
     BrowserModule,

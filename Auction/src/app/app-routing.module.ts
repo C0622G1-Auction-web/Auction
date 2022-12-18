@@ -13,6 +13,10 @@ import {UserEditComponent} from './component/user/user-edit/user-edit.component'
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
 import {LoginComponent} from "./component/security/login/login.component";
+import {GuideAddComponent} from "./component/guide/guide-add/guide-add.component";
+import {GuideEditComponent} from "./component/guide/guide-edit/guide-edit.component";
+import {ChatUserComponent} from "./component/chat/chat-user/chat-user.component";
+import {ChatAdminComponent} from "./component/chat/chat-admin/chat-admin.component";
 
 const routes: Routes = [
   {
@@ -60,9 +64,36 @@ const routes: Routes = [
 
   {
     path: 'methodPayment', component: MethodPaymentComponent
-  }, {path: 'login', component: LoginComponent}
+  }, {path: 'login', component: LoginComponent},
+{
+  path: 'product/add',
+  component: ProductAddComponent
+},
+  {
+  path: 'guide',
+  component: GuideListComponent
+},
+  {
+    path: 'guide/edit/:id',
+    component: GuideEditComponent
+  },
+  {
+    path:'guide/add',
+    component:GuideAddComponent
+  },
+  {
+    path: "auction/:productId", component: AuctionProductDetailComponent,
 
-];
+  },
+  {
+    path:'auction/chat/user',
+    component: ChatUserComponent
+  },
+  {
+    path:'auction/chat/support',
+    component: ChatAdminComponent
+  }];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

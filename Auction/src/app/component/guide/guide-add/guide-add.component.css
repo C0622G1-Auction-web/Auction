@@ -21,3 +21,16 @@ form label {
 #guideform {
   padding: 32px;
 }
+.remove_img {
+  padding: 3px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  box-shadow: 1px, 1px, 4px, rgba(0, 0, 0, 0.35);
+  display: block;
+  background-color: #ff0000a6;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+}
