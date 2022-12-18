@@ -21,4 +21,11 @@ export class UserService {
   findUserById(userId: number): Observable<User> {
     return this.httpClient.get<User>(environment.userUrl + userId)
   }
+
+  createUser(user: User): Observable<User> {
+    console.log(user)
+    return this.httpClient.post<User>(environment.uri_api_create_user_v1_user, user);
+  }
+
+
 }

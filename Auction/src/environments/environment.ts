@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-
   api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
   api_url_list_category: 'http://localhost:8080/api/v1/category',
   api_url_list_user: 'http://localhost:8080/api/v1/users',
@@ -17,7 +16,9 @@ export const environment = {
   productSearchUrl: "http://localhost:8080/api/v1/products/search",
   userUrl: "http://localhost:8080/api/user/v1/",
   LOGIN_API: 'http://localhost:8080/api/auth/login',
-  GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google'
+  GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
+  DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
+  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create"
 }
 
 /*

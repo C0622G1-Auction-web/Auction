@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./security/login/login.component";
 import {RegisterWithGoogleComponent} from "./security/register-with-google/register-with-google.component";
 import {GuideListComponent} from "./component/guide/guide-list/guide-list.component";
@@ -21,10 +21,10 @@ const routes: Routes = [
     component: ProductEditComponent
   },
 
-  {path:"aa", component: TransactionComponent},
+  {path: "aa", component: TransactionComponent},
 
   {
-    path:"home",
+    path: "home",
     component: HomeComponent
 
   },
@@ -36,23 +36,24 @@ const routes: Routes = [
     path: "user/edit",
     component: UserEditComponent
   },
-{
-  path: 'product/add',
-  component: ProductAddComponent
-}, {
-  path: 'guide',
-  component: GuideListComponent
-},
+  {
+    path: 'product/add',
+    component: ProductAddComponent
+  }, {
+    path: 'guide',
+    component: GuideListComponent
+  },
   {
     path: "auction/:productId", component: AuctionProductDetailComponent,
 
-  },  {path: 'login', component: LoginComponent},
+  },
+  {path: 'login', component: LoginComponent},
   {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

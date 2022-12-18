@@ -14,5 +14,4 @@ export interface User {
   address:Address,
   userType:UserType,
   account: Account,
-
 }
