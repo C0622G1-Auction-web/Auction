@@ -2,20 +2,16 @@ import {Address} from "./address";
 import {UserType} from "./user-type";
 
 export interface User {
-  id?:number,
-  firstName?:string,
-  lastName?:string,
-  email?:string,
-  phone?:string,
-  pointDedication?:number,
-  birthDay?:string,
-  idCard?:string,
-  avatar?:string,
-  address:Address,
-  userType:UserType,
-<<<<<<< HEAD
-  account: Account,
-=======
-  account: Account
->>>>>>> e3955969c41569e67c8837a1bff7dea6c49eaabc
+  id?:number;
+  firstName?:string;
+  lastName?:string;
+  email?:string;
+  phone?:string;
+  pointDedication?:number;
+  birthDay?:string;
+  idCard?:string;
+  avatar?:string;
+  address:Address;
+  userType:UserType;
+  account: Account;
 }
