@@ -13,5 +13,9 @@ export interface User {
   avatar?:string,
   address:Address,
   userType:UserType,
+<<<<<<< HEAD
   account: Account,
+=======
+  account: Account
+>>>>>>> e3955969c41569e67c8837a1bff7dea6c49eaabc
 }

@@ -17,8 +17,12 @@ export const environment = {
   userUrl: "http://localhost:8080/api/user/v1/",
   LOGIN_API: 'http://localhost:8080/api/auth/login',
   GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
+<<<<<<< HEAD
   DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
   uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create"
+=======
+  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create",
+>>>>>>> e3955969c41569e67c8837a1bff7dea6c49eaabc
 }
 
 /*

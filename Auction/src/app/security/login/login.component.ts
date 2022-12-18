@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
@@ -80,7 +80,10 @@ export class LoginComponent implements OnInit {
       } else {
         this.toastr.error('Đăng nhập thất bại');
         this.router.navigateByUrl('/login');
+<<<<<<< HEAD
         console.log('Đăng nhập thất bại');
+=======
+>>>>>>> e3955969c41569e67c8837a1bff7dea6c49eaabc
       }
 
     })
