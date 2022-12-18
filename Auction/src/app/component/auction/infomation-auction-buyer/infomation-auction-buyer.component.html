@@ -5,6 +5,7 @@
       <table class="table" style="font-size: 14px">
         <thead class="table-light">
         <tr class="border-top">
+          <th>STT</th>
           <th>Số Tiền</th>
           <th class="text-center">Thời Gian</th>
           <th>Thành Viên</th>
@@ -13,6 +14,7 @@
 
         <tbody *ngIf="auctionPageByProductId">
         <tr *ngFor="let item of auctionPageByProductId.content; let i = index">
+          <td>{{i+1}}</td>
           <td>{{item.currentPrice}}</td>
           <td class="text-center">{{item.auctionTime}}</td>
           <td>{{item.fullName |titlecase}}</td>
@@ -21,18 +23,22 @@
       </table>
       <div class="d-flex justify-content-center">
         <nav aria-label="Page navigation example" class="d-flex justify-content-end">
-          <ul class="pagination" *ngIf="auctionPageByProductId">
-            <li class="page-item pointer" [ngClass]="auctionPageByProductId.number == 0 ? 'disabled': ''">
-              <span class="page-link" (click)="goToPage(auctionPageByProductId.number - 1)">Trước</span>
+          <ul class="my__pagination" *ngIf="auctionPageByProductId">
+            <li class="my__page-item pointer" [ngClass]="auctionPageByProductId.number == 0 ? 'disabled': ''">
+              <span class="page-link" (click)="goToPage(auctionPageByProductId.number - 1)">
+                Trước
+              </span>
             </li>
-            <li class="page-item pointer"
+            <li class="my__page-item pointer"
                 *ngFor="let pageNumber of [].constructor(auctionPageByProductId.totalPages), let i = index"
-                [ngClass]="auctionPageByProductId.number == i ?'active': ''">
-              <span class="page-link" (click)="goToPage(i)">{{i + 1}}</span>
+                [ngClass]="auctionPageByProductId.number == i ?'actived': ''">
+              <span class="my__page-link" (click)="goToPage(i)">{{i + 1}}</span>
             </li>
-            <li class="page-item pointer"
+            <li class="my__page-item pointer"
                 [ngClass]="auctionPageByProductId.number + 1 == auctionPageByProductId.totalPages ? 'disabled': ''">
-              <span class="page-link" (click)="goToPage(auctionPageByProductId.number + 1)">Sau</span>
+              <span class="page-link" (click)="goToPage(auctionPageByProductId.number + 1)">
+                Sau
+              </span>
             </li>
           </ul>
         </nav>
