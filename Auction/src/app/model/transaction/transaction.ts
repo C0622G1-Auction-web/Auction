@@ -1,11 +1,10 @@
-import {User} from "../user/user";
-import {Product} from "../product/product";
-import {Auction} from "../auction/auction";
-
 export interface TransactionAuction {
   id?: number;
+  currentPrice?: number;
+  auctionStatus?: boolean;
   deleteStatus?: boolean;
-  auction?: Auction;
-  user?: User;
-  product?: Product;
+  auctionDay?: string;
+  productName?: string;
+  userPost?: string;
+  userBuying?: string;
 }

@@ -27,9 +27,12 @@ export const environment = {
   api_url_list_img_url: 'http://localhost:8080/api/v1/users/{id}',
   API_URL_AUCTION: 'http://localhost:8080/auction/api',
   api_url_order_status: 'http://localhost:8080/api/v1/payments',
+  transactionDeleteUrl: 'http://localhost:8080/api/v1/auction/delete',
+  transactionFindByListIdUrl: 'http://localhost:8080/api/v1/auction/find-by-list-id',
   api_url_userType: "http://localhost:8080/api/v1/users/usersType",
   productUrl: 'http://localhost:8080/api/v1/products',
   imageUrl: 'http://localhost:8080/api/v1/products/img'
+
 };
 
 /*
