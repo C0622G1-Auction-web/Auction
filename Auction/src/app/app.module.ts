@@ -46,7 +46,6 @@ const googleLoginOptions = {
   plugin_name: 'login'
 };
 
-// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +91,8 @@ const googleLoginOptions = {
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [
     {
