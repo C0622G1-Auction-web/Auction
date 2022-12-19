@@ -20,7 +20,11 @@ export const environment = {
   api_url_list_auction_status: 'http://localhost:8080/api/v1/product-properties/auction-status',
   api_url_search_by_list_id: 'http://localhost:8080/api/v1/products/find-by-list-id',
   api_url_remove_products: 'http://localhost:8080/api/v1/products/remove',
-
+  api_url_find_by_id: 'http://localhost:8080/api/v1/products/find-by-id/',
+  api_url_review_product: 'http://localhost:8080/api/v1/products/review/',
+  api_url_write_reason: 'http://localhost:8080/api/v1/products/reason',
+  api_url_get_reason: 'http://localhost:8080/api/v1/products/reason/',
+  api_url_do_not_review_product: 'http://localhost:8080/api/v1/products/do-not-review/',
 
 };
 

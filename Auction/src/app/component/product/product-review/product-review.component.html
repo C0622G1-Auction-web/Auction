@@ -1,1 +1,140 @@
-<p>product-detail works!</p>
+<div class="container">
+  <div class="borderFull">
+    <div class="row">
+      <div class="register">
+        <div class="container">
+          <div class="row text-center">
+            <h1>Duyệt sản phẩm</h1>
+          </div>
+          <div class="row" *ngIf="product">
+            <div class="col-6">
+              <div class="row" id="img-col">
+                <div class="col-lg-12 d-flex justify-content-center align-items-center">
+                  <div class="mt-2 card card-body w-50" style="border: solid; color: green">
+                    <div id="carouselExampleIndicators" class="carousel slide"
+                         data-bs-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img
+                            src="https://salt.tikicdn.com/cache/750x750/ts/product/89/ac/93/d231600d5b276a7d3027050df14d509c.jpg.webp"
+                            class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                          <img
+                            src="https://salt.tikicdn.com/cache/750x750/ts/product/59/ef/44/653f387974a68b7b0ec7740201343ee9.jpg.webp"
+                            class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                          <img
+                            src="https://salt.tikicdn.com/cache/750x750/ts/product/36/ca/54/3997ea540afb84fb3db6b136f336ab0b.jpg.webp"
+                            class="d-block w-100" alt="...">
+                        </div>
+                      </div>
+                      <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide-to="0"
+                                class="active thumbnail" aria-current="true"
+                                aria-label="Slide 1">
+                          <img
+                            src="https://salt.tikicdn.com/cache/750x750/ts/product/89/ac/93/d231600d5b276a7d3027050df14d509c.jpg.webp"
+                            class="d-block w-100" alt="...">
+                        </button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide-to="1"
+                                class="thumbnail" aria-label="Slide 2">
+                          <img
+                            src="https://salt.tikicdn.com/cache/750x750/ts/product/59/ef/44/653f387974a68b7b0ec7740201343ee9.jpg.webp"
+                            class="d-block w-100" alt="...">
+                        </button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide-to="2"
+                                class="thumbnail" aria-label="Slide 3">
+                          <img
+                            src="https://salt.tikicdn.com/cache/750x750/ts/product/36/ca/54/3997ea540afb84fb3db6b136f336ab0b.jpg.webp"
+                            class="d-block w-100" alt="...">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="container-fluid">
+                <div class="row mt-4">
+                  <table id="customer_table" class="table table-striped table-bordered">
+                    <tr>
+                      <td width="28%">Tên sản phẩm</td>
+                      <td width="72%">{{product.name}}</td>
+                    </tr>
+                    <tr>
+                      <td>Thông tin người đăng</td>
+                      <td>
+                        Id: {{product.userId}}<br>
+                        Tên đầy đủ: {{product.userName}}<br>
+                        Email: {{product.userName}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Chủng loại</td>
+                      <td>{{product.category}}</td>
+                    </tr>
+                    <tr>
+                      <td>Giá ban đầu</td>
+                      <td>{{product.initialPrice}}</td>
+                    </tr>
+                    <tr>
+                      <td>Bước giá</td>
+                      <td>{{product.priceStep}}</td>
+                    </tr>
+                    <tr>
+                      <td>Bắt đầu đấu giá</td>
+                      <td>{{product.startTime}}</td>
+                    </tr>
+                    <tr>
+                      <td>Kết thúc đấu giá</td>
+                      <td>{{product.endTime}}</td>
+                    </tr>
+                    <tr>
+                      <td>Thông tin chi tiết</td>
+                      <td>{{product.description}}
+                      </td>
+                    </tr>
+                    <tr *ngIf="invalidProduct">
+                      <td>Lý do khoá</td>
+                      <td><input type="text" class="form-control" [(ngModel)]="reason.reason"
+                      [disabled]="product.reviewStatusId == 3">
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="row" id="review-btns">
+                <div class="col-4">
+                  <a *ngIf="product.reviewStatusId == 1"
+                     (click)="review()" class="btn btn-success" role="button" style="width: 140px">
+                    <i class="fa-solid fa-check"></i> Duyệt
+                  </a>
+                </div>
+                <div class="col-4">
+                  <button *ngIf="product.reviewStatusId == 1"
+                     (click)="doNotReview()" class="btn btn-warning" role="button" style="width: 140px"
+                  [disabled]="invalidProduct && reason.reason.length == 0">
+                    <i class="fa-solid fa-xmark"></i> Không duyệt
+                  </button>
+                </div>
+                <div class="col-4">
+                  <a routerLink="/products" class="btn btn-secondary" role="button"
+                     style="width: 140px">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> Quay lại
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

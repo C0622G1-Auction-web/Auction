@@ -10,6 +10,7 @@ import {PriceRangeService} from '../../../service/product/price-range.service';
 import {AuctionStatusService} from '../../../service/product/auction-status.service';
 import {AuctionStatus} from '../../../model/product/auction-status';
 import {ProductDelete} from '../../../model/product/product-delete';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-list-products',
@@ -38,7 +39,8 @@ export class ListProductsComponent implements OnInit {
               private _formBuilder: FormBuilder,
               private _categoryService: CategoryService,
               private _auctionStatusService: AuctionStatusService,
-              private _priceRangeService: PriceRangeService) {
+              private _priceRangeService: PriceRangeService,
+              private _activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {

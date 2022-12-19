@@ -144,7 +144,8 @@
           <tr *ngFor="let item of pageProducts.content; index as i ">
             <td>{{pageProducts.size * pageProducts.number + i + 1}}</td>
             <td>{{item.id}}</td>
-            <td><a type="button" class="view" data-bs-toggle="modal" href="#" data-bs-target="#reviewModal">
+            <td><a type="button" class="view"
+                   [routerLink]="item.reviewStatusId == 2 ? ['/auction/',item.id] :['/products/review/',item.id]">
               <span class="text-decoration-underline">{{item.name}}</span></a>
             </td>
             <td>{{item.category}}</td>
@@ -162,7 +163,7 @@
           </tr>
           </tbody>
         </table>
-        <h3 id="null-result-noti">Không tìm thấy kết quả phù hợp</h3>
+        <h3 *ngIf="pageProducts == null" id="null-result-noti">Không tìm thấy kết quả phù hợp</h3>
         <!--            Phân trang-->
         <div class="d-flex justify-content-between">
           <div>
@@ -224,7 +225,8 @@
         <div class="modal-footer">
           <button id="deleteCancel" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ bỏ</button>
           <button id="deleteAccept" class="btn btn-warning" data-bs-dismiss="modal"
-          (click)="delete()">Xác nhận</button>
+                  (click)="delete()">Xác nhận
+          </button>
         </div>
       </div>
     </div>

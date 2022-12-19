@@ -9,12 +9,17 @@ import {HomeComponent} from './component/home/home.component';
 import {UserListComponent} from './component/user/user-list/user-list.component';
 import {UserEditComponent} from './component/user/user-edit/user-edit.component';
 import {ListProductsComponent} from './component/product/list-products/list-products.component';
+import {ProductReviewComponent} from './component/product/product-review/product-review.component';
 
 const routes: Routes = [
 
   {
     path: 'products',
     component: ListProductsComponent,
+  },
+  {
+    path: 'products/review/:id',
+    component: ProductReviewComponent,
   },
   {
     path: 'product/create',

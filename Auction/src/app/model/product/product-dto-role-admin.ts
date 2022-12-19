@@ -13,8 +13,11 @@ export interface ProductDtoRoleAdmin {
   endTime?: string;
   priceStep?: string;
   reviewStatus?: string;
+  reviewStatusId?: number;
   auctionStatus?: string;
   category?: string;
   registerDay?: string;
   userName?: string;
+  userId?: number;
+  userEmail?: string;
 }

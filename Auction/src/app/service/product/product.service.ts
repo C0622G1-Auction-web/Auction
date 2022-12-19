@@ -12,6 +12,8 @@ import {ProductDto} from '../../model/product/iProduct_dto';
 import {ReviewStatus} from '../../model/product/review-status';
 import {PageProduct} from '../../model/product/page-product';
 import {ProductDelete} from '../../model/product/product-delete';
+import {ProductDtoRoleAdmin} from '../../model/product/product-dto-role-admin';
+import {Reason} from '../../model/product/reason';
 
 @Injectable({
   providedIn: 'root'
@@ -86,7 +88,59 @@ export class ProductService {
     return this._httpClient.post<ProductDelete[]>(environment.api_url_search_by_list_id, deleteIds);
   }
 
+  /**
+   * Created: GiangLBH
+   * Function: delete product by selected ids
+   * Date: 15/11/2022
+   */
   delete(deleteIds: number[]): Observable<any> {
     return this._httpClient.post<any>(environment.api_url_remove_products, deleteIds);
   }
+
+  /**
+   * Created: GiangLBH
+   * Function: find product by selected ids
+   * Date: 15/11/2022
+   */
+  findById(id: number): Observable<ProductDtoRoleAdmin> {
+    return this._httpClient.get<ProductDtoRoleAdmin>(environment.api_url_find_by_id + id);
+  }
+
+  /**
+   * Created: GiangLBH
+   * Function: review product
+   * Date: 15/11/2022
+   */
+  review(id: number): Observable<any> {
+    return this._httpClient.get<any>(environment.api_url_review_product + id);
+  }
+
+  /**
+   * Created: GiangLBH
+   * Function: do not review product
+   * Date: 15/11/2022
+   */
+  doNotReview(id: number): Observable<any> {
+    return this._httpClient.get<any>(environment.api_url_do_not_review_product + id);
+  }
+
+  /**
+   * Created: GiangLBH
+   * Function: writeReason
+   * Date: 15/11/2022
+   */
+  writeReason(reason: Reason): Observable<any> {
+    return this._httpClient.post<any>(environment.api_url_write_reason, reason);
+  }
+
+  /**
+   * Created: GiangLBH
+   * Function: get Reason
+   * Date: 15/11/2022
+   */
+  getReason(id: number): Observable<Reason> {
+    return this._httpClient.get<Reason>(environment.api_url_get_reason + id);
+  }
+
+
 }
