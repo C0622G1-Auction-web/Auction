@@ -11,11 +11,16 @@ import {UserEditComponent} from './component/user/user-edit/user-edit.component'
 import {UserAddComponent} from './component/user/user-add/user-add.component';
 import {LockaccountUserComponent} from './component/user/lockaccount-user/lockaccount-user.component';
 import {ListProductsComponent} from './component/product/list-products/list-products.component';
+import {ProductReviewComponent} from './component/product/product-review/product-review.component';
 
 const routes: Routes = [
   {
     path: 'products',
     component: ListProductsComponent,
+  },
+  {
+    path: 'products/review/:id',
+    component: ProductReviewComponent,
   },
   {
     path: 'product/create',
