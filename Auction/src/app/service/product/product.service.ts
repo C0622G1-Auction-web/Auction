@@ -36,7 +36,7 @@ export class ProductService {
     return this._httpClient.get<ImgUrlProduct[]>(environment.api_url_list_img_url);
   }
 
-  save(product: Product): Observable<Product> {
+  save(product: ProductDto): Observable<Product> {
     return this._httpClient.post<Product>('http://localhost:8080/api/v1/products/create', product);
   }
   private API_URL = '  http://localhost:8080/';

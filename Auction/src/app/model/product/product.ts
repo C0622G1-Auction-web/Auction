@@ -16,7 +16,13 @@ export interface Product {
   reviewStatus?: ReviewStatus;
   auctionStatus?: AuctionStatus;
   category?: Category;
+  maxCurrentPrice?: number;
+  imgs?: any;
   registerDay?: string;
-  imgUrlProduct?: ImgUrlProduct;
   user?: User;
+  nameProduct: String;
+  RegisterDay: String;
+  Review: String;
+  IsDelete: String;
+  imgUrlProducts?: ImgUrlProduct;
 }

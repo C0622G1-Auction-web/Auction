@@ -38,14 +38,17 @@ import { MethodPaymentComponent } from './component/payment/method-payment/metho
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
 import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AuctionProductAddComponent } from './component/auction/auction-product-add/auction-product-add.component';
+import { LoginComponent } from './component/security/login/login.component';
+import { ChatUserComponent } from './component/chat/chat-user/chat-user.component';
+import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
-import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/storage";
-import {AngularFireModule} from "@angular/fire";
-import {environment} from "../environments/environment";
 import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
-import {LoginComponent} from "./security/login/login.component";
 
 
 const googleLoginOptions = {
@@ -90,6 +93,11 @@ const googleLoginOptions = {
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent,
+    AuctionProductAddComponent,
+    PaymentReceiptComponent,
+    TransactionComponent,
+    ChatUserComponent,
+    ChatAdminComponent,
     UserCreateComponent,
     UserUpdateComponent,
     UserCreateComponent
