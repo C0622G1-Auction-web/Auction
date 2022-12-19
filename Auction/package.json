@@ -15,14 +15,18 @@
     "@angular/common": "~9.0.7",
     "@angular/compiler": "~9.0.7",
     "@angular/core": "~9.0.7",
-    "@angular/fire": "^6.0.4",
+    "@angular/fire": "^6.1.5",
     "@angular/forms": "~9.0.7",
     "@angular/platform-browser": "~9.0.7",
     "@angular/platform-browser-dynamic": "~9.0.7",
     "@angular/router": "~9.0.7",
+<<<<<<< HEAD
     "@nrwl/angular": "^15.3.3",
     "@stomp/stompjs": "^6.1.2",
     "angularx-social-login": "^3.0.0",
+=======
+    "angularx-social-login": "^3.5.7",
+>>>>>>> f4f689efca083ce6b451b5211af36ead99819b55
     "creditcardpayments": "^1.0.3",
     "firebase": "^8.10.1",
     "html2canvas": "^1.4.1",

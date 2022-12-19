@@ -3,8 +3,11 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
+<<<<<<< HEAD
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToastrModule} from 'ngx-toastr';
+=======
+>>>>>>> f4f689efca083ce6b451b5211af36ead99819b55
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
@@ -22,6 +25,9 @@ import {GuideListComponent} from './component/guide/guide-list/guide-list.compon
 import {HomeComponent} from './component/home/home.component';
 import {LoginComponent} from './component/security/login/login.component';
 import {RegisterComponent} from './component/security/register/register.component';
+import {RegisterComponent} from './security/register/register.component';
+import {ResetPasswordComponent} from './security/reset-password/reset-password.component';
+>>>>>>> f4f689efca083ce6b451b5211af36ead99819b55
 import {AuctionRequestComponent} from './component/auction-request/auction-request.component';
 import {ProductDetailComponent} from './component/product/product-detail/product-detail.component';
 import {VerificationComponent} from './component/security/verification/verification.component';
@@ -45,6 +51,14 @@ import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-logi
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
+import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFireModule} from "@angular/fire";
+import {environment} from "../environments/environment";
+import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
+import {UserCreateComponent} from "./component/user/user-create/user-create.component";
+import {LoginComponent} from "./security/login/login.component";
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -74,6 +88,8 @@ const googleLoginOptions = {
     ProductDetailComponent,
     ProductAddComponent,
     VerificationComponent,
+    VerifyResetPasswordComponent,
+    RegisterWithGoogleComponent,
     AuctionComponent,
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
@@ -87,18 +103,23 @@ const googleLoginOptions = {
     TransactionComponent,
     PaymentReceiptComponent,
     TransactionComponent,
-
+    UserCreateComponent,
+    UserUpdateComponent,
+    UserCreateComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AppRoutingModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    SocialLoginModule
   ],
   providers: [
     {

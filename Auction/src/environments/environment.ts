@@ -21,6 +21,7 @@ export const environment = {
   api_url_list_img_url: 'http://localhost:8080/api/v1/users/{id}',
   // API_URL_AUCTION: 'http://localhost:8080/auction/api',
   api_url_order_status: 'http://localhost:8080/api/v1/payments',
+<<<<<<< HEAD
   categoryUrl: 'http://localhost:8080/api/v1/products/category',
   priceStepUrl: 'http://localhost:8080/api/v1/products/priceStep',
   transactionUrl: 'http://localhost:8080/auction/api/transaction',
@@ -30,6 +31,29 @@ export const environment = {
   GOOGLE_SIGN_IN_API: 'http://localhost:8080/api/v1/auth/google',
   uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create",
 };
+=======
+  categoryUrl: "http://localhost:8080/api/v1/products/category",
+  priceStepUrl: "http://localhost:8080/api/v1/products/priceStep",
+  transactionUrl: "http://localhost:8080/auction/api/transaction",
+  productSearchUrl: "http://localhost:8080/api/v1/products/search",
+  userUrl: "http://localhost:8080/api/user/v1/",
+  uri_api_create_user_v1_user: "http://localhost:8080/api/v1/users/create",
+  uri_api_update_user_v1_user: "http://localhost:8080/api/v1/users/update",
+  uri_api_find_by_id_user_v1_user: "http://localhost:8080/api/v1/users/find/",
+  firebaseConfig: {
+    apiKey: "AIzaSyDRWAv_6CkY0N5ocqceEDbh5gc2UankMXo",
+    authDomain: "truonglh-68106.firebaseapp.com",
+    projectId: "truonglh-68106",
+    storageBucket: "truonglh-68106.appspot.com",
+    messagingSenderId: "680493532790",
+    appId: "1:680493532790:web:4d7b3923a9e9d4f00ac157",
+    measurementId: "G-YRDCYMF4H9"
+  },
+  LOGIN_API: 'http://localhost:8080/api/auth/login',
+  GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
+  DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
+  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create"
+>>>>>>> f4f689efca083ce6b451b5211af36ead99819b55
 
 /*
  * For easier debugging in development mode, you can import the following file
