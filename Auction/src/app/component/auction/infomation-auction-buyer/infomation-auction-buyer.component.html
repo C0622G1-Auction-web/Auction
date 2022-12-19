@@ -1,7 +1,8 @@
+<button hidden (click)="ngOnInit()" id="auto-reload">Auto Reload</button>
 <div>
   <div>
     <div>
-      <table class="table" style="font-size: 14px">
+      <table class="table" style="font-size: 12px">
         <thead class="table-light">
         <tr class="border-top">
           <th>STT</th>
@@ -10,39 +11,31 @@
           <th>Thành Viên</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-          <td>1</td>
-          <td>190.000</td>
-          <td>10:00:00 22/12/2022</td>
-          <td>sangdd123</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>180.000</td>
-          <td>09:00:00 22/12/2022</td>
-          <td>quangnd12</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>150.000</td>
-          <td>08:00:00 22/12/2022</td>
-          <td>tienbm123</td>
+
+        <tbody *ngIf="auctionPageByProductId">
+        <tr *ngFor="let item of auctionPageByProductId.content; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{item.currentPrice}}</td>
+          <td>{{item.auctionTime}}</td>
+          <td>{{item.fullName}}</td>
         </tr>
         </tbody>
       </table>
       <div class="d-flex justify-content-center">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-              <a class="page-link">Trước</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Sau</a>
-            </li>
+        <nav aria-label="Page navigation example" class="d-flex justify-content-end">
+          <ul class="pagination" *ngIf="auctionPageByProductId">
+<!--            <li class="page-item pointer" [ngClass]="auctionPageByProductId.number == 0 ? 'disabled': ''">-->
+              <span class="page-link" (click)="goToPage(auctionPageByProductId.number - 1)">Previous</span>
+<!--            </li>-->
+<!--            <li class="page-item pointer"-->
+                *ngFor="let pageNumber of [].constructor(auctionPageByProductId.totalPages), let i = index"
+                [ngClass]="auctionPageByProductId.number == i ?'active': ''">
+<!--              <span class="page-link" (click)="goToPage(i)">{{i + 1}}</span>-->
+<!--            </li>-->
+<!--            <li class="page-item pointer"-->
+                [ngClass]="auctionPageByProductId.number + 1 == auctionPageByProductId.totalPages ? 'disabled': ''">
+              <span class="page-link" (click)="goToPage(auctionPageByProductId.number + 1)">Next</span>
+<!--            </li>-->
           </ul>
         </nav>
       </div>

@@ -27,16 +27,27 @@ import {AuctionRequestComponent} from './component/auction-request/auction-reque
 import {ProductDetailComponent} from './component/product/product-detail/product-detail.component';
 import {VerificationComponent} from './component/security/verification/verification.component';
 import {AuctionComponent} from './component/auction/auction.component';
-import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
-import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
+import {
+  AuctionProductDetailComponent
+} from './component/auction/auction-product-detail/auction-product-detail.component';
+import {
+  InfomationAuctionBuyerComponent
+} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
+import {AccountResetPassComponent} from './component/security/account-reset-pass/account-reset-pass.component';
+
+import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
+import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
+import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
+import {TransactionComponent} from './component/transaction/transaction.component';
+
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
-import { PaymentCartComponent } from './component/payment/payment-cart/payment-cart.component';
-import { AccountForgotPassComponent } from './component/security/account-forgot-pass/account-forgot-pass.component';
-import { AccountResetPassComponent } from './component/security/account-reset-pass/account-reset-pass.component';
-import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
-import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
-import { PaymentReceiptComponent } from './component/payment/payment-receipt/payment-receipt.component';
-import { TransactionComponent } from './component/transaction/transaction.component';
+import {PaymentCartComponent} from './component/payment/payment-cart/payment-cart.component';
+import {AccountForgotPassComponent} from './component/security/account-forgot-pass/account-forgot-pass.component';
+
+const googleLoginOptions = {
+  scope: 'profile email',
+  plugin_name: 'login'
+};
 
 @NgModule({
   declarations: [
@@ -71,19 +82,37 @@ import { TransactionComponent } from './component/transaction/transaction.compon
     AddressPaymentComponent,
     MethodPaymentComponent,
     PaymentReceiptComponent,
+    TransactionComponent,
+    PaymentReceiptComponent,
     TransactionComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
-
+    ToastrModule.forRoot(),
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: 'SocialAuthServiceConfig',
+    //   useValue: {
+    //     autoLogin: false,
+    //     providers: [
+    //       {
+    //         id: GoogleLoginProvider.PROVIDER_ID,
+    //         provider: new GoogleLoginProvider(
+    //           '360980124241-cu5j4vb8mfob7il8h62oa320t8ldoi7l.apps.googleusercontent.com',
+    //           googleLoginOptions
+    //         )
+    //       },
+    //     ]
+    //   } as SocialAuthServiceConfig,
+    // }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

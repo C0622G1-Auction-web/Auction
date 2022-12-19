@@ -1,8 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+
+// @ts-ignore
+import {PaymentDto} from '../../model/payment/payment-dto';
 import {jsPDF} from 'jspdf';
 import html2canvas from 'html2canvas';
 import {PaymentService} from '../../../service/payment/payment.service';
-import {PaymentDto} from '../../../model/payment/payment-dto';
 
 @Component({
   selector: 'app-payment-receipt',
@@ -50,6 +52,5 @@ export class PaymentReceiptComponent implements OnInit {
       pdf.save('output.pdf');
     });
   }
-
 
 }

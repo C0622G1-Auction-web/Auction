@@ -1,5 +1,156 @@
+<div class="container bg-white h-100 d-flex flex-column">
+  <div class="auction d-flex align-items-center">
+    <div class="row d-flex ms-auto me-5">
+      <div class="boxed shadow-md h-100 ms-auto">
+<!--        <form class="form" [formGroup]="newProduct" *ngIf="newProduct" (ngSubmit)="createProduct()">-->
+          <fieldset>
+            <legend>
+              <div class="mt-4 text-center">
+                <h1>Yêu cầu đấu giá</h1>
+              </div>
+            </legend>
+          </fieldset>
+          <div class="mb-2">
+            <div class="form-field d-flex align-items-center mb-2">
+              <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>
+              <label class="ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>
+            </div>
+<!--            <input formControlName="name" id="name" type="text" class="form-control" placeholder="Nhập tên sản phẩm"-->
+<!--                   [ngClass]="newProduct.controls['name'].invalid ?'is-invalid':'is-valid'"/>-->
+            <div class="invalid-feedback">
+              <div *ngIf="newProduct.controls['name'].errors?.required
+        && (newProduct.controls['name'].touched)">
+                Không được bỏ trống
+              </div>
+            </div>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/dollar.svg" width="20" height="20"></object>
+              <label class="ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>
+            </div>
+<!--            <input formControlName="initialPrice" id="initialPrice" type="number" class="form-control"-->
+<!--                   placeholder="Nhập giá ban đầu"-->
+<!--                   [ngClass]="newProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>-->
+            <div class="invalid-feedback">
+<!--              <div *ngIf="newProduct.controls['initialPrice'].errors?.required-->
+<!--        && (newProduct.controls['initialPrice'].touched)">-->
+                Không được bỏ trống
+              </div>
+            </div>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/money-increase.svg" width="20" height="20"></object>
+              <label class="ms-2">Mỗi lần tăng ít nhất<span style="color: red"> (*)</span>:</label>
+            </div>
+            <div class="input-group">
+              <select formControlName="priceStepId" class="form-select w-50">
+                <option value="">Chon bước giá</option>
+                <option *ngFor="let item of priceStepList" [value]="item.id">{{item.step}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/category.svg" width="20" height="20"></object>
+              <label class="ms-2">Chủng loại<span style="color: red">(*)</span>:</label>
+            </div>
+            <div class="input-group">
+              <select formControlName="categoryId" class="form-select w-50">
+                <option value="">Thể loại</option>
+                <option *ngFor="let item of categoryList" [value]="item.id">{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/dollar.svg" width="20" height="20"></object>
+              <label class="ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>
+            </div>
+            <input style="width: 60%" type="file" class="form-control"/>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/information.svg" width="20" height="20"></object>
+              <label class="ms-2">Thông tin chi tiết<span style="color: red">(*)</span>:</label>
+            </div>
+<!--            <textarea formControlName="description" id="description" class="form-control"-->
+<!--                      [ngClass]="newProduct.controls['description'].invalid ?'is-invalid':'is-valid'"></textarea>-->
+            <div class="invalid-feedback">
+              <div *ngIf="newProduct.controls['description'].errors?.required
+        && (newProduct.controls['description'].touched)">
+                Không được bỏ trống
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/hour-end.svg" width="20" height="20"></object>
+              <label class="ms-2">Thời gian bắt đầu<span style="color: red"> (*)</span>:</label>
+            </div>
+<!--            <input formControlName="startTime" type="date" class="form-control" placeholder="start Day.."-->
+<!--                   [ngClass]="newProduct.controls['startTime'].invalid ?'is-invalid':'is-valid'"/>-->
+            <div class="invalid-feedback">
+              <div *ngIf="newProduct.errors?.checkStartDay
+                    && (newProduct.controls['startTime'].touched)">
+                Không được nhỏ hơn ngày hiện tại
+              </div>
+              <div *ngIf="newProduct.controls['startTime'].errors?.required
+                    && (newProduct.controls['startTime'].touched)">
+                Không được bỏ trống
+              </div>
+            </div>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object data="assets/icons/hour-start.svg" width="20" height="20"></object>
+              <label class="ms-2">Thời gian kết thúc<span style="color: red"> (*)</span>:</label>
+            </div>
+<!--            <input formControlName="endTime" type="date" class="form-control"-->
+<!--                   [ngClass]="newProduct.controls['endTime'].invalid ?'is-invalid':'is-valid'"/>-->
+            <div class="invalid-feedback">
+              <div *ngIf="newProduct.errors?.checkEndDay
+                    && (newProduct.controls['endTime'].touched)">
+                Không được nhỏ hơn ngày bắt đầu
+              </div>
+              <div *ngIf="newProduct.controls['endTime'].errors?.required
+                    && (newProduct.controls['endTime'].touched)">
+                Không được bỏ trống
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex mt-3 mb-2 w-100">
+            <button class="btn btn-primary d-flex justify-content-center">
+              <object data="assets/icons/legal-hammer.svg" width="20" height="20"
+                      class="me-2 slide"></object>
+              <p>
+                Đấu giá sản phẩm
+              </p>
+            </button>
+            <button class="btn btn-outline btn-outline-primary ms-2 d-flex justify-content-center">
+              <object data="assets/icons/back.svg" width="20" height="20"
+                      class="me-2 slide"></object>
+              <p>Nhập lại</p>
+            </button>
+          </div>
+<!--        </form>-->
+        <div class="mb-2">
+            <span style="font-size: 15px" class="fst-italic">
+              Trường có dấu <span style="color: red"> (*)</span> là bắt
+              buộc,không được bỏ trống
+            </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<!--</div>-->
 <!--<div class="container bg-white h-100 d-flex flex-column">-->
-<!--<<<<<<< HEAD-->
 <!--  <div class="auction d-flex align-items-center">-->
 <!--    <div class="row d-flex ms-auto me-5">-->
 <!--      <div class="boxed shadow-md h-100 ms-auto">-->
@@ -8,24 +159,13 @@
 <!--            <legend>-->
 <!--              <div class="mt-4 text-center">-->
 <!--                <h1>Yêu cầu đấu giá</h1>-->
-<!--=======-->
-<!--  <div class="  auction d-flex align-items-center">-->
-<!--    <div class="row d-flex ms-auto me-5">-->
-<!--      <div class="boxed shadow-md h-100 ms-auto">-->
-<!--        <form *ngIf="formCreateProduct" class="form" [formGroup]="formCreateProduct"  (ngSubmit)="addNewProduct()">-->
-<!--          <fieldset>-->
-<!--            <legend>-->
-<!--              <div class="mt-4 text-center">-->
-<!--                <h1>Thêm mới sản phẩm</h1>-->
-<!--&gt;>>>>>> dev-->
 <!--              </div>-->
 <!--            </legend>-->
 <!--          </fieldset>-->
 <!--          <div class="mb-2">-->
-<!--<<<<<<< HEAD-->
 <!--            <div class="form-field d-flex align-items-center mb-2">-->
 <!--              <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>-->
-<!--              <label class="form-label ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>-->
+<!--              <label class="ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>-->
 <!--            </div>-->
 <!--            <input formControlName="name" id="name" type="text" class="form-control" placeholder="Nhập tên sản phẩm"-->
 <!--                   [ngClass]="newProduct.controls['name'].invalid ?'is-invalid':'is-valid'"/>-->
@@ -35,53 +175,12 @@
 <!--                Không được bỏ trống-->
 <!--              </div>-->
 <!--            </div>-->
-<!--=======-->
-<!--            <div class="d-flex align-items-center mb-2">-->
-<!--              <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>-->
-<!--              <label class="form-label ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>-->
-<!--            </div>-->
-<!--            <input type="text" class="form-control" formControlName="name"/>-->
-<!--          </div>-->
-<!--          <div class="mb-2">-->
-<!--            <div class="d-flex align-items-center mb-2">-->
-<!--              <object data="assets/icons/icon-people.svg" width="20" height="20"></object>-->
-<!--              <label class="form-label ms-2">Mã người đăng<span style="color: red"> (*)</span>:</label>-->
-<!--            </div>-->
-<!--            <div class="d-flex align-items-center mb-2">-->
-
-<!--              <input #testNum  style="width: 50%" type="number"  class="form-control"/>-->
-<!--              <button class="btn btn-primary d-flex justify-content-center mx-3" (click)="findUserById(testNum.value)">-->
-<!--                <object data="assets/icons/check-people.svg" width="20" height="20"-->
-<!--                        class="me-2 slide"></object>-->
-<!--                <p>-->
-<!--                  Kiểm tra-->
-<!--                </p>-->
-<!--              </button>-->
-<!--              <button style="width: 20%">-->
-<!--                <object data="assets/icons/back.svg" width="20" height="20"></object>-->
-<!--              </button>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="mb-2">-->
-<!--            <div class="d-flex align-items-center mb-2">-->
-<!--              <object data="assets/icons/information.svg" width="20" height="20"></object>-->
-<!--              <label class="form-label ms-2">Thông tin người đăng:</label>-->
-<!--            </div>-->
-<!--            <textarea *ngIf="userFind" class="form-control" disabled>-->
-<!--              {{userFind.id}}-->
-<!--              {{userFind.firstName}} {{userFind.lastName}}-->
-<!--            </textarea>-->
-<!--            <textarea *ngIf="!userFind" class="form-control" disabled>-->
-<!--             Không tìm thấy thông tin người đăng-->
-<!--            </textarea>-->
-<!--&gt;>>>>>> dev-->
 <!--          </div>-->
 <!--          <div class="mb-2">-->
 <!--            <div class="d-flex align-items-center mb-2">-->
 <!--              <object data="assets/icons/dollar.svg" width="20" height="20"></object>-->
-<!--              <label class="form-label ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>-->
+<!--              <label class="ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>-->
 <!--            </div>-->
-<!--<<<<<<< HEAD-->
 <!--            <input formControlName="initialPrice" id="initialPrice" type="number" class="form-control"-->
 <!--                   placeholder="Nhập giá ban đầu"-->
 <!--                   [ngClass]="newProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>-->
@@ -91,70 +190,44 @@
 <!--                Không được bỏ trống-->
 <!--              </div>-->
 <!--            </div>-->
-<!--=======-->
-<!--            <input style="width: 40%" type="number" class="form-control" formControlName="initialPrice"/>-->
-<!--&gt;>>>>>> dev-->
 <!--          </div>-->
 <!--          <div class="mb-2">-->
 <!--            <div class="d-flex align-items-center mb-2">-->
 <!--              <object data="assets/icons/money-increase.svg" width="20" height="20"></object>-->
-<!--<<<<<<< HEAD-->
-<!--              <label class="form-label ms-2">Mỗi lần tăng ít nhất<span style="color: red"> (*)</span>:</label>-->
+<!--              <label class="ms-2">Mỗi lần tăng ít nhất<span style="color: red"> (*)</span>:</label>-->
 <!--            </div>-->
 <!--            <div class="input-group">-->
-<!--              <select formControlName="priceStepId" class="form-label">-->
+<!--              <select formControlName="priceStepId" class="form-select w-50">-->
 <!--                <option value="">Chon bước giá</option>-->
 <!--                <option *ngFor="let item of priceStepList" [value]="item.id">{{item.step}}</option>-->
 <!--              </select>-->
 <!--            </div>-->
-<!--=======-->
-<!--              <label class="form-label ms-2">Mỗi lần tăng ít nhất<span-->
-<!--                style="color: red"> (*)</span>:</label>-->
-<!--            </div>-->
-<!--            <select style="width: 40%" class="form-select" aria-label="Default select example" formControlName="priceStep">-->
-<!--              <option *ngFor="let item of priceStepList" [ngValue]="item" >{{item.step}}</option>-->
-<!--            </select>-->
-<!--&gt;>>>>>> dev-->
 <!--          </div>-->
 <!--          <div class="mb-2">-->
 <!--            <div class="d-flex align-items-center mb-2">-->
 <!--              <object data="assets/icons/category.svg" width="20" height="20"></object>-->
-<!--              <label class="form-label ms-2">Chủng loại<span style="color: red">(*)</span>:</label>-->
+<!--              <label class="ms-2">Chủng loại<span style="color: red">(*)</span>:</label>-->
 <!--            </div>-->
-<!--<<<<<<< HEAD-->
 <!--            <div class="input-group">-->
-<!--              <select formControlName="categoryId" class="form-label">-->
+<!--              <select formControlName="categoryId" class="form-select w-50">-->
 <!--                <option value="">Thể loại</option>-->
 <!--                <option *ngFor="let item of categoryList" [value]="item.id">{{item.name}}</option>-->
 <!--              </select>-->
 <!--            </div>-->
-<!--=======-->
-<!--            <select style="width: 40%" class="form-select" aria-label="Default select example" formControlName="category">-->
-<!--              <option *ngFor="let item of categoryList" [ngValue]="item" >{{item.name}}</option>-->
-<!--            </select>-->
-<!--&gt;>>>>>> dev-->
 <!--          </div>-->
 
 <!--          <div class="mb-2">-->
 <!--            <div class="d-flex align-items-center mb-2">-->
-<!--<<<<<<< HEAD-->
 <!--              <object data="assets/icons/dollar.svg" width="20" height="20"></object>-->
-<!--              <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>-->
+<!--              <label class="ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>-->
 <!--            </div>-->
 <!--            <input style="width: 60%" type="file" class="form-control"/>-->
-<!--=======-->
-<!--              <object data="assets/icons/image.svg" width="20" height="20"></object>-->
-<!--              <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>-->
-<!--            </div>-->
-<!--            <input style="width: 100%" type="file" class="form-control"/>-->
-<!--&gt;>>>>>> dev-->
 <!--          </div>-->
 
 <!--          <div class="mb-2">-->
 <!--            <div class="d-flex align-items-center mb-2">-->
 <!--              <object data="assets/icons/information.svg" width="20" height="20"></object>-->
-<!--<<<<<<< HEAD-->
-<!--              <label class="form-label ms-2">Thông tin chi tiết<span style="color: red">(*)</span>:</label>-->
+<!--              <label class="ms-2">Thông tin chi tiết<span style="color: red">(*)</span>:</label>-->
 <!--            </div>-->
 <!--            <textarea formControlName="description" id="description" class="form-control"-->
 <!--                      [ngClass]="newProduct.controls['description'].invalid ?'is-invalid':'is-valid'"></textarea>-->
@@ -164,19 +237,12 @@
 <!--                Không được bỏ trống-->
 <!--              </div>-->
 <!--            </div>-->
-<!--=======-->
-<!--              <label class="form-label ms-2">Thông tin chi tiết<span-->
-<!--                style="color: red">(*)</span>:</label>-->
-<!--            </div>-->
-<!--            <textarea class="form-control" formControlName="description"></textarea>-->
-<!--&gt;>>>>>> dev-->
 <!--          </div>-->
 
 <!--          <div class="mb-2">-->
 <!--            <div class="d-flex align-items-center mb-2">-->
 <!--              <object data="assets/icons/hour-end.svg" width="20" height="20"></object>-->
-<!--<<<<<<< HEAD-->
-<!--              <label class="form-label ms-2">Thời gian bắt đầu<span style="color: red"> (*)</span>:</label>-->
+<!--              <label class="ms-2">Thời gian bắt đầu<span style="color: red"> (*)</span>:</label>-->
 <!--            </div>-->
 <!--            <input formControlName="startTime" type="date" class="form-control" placeholder="start Day.."-->
 <!--                   [ngClass]="newProduct.controls['startTime'].invalid ?'is-invalid':'is-valid'"/>-->
@@ -190,18 +256,11 @@
 <!--                Không được bỏ trống-->
 <!--              </div>-->
 <!--            </div>-->
-<!--=======-->
-<!--              <label class="form-label ms-2">Thời gian bắt đầu<span-->
-<!--                style="color: red"> (*)</span>:</label>-->
-<!--            </div>-->
-<!--            <input type="datetime-local" class="form-control" formControlName="startTime"/>-->
-<!--&gt;>>>>>> dev-->
 <!--          </div>-->
 <!--          <div class="mb-2">-->
 <!--            <div class="d-flex align-items-center mb-2">-->
 <!--              <object data="assets/icons/hour-start.svg" width="20" height="20"></object>-->
-<!--<<<<<<< HEAD-->
-<!--              <label class="form-label ms-2">Thời gian kết thúc<span style="color: red"> (*)</span>:</label>-->
+<!--              <label class="ms-2">Thời gian kết thúc<span style="color: red"> (*)</span>:</label>-->
 <!--            </div>-->
 <!--            <input formControlName="endTime" type="date" class="form-control"-->
 <!--                   [ngClass]="newProduct.controls['endTime'].invalid ?'is-invalid':'is-valid'"/>-->
@@ -217,6 +276,7 @@
 <!--            </div>-->
 <!--          </div>-->
 
+
 <!--          <div class="d-flex mt-3 mb-2 w-100">-->
 <!--            <button class="btn btn-primary d-flex justify-content-center">-->
 <!--              <object data="assets/icons/legal-hammer.svg" width="20" height="20"-->
@@ -225,56 +285,447 @@
 <!--                Đấu giá sản phẩm-->
 <!--              </p>-->
 <!--            </button>-->
-<!--            <button class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">-->
+<!--            <button class="btn btn-outline btn-outline-primary ms-2 d-flex justify-content-center">-->
 <!--              <object data="assets/icons/back.svg" width="20" height="20"-->
 <!--                      class="me-2 slide"></object>-->
 <!--              <p>Nhập lại</p>-->
 <!--            </button>-->
 <!--          </div>-->
 <!--        </form>-->
-<!--=======-->
-<!--              <label class="form-label ms-2">Thời gian kết thúc<span-->
-<!--                style="color: red"> (*)</span>:</label>-->
-<!--            </div>-->
-<!--            <input type="datetime-local" class="form-control" formControlName="endTime"/>-->
-<!--          </div>-->
-
-<!--          <div class="d-flex mt-3 mb-2 w-100">-->
-<!--            <button type="submit" style="margin-right: 5px" class="btn btn-primary d-flex justify-content-center">-->
-<!--              <object data="assets/icons/legal-hammer.svg" width="20" height="20"-->
-<!--                      class="me-2 slide"></object>-->
-<!--              <p>-->
-<!--                Thêm mới-->
-<!--              </p>-->
-<!--            </button>-->
-<!--            <button type="reset" style="margin-right: 5px" class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">-->
-<!--              <object data="assets/icons/button-back.svg" width="20" height="20"-->
-<!--                      class="me-2 slide"></object>-->
-<!--              <p>Nhập lại</p>-->
-<!--            </button>-->
-<!--            <button class="btn btn-outline btn-warning ms-auto d-flex justify-content-center">-->
-<!--              <object data="assets/icons/cancel.svg" width="20" height="20"-->
-<!--                      class="me-2 slide"></object>-->
-<!--              <p>Hủy</p>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </form>-->
-
-<!--&gt;>>>>>> dev-->
 <!--        <div class="mb-2">-->
 <!--            <span style="font-size: 15px" class="fst-italic">-->
 <!--              Trường có dấu <span style="color: red"> (*)</span> là bắt-->
 <!--              buộc,không được bỏ trống-->
 <!--            </span>-->
 <!--        </div>-->
-<!--<<<<<<< HEAD-->
 <!--      </div>-->
-
-<!--      <div class="col-lg-3"></div>-->
 <!--=======-->
+<!--&gt;>>>>>> dev-feature-payment-->
+<!--&lt;!&ndash;<div class="container bg-white h-100 d-flex flex-column">&ndash;&gt;-->
+<!--&lt;!&ndash;  <div class="auction d-flex align-items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="row d-flex ms-auto me-5">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="boxed shadow-md h-100 ms-auto">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <form class="form" [formGroup]="newProduct" *ngIf="newProduct" (ngSubmit)="createProduct()">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;          <fieldset>&ndash;&gt;-->
+<!--&lt;!&ndash;            <legend>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="mt-4 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                <h1>Yêu cầu đấu giá</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </legend>&ndash;&gt;-->
+<!--&lt;!&ndash;          </fieldset>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="form-field d-flex align-items-center mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <label class="ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input formControlName="name" id="name" type="text" class="form-control" placeholder="Nhập tên sản phẩm"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   [ngClass]="newProduct.controls['name'].invalid ?'is-invalid':'is-valid'"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div *ngIf="newProduct.controls['name'].errors?.required&ndash;&gt;-->
+<!--&lt;!&ndash;        && (newProduct.controls['name'].touched)">&ndash;&gt;-->
+<!--&lt;!&ndash;                Không được bỏ trống&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/dollar.svg" width="20" height="20"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <label class="ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input formControlName="initialPrice" id="initialPrice" type="number" class="form-control"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   placeholder="Nhập giá ban đầu"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   [ngClass]="newProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div *ngIf="newProduct.controls['initialPrice'].errors?.required&ndash;&gt;-->
+<!--&lt;!&ndash;        && (newProduct.controls['initialPrice'].touched)">&ndash;&gt;-->
+<!--&lt;!&ndash;                Không được bỏ trống&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/money-increase.svg" width="20" height="20"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <label class="ms-2">Mỗi lần tăng ít nhất<span style="color: red"> (*)</span>:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="input-group">&ndash;&gt;-->
+<!--&lt;!&ndash;              <select formControlName="priceStepId" class="form-select w-50">&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="">Chon bước giá</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option *ngFor="let item of priceStepList" [value]="item.id">{{item.step}}</option>&ndash;&gt;-->
+<!--&lt;!&ndash;              </select>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/category.svg" width="20" height="20"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <label class="ms-2">Chủng loại<span style="color: red">(*)</span>:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="input-group">&ndash;&gt;-->
+<!--&lt;!&ndash;              <select formControlName="categoryId" class="form-select w-50">&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="">Thể loại</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option *ngFor="let item of categoryList" [value]="item.id">{{item.name}}</option>&ndash;&gt;-->
+<!--&lt;!&ndash;              </select>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
 
-<!--      </div>-->
-<!--&gt;>>>>>> dev-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<!--&lt;!&ndash;          <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/dollar.svg" width="20" height="20"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <label class="ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input style="width: 60%" type="file" class="form-control"/>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/information.svg" width="20" height="20"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <label class="ms-2">Thông tin chi tiết<span style="color: red">(*)</span>:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <textarea formControlName="description" id="description" class="form-control"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                      [ngClass]="newProduct.controls['description'].invalid ?'is-invalid':'is-valid'"></textarea>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div *ngIf="newProduct.controls['description'].errors?.required&ndash;&gt;-->
+<!--&lt;!&ndash;        && (newProduct.controls['description'].touched)">&ndash;&gt;-->
+<!--&lt;!&ndash;                Không được bỏ trống&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/hour-end.svg" width="20" height="20"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <label class="ms-2">Thời gian bắt đầu<span style="color: red"> (*)</span>:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input formControlName="startTime" type="date" class="form-control" placeholder="start Day.."&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   [ngClass]="newProduct.controls['startTime'].invalid ?'is-invalid':'is-valid'"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div *ngIf="newProduct.errors?.checkStartDay&ndash;&gt;-->
+<!--&lt;!&ndash;                    && (newProduct.controls['startTime'].touched)">&ndash;&gt;-->
+<!--&lt;!&ndash;                Không được nhỏ hơn ngày hiện tại&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div *ngIf="newProduct.controls['startTime'].errors?.required&ndash;&gt;-->
+<!--&lt;!&ndash;                    && (newProduct.controls['startTime'].touched)">&ndash;&gt;-->
+<!--&lt;!&ndash;                Không được bỏ trống&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/hour-start.svg" width="20" height="20"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <label class="ms-2">Thời gian kết thúc<span style="color: red"> (*)</span>:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input formControlName="endTime" type="date" class="form-control"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   [ngClass]="newProduct.controls['endTime'].invalid ?'is-invalid':'is-valid'"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div *ngIf="newProduct.errors?.checkEndDay&ndash;&gt;-->
+<!--&lt;!&ndash;                    && (newProduct.controls['endTime'].touched)">&ndash;&gt;-->
+<!--&lt;!&ndash;                Không được nhỏ hơn ngày bắt đầu&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div *ngIf="newProduct.controls['endTime'].errors?.required&ndash;&gt;-->
+<!--&lt;!&ndash;                    && (newProduct.controls['endTime'].touched)">&ndash;&gt;-->
+<!--&lt;!&ndash;                Không được bỏ trống&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--<<<<<<< HEAD-->
+<!--=======-->
+<!--&gt;>>>>>> 6684ede1c15d97ba57b5cb411e5b6f814a963a6c-->
+<!--&gt;>>>>>> dev-feature-payment-->
+
+<!--&lt;!&ndash;          <div class="d-flex mt-3 mb-2 w-100">&ndash;&gt;-->
+<!--&lt;!&ndash;            <button class="btn btn-primary d-flex justify-content-center">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/legal-hammer.svg" width="20" height="20"&ndash;&gt;-->
+<!--&lt;!&ndash;                      class="me-2 slide"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <p>&ndash;&gt;-->
+<!--&lt;!&ndash;                Đấu giá sản phẩm&ndash;&gt;-->
+<!--&lt;!&ndash;              </p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </button>&ndash;&gt;-->
+<!--&lt;!&ndash;            <button class="btn btn-outline btn-outline-primary ms-2 d-flex justify-content-center">&ndash;&gt;-->
+<!--&lt;!&ndash;              <object data="assets/icons/back.svg" width="20" height="20"&ndash;&gt;-->
+<!--&lt;!&ndash;                      class="me-2 slide"></object>&ndash;&gt;-->
+<!--&lt;!&ndash;              <p>Nhập lại</p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </button>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        </form>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <span style="font-size: 15px" class="fst-italic">&ndash;&gt;-->
+<!--&lt;!&ndash;              Trường có dấu <span style="color: red"> (*)</span> là bắt&ndash;&gt;-->
+<!--&lt;!&ndash;              buộc,không được bỏ trống&ndash;&gt;-->
+<!--&lt;!&ndash;            </span>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div class="container bg-white h-100 d-flex flex-column">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<<<<<<< HEAD&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;  <div class="auction d-flex align-items-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <div class="row d-flex ms-auto me-5">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;      <div class="boxed shadow-md h-100 ms-auto">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <form class="form" [formGroup]="newProduct" *ngIf="newProduct" (ngSubmit)="createProduct()">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <fieldset>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <legend>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <div class="mt-4 text-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <h1>Yêu cầu đấu giá</h1>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;=======&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;  <div class="  auction d-flex align-items-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <div class="row d-flex ms-auto me-5">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;      <div class="boxed shadow-md h-100 ms-auto">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <form *ngIf="formCreateProduct" class="form" [formGroup]="formCreateProduct"  (ngSubmit)="addNewProduct()">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <fieldset>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <legend>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <div class="mt-4 text-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <h1>Thêm mới sản phẩm</h1>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&gt;>>>>>> dev&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </legend>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </fieldset>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<<<<<<< HEAD&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="form-field d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input formControlName="name" id="name" type="text" class="form-control" placeholder="Nhập tên sản phẩm"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   [ngClass]="newProduct.controls['name'].invalid ?'is-invalid':'is-valid'"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <div *ngIf="newProduct.controls['name'].errors?.required&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        && (newProduct.controls['name'].touched)">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                Không được bỏ trống&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;=======&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input type="text" class="form-control" formControlName="name"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/icon-people.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Mã người đăng<span style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;              <input #testNum  style="width: 50%" type="number"  class="form-control"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <button class="btn btn-primary d-flex justify-content-center mx-3" (click)="findUserById(testNum.value)">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <object data="assets/icons/check-people.svg" width="20" height="20"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                        class="me-2 slide"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                  Kiểm tra&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                </p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <button style="width: 20%">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <object data="assets/icons/back.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/information.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Thông tin người đăng:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <textarea *ngIf="userFind" class="form-control" disabled>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              {{userFind.id}}&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              {{userFind.firstName}} {{userFind.lastName}}&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </textarea>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <textarea *ngIf="!userFind" class="form-control" disabled>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;             Không tìm thấy thông tin người đăng&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </textarea>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&gt;>>>>>> dev&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/dollar.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<<<<<<< HEAD&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input formControlName="initialPrice" id="initialPrice" type="number" class="form-control"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   placeholder="Nhập giá ban đầu"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   [ngClass]="newProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <div *ngIf="newProduct.controls['initialPrice'].errors?.required&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        && (newProduct.controls['initialPrice'].touched)">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                Không được bỏ trống&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;=======&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input style="width: 40%" type="number" class="form-control" formControlName="initialPrice"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&gt;>>>>>> dev&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/money-increase.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<<<<<<< HEAD&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Mỗi lần tăng ít nhất<span style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="input-group">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <select formControlName="priceStepId" class="form-label">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <option value="">Chon bước giá</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <option *ngFor="let item of priceStepList" [value]="item.id">{{item.step}}</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </select>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;=======&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Mỗi lần tăng ít nhất<span&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <select style="width: 40%" class="form-select" aria-label="Default select example" formControlName="priceStep">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <option *ngFor="let item of priceStepList" [ngValue]="item" >{{item.step}}</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </select>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&gt;>>>>>> dev&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/category.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Chủng loại<span style="color: red">(*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<<<<<<< HEAD&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="input-group">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <select formControlName="categoryId" class="form-label">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <option value="">Thể loại</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <option *ngFor="let item of categoryList" [value]="item.id">{{item.name}}</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </select>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;=======&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <select style="width: 40%" class="form-select" aria-label="Default select example" formControlName="category">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <option *ngFor="let item of categoryList" [ngValue]="item" >{{item.name}}</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </select>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&gt;>>>>>> dev&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<<<<<<< HEAD&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/dollar.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input style="width: 60%" type="file" class="form-control"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;=======&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/image.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input style="width: 100%" type="file" class="form-control"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&gt;>>>>>> dev&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/information.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<<<<<<< HEAD&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Thông tin chi tiết<span style="color: red">(*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <textarea formControlName="description" id="description" class="form-control"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                      [ngClass]="newProduct.controls['description'].invalid ?'is-invalid':'is-valid'"></textarea>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <div *ngIf="newProduct.controls['description'].errors?.required&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        && (newProduct.controls['description'].touched)">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                Không được bỏ trống&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;=======&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Thông tin chi tiết<span&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                style="color: red">(*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <textarea class="form-control" formControlName="description"></textarea>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&gt;>>>>>> dev&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/hour-end.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<<<<<<< HEAD&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Thời gian bắt đầu<span style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input formControlName="startTime" type="date" class="form-control" placeholder="start Day.."&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   [ngClass]="newProduct.controls['startTime'].invalid ?'is-invalid':'is-valid'"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <div *ngIf="newProduct.errors?.checkStartDay&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    && (newProduct.controls['startTime'].touched)">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                Không được nhỏ hơn ngày hiện tại&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <div *ngIf="newProduct.controls['startTime'].errors?.required&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    && (newProduct.controls['startTime'].touched)">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                Không được bỏ trống&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;=======&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Thời gian bắt đầu<span&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input type="datetime-local" class="form-control" formControlName="startTime"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="d-flex align-items-center mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/hour-start.svg" width="20" height="20"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Thời gian kết thúc<span style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input formControlName="endTime" type="date" class="form-control"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                   [ngClass]="newProduct.controls['endTime'].invalid ?'is-invalid':'is-valid'"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <div class="invalid-feedback">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <div *ngIf="newProduct.errors?.checkEndDay&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    && (newProduct.controls['endTime'].touched)">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                Không được nhỏ hơn ngày bắt đầu&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <div *ngIf="newProduct.controls['endTime'].errors?.required&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    && (newProduct.controls['endTime'].touched)">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                Không được bỏ trống&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="d-flex mt-3 mb-2 w-100">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <button class="btn btn-primary d-flex justify-content-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/legal-hammer.svg" width="20" height="20"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                      class="me-2 slide"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                Đấu giá sản phẩm&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <button class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/back.svg" width="20" height="20"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                      class="me-2 slide"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <p>Nhập lại</p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        </form>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <label class="form-label ms-2">Thời gian kết thúc<span&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                style="color: red"> (*)</span>:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <input type="datetime-local" class="form-control" formControlName="endTime"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;          <div class="d-flex mt-3 mb-2 w-100">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <button type="submit" style="margin-right: 5px" class="btn btn-primary d-flex justify-content-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/legal-hammer.svg" width="20" height="20"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                      class="me-2 slide"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                Thêm mới&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              </p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <button type="reset" style="margin-right: 5px" class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/button-back.svg" width="20" height="20"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                      class="me-2 slide"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <p>Nhập lại</p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <button class="btn btn-outline btn-warning ms-auto d-flex justify-content-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <object data="assets/icons/cancel.svg" width="20" height="20"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                      class="me-2 slide"></object>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <p>Hủy</p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        </form>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;        <div class="mb-2">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <span style="font-size: 15px" class="fst-italic">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              Trường có dấu <span style="color: red"> (*)</span> là bắt&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              buộc,không được bỏ trống&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            </span>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;      </div>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;      <div class="col-lg-3"></div>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;      </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;  </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
