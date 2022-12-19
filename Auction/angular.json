@@ -118,6 +118,9 @@
               "devServerTarget": "Auction:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
