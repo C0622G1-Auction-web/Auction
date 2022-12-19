@@ -1,7 +1,12 @@
-import {Product} from "./product";
+import {ProductDtoRoleAdmin} from './product-dto-role-admin';
 
+/**
+ * Create by: GiangLBH
+ * User for screen: Product-manager Role: Admin
+ * Date: 17/12/2022
+ */
 export interface PageProduct {
-  content: Product[],
+  content: ProductDtoRoleAdmin[],
   pageable: {
     sort: {
       empty: boolean,

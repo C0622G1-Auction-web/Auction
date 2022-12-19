@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs/operators';
 import { Category } from 'src/app/model/product/category';
 import { ImgUrlProductDto } from 'src/app/model/product/dto/img-url-product-dto';
@@ -15,26 +16,27 @@ import { PriceStepService } from 'src/app/service/product/price-step.service';
 import { ProductService } from 'src/app/service/product/product.service';
 import { UserService } from 'src/app/service/user/user.service';
 
-export const checkStartDay: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const startDay = new Date(control.get('startDay').value).getTime();
+export const checkStartTime: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const startTime = new Date(control.get("startTime").value).getTime();
   const dateNow = new Date().getTime();
-  console.log(dateNow);
-  if (startDay - dateNow < 24 * 60 * 60 * 1000) {
-    return {checkStartDay: true};
+  if (startTime - dateNow < 0) {
+    return {"checkStartTime": true};
   } else {
     return null;
   }
-};
+}
 
-export const checkEndDay: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const startDay = new Date(control.get('startDay').value).getTime();
-  const endDay = new Date(control.get('endDay').value).getTime();
-  if (endDay - startDay < 24 * 60 * 60 * 1000) {
-    return {checkStartDay: true};
+export const checkEndTime: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const startTime = new Date(control.get("startTime").value).getTime();
+  console.log(startTime)
+  const endTime = new Date(control.get("endTime").value).getTime();
+  console.log(endTime)
+  if (endTime - startTime < 0 && startTime && endTime) {
+    return {"checkEndTime": true};
   } else {
     return null;
   }
-};
+}
 
 @Component({
   selector: 'app-auction-product-add',
@@ -53,6 +55,7 @@ export class AuctionProductAddComponent implements OnInit {
   selectedImages: any[] = [];
   img: any[] = [];
   error: any;
+  selectedFile: any[] = [];
   
 
   constructor(private _formBuilder: FormBuilder,
@@ -61,17 +64,20 @@ export class AuctionProductAddComponent implements OnInit {
     private _priceStepService: PriceStepService,
     private _userService: UserService,
     private _storage : AngularFireStorage,
-    private _imageProductService: ImageProductService) { }
+    private _imageProductService: ImageProductService,
+    private _toast: ToastrService) { }
 
     ngOnInit(): void {
       this._categoryService.getListCategory().subscribe(data => {
+        console.log('category', data);
+        
         this.categoryList = data;
       })
       this._priceStepService.getListPriceStep().subscribe(data => {
         this.priceStepList = data;
       })
       this.formCreateProduct = this._formBuilder.group({
-        id: ['', [Validators.required]],
+        id: ['', [Validators.required, Validators.pattern("[A-Za-z\\s]+")]],
         name: ['', [Validators.required]],
         description: ['', [Validators.required]],
         initialPrice: ['', [Validators.required, Validators.min(0), Validators.pattern("\\d+")]],
@@ -81,40 +87,26 @@ export class AuctionProductAddComponent implements OnInit {
         priceStep: ['', [Validators.required]],
         category: ['', [Validators.required]],
         user: ['', [Validators.required]]
-      })
+      }, {validators: [checkStartTime, checkEndTime]})
     };
   
     addNewProduct() {
       this.productDto = this.formCreateProduct.value;
-      console.log(this.formCreateProduct.value);
       this._productService.save(this.productDto).subscribe(data => {
-          console.log(data);
-          if (this.selectedImages.length !== 0) {
-            for (let i = 0; i < this.selectedImages.length; i++) {
-              let selectedImage = this.selectedImages[i];
-              const n = Date.now();
-              const filePath = `RoomsImages/${n}`;
-              const fileRef = this._storage.ref(filePath);
-              this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
-                finalize(() => {
-                  fileRef.getDownloadURL().subscribe(url => {
-                    const image: ImgUrlProductDto = {
-                      url: url,
-                      product: data.id
-                    };
-                    console.log(url);
-                    console.log(image);
-                    this._imageProductService.create(image).subscribe(() => {
-                      console.log('SUCCESSFULLY CREATE');
-                    });
-                  });
-                })
-              ).subscribe();
+          if (this.img.length !== 0) {
+            for (let i = 0; i < this.img.length; i++) {
+              const image: ImgUrlProductDto = {
+                url: this.img[i],
+                product: data.id
+              };
+              this._imageProductService.create(image).subscribe(() => {
+              })
             }
           }
+          this._toast.success("Chúc mừng bạn đã đấu giá thành công, đợi bộ phận kiểm duyệt xác nhận và thông báo bạn sau nhé !")
         },
         error => {
-          this.error = error.message;
+          this._toast.error("Yêu cầu của bạn không được duyệt, vui lòng nhập chính xác điều kiện đấu giá");
         });
     }
   
@@ -128,21 +120,17 @@ export class AuctionProductAddComponent implements OnInit {
     }
   
     showPreview(event: any) {
-      let newSelectedImages = [];
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.readAsDataURL(event.target.files[0]);
-        newSelectedImages = event.target.files;
-        for (let i = 0; i < event.target.files.length; i++) {
-          this.selectedImages.push(event.target.files[i]);
-        }
+        this.selectedFile = event.target.files;
       } else {
-        this.selectedImages = [];
+        this.selectedFile = [];
       }
-      console.log(this.selectedImages);
-      if (newSelectedImages.length !== 0) {
-        for (let i = 0; i < newSelectedImages.length; i++) {
-          let selectedImage = newSelectedImages[i];
+      console.log(this.selectedFile)
+      if (this.selectedFile.length !== 0) {
+        for (let i = 0; i < this.selectedFile.length; i++) {
+          let selectedImage = this.selectedFile[i];
           const n = Date.now();
           const filePath = `RoomsImages/${n}`;
           const fileRef = this._storage.ref(filePath);
@@ -151,12 +139,21 @@ export class AuctionProductAddComponent implements OnInit {
               fileRef.getDownloadURL().subscribe(url => {
                 this.img.push(url);
                 console.log(url);
-                if (this.img.length == newSelectedImages.length) {
-                }
+            
               });
             })
-          ).subscribe();
+          ).subscribe(() => {
+          });
         }
       }
+    }
+
+    deleteImageNew(index) {
+      this.img.splice(index, 1)
+      console.log(index)
+    }
+  
+    resetFindUserById(testNum) {
+      testNum.removeAttribute('disabled')
     }
 }

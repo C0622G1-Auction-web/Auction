@@ -2,33 +2,90 @@
     Screen: Edit a guide of auction web
     DateCreate: 15/12/2022
 -->
-
 <div class="container ">
-  <h3 class="center"> Chỉnh Sửa Hướng Dẫn</h3>
-  <div class="guide w-50" style=" box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.35);">
-    <form id="guideform" name="guide" method="post" action="#">
-      <div class="row">
-        <label for="title" class="form-label">Chủ đề (<span style="color: red">*</span>)</label>
-        <input id="title" type="text" value="Hướng dẫn đấu giá trên web &$^" class="form-control">
-      </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="center"> Chỉnh Sửa Hướng Dẫn</h3>
+      <div class="guide w-100" style=" box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.35);">
+        <h3 *ngIf="!editGuideForm">No data</h3>
+        <form [formGroup]="editGuideForm" *ngIf="editGuideForm" id="guideform" name="guide" (ngSubmit)="updateGuide()">
+          <input formControlName="id" hidden>
+          <div class="row">
+            <label for="title" class="form-label">Chủ đề (<span style="color: red">*</span>)</label>
+            <input formControlName="title" id="title" type="text" class="form-control"
+                   [ngClass]="editGuideForm.controls['title'].touched && editGuideForm.controls['title'].invalid?'is-invalid':editGuideForm.controls['title'].touched && editGuideForm.controls['title'].valid ?'is-valid':''">
+            <div class="invalid-feedback">
+              <div *ngIf="editGuideForm.controls['title'].errors?.required">
+                <span>Chủ đề không được bỏ trống</span>
+              </div>
+              <div
+                *ngIf="editGuideForm.controls['title'].errors?.minlength||editGuideForm.controls['title'].errors?.maxlength">
+                <span>Tên chủ đề quá dài hoặc quá ngắn</span>
+              </div>
+              <div *ngIf="editGuideForm.controls['title'].errors?.pattern">
+                <span>Tên chủ đề không được chứa ký tự đặc biệt</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <label for="floatingTextarea">Nội dung (<span style="color: red">*</span>)</label>
 
-      <div class="row">
-        <label for="floatingTextarea">Nội dung (<span style="color: red">*</span>)</label>
+            <textarea formControlName="content" class="form-control" rows="7" placeholder="Leave a content here"
+                      id="floatingTextarea"
+                      [ngClass]="editGuideForm.controls['content'].touched && editGuideForm.controls['content'].invalid?'is-invalid':editGuideForm.controls['content'].touched && editGuideForm.controls['title'].valid ?'is-valid':''"></textarea>
+            <div class="invalid-feedback">
+              <div *ngIf="editGuideForm.controls['content'].errors?.required">
+                <span>Nội dung không được bỏ trống</span>
+              </div>
+              <div
+                *ngIf="editGuideForm.controls['content'].errors?.minlength||editGuideForm.controls['content'].errors?.maxlength">
+                <span>Nội dung quá dài hoặc quá ngắn</span>
+              </div>
+            </div>
+          </div>
 
-        <textarea class="form-control" rows="7"  placeholder="Leave a content here"
-                  id="floatingTextarea"></textarea>
+          <div class="row">
+            <label class="form-label">Sửa hình ảnh(Thêm hoặc xóa)</label>
+            <input class="form-control" type="file" #file multiple (change)="showPreview($event)">
+            <div class="d-flex justify-content-left" style="overflow-x: scroll; margin-top: 20px ">
+              <span *ngIf="messageCreate!=''">{{messageCreate}}</span>
+              <div *ngFor=" let item of imgs,let i = index" style="margin-right: 10px">
+                <div style="position: relative">
+                  <img class="d-block" style="height: 84px" src="{{item.url}}">
+                  <span class="remove_img" (click)="deleteImage(i,item)"
+                        aria-label="Close">
+        <i class="fa-solid fa-trash-can"></i>
+      </span>
+                </div>
+              </div>
+              <div *ngFor="let img of imgCreate,let i = index" style="margin-right: 10px">
+                <div style="position: relative">
+                  <img class="d-block" style="height: 84px" src="{{img}}">
+                  <span class="remove_img" (click)="deleteImageNew(i);file.value=''"
+                        aria-label="Close">
+        <i class="fa-solid fa-trash-can"></i>
+      </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn btn-primary w-100" [disabled]="!editGuideForm.valid">
+              Sửa Hướng dẫn
+            </button>
+          </div>
+        </form>
       </div>
-
-      <div class="row">
-        <label for="formFile" class="form-label">Chọn hình ảnh</label>
-        <input class="form-control" type="file" id="formFile" value="lgkgg.pmg">
+    </div>
+    <div class="col-lg-6">
+      <div class="row bdg d-flex align-items-center w-50">
+        <div class="d-block w-50">
+          <img style="width: 600px; height: 500px; margin-top: 100px"
+               src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmdbcdn.b-cdn.net%2Fimg%2FPhotos%2Fnew-templates%2Fbootstrap-registration%2Fdraw1.webp"
+               alt="">
+        </div>
       </div>
-      <div class="center">
-        <button class="btn btn-primary w-100">
-          Sửa Hướng dẫn
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 
 </div>

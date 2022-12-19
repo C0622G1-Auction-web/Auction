@@ -56,4 +56,8 @@
   display: flex;
   justify-content: space-between;
 }
+#null-result-noti {
+  text-align: center;
+  color: red;
+}
 

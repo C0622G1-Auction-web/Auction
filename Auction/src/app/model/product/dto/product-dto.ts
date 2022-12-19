@@ -1,4 +1,4 @@
-import { ImgUrlProduct } from "../img-url-product";
+import {ImgUrlProduct} from "../img-url-product";
 
 export interface ProductDto {
   id?: number;
