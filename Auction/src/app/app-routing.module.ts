@@ -8,6 +8,7 @@ import {TransactionComponent} from './component/transaction/transaction.componen
 import {HomeComponent} from './component/home/home.component';
 import {UserListComponent} from './component/user/user-list/user-list.component';
 import {UserEditComponent} from './component/user/user-edit/user-edit.component';
+import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,8 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent
 
+  }, {
+    path: 'receipt', component: PaymentReceiptComponent,
   },
   {
     path: 'user/list',
@@ -43,7 +46,6 @@ const routes: Routes = [
   },
   {
     path: 'auction/:productId', component: AuctionProductDetailComponent,
-
   }];
 
 

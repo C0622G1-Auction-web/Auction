@@ -1,10 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {PaymentDto} from '../../model/payment/payment-dto';
-import {PaymentService} from '../../service/payment/payment.service';
-// @ts-ignore
 import {jsPDF} from 'jspdf';
-// @ts-ignore
 import html2canvas from 'html2canvas';
+import {PaymentService} from '../../../service/payment/payment.service';
+import {PaymentDto} from '../../../model/payment/payment-dto';
 
 @Component({
   selector: 'app-payment-receipt',
@@ -14,14 +12,29 @@ import html2canvas from 'html2canvas';
 export class PaymentReceiptComponent implements OnInit {
 
   paymentList: PaymentDto[];
-
+  paymentBill: number | undefined;
   @ViewChild('content', {static: true}) ab: ElementRef<HTMLImageElement>;
 
   // tslint:disable-next-line:variable-name
   constructor(private _paymentService: PaymentService) {
+    this.findPaymentList();
   }
 
   ngOnInit(): void {
+  }
+
+  findPaymentList() {
+    this._paymentService.findPaymentList().subscribe(data => {
+      console.log(data);
+      this.paymentList = data;
+      this.paymentBill = 49000;
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < data.length; i++) {
+        this.paymentBill += +data[i].productPrice;
+      }
+    }, error => {
+      this._paymentService.showErrorMessage('Không thể lấy danh sách');
+    });
   }
 
   convertToPDF() {

@@ -12,16 +12,18 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class PaymentService {
-  private API_URL = 'http://localhost:8080/api/v1/payments';
+  private API_URL = 'http://localhost:8080/api/v1/payments/';
 
 
+  // tslint:disable-next-line:variable-name
   constructor(private _httpClient: HttpClient,
+              // tslint:disable-next-line:variable-name
               private _toastrService: ToastrService) {
   }
 
   sendId(idList: string[]): Observable<Payment[]> {
     const params = new HttpParams({
-      fromObject: {'id': idList }
+      fromObject: {id: idList }
     });
     console.log(this.API_URL + params);
     return this._httpClient.get<Payment[]>(this.API_URL, {params});
