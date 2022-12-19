@@ -82,7 +82,6 @@ export class ProductService {
       );
   }
 
-
   findAll(curPage: number, numberRecord: number): Observable<DataResult<ProductDto>> {
     return this._httpClient.get<DataResult<ProductDto>>(this.API_URL + 'list?page=' + (curPage - 1) + '&size=' + numberRecord);
   }

@@ -60,9 +60,9 @@ export class ProductEditComponent implements OnInit {
   getFormEdit() {
     this._activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get("id");
-      this._productService.findByIdd(this.id).subscribe(data => {
-        this.productFind = data;
-        this._userService.findUserById(data.user.id).subscribe(data => {
+      this._productService.findByIdd(this.id).subscribe(product => {
+        this.productFind = product;
+        this._userService.findUserById(product.user.id).subscribe(data => {
           this.userFind = data;
           this.formEditProduct.patchValue({user: this.userFind.id})
           this.checkUser = "Mã người đăng: " + this.userFind.id + "\n" + "Tên người đăng: " + this.userFind.firstName + " " + this.userFind.lastName;

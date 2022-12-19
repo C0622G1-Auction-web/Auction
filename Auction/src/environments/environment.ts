@@ -40,8 +40,18 @@ export const environment = {
   transactionFindByListIdUrl: 'http://localhost:8080/api/v1/auction/find-by-list-id',
   api_url_userType: "http://localhost:8080/api/v1/users/usersType",
   productUrl: 'http://localhost:8080/api/v1/products',
-  imageUrl: 'http://localhost:8080/api/v1/products/img'
-};
+  imageUrl: 'http://localhost:8080/api/v1/products/img',
+  API_URL_GUIDE:'http://localhost:8080/api/v1/guide',
+  SIGN_IN_API: 'http://localhost:8080/api/v1/auth/signin',
+  GOOGLE_SIGN_IN_API: 'http://localhost:8080/api/v1/auth/google',
+  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create",
+  api_url_create_img_url: 'http://localhost:8080/api/v1/products/img/create',
+  uri_api_update_user_v1_user: "http://localhost:8080/api/v1/users/update",
+  uri_api_find_by_id_user_v1_user: 'http://localhost:8080/api/v1/users/find/',
+  LOGIN_API: 'http://localhost:8080/api/auth/login',
+  GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
+  DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
