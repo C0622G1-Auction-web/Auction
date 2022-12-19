@@ -16,7 +16,9 @@ export class ImageProductService {
     'Access-Control-Allow-Origin': 'http://localhost:4200',  // chấp nhận đường dẫn từ phía back-end
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'  // chấp nhận các method từ phía back-end
   };
-  constructor(private _httpClient: HttpClient) { }
+
+  constructor(private _httpClient: HttpClient) {}
+
   create(image): Observable<ImgUrlProduct> {
     return this._httpClient.post<ImgUrlProduct>(environment.api_url_create_img_url, image, this.httpOptions);
   }

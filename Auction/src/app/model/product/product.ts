@@ -19,7 +19,6 @@ export interface Product {
   reviewStatus?: ReviewStatus;
   auctionStatus?: AuctionStatus;
   category?: Category;
-  imgUrlProducts?: any;
   maxCurrentPrice?: number;
   registerDay?: string;
   imgUrlProduct?: ImgUrlProduct;

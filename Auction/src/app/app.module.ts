@@ -20,7 +20,6 @@ import {GuideEditComponent} from './component/guide/guide-edit/guide-edit.compon
 import {GuideDeleteComponent} from './component/guide/guide-delete/guide-delete.component';
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
 import {HomeComponent} from './component/home/home.component';
-import {LoginComponent} from './component/security/login/login.component';
 import {RegisterComponent} from './component/security/register/register.component';
 import {AuctionRequestComponent} from './component/auction-request/auction-request.component';
 import {ProductDetailComponent} from './component/product/product-detail/product-detail.component';
@@ -43,6 +42,8 @@ import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-logi
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { AuctionProductAddComponent } from './component/auction/auction-product-add/auction-product-add.component';
+import { LoginComponent } from './component/security/login/login.component';
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -83,6 +84,7 @@ const googleLoginOptions = {
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent,
+    AuctionProductAddComponent
   ],
   imports: [
     BrowserModule,
