@@ -3,14 +3,14 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 
-// @ts-ignore
-import {MessageRespone} from '../../model/security/message-respone';
-// @ts-ignore
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
 
-import {AuthService} from "../../../service/security/auth.service";
-import {TokenService} from "../../../service/security/token.service";
-import {Googletoken} from "../../../security/oauth2/googletoken";
+// @ts-ignore
+// import {GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
+
+import {AuthService} from '../../../service/security/auth.service';
+import {TokenService} from '../../../service/security/token.service';
+import {Googletoken} from '../../../security/oauth2/googletoken';
+import {MessageRespone} from '../../../model/security/message-respone';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +20,10 @@ import {Googletoken} from "../../../security/oauth2/googletoken";
 export class LoginComponent implements OnInit {
 
   rfLogin: FormGroup;
-  socialUser: SocialUser;
+  // socialUser: SocialUser;
 
   constructor(
-    private authSocialService: SocialAuthService,
+    // private authSocialService: SocialAuthService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
@@ -100,32 +100,30 @@ export class LoginComponent implements OnInit {
    * Function: To login using google oauth2
    */
 
-  loginWithGoogle() {
-    this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
-      this.socialUser = data;
-
-      const googleToken = new Googletoken(this.socialUser.idToken);
-
-      this.authService.googleLogin(googleToken).subscribe(req => {
-
-        if (req.token == null) {
-          const emailToRegister = req.email;
-
-          this.router.navigateByUrl('/signUp/' + emailToRegister);
-
-        } else {
-
-          this.tokenService.setTokenLocal(req.token);
-          this.tokenService.setRoleLocal(req.roles);
-
-          this.router.navigate(['/home']).then(() => {
-            location.reload();
-          });
-
-        }
-      });
-    });
-  }
-
-
+  // loginWithGoogle() {
+  //   this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+  //     this.socialUser = data;
+  //
+  //     const googleToken = new Googletoken(this.socialUser.idToken);
+  //
+  //     this.authService.googleLogin(googleToken).subscribe(req => {
+  //
+  //       if (req.token == null) {
+  //         const emailToRegister = req.email;
+  //
+  //         this.router.navigateByUrl('/signUp/' + emailToRegister);
+  //
+  //       } else {
+  //
+  //         this.tokenService.setTokenLocal(req.token);
+  //         this.tokenService.setRoleLocal(req.roles);
+  //
+  //         this.router.navigate(['/home']).then(() => {
+  //           location.reload();
+  //         });
+  //
+  //       }
+  //     });
+  //   });
+  // }
 }

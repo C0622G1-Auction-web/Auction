@@ -1,7 +1,6 @@
-
 import {Component, OnInit} from '@angular/core';
-import {PaymentService} from "../../../service/payment/payment.service";
-import {PaymentDto} from "../../../dto/payment-dto";
+import {PaymentService} from '../../../service/payment/payment.service';
+import {PaymentDto} from '../../../dto/payment-dto';
 
 @Component({
   selector: 'app-payment-cart',
@@ -10,11 +9,12 @@ import {PaymentDto} from "../../../dto/payment-dto";
 })
 export class PaymentCartComponent implements OnInit {
 
-  idList: string[] =['1','2','8'] ;
+  idList: string[] = ['1', '2', '8'];
   paymentList: PaymentDto[];
-  userId = "3";
+  userId = '3';
 
 
+  // tslint:disable-next-line:variable-name
   constructor(private _paymentService: PaymentService,) {
   }
 
@@ -23,20 +23,20 @@ export class PaymentCartComponent implements OnInit {
       this.paymentList = data;
     }, err => {
       console.log(err);
-    }, ()=>{
-      console.log("done");
+    }, () => {
+      console.log('done');
     });
 
   }
 
 
   sendId() {
-    this._paymentService.sendId(this.idList).subscribe(data=>{
+    this._paymentService.sendId(this.idList).subscribe(data => {
       console.log(data);
     }, err => {
       console.log('err');
     }, () => {
       console.log('done');
-    })
+    });
   }
 }

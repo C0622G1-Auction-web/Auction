@@ -39,11 +39,10 @@ import {AddressPaymentComponent} from './component/payment/address-payment/addre
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
 import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
 import {TransactionComponent} from './component/transaction/transaction.component';
-// @ts-ignore
-import {GoogleLoginProvider, SocialAuthServiceConfig} from 'angularx-social-login';
-import {InfomationAuctionSellerComponent} from "./component/auction/infomation-auction-seller/infomation-auction-seller.component";
-import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
-import {AccountForgotPassComponent} from "./component/security/account-forgot-pass/account-forgot-pass.component";
+
+import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
+import {PaymentCartComponent} from './component/payment/payment-cart/payment-cart.component';
+import {AccountForgotPassComponent} from './component/security/account-forgot-pass/account-forgot-pass.component';
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -97,21 +96,21 @@ const googleLoginOptions = {
     AppRoutingModule
   ],
   providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '360980124241-cu5j4vb8mfob7il8h62oa320t8ldoi7l.apps.googleusercontent.com',
-              googleLoginOptions
-            )
-          },
-        ]
-      } as SocialAuthServiceConfig,
-    }
+    // {
+    //   provide: 'SocialAuthServiceConfig',
+    //   useValue: {
+    //     autoLogin: false,
+    //     providers: [
+    //       {
+    //         id: GoogleLoginProvider.PROVIDER_ID,
+    //         provider: new GoogleLoginProvider(
+    //           '360980124241-cu5j4vb8mfob7il8h62oa320t8ldoi7l.apps.googleusercontent.com',
+    //           googleLoginOptions
+    //         )
+    //       },
+    //     ]
+    //   } as SocialAuthServiceConfig,
+    // }
   ],
   bootstrap: [AppComponent]
 })
