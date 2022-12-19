@@ -20,7 +20,6 @@ import {GuideEditComponent} from './component/guide/guide-edit/guide-edit.compon
 import {GuideDeleteComponent} from './component/guide/guide-delete/guide-delete.component';
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
 import {HomeComponent} from './component/home/home.component';
-import {LoginComponent} from './security/login/login.component';
 import {RegisterComponent} from './security/register/register.component';
 import {ResetPasswordComponent} from './security/reset-password/reset-password.component';
 import {AuctionRequestComponent} from './component/auction-request/auction-request.component';
@@ -46,6 +45,7 @@ import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
+import {LoginComponent} from "./security/login/login.component";
 
 
 const googleLoginOptions = {
@@ -103,9 +103,8 @@ const googleLoginOptions = {
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
-
-
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    SocialLoginModule
   ],
   providers: [
     {
@@ -126,4 +125,5 @@ const googleLoginOptions = {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
