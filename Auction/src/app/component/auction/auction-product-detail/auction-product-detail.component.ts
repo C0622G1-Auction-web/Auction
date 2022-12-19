@@ -4,6 +4,7 @@ import {Product} from "../../../model/product/product";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {Auction} from "../../../model/auction/auction";
 import {Router} from "@angular/router";
+import {Stomp} from "@stomp/stompjs";
 
 
 @Component({
@@ -26,15 +27,16 @@ export class AuctionProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._auctionService.getAuctionByProductId(2).subscribe(
+    this._auctionService.getAuctionByProductId(1).subscribe(
       data => {
         this.productDetail = data;
         console.log(this.productDetail);
         this.rfAuction = this._formBuilder.group({
           currentPrice: [this.productDetail.maxCurrentPrice],
           userId: [5],
-          productId: [2]
+          productId: [1]
         }, {validators: [this.checkAuctionPrice]})
+        this.selectedChangImage();
       }
     )
   }
@@ -45,12 +47,16 @@ export class AuctionProductDetailComponent implements OnInit {
    * Function: Transfer of seller and buyer information boards
    */
   onChangeInfoSeller() {
-    this.changeBuyer = !this.changeBuyer;
-    this.changeSeller = !this.changeSeller;
+    this.changeBuyer = true;
+    this.changeSeller = false;
     let titleSeller = document.getElementById("title-seller");
     let titleBuyer = document.getElementById("title-buyer");
     titleBuyer.style.backgroundColor = "#ffffff";
     titleSeller.style.backgroundColor = "transparent";
+    titleSeller.style.color = 'white';
+    titleBuyer.style.color = 'black';
+
+
   }
 
   /**
@@ -59,12 +65,16 @@ export class AuctionProductDetailComponent implements OnInit {
    * Function: Transfer of seller and buyer information boards
    */
   onChangeInfoAuction() {
-    this.changeBuyer = !this.changeBuyer;
-    this.changeSeller = !this.changeSeller;
+    this.changeBuyer = false;
+    this.changeSeller = true;
     let titleSeller = document.getElementById("title-seller");
     let titleBuyer = document.getElementById("title-buyer");
     titleBuyer.style.backgroundColor = "transparent";
     titleSeller.style.backgroundColor = "#ffffff";
+    titleSeller.style.color = 'black';
+    titleBuyer.style.color = 'white';
+
+
   }
 
   /**
@@ -83,7 +93,7 @@ export class AuctionProductDetailComponent implements OnInit {
       this.rfAuction.setValue({
         currentPrice: this.auctionPrice,
         userId: 5,
-        productId: 2
+        productId: 1
       })
       // this.stateExistsSync('currentPrice');
       this.checkAuctionPrice(this.rfAuction);
@@ -111,7 +121,6 @@ export class AuctionProductDetailComponent implements OnInit {
 
     }
   }
-
 
 
   /**
@@ -157,5 +166,27 @@ export class AuctionProductDetailComponent implements OnInit {
     )
   }
 
+  changeImage(event: any, i: any, j: number) {
+    const src = event.target.src;
+    const imgs = document.querySelectorAll('.img-selected' + i);
+    document.getElementById('image__main' + i).setAttribute('src', src);
+    imgs.forEach(value => {
+      if (value.getAttribute('value') == j + '') {
+        value.classList.add('actived');
+      } else {
+        value.classList.remove('actived');
+      }
+    });
+  }
+
+  selectedChangImage() {
+    setTimeout(() => {
+      const imgF = document.querySelectorAll('.carousel__images');
+      console.log(imgF);
+      imgF.forEach(value => {
+        value.children[0].classList.add('actived');
+      });
+    }, 500)
+  }
 
 }

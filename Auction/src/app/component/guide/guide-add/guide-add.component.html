@@ -4,48 +4,82 @@
 -->
 
 <div class="container ">
-  <h3 class="center">Tạo Mới Hướng Dẫn</h3>
-  <div class="guide w-50" style=" box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.35);">
-<<<<<<< HEAD
-<!--    <form [formGroup]="guideForm" *ngIf="guideForm" (ngSubmit)="craeteGuide()" >-->
-=======
-    <form [formGroup]="guideForm" id="guideform" (ngSubmit)="craeteGuide()">
->>>>>>> dev
-      <div class="row">
-        <label for="title" class="form-label">Chủ đề (<span style="color: red">*</span>)</label>
-        <input formControlName="title" id="title" type="text" placeholder=" Chọn chủ đề" class="form-control">
-      </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <h3 class="center">Tạo Mới Hướng Dẫn</h3>
+      <div class="guide " style=" box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.35);">
+        <form [formGroup]="guideForm" id="guideform" (ngSubmit)="createGuide()">
+          <div class="row">
+            <label for="title" class="form-label">Chủ đề (<span style="color: red">*</span>)</label>
+            <input formControlName="title" id="title" type="text" placeholder=" Chọn chủ đề" class="form-control"
+                   [ngClass]="guideForm.controls['title'].touched && guideForm.controls['title'].invalid?'is-invalid':guideForm.controls['title'].touched && guideForm.controls['title'].valid ?'is-valid':''"/>
+            <div class="invalid-feedback">
+              <div *ngIf="guideForm.controls['title'].errors?.required">
+                <span>Chủ đề không được bỏ trống</span>
+              </div>
+              <div *ngIf="guideForm.controls['title'].errors?.minlength||guideForm.controls['title'].errors?.maxlength">
+                <span>Tên chủ đề quá dài hoặc quá ngắn</span>
+              </div>
+              <div *ngIf="guideForm.controls['title'].errors?.pattern">
+                <span>Tên chủ đề không được chứa ký tự đặc biệt</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="row">
-        <label for="floatingTextarea">Nội dung (<span style="color: red">*</span>)</label>
+          <div class="row">
+            <label for="floatingTextarea">Nội dung (<span style="color: red">*</span>)</label>
 
-        <textarea formControlName="content" class="form-control" rows="6" placeholder="Ghi nội dung ở đây"
-                  id="floatingTextarea"></textarea>
-      </div>
+            <textarea formControlName="content" class="form-control" rows="6" placeholder="Ghi nội dung ở đây"
+                      id="floatingTextarea"
+                      [ngClass]="guideForm.controls['content'].touched && guideForm.controls['content'].invalid?'is-invalid':guideForm.controls['content'].touched && guideForm.controls['title'].valid ?'is-valid':''"></textarea>
+            <div class="invalid-feedback">
+              <div *ngIf="guideForm.controls['content'].errors?.required">
+                <span>Nội dung không được bỏ trống</span>
+              </div>
+              <div
+                *ngIf="guideForm.controls['content'].errors?.minlength||guideForm.controls['content'].errors?.maxlength">
+                <span>Nội dung quá dài hoặc quá ngắn</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="row">
-        <label for="file" class="form-label">Chọn hình ảnh</label>
-        <input type="file" id="file"
-               #userPhoto
-               multiple
-               (change)="showPreview($event)"
-               name="image"
-               autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
+          <div class="row">
+            <label for="file" class="form-label">Chọn hình ảnh</label>
+            <input type="file" id="file"
+                   #file
+                   multiple
+                   (change)="showPreview($event)"
+                   name="image"
+                   autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
+          </div>
+          <div class="d-flex justify-content-left" style="overflow-x: scroll; margin-top: 20px ">
+            <p *ngIf="messageCreate!=''">{{messageCreate}}</p>
+            <div *ngFor=" let item of imgCreate, let i = index">
+              <div style="position: relative">
+                <img class="d-block" style="height: 84px" src="{{item}}">
+                <span class="remove_img" (click)="deleteImageNew(i); file.value = ''"
+                      aria-label="Close">
+  <i class="fa-solid fa-trash-can"></i>
+</span>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <button class="btn btn-primary w-100" type="submit" [disabled]="!guideForm.valid ">
+              Thêm Hướng dẫn
+            </button>
+          </div>
+        </form>
       </div>
-      <div *ngFor=" let item of imgs">
-        <img style="height: 200px; width: 200px" src="{{item}}">
+    </div>
+    <div class="col-lg-6">
+      <div class="row bdg d-flex align-items-center w-50">
+        <div class="d-block w-50">
+          <img style="width: 600px; height: 500px; margin-top: 100px"
+               src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmdbcdn.b-cdn.net%2Fimg%2FPhotos%2Fnew-templates%2Fbootstrap-registration%2Fdraw1.webp"
+               alt="">
+        </div>
       </div>
-      <button class="btn btn-warning"  type="button" (click)="userPhoto.value=''"> clear image</button>
-      <div class="center">
-        <button class="btn btn-primary w-100" type="submit">
-          Thêm Hướng dẫn
-        </button>
-      </div>
-<<<<<<< HEAD
-<!--    </form>-->
-=======
-    </form>
-    <a [routerLink]="['/guide/edit',42]" > show</a>
->>>>>>> dev
+    </div>
   </div>
 </div>

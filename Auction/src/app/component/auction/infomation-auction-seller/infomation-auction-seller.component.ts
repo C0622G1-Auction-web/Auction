@@ -17,7 +17,7 @@ export class InfomationAuctionSellerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._auctionService.getAuctionByProductId(2).subscribe(
+    this._auctionService.getAuctionByProductId(1).subscribe(
       data => {
         this.productAuction = data;
         console.log("product",this.productAuction);

@@ -2,9 +2,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ToastrModule} from 'ngx-toastr';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
@@ -29,6 +29,8 @@ import {AuctionProductDetailComponent} from './component/auction/auction-product
 import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
 import {AppRoutingModule} from "./app-routing.module";
+import {FIREBASE_OPTIONS} from "@angular/fire";
+
 import { AccountResetPassComponent } from './component/security/account-reset-pass/account-reset-pass.component';
 // @ts-ignore
 import { PaymentCartComponent } from './component/payment/payment-cart/payment-cart.component';
@@ -44,6 +46,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AuctionProductAddComponent } from './component/auction/auction-product-add/auction-product-add.component';
 import { LoginComponent } from './component/security/login/login.component';
+import { ChatUserComponent } from './component/chat/chat-user/chat-user.component';
+import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.component';
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -84,7 +88,11 @@ const googleLoginOptions = {
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent,
-    AuctionProductAddComponent
+    AuctionProductAddComponent,
+    PaymentReceiptComponent,
+    TransactionComponent,
+    ChatUserComponent,
+    ChatAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -94,6 +102,7 @@ const googleLoginOptions = {
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AppRoutingModule,
+
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
@@ -113,6 +122,7 @@ const googleLoginOptions = {
         ]
       } as SocialAuthServiceConfig,
     },
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig}
   ],
   bootstrap: [AppComponent]
 })
