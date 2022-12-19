@@ -148,15 +148,15 @@
                     <span class="time__hh mx-2">09</span>
                   </p>
                   <div class="modal__product">
-                    <button [routerLink]="['/auction/', product.id]" *ngIf="product.auctionStatus?.id == 1"
+                    <button [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 1"
                             class=" btn__auction">
                       <span class="btn__auction--title">Đấu giá</span>
                     </button>
-                    <button [routerLink]="['/auction/', product.id]" *ngIf="product.auctionStatus?.id == 2"
+                    <button [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 2"
                             class=" btn__auctioning">
                       <span class="btn__auctioning--title">Tham gia</span>
                     </button>
-                    <button [routerLink]="['/auction/', product.id]" *ngIf="product.auctionStatus?.id == 3"
+                    <button [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 3"
                             class=" btn btn__auctioned">
                       <span class="btn__auctioned--title">Xem thêm</span>
                     </button>

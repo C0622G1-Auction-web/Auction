@@ -25,7 +25,6 @@ export const checkStartTime: ValidatorFn = (control: AbstractControl): Validatio
     return null;
   }
 }
-
 export const checkEndTime: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const startTime = new Date(control.get("startTime").value).getTime();
   console.log(startTime)
@@ -56,7 +55,7 @@ export class AuctionProductAddComponent implements OnInit {
   img: any[] = [];
   error: any;
   selectedFile: any[] = [];
-  
+
 
   constructor(private _formBuilder: FormBuilder,
     private _productService: ProductService,
@@ -70,15 +69,15 @@ export class AuctionProductAddComponent implements OnInit {
     ngOnInit(): void {
       this._categoryService.getListCategory().subscribe(data => {
         console.log('category', data);
-        
+
         this.categoryList = data;
       })
       this._priceStepService.getListPriceStep().subscribe(data => {
         this.priceStepList = data;
       })
       this.formCreateProduct = this._formBuilder.group({
-        id: ['', [Validators.required, Validators.pattern("[A-Za-z\\s]+")]],
-        name: ['', [Validators.required]],
+        id: ['', [Validators.required]],
+        name: ['', [Validators.required, Validators.pattern("[A-Za-z\\s]+")]],
         description: ['', [Validators.required]],
         initialPrice: ['', [Validators.required, Validators.min(0), Validators.pattern("\\d+")]],
         startTime: ['', [Validators.required]],
@@ -89,7 +88,7 @@ export class AuctionProductAddComponent implements OnInit {
         user: ['', [Validators.required]]
       }, {validators: [checkStartTime, checkEndTime]})
     };
-  
+
     addNewProduct() {
       this.productDto = this.formCreateProduct.value;
       this._productService.save(this.productDto).subscribe(data => {
@@ -109,16 +108,16 @@ export class AuctionProductAddComponent implements OnInit {
           this._toast.error("Yêu cầu của bạn không được duyệt, vui lòng nhập chính xác điều kiện đấu giá");
         });
     }
-  
+
     findUserById(value) {
       this._userService.findUserById(value).subscribe(data => {
         this.userFind = data;
         this.formCreateProduct.patchValue({user: this.userFind.id})
         console.log(this.userFind)
       })
-  
+
     }
-  
+
     showPreview(event: any) {
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
@@ -139,7 +138,7 @@ export class AuctionProductAddComponent implements OnInit {
               fileRef.getDownloadURL().subscribe(url => {
                 this.img.push(url);
                 console.log(url);
-            
+
               });
             })
           ).subscribe(() => {
@@ -152,7 +151,7 @@ export class AuctionProductAddComponent implements OnInit {
       this.img.splice(index, 1)
       console.log(index)
     }
-  
+
     resetFindUserById(testNum) {
       testNum.removeAttribute('disabled')
     }

@@ -1,4 +1,5 @@
 import {ProductDtoRoleAdmin} from './product-dto-role-admin';
+import {Product} from "./product";
 
 /**
  * Create by: GiangLBH
@@ -6,7 +7,8 @@ import {ProductDtoRoleAdmin} from './product-dto-role-admin';
  * Date: 17/12/2022
  */
 export interface PageProduct {
-  content: ProductDtoRoleAdmin[],
+  // content: ProductDtoRoleAdmin[],
+  content: Product[],
   pageable: {
     sort: {
       empty: boolean,

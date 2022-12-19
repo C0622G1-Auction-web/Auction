@@ -13,4 +13,5 @@ export interface Auction {
   user?: User;
   product?: Product;
   payment?: Payment;
+  fullName?: string;
 }
