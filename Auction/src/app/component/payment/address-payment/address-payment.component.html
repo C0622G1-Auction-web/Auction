@@ -9,31 +9,31 @@
   </div>
 </div>
 
-<!--<div class="row">-->
-<!--  <div class="col-lg-2">-->
+<div class="row">
+  <div class="col-lg-2">
 
-<!--  </div>-->
-<!--  <div class="col-lg-2">-->
-<!--    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"-->
-<!--            data-bs-target="#pills-home" type="button" role="tab"-->
-<!--            aria-controls="pills-home" aria-selected="true">Địa chỉ thanh toán-->
-<!--    </button>-->
-<!--  </div>-->
+  </div>
+  <div class="col-lg-2">
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+            data-bs-target="#pills-home" type="button" role="tab"
+            aria-controls="pills-home" aria-selected="true">Địa chỉ thanh toán
+    </button>
+  </div>
 
-<!--  <div class="col-lg-2">-->
-<!--    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"-->
-<!--            data-bs-target="#pills-profile" type="button" role="tab"-->
-<!--            aria-controls="pills-profile" aria-selected="false" style="padding-left: 20px">Hình thức giao hàng-->
-<!--    </button>-->
-<!--  </div>-->
+  <div class="col-lg-2">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+            data-bs-target="#pills-profile" type="button" role="tab"
+            aria-controls="pills-profile" aria-selected="false" style="padding-left: 20px">Hình thức giao hàng
+    </button>
+  </div>
 
-<!--  <div class="col-lg-2">-->
-<!--    <button class="nav-link " id="pills-contact-tab" data-bs-toggle="pill"-->
-<!--            data-bs-target="#pills-contact" type="button" role="tab"-->
-<!--            aria-controls="pills-contact" aria-selected="false">Tình trạng đơn hàng-->
-<!--    </button>-->
-<!--  </div>-->
-<!--</div>-->
+  <div class="col-lg-2">
+    <button class="nav-link " id="pills-contact-tab" data-bs-toggle="pill"
+            data-bs-target="#pills-contact" type="button" role="tab"
+            aria-controls="pills-contact" aria-selected="false">Tình trạng đơn hàng
+    </button>
+  </div>
+</div>
 
 
 <div class="container">
@@ -42,12 +42,12 @@
     </div>
     <div class="col-lg-8"
          style="border: solid darkgray 1px;padding-top: 20px;padding-bottom: 20px">
-      <div class="row" *ngIf="paymentDtoList[0] != undefined">
+      <div class="row">
         <div class="col-lg-6">
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="ten"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].lastName}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2">
             <label for="ten"><span style="color: red"> * </span>Tên</label>
             <span class="input-group-text"><i
               class="fa-solid fa-user"></i></span>
@@ -57,7 +57,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="ho"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].firstName}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2">
             <label for="ho"><span style="color: red"> * </span>Họ</label>
             <span class="input-group-text"><i
               class="fa-solid fa-user"></i></span>
@@ -68,7 +68,7 @@
         <div class="col-lg-6">
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="floatingPhone" placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].phone}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2">
             <label for="floatingPhone"><span style="color: red"> * </span>Số điện thoại</label>
             <span class="input-group-text"><i class="fa-solid fa-phone-flip"></i></span>
           </div>
@@ -77,7 +77,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="email" class="form-control" id="mail"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].email}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2">
             <label for="mail"><span style="color: red"> * </span>Email</label>
             <span class="input-group-text" id="basic-addon6"><i
               class="fa-solid fa-envelope"></i></span>
@@ -89,7 +89,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="quocgia"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].country}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2">
             <label for="quocgia"><span style="color: red"> * </span>Quốc Gia</label>
             <span class="input-group-text" id="basic-addon0"><i class="fa-solid fa-earth-africa"></i></span>
           </div>
@@ -98,7 +98,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="thanhpho"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].city}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2">
             <label for="thanhpho"><span style="color: red"> * </span>Thành Phố/Tỉnh</label>
             <span class="input-group-text"><i
               class="fa-solid fa-location-dot"></i></span>
@@ -110,7 +110,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="quanhuyen"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].district}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2">
             <label for="quanhuyen"><span style="color: red"> * </span>Quận/Huyện</label>
             <span class="input-group-text"><i
               class="fa-solid fa-location-dot"></i></span>
@@ -120,7 +120,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="phuongxa"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].town}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2">
             <label for="phuongxa"><span style="color: red"> * </span>Phường /Xã</label>
             <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
           </div>
@@ -131,7 +131,7 @@
           <div class=" input-group form-floating mb-3">
             <input type="text" class="form-control" id="floatingAddress"
                    placeholder="name@example.com"
-                   aria-label="name@example.com" aria-describedby="basic-addon2" value="{{paymentDtoList[0].detailAddress}}">
+                   aria-label="name@example.com" aria-describedby="basic-addon2">
             <label for="floatingAddress"><span style="color: red"> * </span>Địa Chỉ</label>
             <span class="input-group-text" id="basic-addon7"><i
               class="fa-solid fa-location-dot"></i></span>
@@ -152,7 +152,7 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <button type="button" class="btn btn-primary" routerLink="/methodPayment" (click)="redirectPayment()">Xác Nhận</button>
+          <button type="button" class="btn btn-primary">Xác Nhận</button>
         </div>
       </div>
     </div>
@@ -173,12 +173,10 @@
           <div class="card-body text-primary" >
             <h6>Giao hàng tiêu chuẩn : 49.000</h6>
           </div>
-<!--          <div class="card-footer bg-light border-success" style="color: red"><h6>Tổng số tiền cần thanh toán: {{total | number}} vnd</h6></div>-->
+          <div class="card-footer bg-light border-success" style="color: red"><h6>Tổng số tiền cần thanh toán : 138.000</h6></div>
         </div>
       </div>
     </div>
   </div>
-
-
 </div>
 
