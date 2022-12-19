@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../service/user/user.service";
-import {ActivatedRoute, ParamMap} from '@angular/router';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {finalize} from "rxjs/operators";
 import {AngularFireStorage} from "@angular/fire/storage";
 
@@ -20,38 +20,38 @@ export class UserUpdateComponent implements OnInit {
     private _userService: UserService,
     private _activatedRoute: ActivatedRoute,
     private _builder: FormBuilder,
-    private _storage: AngularFireStorage
+    private _storage: AngularFireStorage,
+    private _router: Router
   ) {
   }
 
   ngOnInit(): void {
-    console.log('ok1')
     this._activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
+      console.log(this.id)
       this.getUserUpdate(this.id);
+
     });
   }
 
   getUserUpdate(id: number) {
-    console.log('ok2')
+    console.log(id)
     return this._userService.findUserByIdServer(id).subscribe(value => {
-      console.log('ok3')
-      console.log(value);
       this.updateUserForm = this._builder.group({
         id: [id],
-        firstName: [value.firstName],
-        lastName: [value.lastName],
-        username: [value.account.username],
-        avatar: [value.avatar],
-        email: [value.email],
-        phone: [value.phone],
-        birthDay: [value.birthDay],
-        city: [value.address.city],
-        district: [value.address.district],
-        town: [value.address.town],
+        firstName: [value.firstName, [Validators.required, Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
+        lastName: [value.lastName, [[Validators.required, Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]]],
+        username: [value.account.username, [Validators.required]],
+        avatar: [value.avatar, [Validators.required]],
+        email: [value.email, [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")]],
+        phone: [value.phone, [Validators.required, Validators.pattern("[0][9][0]\\d{7}")]],
+        birthDay: [value.birthDay, [Validators.required]],
+        city: [value.address.city, [[Validators.required, Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]]],
+        district: [value.address.district, [[Validators.required, Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]]],
+        town: [value.address.town, [[Validators.required, Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]]],
         country: ["viet nam"],
-        idCard: [value.idCard],
-        password: [value.account.password],
+        idCard: [value.idCard, [Validators.required, Validators.pattern("\\d{9}")]],
+        password: [value.account.password, [Validators.required]],
         pointDedication: [10.0],
         statusLock: [true],
         deleteStatus: [true],
@@ -63,6 +63,7 @@ export class UserUpdateComponent implements OnInit {
   updateUser(id: number) {
     const user = this.updateUserForm.value;
     this._userService.updateUser(id, user).subscribe(value => {
+      this._router.navigateByUrl('');
     })
   }
 

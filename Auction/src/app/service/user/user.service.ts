@@ -29,7 +29,7 @@ export class UserService {
     return this.httpClient.get<User>(environment.userUrl + userId);
   }
   findUserByIdServer(userId: number): Observable<User> {
-    return this.httpClient.get<User>(environment.uri_api_find_by_id_user_v1_user + userId);
+    return this.httpClient.get<User>(environment.uri_api_find_by_id_user_v1_user +'/' + userId);
   }
 
 }

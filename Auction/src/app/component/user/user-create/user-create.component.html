@@ -35,7 +35,7 @@
                          autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
                 </div>
                 <div>
-                  <img style="height: 200px; width: 200px" src="{{imgs}}">
+                  <!--                  <img style="height: 200px; width: 200px" src="{{imgs}}">-->
                 </div>
               </div>
               <div class="row" style="height: 25px"></div>
@@ -45,43 +45,43 @@
                     <div class="form-floating flex-grow-1">
                       <input type="text" class="form-control" formControlName="firstName" id="floatingFistName"
                              placeholder="Ho" aria-label="Ho"
-                             aria-describedby="basic-addon2">
-                      <!--                               [ngClass]="(userCreateForm.controls['firstName'].touched)?-->
-                      <!--                               userCreateForm.controls['firstName'].invalid?'is-invalid':'is-valid':''">-->
+                             aria-describedby="basic-addon2"
+                             [ngClass]="(userCreateForm.controls['firstName'].touched)?
+                      userCreateForm.controls['firstName'].invalid?'is-invalid':'is-valid':''">
                       <label for="floatingFistName">Họ</label>
                     </div>
                     <span class="input-group-text" id="basic-addon14"><i
                       class="fa-solid fa-user"></i></span>
                   </div>
-                  <!--                    <div *ngIf="userCreateForm.controls['firstName'].hasError('required') &&-->
-                  <!--                   userCreateForm.controls['firstName'].touched" style="color: red">-->
-                  <!--                      Tên không được bỏ trống-->
-                  <!--                    </div>-->
-                  <!--                    <div *ngIf="userCreateForm.controls['firstName'].hasError('pattern') &&-->
-                  <!--                   userCreateForm.controls['firstName'].touched" style="color: red">-->
-                  <!--                      Tên phải đúng định dạng-->
-                  <!--                    </div>-->
+                  <div *ngIf="userCreateForm.controls['firstName'].hasError('required') &&
+                                     userCreateForm.controls['firstName'].touched" style="color: red">
+                    Tên không được bỏ trống
+                  </div>
+                  <div *ngIf="userCreateForm.controls['firstName'].hasError('pattern') &&
+                                     userCreateForm.controls['firstName'].touched" style="color: red">
+                    Tên phải đúng định dạng
+                  </div>
                 </div>
                 <div class="col-lg-6">
                   <div class=" input-group mb-3">
                     <div class=" form-floating flex-grow-1">
                       <input type="text" class="form-control" id="floatingName"
-                             placeholder="Name" formControlName="lastName">
-                      <!--                               [ngClass]="(userCreateForm.controls['lastName'].touched)?-->
-                      <!--                                            userCreateForm.controls['lastName'].invalid?'is-invalid':'is-valid':''">-->
+                             placeholder="Name" formControlName="lastName"
+                             [ngClass]="(userCreateForm.controls['lastName'].touched)?
+                             userCreateForm.controls['lastName'].invalid?'is-invalid':'is-valid':''">
                       <label for="floatingName">Tên</label>
                     </div>
                     <span class="input-group-text" id="basic-addon2"><i
                       class="fa-solid fa-user"></i></span>
                   </div>
-                  <!--                    <div *ngIf="userCreateForm.controls['lastName'].hasError('required') &&-->
-                  <!--                   userCreateForm.controls['lastName'].touched" style="color: red">-->
-                  <!--                      Họ không được bỏ trống-->
-                  <!--                    </div>-->
-                  <!--                    <div *ngIf="userCreateForm.controls['lastName'].hasError('pattern') &&-->
-                  <!--                   userCreateForm.controls['lastName'].touched" style="color: red">-->
-                  <!--                      Họ phải đúng định dạng-->
-                  <!--                    </div>-->
+                  <div *ngIf="userCreateForm.controls['lastName'].hasError('required') &&
+                                     userCreateForm.controls['lastName'].touched" style="color: red">
+                    Họ không được bỏ trống
+                  </div>
+                  <div *ngIf="userCreateForm.controls['lastName'].hasError('pattern') &&
+                                     userCreateForm.controls['lastName'].touched" style="color: red">
+                    Họ phải đúng định dạng
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -91,22 +91,22 @@
                       <input type="text" class="form-control" id="floatingLogin"
                              placeholder="Tên đăng nhập"
                              aria-label="Tên đăng nhập" aria-describedby="basic-addon2"
-                             formControlName="username">
-                      <!--                               [ngClass]="(userCreateForm.controls['username'].touched)?-->
-                      <!--                                            userCreateForm.controls['username'].invalid?'is-invalid':'is-valid':''">-->
+                             formControlName="username"
+                             [ngClass]="(userCreateForm.controls['username'].touched)?
+                      userCreateForm.controls['username'].invalid?'is-invalid':'is-valid':''">
                       <label for="floatingLogin">Tên đăng nhập</label>
                     </div>
                     <span class="input-group-text" id="basic-addon1"><i
                       class="fa-solid fa-user"></i></span>
                   </div>
-                  <!--                    <div *ngIf="userCreateForm.controls['username'].hasError('required') &&-->
-                  <!--                   userCreateForm.controls['username'].touched" style="color: red">-->
-                  <!--                      Tên đăng nhập không được bỏ trống-->
-                  <!--                    </div>-->
-                  <!--                    <div *ngIf="userCreateForm.controls['username'].hasError('pattern') &&-->
-                  <!--                   userCreateForm.controls['username'].touched" style="color: red">-->
-                  <!--                      Tên đăng nhập phải đúng định dạng-->
-                  <!--                    </div>-->
+                  <div *ngIf="userCreateForm.controls['username'].hasError('required') &&
+                                     userCreateForm.controls['username'].touched" style="color: red">
+                    Tên đăng nhập không được bỏ trống
+                  </div>
+                  <div *ngIf="userCreateForm.controls['username'].hasError('pattern') &&
+                                     userCreateForm.controls['username'].touched" style="color: red">
+                    Tên đăng nhập phải đúng định dạng
+                  </div>
                 </div>
                 <div class="col-lg-6">
                   <div class=" input-group mb-3">
@@ -114,22 +114,22 @@
                       <input type="email" class="form-control" id="floatingEmail"
                              placeholder="Email"
                              aria-label="Email" aria-describedby="basic-addon2"
-                             formControlName="email">
-                      <!--                               [ngClass]="(userCreateForm.controls['email'].touched)?-->
-                      <!--                                            userCreateForm.controls['email'].invalid?'is-invalid':'is-valid':''">-->
+                             formControlName="email"
+                             [ngClass]="(userCreateForm.controls['email'].touched)?
+                             userCreateForm.controls['email'].invalid?'is-invalid':'is-valid':''">
                       <label for="floatingEmail">Email</label>
                     </div>
                     <span class="input-group-text" id="basic-addon3"><i
                       class="fa-solid fa-envelope"></i></span>
                   </div>
-                  <!--                    <div *ngIf="userCreateForm.controls['email'].hasError('required') &&-->
-                  <!--                   userCreateForm.controls['email'].touched" style="color: red">-->
-                  <!--                      Email không được bỏ trống-->
-                  <!--                    </div>-->
-                  <!--                    <div *ngIf="userCreateForm.controls['email'].hasError('pattern') &&-->
-                  <!--                   userCreateForm.controls['email'].touched" style="color: red">-->
-                  <!--                      Email phải đúng định dạng-->
-                  <!--                    </div>-->
+                  <div *ngIf="userCreateForm.controls['email'].hasError('required') &&
+                                     userCreateForm.controls['email'].touched" style="color: red">
+                    Email không được bỏ trống
+                  </div>
+                  <div *ngIf="userCreateForm.controls['email'].hasError('pattern') &&
+                                     userCreateForm.controls['email'].touched" style="color: red">
+                    Email phải đúng định dạng
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -139,66 +139,87 @@
                       <input type="text" class="form-control" id="floatingPhone"
                              placeholder="PhoneNumber"
                              aria-label="PhoneNumber" aria-describedby="basic-addon2"
-                             formControlName="phone">
-                      <!--                               [ngClass]="(userCreateForm.controls['phone'].touched)?-->
-                      <!--                                            userCreateForm.controls['phone'].invalid?'is-invalid':'is-valid':''">-->
+                             formControlName="phone"
+                             [ngClass]="(userCreateForm.controls['phone'].touched)?
+                             userCreateForm.controls['phone'].invalid?'is-invalid':'is-valid':''">
                       <label for="floatingPhone">Số điện thoại</label>
                     </div>
                     <span class="input-group-text" id="basic-addon5"><i
                       class="fa-solid fa-phone-flip"></i></span>
                   </div>
-                  <!--                    <div *ngIf="userCreateForm.controls['phone'].hasError('required') &&-->
-                  <!--                   userCreateForm.controls['phone'].touched" style="color: red">-->
-                  <!--                      Email không được bỏ trống-->
-                  <!--                    </div>-->
-                  <!--                    <div *ngIf="userCreateForm.controls['phone'].hasError('pattern') &&-->
-                  <!--                   userCreateForm.controls['phone'].touched" style="color: red">-->
-                  <!--                      Email phải đúng định dạng-->
-                  <!--                    </div>-->
+                  <div *ngIf="userCreateForm.controls['phone'].hasError('required') &&
+                                     userCreateForm.controls['phone'].touched" style="color: red">
+                    Số điện thoại không được bỏ trống
+                  </div>
+                  <div *ngIf="userCreateForm.controls['phone'].hasError('pattern') &&
+                                     userCreateForm.controls['phone'].touched" style="color: red">
+                    Số điện thoại phải đúng định dạng
+                  </div>
                 </div>
+                ​
                 <div class="col-lg-6">
                   <div class=" input-group mb-3">
                     <div class=" form-floating flex-grow-1">
                       <input type="text" class="form-control" id="floatingDateOfBirth"
                              placeholder="DateOfBirth"
-                             formControlName="birthday">
-                      <!--                               [ngClass]="(userCreateForm.controls['birthday'].touched)?-->
-                      <!--                                            userCreateForm.controls['birthday'].invalid?'is-invalid':'is-valid':''">-->
+                             formControlName="birthDay"
+                             [ngClass]="(userCreateForm.controls['birthDay'].touched)?
+                             userCreateForm.controls['birthDay'].invalid?'is-invalid':'is-valid':''">
                       <label for="floatingDateOfBirth">Ngày sinh</label>
                     </div>
                     <span class="input-group-text" id="basic-addon4"><i
                       class="fa-regular fa-calendar"></i></span>
                   </div>
-                  <!--                    <div *ngIf="userCreateForm.controls['birthday'].hasError('required') &&-->
-                  <!--                   userCreateForm.controls['birthday'].touched" style="color: red">-->
-                  <!--                      Email không được bỏ trống-->
-                  <!--                    </div>-->
-                  <!--                    <div *ngIf="userCreateForm.controls['birthday'].hasError('pattern') &&-->
-                  <!--                   userCreateForm.controls['birthday'].touched" style="color: red">-->
-                  <!--                      Email phải đúng định dạng-->
-                  <!--                    </div>-->
+                  <div *ngIf="userCreateForm.controls['birthDay'].hasError('required') &&
+                                     userCreateForm.controls['birthDay'].touched" style="color: red">
+                    Ngày sinh không được bỏ trống
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-4">
                   <div>
-                    <select class="form-control" id="city" aria-label=".form-select-sm">
-                      <option value="" selected>Chọn tỉnh thành</option>
+                    <select formControlName="city" (change)="selectCity()" class="form-control" id="city"
+                            aria-label=".form-select-sm">
+                      <option value="" >Chọn tỉnh thành</option>
+                      <option *ngFor="let x of cities" [ngValue]="x.id">{{x.name}}</option>
                     </select>
+
+                    <div *ngIf="userCreateForm.controls['city'].hasError('required') &&
+                                     userCreateForm.controls['city'].touched" style="color: red">
+                      Tỉnh thành không được bỏ trống
+                    </div>
+
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div>
-                    <select class="form-control" id="district" aria-label=".form-select-sm">
-                      <option value="" selected>Chọn quận huyện</option>
+                    <select formControlName="district" (change)="selectDistrict()" class="form-control" id="district"
+                            aria-label=".form-select-sm">
+                      <option value="">Chọn quận huyện</option>
+                      <option *ngFor="let x of districts" [ngValue]="x.id">{{x.name}}</option>
                     </select>
+
+                    <div *ngIf="userCreateForm.controls['district'].hasError('required') &&
+                                     userCreateForm.controls['district'].touched" style="color: red">
+                      Quận huyện không được bỏ trống
+                    </div>
+
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div>
-                    <select class="form-control" id="ward" aria-label=".form-select-sm">
-                      <option value="" selected>Chọn phường xã</option>
+                    <select formControlName="town" (change)="selectWard()" class="form-control" id="ward"
+                            aria-label=".form-select-sm">
+                      <option value="">Chọn phường xã</option>
+                      <option *ngFor="let x of wards" [ngValue]="x.id">{{x.name}}</option>
                     </select>
+
+                    <div *ngIf="userCreateForm.controls['town'].hasError('required') &&
+                                     userCreateForm.controls['town'].touched" style="color: red">
+                      Phường xã không được bỏ trống
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -209,44 +230,44 @@
                       <input type="text" class="form-control" id="floatingAddress"
                              placeholder="Address"
                              aria-label="Address" aria-describedby="basic-addon2"
-                             formControlName="detailAddress">
-                      <!--                               [ngClass]="(userCreateForm.controls['detailAddress'].touched)?-->
-                      <!--                                            userCreateForm.controls['detailAddress'].invalid?'is-invalid':'is-valid':''">-->
+                             formControlName="detailAddress"
+                             [ngClass]="(userCreateForm.controls['detailAddress'].touched)?
+                             userCreateForm.controls['detailAddress'].invalid?'is-invalid':'is-valid':''">
                       <label for="floatingAddress">Địa chỉ chi tiết</label>
                     </div>
                     <span class="input-group-text" id="basic-addon7"><i
                       class="fa-solid fa-location-dot"></i></span>
                   </div>
-                  <!--                    <div *ngIf="userCreateForm.controls['detailAddress'].hasError('required') &&-->
-                  <!--                   userCreateForm.controls['detailAddress'].touched" style="color: red">-->
-                  <!--                      Email không được bỏ trống-->
-                  <!--                    </div>-->
-                  <!--                    <div *ngIf="userCreateForm.controls['detailAddress'].hasError('pattern') &&-->
-                  <!--                   userCreateForm.controls['detailAddress'].touched" style="color: red">-->
-                  <!--                      Email phải đúng định dạng-->
-                  <!--                    </div>-->
+                  <div *ngIf="userCreateForm.controls['detailAddress'].hasError('required') &&
+                                     userCreateForm.controls['detailAddress'].touched" style="color: red">
+                    Địa chỉ chi tiết không được bỏ trống
+                  </div>
+                  <div *ngIf="userCreateForm.controls['detailAddress'].hasError('pattern') &&
+                                     userCreateForm.controls['detailAddress'].touched" style="color: red">
+                    Địa chỉ chi tiết không đúng định dạng
+                  </div>
                 </div>
                 <div class="col-lg-6">
                   <div class=" input-group mb-3">
                     <div class="form-floating flex-grow-1">
                       <input type="text" class="form-control" id="floatingIdCard"
                              placeholder="IdCard"
-                             formControlName="idCard">
-                      <!--                               [ngClass]="(userCreateForm.controls['idCard'].touched)?-->
-                      <!--                                            userCreateForm.controls['idCard'].invalid?'is-invalid':'is-valid':''">-->
+                             formControlName="idCard"
+                             [ngClass]="(userCreateForm.controls['idCard'].touched)?
+                                                                  userCreateForm.controls['idCard'].invalid?'is-invalid':'is-valid':''">
                       <label for="floatingIdCard">CMND</label>
                     </div>
                     <span class="input-group-text" id="basic-addon6"><i
                       class="fa-regular fa-id-card"></i></span>
                   </div>
-                  <!--                    <div *ngIf="userCreateForm.controls['idCard'].hasError('required') &&-->
-                  <!--                   userCreateForm.controls['idCard'].touched" style="color: red">-->
-                  <!--                      Email không được bỏ trống-->
-                  <!--                    </div>-->
-                  <!--                    <div *ngIf="userCreateForm.controls['idCard'].hasError('pattern') &&-->
-                  <!--                   userCreateForm.controls['idCard'].touched" style="color: red">-->
-                  <!--                      Email phải đúng định dạng-->
-                  <!--                    </div>-->
+                  <div *ngIf="userCreateForm.controls['idCard'].hasError('required') &&
+                                     userCreateForm.controls['idCard'].touched" style="color: red">
+                    CMND không được bỏ trống
+                  </div>
+                  <div *ngIf="userCreateForm.controls['idCard'].hasError('pattern') &&
+                                     userCreateForm.controls['idCard'].touched" style="color: red">
+                    CMND không đúng định dạng
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -256,22 +277,22 @@
                       <input type="password" class="form-control" id="floatingPassword"
                              placeholder="Password"
                              aria-label="Password" aria-describedby="basic-addon2"
-                             formControlName="password">
-                      <!--                               [ngClass]="(userCreateForm.controls['password'].touched)?-->
-                      <!--                                            userCreateForm.controls['password'].invalid?'is-invalid':'is-valid':''">-->
+                             formControlName="password"
+                             [ngClass]="(userCreateForm.controls['password'].touched)?
+                                                                  userCreateForm.controls['password'].invalid?'is-invalid':'is-valid':''">
                       <label for="floatingPassword">Mật khẩu</label>
                     </div>
                     <span class="input-group-text" id="basic-addon8"><i
                       class="fa-solid fa-lock"></i></span>
                   </div>
-                  <!--                    <div *ngIf="userCreateForm.controls['password'].hasError('required') &&-->
-                  <!--                   userCreateForm.controls['password'].touched" style="color: red">-->
-                  <!--                      Email không được bỏ trống-->
-                  <!--                    </div>-->
-                  <!--                    <div *ngIf="userCreateForm.controls['password'].hasError('pattern') &&-->
-                  <!--                   userCreateForm.controls['password'].touched" style="color: red">-->
-                  <!--                      Email phải đúng định dạng-->
-                  <!--                    </div>-->
+                  <div *ngIf="userCreateForm.controls['password'].hasError('required') &&
+                                     userCreateForm.controls['password'].touched" style="color: red">
+                    Mật khẩu không được bỏ trống
+                  </div>
+                  <div *ngIf="userCreateForm.controls['password'].hasError('pattern') &&
+                                     userCreateForm.controls['password'].touched" style="color: red">
+                    Mật khẩu không đúng định dạng
+                  </div>
                 </div>
                 <div class="col-lg-6">
                   <div class=" input-group mb-3">
@@ -284,37 +305,37 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-5">
-                  <div>
-                    <div class="floating" id="user-input">
-                      <div class="row">
-                        <div class="col-lg-8"><input type="text" class="form-control"
-                                                     id="submit" placeholder="Mã xác minh"/>
-                        </div>
-                        <div class="col-lg-4">
-                          <button type="button" id="btn" class="btn btn-gray" (click)="printd()">Gửi</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-7">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div id="image" selectable="False" style=" margin-top: 0;"></div>
-                    </div>
-                    <div class="col-lg-1" style="margin-top: 10px">
-                      <div (click)="generate()" style="cursor: pointer">
-                        <i class="fas fa-sync"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-7">
-                      <div style="font-size: 17px;color: blue;margin-top: 6px"><p id="key"></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                            <div class="row">
+                              <div class="col-lg-5">
+                                <div>
+                                  <div class="floating" id="user-input">
+                                    <div class="row">
+                                      <div class="col-lg-8"><input type="text" class="form-control"
+                                                                   id="submit" placeholder="Mã xác minh"/>
+                                      </div>
+                                      <div class="col-lg-4">
+                                        <button type="button" id="btn" class="btn btn-gray" (click)="printd()">Gửi</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-7">
+                                <div class="row">
+                                  <div class="col-lg-4">
+                                    <div id="image" selectable="False" style=" margin-top: 0;"></div>
+                                  </div>
+                                  <div class="col-lg-1" style="margin-top: 10px">
+                                    <div (click)="generate()" style="cursor: pointer">
+                                      <i class="fas fa-sync"></i>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-7">
+                                    <div style="font-size: 17px;color: blue;margin-top: 6px"><p id="key"></p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                 <div class="row mt-3">
                   <div class="col-lg-12">
                     <div class="form-check">

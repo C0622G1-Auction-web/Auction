@@ -55,9 +55,10 @@ const routes: Routes = [
   },
   {
     path:'user/update/:id', component: UserUpdateComponent
-  }
+  },
 
-  },  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
+
   {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
 
 ];
