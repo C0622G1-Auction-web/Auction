@@ -4,6 +4,6 @@
  * Date: 17/12/2022
  */
 export interface AuctionStatus {
-  id: number,
-  name: string
+  id: number;
+  name: string;
 }
