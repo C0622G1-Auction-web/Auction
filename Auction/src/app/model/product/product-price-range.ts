@@ -4,6 +4,6 @@
  * Date: 17/12/2022
  */
 export interface ProductPriceRange {
-  id? : number;
+  id?: number;
   name?: string;
 }

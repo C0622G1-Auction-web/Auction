@@ -40,7 +40,7 @@ export class ProductReviewComponent implements OnInit {
    */
   getInfo() {
     const id = +this._activatedRoute.snapshot.params.id;
-    this._productService.findById(id).subscribe(data => {
+    this._productService.findByDtoId(id).subscribe(data => {
       this.product = data;
       this.invalidProduct = this.product.reviewStatusId == 3;
       console.log(this.invalidProduct);
