@@ -4,7 +4,8 @@
 
 export const environment = {
 
-  production: false, firebaseConfig: {
+  production: false,
+  firebaseConfig: {
     apiKey: "AIzaSyDV8RZyn7riFw087ES5nA05z4ON5axBO28",
     authDomain: "test-42050.firebaseapp.com",
     databaseURL: "https://test-42050-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -18,7 +19,7 @@ export const environment = {
   priceStepUrl: 'http://localhost:8080/api/v1/products/priceStep',
   transactionUrl: 'http://localhost:8080/auction/api/transaction',
   productSearchUrl: 'http://localhost:8080/api/v1/products/search',
-  userUrl: 'http://localhost:8080/api/user/v1/',
+  userUrl: 'http://localhost:8080/api/v1/users',
   urlAddAccountUser: 'http://localhost:8080/api/user/v1/add',
   api_url_products: 'http://localhost:8080/api/v1/products',
   api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
