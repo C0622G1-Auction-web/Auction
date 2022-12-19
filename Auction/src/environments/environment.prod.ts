@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: 'https://trungdc.synology.me:5152/auction',
   api_url_list_price_step: this.apiUrl + '/api/v1/pricestep',
   api_url_list_category: this.apiUrl + '/api/v1/category',
