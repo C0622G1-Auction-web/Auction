@@ -60,10 +60,13 @@ export class ListProductsComponent implements OnInit {
    * Date: 17/12/2022
    */
   searchByRoleAdmin(pageNumber: number) {
+    console.log("vao page");
+    console.log(this.rfSearch.value);
     this._productService.getPageProductRoleAdmin(this.rfSearch.value, pageNumber).subscribe(data => {
+      console.log(data);
       this.pageProducts = data;
     }, error => {
-      this._notificationService.showErrorNotification('Không thể kết nối đến Server');
+      this._notificationService.showErrorNotification('Không thể kết nối đến Server.');
     });
   }
 
@@ -154,7 +157,7 @@ export class ListProductsComponent implements OnInit {
     this._productService.findByListId(this.deleteIds).subscribe(data => {
       this.deleteProducts = data;
     }, error => {
-      this._notificationService.showErrorNotification('Không thể tìm thấy sản phẩm');
+      this._notificationService.showErrorNotification('Không thể tìm thấy sản phẩm.');
     });
   }
 
@@ -165,9 +168,9 @@ export class ListProductsComponent implements OnInit {
    */
   delete() {
     this._productService.delete(this.deleteIds).subscribe(data => {
-      this._notificationService.showSuccessNotification('Xoá thành công!');
+      this._notificationService.showSuccessNotification('Xoá thành công.');
     }, error => {
-      this._notificationService.showErrorNotification('Có lỗi khi xoá');
+      this._notificationService.showErrorNotification('Có lỗi khi xoá.');
     }, () => {
       this.ngOnInit();
     });
@@ -183,7 +186,7 @@ export class ListProductsComponent implements OnInit {
       data => {
         this.categories = data;
       }, error => {
-        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ!');
+        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ.');
       }
     );
   }
@@ -198,7 +201,7 @@ export class ListProductsComponent implements OnInit {
       data => {
         this.priceRanges = data;
       }, error => {
-        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ!');
+        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ.');
       }
     );
   }
@@ -213,7 +216,7 @@ export class ListProductsComponent implements OnInit {
       data => {
         this.auctionStatus = data;
       }, error => {
-        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ!');
+        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ.');
       }
     );
   }

@@ -11,50 +11,14 @@
               <div class="row" id="img-col">
                 <div class="col-lg-12 d-flex justify-content-center align-items-center">
                   <div class="mt-2 card card-body w-50" style="border: solid; color: green">
-                    <div id="carouselExampleIndicators" class="carousel slide"
-                         data-bs-ride="carousel">
-                      <div class="carousel-inner">
-                        <div class="carousel-item active">
-                          <img
-                            src="https://salt.tikicdn.com/cache/750x750/ts/product/89/ac/93/d231600d5b276a7d3027050df14d509c.jpg.webp"
-                            class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                          <img
-                            src="https://salt.tikicdn.com/cache/750x750/ts/product/59/ef/44/653f387974a68b7b0ec7740201343ee9.jpg.webp"
-                            class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                          <img
-                            src="https://salt.tikicdn.com/cache/750x750/ts/product/36/ca/54/3997ea540afb84fb3db6b136f336ab0b.jpg.webp"
-                            class="d-block w-100" alt="...">
-                        </div>
-                      </div>
-                      <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide-to="0"
-                                class="active thumbnail" aria-current="true"
-                                aria-label="Slide 1">
-                          <img
-                            src="https://salt.tikicdn.com/cache/750x750/ts/product/89/ac/93/d231600d5b276a7d3027050df14d509c.jpg.webp"
-                            class="d-block w-100" alt="...">
-                        </button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide-to="1"
-                                class="thumbnail" aria-label="Slide 2">
-                          <img
-                            src="https://salt.tikicdn.com/cache/750x750/ts/product/59/ef/44/653f387974a68b7b0ec7740201343ee9.jpg.webp"
-                            class="d-block w-100" alt="...">
-                        </button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide-to="2"
-                                class="thumbnail" aria-label="Slide 3">
-                          <img
-                            src="https://salt.tikicdn.com/cache/750x750/ts/product/36/ca/54/3997ea540afb84fb3db6b136f336ab0b.jpg.webp"
-                            class="d-block w-100" alt="...">
-                        </button>
-                      </div>
-                    </div>
+                    <img id="image__main{{1}}" height="600" src="{{imgs[0]?.url}}" class="d-block w-100 card-img"
+                         alt="">
+                    <ul class="carousel__images d-flex justify-content-center">
+                      <li value="{{j}}" class="image__item img-selected{{1}}" *ngFor="let img of imgs,let j = index;">
+                        <img (click)="changeImage($event, 1, j)" class="d-block w-100" height="50" src="{{img.url}}"
+                             width="" alt="">
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -100,10 +64,29 @@
                       <td>{{product.description}}
                       </td>
                     </tr>
-                    <tr *ngIf="invalidProduct">
+                    <tr *ngIf="product.reviewStatusId == 3">
                       <td>Lý do khoá</td>
-                      <td><input type="text" class="form-control" [(ngModel)]="reason.reason"
-                      [disabled]="product.reviewStatusId == 3">
+                      <td>{{reason.reason}}
+                      </td>
+                    </tr>
+
+                    <tr *ngIf="invalidProduct">
+                      <td><label for="reason-input">Lý do khoá</label></td>
+                      <td>
+                        <form *ngIf="rfReason" [formGroup]="rfReason">
+                          <input type="text" class="form-control"
+                                 id="reason-input"
+                                 formControlName="reason"
+                                 [(ngModel)]="reason.reason">
+                          <div *ngIf="rfReason.controls['reason'].hasError('required') &&
+                               rfReason.controls['reason'].touched" style="color: red">
+                            Vui lòng nhập lý do không duyệt sản phẩm.
+                          </div>
+                          <div *ngIf="rfReason.controls['reason'].hasError('maxlength') &&
+                                rfReason.controls['reason'].touched" style="color: red">
+                            Lý do không được quá 250 ký tự.
+                          </div>
+                        </form>
                       </td>
                     </tr>
                   </table>
@@ -118,8 +101,8 @@
                 </div>
                 <div class="col-4">
                   <button *ngIf="product.reviewStatusId == 1"
-                     (click)="doNotReview()" class="btn btn-warning" role="button" style="width: 140px"
-                  [disabled]="invalidProduct && reason.reason.length == 0">
+                          (click)="doNotReview()" class="btn btn-warning" role="button" style="width: 140px"
+                          [disabled]="invalidProduct && rfReason.invalid ">
                     <i class="fa-solid fa-xmark"></i> Không duyệt
                   </button>
                 </div>
@@ -136,5 +119,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -39,7 +39,8 @@ export const environment = {
   transactionFindByListIdUrl: 'http://localhost:8080/api/v1/auction/find-by-list-id',
   api_url_userType: "http://localhost:8080/api/v1/users/usersType",
   productUrl: 'http://localhost:8080/api/v1/products',
-  imageUrl: 'http://localhost:8080/api/v1/products/img'
+  imageUrl: 'http://localhost:8080/api/v1/products/img',
+  api_url_get_imgs: 'http://localhost:8080/api/v1/products/imgs/',
 
 };
 

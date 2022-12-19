@@ -74,7 +74,7 @@
               </div>
             </div>
             <div class="col-4" id="form-btn">
-              <button class="btn btn-primary" type="submit">
+              <button class="btn btn-primary" type="submit" [disabled]="rfSearch.invalid">>
                 <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả
               </button>
               <button class="btn btn-success" (click)="resetFormAndData()">
@@ -163,7 +163,7 @@
           </tr>
           </tbody>
         </table>
-        <h3 *ngIf="pageProducts == null" id="null-result-noti">Không tìm thấy kết quả phù hợp</h3>
+        <h3 *ngIf="pageProducts == null" id="null-result-noti">Không tìm thấy kết quả phù hợp.</h3>
         <!--            Phân trang-->
         <div class="d-flex justify-content-between">
           <div>

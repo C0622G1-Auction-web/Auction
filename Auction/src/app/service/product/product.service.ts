@@ -15,6 +15,7 @@ import {ProductDelete} from '../../model/product/product-delete';
 import {ProductDtoRoleAdmin} from '../../model/product/product-dto-role-admin';
 import {Reason} from '../../model/product/reason';
 import {catchError} from 'rxjs/operators';
+import {ImgDetailDto} from '../../model/product/img_detail_dto';
 
 
 @Injectable({
@@ -185,5 +186,9 @@ export class ProductService {
 
   update(productDto, id): Observable<Product> {
     return this._httpClient.put<Product>(environment.productUrl + '/update/' + id, productDto);
+  }
+
+  getImgsByProductId(id: number): Observable<ImgDetailDto[]> {
+    return this._httpClient.get<ImgDetailDto[]>(environment.api_url_get_imgs + id);
   }
 }
