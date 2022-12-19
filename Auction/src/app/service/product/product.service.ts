@@ -1,20 +1,24 @@
 import {Injectable} from '@angular/core';
-import {Product} from '../../model/product/product';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+
 import {Observable, throwError} from 'rxjs';
-import {environment} from '../../../environments/environment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Product} from '../../model/product/product';
+
 import {PriceStep} from '../../model/product/price-step';
 import {Category} from '../../model/product/category';
 import {User} from '../../model/user/user';
 import {ImgUrlProduct} from '../../model/product/img-url-product';
-import {DataResult} from '../../model/product/data_result';
-import {ProductDto} from '../../model/product/iProduct_dto';
+import {environment} from '../../../environments/environment';
+
 import {ReviewStatus} from '../../model/product/review-status';
 import {PageProduct} from '../../model/product/page-product';
 import {ProductDelete} from '../../model/product/product-delete';
 import {ProductDtoRoleAdmin} from '../../model/product/product-dto-role-admin';
 import {Reason} from '../../model/product/reason';
+import {DataResult} from '../../model/product/data_result';
 import {catchError} from 'rxjs/operators';
+import {ProductDto} from '../../model/product/iProduct_dto';
+
 
 
 @Injectable({
@@ -26,7 +30,7 @@ export class ProductService {
   private product: Product[];
 
 
-  constructor(private _httpClient: HttpClient) {
+  constructor(protected _httpClient: HttpClient) {
   }
 
   httpOptions = {
@@ -107,6 +111,9 @@ export class ProductService {
       searchProduct);
   }
 
+  getAllAndSearchToPage(rfSearch: any, pageNumber: any) {
+    return this._httpClient.post<PageProduct>(environment.productSearchUrl + '?page=' + pageNumber, rfSearch);
+  }
   /**
    * Created: GiangLBH
    * Function: find product by selected ids
@@ -179,8 +186,9 @@ export class ProductService {
     return this._httpClient.post<number>(environment.productUrl + '/create', product);
   }
 
-  findById(id: number): Observable<Product> {
-    return this._httpClient.get<Product>(environment.productUrl + '/' + id);
+  findByIdd(id: number): Observable<Product> {
+    return this._httpClient.get<Product>(environment.productUrl + "/" + id)
+
   }
 
   update(productDto, id): Observable<Product> {

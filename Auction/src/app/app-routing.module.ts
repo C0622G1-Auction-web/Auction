@@ -31,6 +31,16 @@ const routes: Routes = [
     component: ProductEditComponent
   },
   {
+    path: "home",
+    component: HomeComponent
+
+  },
+  {
+    path: "",
+    component: HomeComponent
+  },
+
+  {
     path: 'transaction',
     component: TransactionComponent
   },
@@ -54,6 +64,18 @@ const routes: Routes = [
     component: UserEditComponent
   },
   {
+    path: 'product/add',
+    component: ProductAddComponent
+  },
+  {
+    path: 'guide',
+    component: GuideListComponent
+  },
+  {
+    path: 'user-add',
+    component: UserAddComponent
+  },
+  {
     path: 'user/add',
     component: UserAddComponent
   },
@@ -71,7 +93,8 @@ const routes: Routes = [
   {
     path: 'auction/:productId', component: AuctionProductDetailComponent,
 
-  }];
+  }
+];
 
 
 @NgModule({

@@ -13,7 +13,7 @@ export class AuctionService {
   }
 
   getAuctionByProductId(idProduct: number): Observable<Product> {
-    return this._httpClient.get<Product>(environment.API_URL_AUCTION + '/auction/' + idProduct);
+    return this._httpClient.get<Product>(environment.API_URL_AUCTION + '/auction-detail/' + idProduct);
   }
 }
 

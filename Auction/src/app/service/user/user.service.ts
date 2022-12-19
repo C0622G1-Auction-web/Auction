@@ -81,11 +81,16 @@ export class UserService {
    * Date created: 15/12/2022
    * @return User
    */
-  saveaddAcountUser(user: User): Observable<User> {
+
+  saveaddAcountUser(user : User): Observable<User> {
+
     console.log(user);
     return this._httpClient.post<User>('http://localhost:8080/api/user/v1/add', user);
   }
 
+  findTopUser(): Observable<any> {
+    return this._httpClient.get<any>(environment.API_TOP_USER)
+  }
 
   /**
    * Create by: HaiNT
@@ -95,7 +100,6 @@ export class UserService {
   updateByAdim(id: any, user: any): Observable<UserEditDto> {
     return this._httpClient.put<UserEditDto>(environment.api_url_list_user + '/' + id, user);
   }
-
 
 }
 

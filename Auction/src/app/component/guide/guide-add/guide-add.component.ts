@@ -27,9 +27,9 @@ export class GuideAddComponent implements OnInit {
       content:['']
     })
   }
-    craeteGuide(){
+    createGuide(){
 this._guideService.create(this.guideForm.value).subscribe(data=>{
-  console.log("sucesss")
+  console.log("success")
 })
     }
 }
