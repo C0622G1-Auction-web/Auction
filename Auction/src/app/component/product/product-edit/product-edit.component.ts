@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Category} from "../../../model/product/category";
 import {PriceStep} from "../../../model/product/price-step";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -14,6 +14,10 @@ import {ImgUrlProduct} from "../../../model/product/img-url-product";
 import {finalize} from "rxjs/operators";
 import {ImgUrlProductDto} from "../../../model/product/dto/img-url-product-dto";
 import {ProductDto} from "../../../model/product/dto/product-dto";
+import {ProductAddComponent} from '../product-add/product-add.component';
+import {checkStartTime} from "../product-add/product-add.component";
+import {ToastrService} from "ngx-toastr";
+import {checkEndTime} from "../product-add/product-add.component";
 
 @Component({
   selector: 'app-product-edit',
@@ -32,7 +36,8 @@ export class ProductEditComponent implements OnInit {
   imgs: ImgUrlProduct[] = [];
   idImageList: any[] = [];
   imgCreate: any[] = [];
-
+  checkUser = "";
+  messageEdit = "";
 
   constructor(private _formBuilder: FormBuilder,
               private _productService: ProductService,
@@ -41,7 +46,8 @@ export class ProductEditComponent implements OnInit {
               private _userService: UserService,
               private _storage: AngularFireStorage,
               private _imageProductService: ImageProductService,
-              private _activatedRoute: ActivatedRoute) {
+              private _activatedRoute: ActivatedRoute,
+              private _toast: ToastrService) {
 
   }
 
@@ -54,11 +60,14 @@ export class ProductEditComponent implements OnInit {
   getFormEdit() {
     this._activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get("id");
-      this._productService.findById(this.id).subscribe(data => {
-        this.productFind = data;
-        this._userService.findUserById(data.user.id).subscribe(data => {
-          this.userFind = data;
+      this._productService.findById(this.id).subscribe(product => {
+        this.productFind = product;
+        console.log(product);
+        this._userService.findUserById(product.user.id).subscribe(u => {
+          this.userFind = u;
+          console.log(u);
           this.formEditProduct.patchValue({user: this.userFind.id})
+          this.checkUser = "Mã người đăng: " + this.userFind.id + "\n" + "Tên người đăng: " + this.userFind.firstName + " " + this.userFind.lastName;
         });
         console.log(this.productFind);
         this._imageProductService.getListImgProductId(this.productFind.id).subscribe(value => {
@@ -66,19 +75,20 @@ export class ProductEditComponent implements OnInit {
           console.log(value);
         });
         this.formEditProduct = this._formBuilder.group({
-          id: [data.id, [Validators.required]],
-          name: [data.name, [Validators.required]],
-          description: [data.description, [Validators.required]],
-          initialPrice: [data.initialPrice, [Validators.required]],
-          startTime: [data.startTime, [Validators.required]],
-          endTime: [data.endTime, [Validators.required]],
-          registerDay: [data.registerDay],
-          priceStep: [data.priceStep.id, [Validators.required]],
-          category: [data.category.id, [Validators.required]],
-          reviewStatus: [data.reviewStatus.id],
-          auctionStatus: [data.auctionStatus.id],
-          user: []
-        });
+          id: [product.id, [Validators.required]],
+          name: [product.name, [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
+          description: [product.description, [Validators.required]],
+          initialPrice: [product.initialPrice, [Validators.required, Validators.pattern('\\d+$')]],
+          startTime: [product.startTime, [Validators.required]],
+          endTime: [product.endTime, [Validators.required]],
+          registerDay: [product.registerDay],
+          priceStep: [product.priceStep.id],
+          category: [product.category.id],
+          reviewStatus: [product.reviewStatus.id],
+          auctionStatus: [product.auctionStatus.id],
+          user: ["", [Validators.required, Validators.pattern('\\d+$')]],
+          imageProduct: ["", [Validators.required]],
+        }, {validators: [checkStartTime, checkEndTime]});
       });
     });
   }
@@ -96,11 +106,14 @@ export class ProductEditComponent implements OnInit {
   }
 
   findUserById(testNum) {
-    testNum.setAttribute('disabled',true);
+    testNum.setAttribute('disabled', true);
     this._userService.findUserById(testNum.value).subscribe(data => {
       this.userFind = data;
-      this.formEditProduct.patchValue({user: this.userFind.id})
+      this.formEditProduct.patchValue({user: this.userFind.id});
+      this.checkUser = "Mã người đăng: " + this.userFind.id + "\n" + "Tên người đăng: " + this.userFind.firstName + " " + this.userFind.lastName;
       console.log(this.userFind)
+    }, error => {
+      this.checkUser = "Không tìm thấy thông tin người đăng!"
     });
   }
 
@@ -114,6 +127,9 @@ export class ProductEditComponent implements OnInit {
     }
     console.log(this.selectedFile);
     if (this.selectedFile.length !== 0) {
+      setTimeout(() => {
+        this.messageEdit = "Đang tải ảnh vui lòng đợi........";
+      }, 3000)
       for (let i = 0; i < this.selectedFile.length; i++) {
         let selectedImage = this.selectedFile[i];
         const n = Date.now();
@@ -122,6 +138,7 @@ export class ProductEditComponent implements OnInit {
         this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe(url => {
+              this.messageEdit = ""
               this.imgCreate.push(url);
             });
           })
@@ -145,11 +162,13 @@ export class ProductEditComponent implements OnInit {
             };
             console.log(image);
             this._imageProductService.create(image).subscribe(() => {
-              console.log('SUCCESSFULLY CREATE');
             });
           }
         }
+      },error => {
+        this._toast.error("Cập nhật sản phẩm thất bại!");
       });
+      this._toast.success("Cập nhật sản phẩm thành công!");
       if (this.idImageList.length !== 0) {
         for (let j = 0; j < this.idImageList.length; j++) {
           console.log(this.idImageList[j])
@@ -157,24 +176,31 @@ export class ProductEditComponent implements OnInit {
         }
       }
     }
+    this._toast.error("Cập nhật sản phẩm thất bại!");
   }
 
   deleteImage(i, img) {
     this.idImageList.push(img.id);
     this.imgs.splice(i, 1);
-    console.log(img);
+    this._toast.error("Bạn đã xóa 1 ảnh!")
   }
 
   deleteImageNew(index) {
     this.imgCreate.splice(index, 1)
-    console.log(index);
+    this._toast.error("Bạn đã xóa 1 ảnh!")
   }
 
   deleteImageById(id: number) {
     this._imageProductService.delete(id).subscribe(data => {
     });
   }
+
   resetFindUserById(testNum) {
     testNum.removeAttribute('disabled')
   }
+
+  resetForm() {
+    this.ngOnInit();
+  }
+
 }
