@@ -20,12 +20,8 @@ import {GuideEditComponent} from './component/guide/guide-edit/guide-edit.compon
 import {GuideDeleteComponent} from './component/guide/guide-delete/guide-delete.component';
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
 import {HomeComponent} from './component/home/home.component';
-<<<<<<< HEAD
-import {RegisterComponent} from './component/security/register/register.component';
-=======
 import {RegisterComponent} from './security/register/register.component';
 import {ResetPasswordComponent} from './security/reset-password/reset-password.component';
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
 import {AuctionRequestComponent} from './component/auction-request/auction-request.component';
 import {ProductDetailComponent} from './component/product/product-detail/product-detail.component';
 import {VerificationComponent} from './security/verification/verification.component';
@@ -41,8 +37,7 @@ import { AddressPaymentComponent } from './component/payment/address-payment/add
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
-<<<<<<< HEAD
-import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
+import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
@@ -50,18 +45,11 @@ import { AuctionProductAddComponent } from './component/auction/auction-product-
 import { LoginComponent } from './component/security/login/login.component';
 import { ChatUserComponent } from './component/chat/chat-user/chat-user.component';
 import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.component';
-=======
-import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
-import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/storage";
-import {AngularFireModule} from "@angular/fire";
-import {environment} from "../environments/environment";
 import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
-import {LoginComponent} from "./security/login/login.component";
 
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -105,17 +93,14 @@ const googleLoginOptions = {
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent,
-<<<<<<< HEAD
     AuctionProductAddComponent,
     PaymentReceiptComponent,
     TransactionComponent,
     ChatUserComponent,
-    ChatAdminComponent
-=======
+    ChatAdminComponent,
     UserCreateComponent,
     UserUpdateComponent,
     UserCreateComponent
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
   ],
   imports: [
     ReactiveFormsModule,

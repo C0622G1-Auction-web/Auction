@@ -16,15 +16,9 @@ export interface Product {
   reviewStatus?: ReviewStatus;
   auctionStatus?: AuctionStatus;
   category?: Category;
-<<<<<<< HEAD
   maxCurrentPrice?: number;
-  registerDay?: string;
-  imgUrlProduct?: ImgUrlProduct;
   imgs?: any;
-=======
   registerDay?: string;
-  imgUrlProduct?: ImgUrlProduct;
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
   user?: User;
   nameProduct: String;
   RegisterDay: String;

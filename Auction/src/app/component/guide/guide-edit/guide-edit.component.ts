@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GuideService} from "../../../service/guide/guide.service";
@@ -9,9 +8,6 @@ import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
 import {finalize} from "rxjs/operators";
 import {Guide} from "../../../model/guide/guide";
 import {ToastrService} from "ngx-toastr";
-=======
-import { Component, OnInit } from '@angular/core';
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
 
 /*Create by QuangND
 * Component of screen Edit a Guide
@@ -23,7 +19,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./guide-edit.component.css']
 })
 export class GuideEditComponent implements OnInit {
-<<<<<<< HEAD
   editGuideForm: FormGroup;
   guide: Guide;
   selectedImages: any[] = [];
@@ -53,7 +48,7 @@ export class GuideEditComponent implements OnInit {
       console.log(data)
       this.editGuideForm = this._formBuilder.group({
         id: [data.id],
-        title: [data.title, [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern('^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ0-9 ]*$')]],
+        title: [data.title, [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern('^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ0-9,.?! ]*$')]],
         content: [data.content, [Validators.required, Validators.minLength(30), Validators.maxLength(1000)]]
       })
     })
@@ -150,12 +145,4 @@ export class GuideEditComponent implements OnInit {
     this._imgUrlGuideService.delete(id).subscribe(data => {
     });
   }
-=======
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
 }

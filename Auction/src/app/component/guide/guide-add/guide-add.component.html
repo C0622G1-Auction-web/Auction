@@ -4,7 +4,6 @@
 -->
 
 <div class="container ">
-<<<<<<< HEAD
   <div class="row">
     <div class="col-lg-6">
       <h3 class="center">Tạo Mới Hướng Dẫn</h3>
@@ -26,20 +25,10 @@
               </div>
             </div>
           </div>
-=======
-  <h3 class="center">Tạo Mới Hướng Dẫn</h3>
-  <div class="guide w-50" style=" box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.35);">
-    <form [formGroup]="guideForm" id="guideform" (ngSubmit)="craeteGuide()" >
-      <div class="row">
-        <label for="title" class="form-label">Chủ đề (<span style="color: red">*</span>)</label>
-        <input formControlName="title" id="title" type="text" placeholder=" Chọn chủ đề" class="form-control" >
-      </div>
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
 
           <div class="row">
             <label for="floatingTextarea">Nội dung (<span style="color: red">*</span>)</label>
 
-<<<<<<< HEAD
             <textarea formControlName="content" class="form-control" rows="6" placeholder="Ghi nội dung ở đây"
                       id="floatingTextarea"
                       [ngClass]="guideForm.controls['content'].touched && guideForm.controls['content'].invalid?'is-invalid':guideForm.controls['content'].touched && guideForm.controls['title'].valid ?'is-valid':''"></textarea>
@@ -92,22 +81,5 @@
         </div>
       </div>
     </div>
-=======
-        <textarea formControlName="content" class="form-control" rows="6" placeholder="Ghi nội dung ở đây"
-                  id="floatingTextarea" ></textarea>
-      </div>
-
-      <div class="row">
-        <label for="formFile" class="form-label">Chọn hình ảnh</label>
-        <input class="form-control" type="file" id="formFile">
-      </div>
-      <div class="center">
-        <button class="btn btn-primary w-100" type="submit">
-          Thêm Hướng dẫn
-        </button>
-      </div>
-    </form>
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
   </div>
-
 </div>

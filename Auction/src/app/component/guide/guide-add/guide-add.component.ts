@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GuideService} from "../../../service/guide/guide.service";
 import {AngularFireStorage} from "@angular/fire/storage";
@@ -8,13 +7,6 @@ import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
 import {ImgUrlGuideService} from "../../../service/guide/img-url-guide.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
-=======
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {Observable} from "rxjs";
-import {GuideService} from "../../../service/guide/guide.service";
-import {Guide} from "../../../model/guide/guide";
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
-
 @Component({
   selector: 'app-guide-add',
   templateUrl: './guide-add.component.html',
@@ -27,7 +19,6 @@ import {Guide} from "../../../model/guide/guide";
 * */
 export class GuideAddComponent implements OnInit {
   guideForm: FormGroup;
-<<<<<<< HEAD
   selectedImages: any[] = [];
   imgCreate: any[]=[];
   messageCreate: String;
@@ -108,22 +99,5 @@ export class GuideAddComponent implements OnInit {
     this.imgCreate.splice(i, 1)
     console.log(i)
   }
-=======
-  newGuide: Guide;
-  downloadURL: Observable<string>;
-  constructor(private _guideService:GuideService,
-              private _formBuilder: FormBuilder) { }
 
-  ngOnInit(): void {
-    this.guideForm =this._formBuilder.group({
-      title:[''],
-      content:['']
-    })
-  }
-    craeteGuide(){
-this._guideService.create(this.guideForm.value).subscribe(data=>{
-  console.log("sucesss")
-})
-    }
->>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
 }
