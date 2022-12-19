@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Auction/src/app/security/login/login.component.ts
  import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
@@ -7,6 +8,18 @@ import {TokenService} from "../../service/security/token.service";
 import {MessageRespone} from "../../model/security/message-respone";
 import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {Googletoken} from "../oauth2/googletoken";
+=======
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+
+import {GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
+import {MessageRespone} from "../../../model/security/message-respone";
+import {Googletoken} from "../../../security/oauth2/googletoken";
+import {AuthService} from "../../../service/security/auth.service";
+import {TokenService} from "../../../service/security/token.service";
+>>>>>>> 87538edb941b6376983de53110d9afb180e93206:Auction/src/app/component/security/login/login.component.ts
 
 @Component({
   selector: 'app-login',
@@ -43,7 +56,7 @@ export class LoginComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(5)]],
       rememberMe: [false]
-    })
+    });
   }
 
   /**
@@ -54,11 +67,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.rfLogin.value).subscribe(data => {
-      if(data.token != undefined) {
+      // tslint:disable-next-line:triple-equals
+      if (data.token != undefined) {
 
         if (this.rfLogin.value.rememberMe) {
           this.tokenService.rememberMe(data.accountId, data.deleteStatus, data.statusLock, data.username,
-            data.token, data.role)
+            data.token, data.role);
         } else {
           this.tokenService.setAccountIdSession(data.accountId);
           this.tokenService.setDeleteStatusSession(data.deleteStatus);
@@ -68,12 +82,12 @@ export class LoginComponent implements OnInit {
           this.tokenService.setRoleSession(data.role);
         }
 
-        this.router.navigate(['/home']).then(()=>{
+        this.router.navigate(['/home']).then(() => {
           location.reload();
-        })
+        });
 
       }
-    },error => {
+    }, error => {
 
       const messageRespone: MessageRespone = error;
 
@@ -83,16 +97,20 @@ export class LoginComponent implements OnInit {
       } else {
         this.toastr.error('Đăng nhập thất bại');
         this.router.navigateByUrl('/login');
+<<<<<<< HEAD:Auction/src/app/security/login/login.component.ts
+=======
+        console.log('Đăng nhập thất bại');
+>>>>>>> 87538edb941b6376983de53110d9afb180e93206:Auction/src/app/component/security/login/login.component.ts
       }
 
-    })
+    });
   }
 
   /**
-  * Created by: DucDH
-  * Date: 16/12/2022
-  * Function: To login using google oauth2
-  */
+   * Created by: DucDH
+   * Date: 16/12/2022
+   * Function: To login using google oauth2
+   */
 
   loginWithGoogle() {
     this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
@@ -105,7 +123,7 @@ export class LoginComponent implements OnInit {
         if (req.token == null) {
           const emailToRegister = req.email;
 
-          this.router.navigateByUrl('/signUp/' + emailToRegister)
+          this.router.navigateByUrl('/signUp/' + emailToRegister);
 
         } else {
 
@@ -114,11 +132,11 @@ export class LoginComponent implements OnInit {
 
           this.router.navigate(['/home']).then(() => {
             location.reload();
-          })
+          });
 
         }
-      })
-    })
+      });
+    });
   }
 
 

@@ -1,9 +1,7 @@
 export interface ProductDto {
-
-  nameProduct?: String;
-  description?: String;
-  RegisterDay?: String;
-  Review?: String;
-  IsDelete?: String;
-
+  nameProduct?: string;
+  description?: string;
+  RegisterDay?: string;
+  Review?: string;
+  IsDelete?: string;
 }

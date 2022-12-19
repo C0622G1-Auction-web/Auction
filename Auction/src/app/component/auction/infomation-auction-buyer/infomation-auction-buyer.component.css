@@ -1,0 +1,29 @@
+.my__pagination{
+  display: flex;
+
+}
+.my__page-item {
+  margin: 0 4px;
+  border-radius: 4px;
+  display: block;
+  padding: 2px 16px;
+  list-style: none;
+  border: 1px solid #e74c3c;
+
+}
+.my__page-item:hover {
+  color: white;
+  background-color: #e74c3c;
+  cursor: pointer;
+  transition: background-color, 0.5s;
+}
+
+.my__page-link {
+  font-weight: bold;
+
+}
+
+.my__page-item.actived {
+  color: white;
+  background-color: #e74c3c;
+}
