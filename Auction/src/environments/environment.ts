@@ -30,7 +30,8 @@ export const environment = {
   api_url_order_status: 'http://localhost:8080/api/v1/payments',
   api_url_userType: "http://localhost:8080/api/v1/users/usersType",
   productUrl: 'http://localhost:8080/api/v1/products',
-  imageUrl: 'http://localhost:8080/api/v1/products/img'
+  imageUrl: 'http://localhost:8080/api/v1/products/img',
+  DIA_GIOI_VIETNAM_API: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
 };
 
 /*

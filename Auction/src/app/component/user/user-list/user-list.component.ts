@@ -6,7 +6,7 @@ import {UserListDto} from "../../../dto/user-list-dto";
 import {PageUsers} from "../../../model/user/page-users";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UnlockUsers} from 'src/app/model/user/unlock-users';
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import {Router} from "@angular/router";
 
 @Component({
@@ -21,9 +21,6 @@ export class UserListComponent implements OnInit {
   userTypeList: UserType[] = [];
   user: User
 
-  // deleteProducts
-  // deleteIds: number[];
-
   unlockUsers: UnlockUsers[];
   unlockIds: number[];
   checkedAll: boolean;
@@ -32,7 +29,6 @@ export class UserListComponent implements OnInit {
   constructor(private _userService: UserService,
               private _formBuilder: FormBuilder,
               private _toast: ToastrService,
-
   ) {
   }
 
@@ -49,7 +45,8 @@ export class UserListComponent implements OnInit {
           emailSearch: [''],
           userTypeSearch: [''],
         });
-        console.log(this.rfSearch.value)
+        this.unlockIds = [];
+        console.log(this.rfSearch.value);
         this.onSearchAndPage();
         console.log(this.onSearchAndPage())
       });
@@ -73,25 +70,6 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  modalById(id: number): void {
-    this._userService.findUserEditById(id).subscribe(data => {
-      this.user = data;
-    })
-  }
-
-  unlock() {
-    this._userService.unlock(this.unlockIds)
-      // .subscribe(data => {
-      // this._router.navigate(['/user/list']);
-    // });
-  }
-
-  sendToUnlockGroupModal() {
-    this.unlockUsers = [];
-    this._userService.findByListId(this.unlockIds).subscribe(data => {
-      this.unlockUsers = data;
-    });
-  }
 
   addToUnlock(id: any) {
     const index = this.unlockIds.indexOf(id, 0);
@@ -99,18 +77,7 @@ export class UserListComponent implements OnInit {
   }
 
 
-  delete() {
-    this._userService.delete(this.unlockIds)
-  }
-
-  sendToDeleteGroupModal() {
-    this.unlockUsers = [];
-    this._userService.findByListId(this.unlockIds).subscribe(data => {
-      this.unlockUsers = data;
-    });
-  }
-
-  addAllToDelete() {
+  addAllToUnlock() {
     this.checkedAll = true;
     for (let value of this.pageUsers.content) {
       if (!this.unlockIds.includes(value.id)) {
@@ -133,10 +100,33 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  addToDelete(id: number) {
-    const index = this.unlockIds.indexOf(id, 0);
-    index > -1 ? this.unlockIds.splice(index, 1) : this.unlockIds.push(id);
+  sendToUnlockGroupModal() {
+    this.unlockUsers = [];
+    this._userService.findByListId(this.unlockIds).subscribe(data => {
+      this.unlockUsers = data;
+    });
   }
 
+  modalById(id: number): void {
+    this._userService.findUserEditById(id).subscribe(data => {
+      this.user = data;
+    })
+    console.log(id)
+    this.unlockIds = [id];
+    console.log(this.unlockUsers)
+    this.sendToUnlockGroupModal();
+    console.log(this.unlockUsers)
+  }
+
+
+  unlock() {
+    this._userService.unlock(this.unlockIds).subscribe(data => {
+      // this._notificationService.showSuccessNotification('Xoá thành công!');
+    }, error => {
+      // this._notificationService.showErrorNotification('Có lỗi khi xoá');
+    }, () => {
+      this.ngOnInit();
+    });
+  }
 
 }

@@ -73,11 +73,6 @@ export class UserService {
   }
 
 
-  getAllUser(): Observable<User[]> {
-    return null;
-  }
-
-
   /**
    * Create by: NguyenNQ
    * Date created: 15/12/2022
@@ -99,23 +94,25 @@ export class UserService {
     return this._httpClient.put<UserEditDto>(environment.api_url_list_user + '/' + id, user);
   }
 
-
-  // findByListId(unlockIds: number[]): Observable<UnlockUsers[]> {
-  //   console.log(unlockIds);
-  //   return this._httpClient.put<UserEditDto[]>(environment.api_url_list_user + '/Unlock' , unlockIds);
-  // }
-
+  /**
+   * Create by: HaiNT
+   * Date created: 16/12/2022
+   * @return User
+   */
   unlock(unlockIds: number[]): Observable<any> {
-    console.log(unlockIds)
-    return this._httpClient.post<UserEditDto[]>(environment.api_url_list_user + '/unlockUser' , unlockIds);
+    return this._httpClient.post<UserEditDto[]>(environment.api_url_list_user + '/unlockUser', unlockIds);
   }
 
-  delete(unlockIds: number[]): Observable<any> {
-    return this._httpClient.post<any>(environment.api_url_list_user + '/Unlock', unlockIds);
-  }
+  /**
+   * Create by: HaiNT
+   * Date created: 16/12/2022
+   * @return User
+   */
 
   findByListId(unlockIds: number[]): Observable<UnlockUsers[]> {
     return this._httpClient.post<UnlockUsers[]>(environment.api_url_list_user_list_id, unlockIds);
   }
+
+
 }
 
