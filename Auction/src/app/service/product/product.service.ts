@@ -3,11 +3,13 @@ import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Product} from '../../model/product/product';
+
 import {PriceStep} from '../../model/product/price-step';
 import {Category} from '../../model/product/category';
 import {User} from '../../model/user/user';
 import {ImgUrlProduct} from '../../model/product/img-url-product';
 import {environment} from '../../../environments/environment';
+
 import {ReviewStatus} from '../../model/product/review-status';
 import {PageProduct} from '../../model/product/page-product';
 import {ProductDelete} from '../../model/product/product-delete';
@@ -16,6 +18,7 @@ import {Reason} from '../../model/product/reason';
 import {DataResult} from '../../model/product/data_result';
 import {catchError} from 'rxjs/operators';
 import {ProductDto} from '../../model/product/iProduct_dto';
+
 
 
 @Injectable({
@@ -73,7 +76,7 @@ export class ProductService {
    * Date: 16/11/2022
    */
   save(productDto): Observable<Product> {
-    return this._httpClient.post<Product>(environment.productUrl + "/create", JSON.stringify(productDto), this.httpOptions)
+    return this._httpClient.post<Product>(environment.productUrl + '/create', JSON.stringify(productDto), this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -87,7 +90,6 @@ export class ProductService {
   findAllReview(): Observable<ReviewStatus[]> {
     return this._httpClient.get<ReviewStatus[]>(this.API_URL + 'listReviewStatus');
   }
-
 
   /**
    * Created: SangDD
@@ -135,7 +137,7 @@ export class ProductService {
    * Function: find product by selected ids
    * Date: 15/11/2022
    */
-  findById(id: number): Observable<ProductDtoRoleAdmin> {
+  findByDtoId(id: number): Observable<ProductDtoRoleAdmin> {
     return this._httpClient.get<ProductDtoRoleAdmin>(environment.api_url_find_by_id + id);
   }
 
@@ -175,21 +177,21 @@ export class ProductService {
     return this._httpClient.get<Reason>(environment.api_url_get_reason + id);
   }
 
-
   getAll(): Observable<PageProduct> {
     return this._httpClient.get<PageProduct>(environment.api_url_products);
   }
 
 
   saveProduct(product: ProductDto): Observable<number> {
-    return this._httpClient.post<number>(environment.productUrl + "/create", product)
+    return this._httpClient.post<number>(environment.productUrl + '/create', product);
   }
 
   findByIdd(id: number): Observable<Product> {
     return this._httpClient.get<Product>(environment.productUrl + "/" + id)
+
   }
 
   update(productDto, id): Observable<Product> {
-    return this._httpClient.put<Product>(environment.productUrl + "/update/" + id, productDto)
+    return this._httpClient.put<Product>(environment.productUrl + '/update/' + id, productDto);
   }
 }

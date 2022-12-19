@@ -66,8 +66,8 @@ export class UserService {
    * Date created: 16/12/2022
    * @return User
    */
-  findUserById(value: number): Observable<User> {
-    return this._httpClient.get<User>(environment.userUrl + "find/" + value);
+  findUserById(value): Observable<User> {
+    return this._httpClient.get<User>(environment.userUrl + "/find/" + value, this.httpOptions);
   }
 
 
@@ -81,7 +81,9 @@ export class UserService {
    * Date created: 15/12/2022
    * @return User
    */
+
   saveaddAcountUser(user : User): Observable<User> {
+
     console.log(user);
     return this._httpClient.post<User>('http://localhost:8080/api/user/v1/add', user);
   }

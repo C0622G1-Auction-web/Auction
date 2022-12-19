@@ -1,221 +1,248 @@
-<div class="container bg-white h-100 d-flex flex-column">
-  <div class="  auction d-flex align-items-center">
-    <div class="row d-flex ms-auto me-5">
-      <div class="boxed shadow-md h-100 ms-auto">
-        <form *ngIf="formCreateProduct" class="form" [formGroup]="formCreateProduct" (ngSubmit)="addNewProduct()">
-          <fieldset>
-            <legend>
-              <div class="mt-4 text-center">
-                <h1>Thêm mới sản phẩm</h1>
-              </div>
-            </legend>
-          </fieldset>
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+
+  <div class="bg-add-product">
+    <div class="boxed shadow-md h-100 ms-auto">
+      <form *ngIf="formCreateProduct" class="form" [formGroup]="formCreateProduct" (ngSubmit)="addNewProduct()">
+        <fieldset>
+          <legend>
+            <div class="mt-4 text-center">
+              <h1>Thêm mới sản phẩm</h1>
             </div>
-            <input type="text" class="form-control" formControlName="name"
-                   [ngClass]="formCreateProduct.controls['name'].invalid ?'is-invalid':'is-valid'"/>
-            <div class="invalid-feedback">
-              <div *ngIf="formCreateProduct.controls['name'].errors?.required
+          </legend>
+        </fieldset>
+        <div class="mb-2">
+          <div class="d-flex align-items-center mb-2">
+            <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>
+          </div>
+          <input type="text" class="form-control" formControlName="name"
+                 [ngClass]="formCreateProduct.controls['name'].invalid ?'is-invalid':'is-valid'"/>
+          <div class="invalid-feedback">
+            <div *ngIf="formCreateProduct.controls['name'].errors?.required
         && (formCreateProduct.controls['name'].touched)">
-                Không được bỏ trống
-              </div>
-              <div *ngIf="formCreateProduct.controls['name'].errors?.pattern
+              Không được bỏ trống!
+            </div>
+            <div *ngIf="formCreateProduct.controls['name'].errors?.minlength
         && (formCreateProduct.controls['name'].touched)">
-                Khong dung dinh dang
-              </div>
+              Tên sản phẩm không được ít hơn 6 kí tự!
+            </div>
+            <div *ngIf="formCreateProduct.controls['name'].errors?.maxlength
+        && (formCreateProduct.controls['name'].touched)">
+              Tên sản phẩm không được nhiều hơn 255 kí tự!
             </div>
           </div>
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/icon-people.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Mã người đăng<span style="color: red"> (*)</span>:</label>
-            </div>
-            <div class="d-flex align-items-center mb-2">
-              <input  #testNum style="width: 50%" type="number" class="form-control" formControlName="user"
-                     [ngClass]="formCreateProduct.controls['user'].invalid ? 'is-invalid':'is-valid'" />
-              <button type="button" class="btn btn-primary d-flex justify-content-center mx-3"
-                      (click)="findUserById(testNum)">
-                <object data="assets/icons/check-people.svg" width="20" height="20"
-                        class="me-2 slide"></object>
-                Kiểm tra
-              </button>
-              <button type="button" style="width: 20%" (click)="resetFindUserById(testNum)">
-                <object data="assets/icons/back.svg" width="20" height="20"></object>
-              </button>
-            </div>
-            <div class="invalid-feedback">
-              <div *ngIf="formCreateProduct.controls['user'].errors?.required
+        </div>
+        <div class="mb-2">
+          <div class="d-flex mb-2 mt-3 w-100">
+            <object data="assets/icons/icon-people.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Mã người đăng<span style="color: red"> (*)</span>:</label>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <input #testNum style="width: 50%" type="text" class="form-control" formControlName="user"
+                   [ngClass]="formCreateProduct.controls['user'].invalid ? 'is-invalid':'is-valid'"/>
+            <button type="button" class="btn btn-primary d-flex justify-content-center mx-3"
+                    (click)="findUserById(testNum)">
+              <object data="assets/icons/check-people.svg" width="20" height="20"
+                      class="me-2 slide"></object>
+              Kiểm tra
+            </button>
+            <button type="button" style="width: 20%" (click)="resetFindUserById(testNum)">
+              <object data="assets/icons/back.svg" width="20" height="20"></object>
+            </button>
+          </div>
+        </div>
+        <div class="invalid-feedback d-block">
+          <div *ngIf="formCreateProduct.controls['user'].errors?.required
         && (formCreateProduct.controls['user'].touched)">
-                Không được bỏ trống
-              </div>
-              <div *ngIf="formCreateProduct.controls['user'].errors?.pattern
+            Không được bỏ trống!
+          </div>
+          <div *ngIf="formCreateProduct.controls['user'].errors?.pattern
         && (formCreateProduct.controls['user'].touched)">
-                Khong dung dinh dang
-              </div>
-            </div>
+            Không đúng định dạng số!
           </div>
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/information.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Thông tin người đăng:</label>
-            </div>
-            <textarea *ngIf="userFind" class="form-control" disabled>
-              {{userFind.id}}
-              {{userFind.firstName}} {{userFind.lastName}}
+        </div>
+        <div class="mb-2">
+          <div class="d-flex align-items-center mb-2">
+            <object data="assets/icons/information.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Thông tin người đăng:</label>
+          </div>
+          <textarea *ngIf="userFind" class="form-control" disabled>
+                  {{checkUser}}
             </textarea>
-            <textarea *ngIf="!userFind" class="form-control" disabled>
-             Không tìm thấy thông tin người đăng
+          <textarea *ngIf="!userFind" class="form-control" disabled>
+                  {{checkUser}}
             </textarea>
+        </div>
+        <div class="mb-2">
+          <div class="d-flex align-items-center mb-2">
+            <object data="assets/icons/dollar.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>
           </div>
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/dollar.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>
+          <input type="text" class="form-control" formControlName="initialPrice"
+                 [ngClass]="formCreateProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>
+          <div class="invalid-feedback">
+            <div *ngIf="formCreateProduct.controls['initialPrice'].errors?.required
+        && (formCreateProduct.controls['initialPrice'].touched)">
+              Không được bỏ trống!
             </div>
-            <input type="text" class="form-control" formControlName="initialPrice"
-                   [ngClass]="formCreateProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>
-            <div class="invalid-feedback">
-              <div *ngIf="formCreateProduct.controls['initialPrice'].errors?.required
+            <div *ngIf="formCreateProduct.controls['initialPrice'].errors?.pattern
         && (formCreateProduct.controls['initialPrice'].touched)">
-                Không được bỏ trống
-              </div>
-              <div *ngIf="formCreateProduct.controls['initialPrice'].errors?.pattern
-        && (formCreateProduct.controls['initialPrice'].touched)">
-                Khong dung dinh dang
-              </div>
+              Giá ban đầu không được nhỏ hơn 0!
             </div>
           </div>
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/money-increase.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Mỗi lần tăng ít nhất<span
-                style="color: red"> (*)</span>:</label>
-            </div>
-            <select class="form-select" aria-label="Default select example" formControlName="priceStep"
-                    [ngClass]="formCreateProduct.controls['priceStep'].invalid ?'is-invalid':'is-valid'">
-              <option *ngFor="let item of priceStepList" [ngValue]="item.id">{{item.step}}</option>
-            </select>
-            <div class="invalid-feedback">
-              <div *ngIf="formCreateProduct.controls['priceStep'].errors?.required
+        </div>
+        <div class="mb-2">
+          <div class="d-flex align-items-center mb-2">
+            <object data="assets/icons/money-increase.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Mỗi lần tăng ít nhất<span
+              style="color: red"> (*)</span>:</label>
+          </div>
+          <select class="form-select" aria-label="Default select example" formControlName="priceStep"
+                  [ngClass]="formCreateProduct.controls['priceStep'].invalid ?'is-invalid':'is-valid'">
+            <option *ngFor="let item of priceStepList" [ngValue]="item.id">{{item.step}}</option>
+          </select>
+          <div class="invalid-feedback">
+            <div *ngIf="formCreateProduct.controls['priceStep'].errors?.required
         && (formCreateProduct.controls['priceStep'].touched)">
-                Không được bỏ trống
-              </div>
+              Không được bỏ trống!
             </div>
           </div>
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/category.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Chủng loại<span style="color: red">(*)</span>:</label>
-            </div>
-            <select class="form-select" aria-label="Default select example"
-                    formControlName="category"
-                    [ngClass]="formCreateProduct.controls['category'].invalid ?'is-invalid':'is-valid'">
-              <option *ngFor="let item of categoryList" [ngValue]="item.id">{{item.name}}</option>
-            </select>
-            <div class="invalid-feedback">
-              <div *ngIf="formCreateProduct.controls['category'].errors?.required
+        </div>
+        <div class="mb-2">
+          <div class="d-flex align-items-center mb-2">
+            <object data="assets/icons/category.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Chủng loại<span style="color: red">(*)</span>:</label>
+          </div>
+          <select class="form-select" aria-label="Default select example"
+                  formControlName="category"
+                  [ngClass]="formCreateProduct.controls['category'].invalid ?'is-invalid':'is-valid'">
+            <option *ngFor="let item of categoryList" [ngValue]="item.id">{{item.name}}</option>
+          </select>
+          <div class="invalid-feedback">
+            <div *ngIf="formCreateProduct.controls['category'].errors?.required
         && (formCreateProduct.controls['category'].touched)">
-                Không được bỏ trống
-              </div>
+              Không được bỏ trống
             </div>
           </div>
-
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/image.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>
-            </div>
-            <input type="file" id="file"
-                   #userPhoto
-                   multiple
-                   (change)="showPreview($event)"
-                   name="image"
-                   autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
-          </div>
-          <div *ngFor="let img of imgs,let i = index">
-            <img style="width: 10px;height: 10px" src="{{img}}">
-            <button (click)="deleteImageNew(i)" type="button" class="btn-close" aria-label="Close"></button>
-          </div>
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/information.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Thông tin chi tiết<span
-                style="color: red">(*)</span>:</label>
-            </div>
-            <textarea class="form-control" formControlName="description"
-                      [ngClass]="formCreateProduct.controls['description'].invalid ?'is-invalid':'is-valid'"></textarea>
-            <div class="invalid-feedback">
-              <div *ngIf="formCreateProduct.controls['description'].errors?.required
-        && (formCreateProduct.controls['description'].touched)">
-                Không được bỏ trống
-              </div>
-            </div>
-          </div>
-
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/hour-end.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Thời gian bắt đầu<span
-                style="color: red"> (*)</span>:</label>
-            </div>
-            <input type="datetime-local" class="form-control" formControlName="startTime"
-                   [ngClass]="formCreateProduct.controls['startTime'].invalid ?'is-invalid':'is-valid'"/>
-            <div class="invalid-feedback">
-              <div *ngIf="formCreateProduct.controls['startTime'].errors?.required
-        && (formCreateProduct.controls['startTime'].touched)">
-                Không được bỏ trống
-              </div>
-            </div>
-          </div>
-          <div class="mb-2">
-            <div class="d-flex align-items-center mb-2">
-              <object data="assets/icons/hour-start.svg" width="20" height="20"></object>
-              <label class="form-label ms-2">Thời gian kết thúc<span
-                style="color: red"> (*)</span>:</label>
-            </div>
-            <input type="datetime-local" class="form-control" formControlName="endTime"
-                   [ngClass]="formCreateProduct.controls['endTime'].invalid ?'is-invalid':'is-valid'"/>
-            <div class="invalid-feedback">
-              <div *ngIf="formCreateProduct.controls['endTime'].errors?.required
-        && (formCreateProduct.controls['endTime'].touched)">
-                Không được bỏ trống
-              </div>
-            </div>
-          </div>
-
-          <div class="d-flex mt-3 mb-2 w-100">
-            <button style="margin-right: 5px" class="btn btn-primary d-flex justify-content-center">
-              <object data="assets/icons/legal-hammer.svg" width="20" height="20"
-                      class="me-2 slide"></object>
-              <p>
-                Thêm
-              </p>
-            </button>
-            <button style="margin-right: 5px"
-                    class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">
-              <object data="assets/icons/button-back.svg" width="20" height="20"
-                      class="me-2 slide"></object>
-              <p>Nhập lại</p>
-            </button>
-            <button class="btn btn-outline btn-warning ms-auto d-flex justify-content-center">
-              <object data="assets/icons/cancel.svg" width="20" height="20"
-                      class="me-2 slide"></object>
-              <p>Hủy</p>
-            </button>
-          </div>
-
-        </form>
+        </div>
 
         <div class="mb-2">
+          <div class="d-flex align-items-center mb-2">
+            <object data="assets/icons/image.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>
+          </div>
+          <input
+            type="file"
+            multiple
+            (change)="showPreview($event)"
+            autocomplete="off" class="custom-file-input form-control"
+            formControlName="imageProduct"
+            [ngClass]="formCreateProduct.controls['imageProduct'].invalid ?'is-invalid':'is-valid'">
+          <div class="invalid-feedback d-block">
+            <div *ngIf="formCreateProduct.controls['imageProduct'].errors?.required
+        && (formCreateProduct.controls['imageProduct'].touched)">
+              Không được bỏ trống!
+            </div>
+          </div>
+        </div>
+        <div *ngIf="messageCreate !=''">{{messageCreate}}</div>
+        <div class="d-flex justify-content-left" style="overflow-x: scroll">
+          <div *ngFor="let img of imgs,let i = index" style="margin-right: 8px">
+            <div style="position: relative">
+              <img class="d-block" style="height: 84px" src="{{img}}">
+              <span class="remove_img" (click)="deleteImageNew(i)"
+                    aria-label="Close">
+            <i class="fa-solid fa-trash-can"></i>
+          </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <div class="d-flex align-items-center mb-2">
+            <object data="assets/icons/information.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Thông tin chi tiết<span
+              style="color: red">(*)</span>:</label>
+          </div>
+          <textarea class="form-control" formControlName="description"
+                    [ngClass]="formCreateProduct.controls['description'].invalid ?'is-invalid':'is-valid'"></textarea>
+          <div class="invalid-feedback">
+            <div *ngIf="formCreateProduct.controls['description'].errors?.required
+        && (formCreateProduct.controls['description'].touched)">
+              Không được bỏ trống!
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <div class="d-flex align-items-center mb-2">
+            <object data="assets/icons/hour-end.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Thời gian bắt đầu<span
+              style="color: red"> (*)</span>:</label>
+          </div>
+          <input type="datetime-local" class="form-control" formControlName="startTime"
+                 [ngClass]="formCreateProduct.errors?.checkStartTime||formCreateProduct.controls['startTime'].invalid ?'is-invalid':'is-valid'"/>
+          <div class="invalid-feedback">
+            <div *ngIf="formCreateProduct.errors?.checkStartTime
+        && (formCreateProduct.controls['startTime'].touched)">
+              Ngày bắt đầu đấu giá không được nhỏ hơn ngày hiện tại!
+            </div>
+            <div *ngIf="formCreateProduct.controls['startTime'].errors?.required
+        && (formCreateProduct.controls['startTime'].touched)">
+              Không được bỏ trống!
+            </div>
+          </div>
+        </div>
+        <div class="mb-2">
+          <div class="d-flex align-items-center mb-2">
+            <object data="assets/icons/hour-start.svg" width="20" height="20"></object>
+            <label class="form-label ms-2">Thời gian kết thúc<span
+              style="color: red"> (*)</span>:</label>
+          </div>
+          <input type="datetime-local" class="form-control" formControlName="endTime"
+                 [ngClass]="formCreateProduct.errors?.checkEndTime||formCreateProduct.controls['endTime'].invalid ?'is-invalid':'is-valid'"/>
+          <div class="invalid-feedback">
+            <div *ngIf="formCreateProduct.errors?.checkEndTime
+        && (formCreateProduct.controls['endTime'].touched)">
+              Ngày kết thúc đấu giá không được nhỏ hơn ngày bắt đầu đấu giá!
+            </div>
+            <div *ngIf="formCreateProduct.controls['endTime'].errors?.required
+        && (formCreateProduct.controls['endTime'].touched)">
+              Không được bỏ trống!
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex mt-3 mb-2 w-100">
+          <button style="margin-right: 5px" class="btn btn-primary d-flex justify-content-center">
+            <object data="assets/icons/legal-hammer.svg" width="20" height="20"
+                    class="me-2 slide"></object>
+            <p>
+              Thêm
+            </p>
+          </button>
+          <button style="margin-right: 5px"
+                  class="btn btn-outline btn-outline-primary ms-auto d-flex justify-content-center">
+            <object data="assets/icons/button-back.svg" width="20" height="20"
+                    class="me-2 slide"></object>
+            <p>Nhập lại</p>
+          </button>
+          <button class="btn btn-outline btn-warning ms-auto d-flex justify-content-center">
+            <object data="assets/icons/cancel.svg" width="20" height="20"
+                    class="me-2 slide"></object>
+            <p>Hủy</p>
+          </button>
+        </div>
+
+      </form>
+
+      <div class="mb-2">
             <span style="font-size: 15px" class="fst-italic">
               Trường có dấu <span style="color: red"> (*)</span> là bắt
               buộc,không được bỏ trống
             </span>
-        </div>
       </div>
     </div>
   </div>
+
 </div>
