@@ -46,5 +46,10 @@ export class PaymentService {
     return this._httpClient.get<PaymentDto>(URL_API + '/get-total-bill');
   }
 
+  updateDisCription(): Observable<PaymentDto> {
+    // @ts-ignore
+    return this._httpClient.put<PaymentDto>(URL_API + '/update');
+  }
+
 }
 
