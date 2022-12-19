@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GuideService} from "../../../service/guide/guide.service";
@@ -8,6 +9,9 @@ import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
 import {finalize} from "rxjs/operators";
 import {Guide} from "../../../model/guide/guide";
 import {ToastrService} from "ngx-toastr";
+=======
+import { Component, OnInit } from '@angular/core';
+>>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
 
 /*Create by QuangND
 * Component of screen Edit a Guide
@@ -19,6 +23,7 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./guide-edit.component.css']
 })
 export class GuideEditComponent implements OnInit {
+<<<<<<< HEAD
   editGuideForm: FormGroup;
   guide: Guide;
   selectedImages: any[] = [];
@@ -145,4 +150,12 @@ export class GuideEditComponent implements OnInit {
     this._imgUrlGuideService.delete(id).subscribe(data => {
     });
   }
+=======
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+>>>>>>> 0fdda8cd5056403da2d913d5a6c5d835cff1563b
 }
