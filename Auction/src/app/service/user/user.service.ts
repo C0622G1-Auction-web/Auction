@@ -21,4 +21,8 @@ export class UserService {
   findUserById(userId: number): Observable<User> {
     return this.httpClient.get<User>(environment.userUrl + userId)
   }
+
+  findTopUser(): Observable<any> {
+    return this.httpClient.get<any>(environment.API_TOP_USER)
+  }
 }

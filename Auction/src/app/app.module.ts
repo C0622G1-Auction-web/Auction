@@ -75,7 +75,7 @@ import { TransactionComponent } from './component/transaction/transaction.compon
     AddressPaymentComponent,
     MethodPaymentComponent,
     PaymentReceiptComponent,
-    TransactionComponent
+    TransactionComponent,
   ],
   imports: [
     BrowserModule,

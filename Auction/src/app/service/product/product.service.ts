@@ -58,9 +58,12 @@ export class ProductService {
    * Date: 15/11/2022
    */
   getAllAndSearch(rfSearch: any): Observable<any> {
-    // return this._httpClient.get<PageProduct>(environment.productSearchUrl, rfSearch);
     return this._httpClient.post<PageProduct>(environment.productSearchUrl, rfSearch);
   }
 
 
+  getAllAndSearchToPage(rfSearch: any, pageNumber: any) {
+    return this._httpClient.post<PageProduct>(environment.productSearchUrl + '?page=' + pageNumber, rfSearch);
+
+  }
 }
