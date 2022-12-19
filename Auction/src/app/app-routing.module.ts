@@ -50,9 +50,7 @@ const routes: Routes = [
   {
     path:"user/create",component:UserCreateComponent
   },
-  {
-    path:'user/update/:id', component: UserUpdateComponent
-  },  
+  {path:'user/update/:id', component: UserUpdateComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
 ];

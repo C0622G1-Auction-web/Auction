@@ -37,7 +37,7 @@ import { AddressPaymentComponent } from './component/payment/address-payment/add
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
-import {GoogleLoginProvider, SocialAuthServiceConfig} from "angularx-social-login";
+import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
 import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/storage";

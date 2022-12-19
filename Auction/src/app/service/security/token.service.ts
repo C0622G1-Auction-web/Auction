@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {User} from "../../model/user/user";
-import {Account} from "../../model/account/account";
 
 const TOKEN_KEY = 'Token_key';
 const ROLE_KEY = 'Role_key';
@@ -19,12 +18,12 @@ export class TokenService {
 
   public setTokenLocal(token: string) {
     localStorage.removeItem(TOKEN_KEY);
-    localStorage.setItem(TOKEN_KEY, token)
+    localStorage.setItem(TOKEN_KEY, token);
   }
 
   public setTokenSession(token: string) {
     sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.setItem(TOKEN_KEY, token)
+    sessionStorage.setItem(TOKEN_KEY, token);
   }
 
   public getToken(): string {
@@ -37,12 +36,12 @@ export class TokenService {
 
   public setUserLocal(user: User) {
     localStorage.removeItem(USER_KEY);
-    localStorage.setItem(USER_KEY, JSON.stringify(user))
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   public setUserSession(user: User) {
     sessionStorage.removeItem(USER_KEY);
-    sessionStorage.setItem(USER_KEY, JSON.stringify(user))
+    sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   public getUser(): string {
@@ -55,12 +54,12 @@ export class TokenService {
 
   public setAccountLocal(account: Account) {
     localStorage.removeItem(ACCOUNT_KEY);
-    localStorage.setItem(ACCOUNT_KEY, JSON.stringify(account))
+    localStorage.setItem(ACCOUNT_KEY, JSON.stringify(account));
   }
 
   public setAccountSession(account: Account) {
     sessionStorage.removeItem(ACCOUNT_KEY);
-    sessionStorage.setItem(ACCOUNT_KEY, JSON.stringify(account))
+    sessionStorage.setItem(ACCOUNT_KEY, JSON.stringify(account));
   }
 
   public getAccount(): string {
@@ -71,25 +70,25 @@ export class TokenService {
     }
   }
 
-  public setRoleLocal(roles: String[]) {
+  public setRoleLocal(roles: string[]) {
     localStorage.removeItem(ROLE_KEY);
-    localStorage.setItem(ROLE_KEY, JSON.stringify(roles))
+    localStorage.setItem(ROLE_KEY, JSON.stringify(roles));
   }
 
-  public setRoleSession(roles: String[]) {
+  public setRoleSession(roles: string[]) {
     sessionStorage.removeItem(ROLE_KEY);
-    sessionStorage.setItem(ROLE_KEY, JSON.stringify(roles))
+    sessionStorage.setItem(ROLE_KEY, JSON.stringify(roles));
   }
 
   public getRole(): string[] {
     if (localStorage.getItem(ROLE_KEY) !== null) {
       JSON.parse(localStorage.getItem(ROLE_KEY)).forEach(role => {
         this.roles.push(role.authority);
-      })
+      });
     } else {
       JSON.parse(sessionStorage.getItem(ROLE_KEY)).forEach(role => {
         this.roles.push(role.authority);
-      })
+      });
     }
 
     return this.roles;

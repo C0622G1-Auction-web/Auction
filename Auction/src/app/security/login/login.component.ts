@@ -7,7 +7,6 @@ import {TokenService} from "../../service/security/token.service";
 import {MessageRespone} from "../../model/security/message-respone";
 import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {Googletoken} from "../oauth2/googletoken";
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 
 @Component({
   selector: 'app-login',

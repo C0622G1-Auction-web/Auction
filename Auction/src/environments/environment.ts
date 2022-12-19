@@ -25,12 +25,13 @@ export const environment = {
     storageBucket: "truonglh-68106.appspot.com",
     messagingSenderId: "680493532790",
     appId: "1:680493532790:web:4d7b3923a9e9d4f00ac157",
-    measurementId: "G-YRDCYMF4H9"
+    measurementId: "G-YRDCYMF4H9",
   },
   LOGIN_API: 'http://localhost:8080/api/auth/login',
   GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
   DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
-  uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create"
+}
+
 
 /*
  * For easier debugging in development mode, you can import the following file
