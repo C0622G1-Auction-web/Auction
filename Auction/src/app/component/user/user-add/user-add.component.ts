@@ -6,7 +6,6 @@ import {UserService} from '../../../service/user/user.service';
 import {Router} from '@angular/router';
 import {Builder} from 'protractor';
 import {User} from '../../../model/user/user';
-import {Account} from '../../../model/account/account';
 
 @Component({
   selector: 'app-user-add',

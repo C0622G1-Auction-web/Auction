@@ -20,21 +20,14 @@
     "@angular/platform-browser": "~9.0.7",
     "@angular/platform-browser-dynamic": "~9.0.7",
     "@angular/router": "~9.0.7",
-<<<<<<< HEAD
-    "@nrwl/angular": "^15.3.3",
-    "@stomp/stompjs": "^6.1.2",
-    "angularx-social-login": "^3.0.0",
-=======
     "angularx-social-login": "^3.5.7",
->>>>>>> f4f689efca083ce6b451b5211af36ead99819b55
     "creditcardpayments": "^1.0.3",
     "firebase": "^8.10.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "ngx-toastr": "^12.1.0",
     "rxjs": "~6.5.4",
-    "socketjs-client": "^1.0.2",
-    "tslib": "^1.14.1",
+    "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
@@ -56,12 +49,6 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
-    "typescript": "~3.7.5",
-    "@angular-devkit/architect": ">= 0.900 < 0.1100",
-    "firebase-tools": "^8.0.0",
-    "fuzzy": "^0.1.3",
-    "inquirer": "^6.2.2",
-    "inquirer-autocomplete-prompt": "^1.0.1",
-    "open": "^7.0.3"
+    "typescript": "~3.7.5"
   }
 }

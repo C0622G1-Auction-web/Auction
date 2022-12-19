@@ -1,8 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {AuctionService} from "../../../service/auction/auction.service";
-import {Auction} from "../../../model/auction/auction";
-import {Product} from "../../../model/product/product";
-import {User} from "../../../model/user/user";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-infomation-auction-seller',
@@ -10,19 +6,10 @@ import {User} from "../../../model/user/user";
   styleUrls: ['./infomation-auction-seller.component.css']
 })
 export class InfomationAuctionSellerComponent implements OnInit {
-  productAuction: Product;
 
-
-  constructor(private _auctionService: AuctionService) {
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this._auctionService.getAuctionByProductId(1).subscribe(
-      data => {
-        this.productAuction = data;
-        console.log("product",this.productAuction);
-      }
-    )
   }
 
 }
