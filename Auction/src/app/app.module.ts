@@ -34,12 +34,16 @@ import { AccountResetPassComponent } from './component/account-reset-pass/accoun
 import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
-import { TransactionComponent } from './component/transaction/transaction.component';
+import {environment} from "../environments/environment";
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFireModule} from "@angular/fire";
 import { ListProductsComponent } from './component/product/list-products/list-products.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { TransactionComponent } from './component/transaction/transaction.component';
+import { LockaccountUserComponent } from './component/user/lockaccount-user/lockaccount-user.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +70,8 @@ import {ToastrModule} from 'ngx-toastr';
     ProductReviewComponent,
     VerificationComponent,
     VerifyResetPasswordComponent,
+    TransactionComponent,
+    LockaccountUserComponent,
     AuctionComponent,
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
@@ -86,7 +92,10 @@ import {ToastrModule} from 'ngx-toastr';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
+
   ],
   providers: [],
   bootstrap: [AppComponent]
