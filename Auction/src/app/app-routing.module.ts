@@ -59,11 +59,11 @@ const routes: Routes = [
 
   },
   {
-    path:'auction/chat/user',
+    path:'chat/user',
     component: ChatUserComponent
   },
   {
-    path:'auction/chat/support',
+    path:'chat/support',
     component: ChatAdminComponent
   }];
 

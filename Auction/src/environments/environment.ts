@@ -9,7 +9,7 @@ export const environment = {
   api_url_list_user: 'http://localhost:8080/api/v1/users',
   api_url_list_img_url: 'http://localhost:8080/api/v1/users/{id}',
   API_URL_AUCTION: "http://localhost:8080/auction/api",
-  API_URL_GUIDE:'http://localhost:8080/auction/v1/api/guide',
+  API_URL_GUIDE:'http://localhost:8080/api/v1/guide',
   firebaseConfig: {
     apiKey: "AIzaSyBFqqq1BOcFnqRPAx_Vq8ewdQiAUPkJbrE",
     authDomain: "eng-cogency-370914.firebaseapp.com",
