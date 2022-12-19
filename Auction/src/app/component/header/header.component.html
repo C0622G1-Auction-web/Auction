@@ -1,81 +1,83 @@
-  <div class="header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="header__menu">
-          <ul class="menu d-flex align-items-center m-0">
-            <li class="menu__item band">
+<div class="header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="header__menu">
+        <ul class="menu d-flex align-items-center m-0">
+          <li class="menu__item band">
                                 <span class="menu__link logo">
                                     <i class="fa-brands fa-suse"></i>
                                 </span>
-            </li>
-            <li class="menu__item">
+          </li>
+          <li class="menu__item">
                                 <span class="menu__link ">
                                     Đang đấu giá
                                 </span>
-            </li>
-            <li class="menu__item">
-              <span class="menu__link ">Đã kết thúc</span>
-            </li>
-            <li class="menu__item">
-              <span class="menu__link ">Top</span>
-            </li>
-            <li class="menu__item">
-              <span class="menu__link ">Trang quản lý</span>
-            </li>
-            <li class="menu__item">
+          </li>
+          <li class="menu__item">
+            <span class="menu__link ">Đã kết thúc</span>
+          </li>
+          <li class="menu__item">
+            <span class="menu__link ">Top</span>
+          </li>
+          <li class="menu__item">
+            <span class="menu__link " routerLink="/products" >Trang quản lý</span>
+          </li>
+          <li class="menu__item">
                                 <span class="menu__link">
                                     <i class="fa-solid fa-circle-question mx-1"></i>
                                     <span class="label_guide">Hướng dẫn</span>
                                 </span>
-            </li>
-          </ul>
-          <div class="login d-flex">
-            <button class="login__btn mx-2">
-              <i class="fa-solid fa-circle-user"></i>
-              Đăng ký
-            </button>
-            <button class="login__btn">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              Đăng nhập
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <nav class="header__mobile header navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <button style="border: 1px solid aliceblue;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <!-- <span class="navbar-toggler-icon"></span> -->
-        <i class="text-white fa-solid fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <p class="nav-link">Trang trủ</p>
-
-          </li>
-          <li class="nav-item">
-            <p class="nav-link">Đang đấu giá</p>
-          </li>
-          <li class="nav-item">
-            <p class="nav-link">Đã kết thúc</p>
-          </li>
-          <li class="nav-item">
-            <p class="nav-link">Top</p>
           </li>
         </ul>
-        <form class="d-flex justify-content-center" role="search">
-          <button class=" w-50 login__btn mx-2">
+        <div class="login d-flex">
+          <button class="login__btn mx-2">
             <i class="fa-solid fa-circle-user"></i>
             Đăng ký
           </button>
-          <button class=" w-50 login__btn">
+          <button routerLink="/login" class="login__btn">
             <i class="fa-solid fa-right-to-bracket"></i>
             Đăng nhập
           </button>
-        </form>
+        </div>
       </div>
     </div>
-  </nav>
+
+  </div>
+</div>
+<nav class="header__mobile header navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <button style="border: 1px solid aliceblue;" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <!-- <span class="navbar-toggler-icon"></span> -->
+      <i class="text-white fa-solid fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <p class="nav-link">Trang trủ</p>
+
+        </li>
+        <li class="nav-item">
+          <p class="nav-link">Đang đấu giá</p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link">Đã kết thúc</p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link">Top</p>
+        </li>
+      </ul>
+      <form class="d-flex justify-content-center" role="search">
+        <button class=" w-50 login__btn mx-2">
+          <i class="fa-solid fa-circle-user"></i>
+          Đăng ký
+        </button>
+        <button class=" w-50 login__btn">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Đăng nhập
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>

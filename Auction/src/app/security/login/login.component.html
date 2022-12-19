@@ -1,90 +1,92 @@
-<div style="height: 100vh; display: flex; justify-content: center; align-items: center">
-  <div class="container h-100">
-    <div class="row h-100" style="display: flex; justify-content: center; align-items: center; box-sizing: border-box">
+<div class="app">
+  <div style="height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div class="container h-100">
+      <div class="row h-100" style="display: flex; justify-content: center; align-items: center; box-sizing: border-box">
 
-      <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+        <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
 
-        <div class="card shadow-lg" style="box-sizing: border-box">
-          <div class="card-body">
+          <div class="card shadow-lg" style="box-sizing: border-box">
+            <div class="card-body">
 
-            <h1 class="mb-5 mt-2 text-primary h2 text-center">Đăng Nhập</h1>
+              <h1 class="mb-5 mt-2 text-primary h2 text-center">Đăng Nhập</h1>
 
-            <form [formGroup]="rfLogin" (ngSubmit)="login()">
-              <div class="form-floating mb-4">
-                <input formControlName="username" type="text" class="form-control" id="floatingInput"
-                       placeholder="name@example.com">
-                <label for="floatingInput">Tên đăng nhập<small> *</small></label>
+              <form [formGroup]="rfLogin" (ngSubmit)="login()">
+                <div class="form-floating mb-4">
+                  <input formControlName="username" type="text" class="form-control" id="floatingInput"
+                         placeholder="name@example.com">
+                  <label for="floatingInput">Tên đăng nhập<small> *</small></label>
 
-                <div *ngIf="rfLogin.controls['username'].hasError('required') &&
+                  <div *ngIf="rfLogin.controls['username'].hasError('required') &&
                 rfLogin.controls['username'].touched" class="col-12">
-                  <p style="color: red; margin-left: 15px">Vui lòng nhập tên đăng nhập</p>
-                </div>
+                    <p style="color: red; margin-left: 15px">Vui lòng nhập tên đăng nhập</p>
+                  </div>
 
-                <div *ngIf="rfLogin.controls['username'].hasError('minlength') &&
+                  <div *ngIf="rfLogin.controls['username'].hasError('minlength') &&
                 rfLogin.controls['username'].touched" class="col-12">
-                  <p style="color: red; margin-left: 15px">Tên đăng nhập tối thiểu chứa 4 ký tự</p>
+                    <p style="color: red; margin-left: 15px">Tên đăng nhập tối thiểu chứa 4 ký tự</p>
+                  </div>
+
                 </div>
 
-              </div>
+                <div class="form-floating mb-4">
+                  <input formControlName="password" type="password" class="form-control" id="floatingPassword"
+                         placeholder="name@example.com">
+                  <label for="floatingPassword">Mật khẩu<small> *</small></label>
 
-
-              <div class="form-floating mb-4">
-                <input formControlName="password" type="password" class="form-control" id="floatingPassword"
-                       placeholder="name@example.com">
-                <label for="floatingPassword">Mật khẩu<small> *</small></label>
-
-                <div *ngIf="rfLogin.controls['password'].hasError('required') &&
+                  <div *ngIf="rfLogin.controls['password'].hasError('required') &&
                 rfLogin.controls['password'].touched" class="col-12">
-                  <p style="color: red; margin-left: 15px">Vui lòng nhập mật khẩu</p>
-                </div>
+                    <p style="color: red; margin-left: 15px">Vui lòng nhập mật khẩu</p>
+                  </div>
 
-                <div *ngIf="rfLogin.controls['password'].hasError('minlength') &&
+                  <div *ngIf="rfLogin.controls['password'].hasError('minlength') &&
                 rfLogin.controls['password'].touched" class="col-12">
-                  <p style="color: red; margin-left: 15px">Mật khẩu tối thiểu chứa 5 ký tự</p>
+                    <p style="color: red; margin-left: 15px">Mật khẩu tối thiểu chứa 5 ký tự</p>
+                  </div>
+
                 </div>
 
-              </div>
+                <div class="row form-floating mb-4">
+                  <div class="col-7">
+                    <input type="checkbox" formControlName="rememberMe" name="remember" id="remember"
+                           class="form-check-input">
+                    <label style="margin-left: 3px" for="remember" class="form-check-label">Ghi nhớ đăng nhập</label>
+                  </div>
+                  <div class="col-5">
+                    <a href="#" class="float-end mb-1">
+                      Quên mật khẩu?
+                    </a>
+                  </div>
+                </div>
 
-              <div class="row form-floating mb-4">
-                <div class="col-7">
-                  <input type="checkbox" formControlName="rememberMe" name="remember" id="remember"
-                         class="form-check-input">
-                  <label style="margin-left: 3px" for="remember" class="form-check-label">Ghi nhớ đăng nhập</label>
+                <div class="row form-floating mb-4">
+                  <div class="col-12">
+                    <button [disabled]="rfLogin.invalid" type="submit" class="btn btn-primary" style="width: 100%">
+                      Đăng Nhập
+                    </button>
+                  </div>
                 </div>
-                <div class="col-5">
-                  <a href="#" class="float-end mb-1">
-                    Quên mật khẩu?
-                  </a>
-                </div>
-              </div>
 
-              <div class="row form-floating mb-4">
-                <div class="col-12">
-                  <button [disabled]="rfLogin.invalid" type="submit" class="btn btn-primary" style="width: 100%">
-                    Đăng Nhập
-                  </button>
+                <div class="mt-5 bordert">
+                  <div class="text-center" style="margin-top: 35px">
+                    <a (click)="loginWithGoogle()"
+                       href="#" target="_blank" class="px-3">
+                      <img
+                        src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
+                        alt="">
+                    </a>
+                  </div>
                 </div>
+              </form>
+            </div>
+            <div class="card-footer py-3 border-1">
+              <div class="text-center">
+                Bạn chưa có tài khoản? <a href="#" class="abc">Đăng ký ngay</a>
               </div>
-
-              <div class="mt-5 bordert">
-                <div class="text-center" style="margin-top: 35px">
-                  <a href="https://www.google.com" target="_blank" class="px-3">
-                    <img
-                      src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
-                      alt="">
-                  </a>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="card-footer py-3 border-1">
-            <div class="text-center">
-              Bạn chưa có tài khoản? <a href="#" class="abc">Đăng ký ngay</a>
             </div>
           </div>
-        </div>
-        <div class="text-center mt-4 text-muted">
-          C0622G1 - Website đấu giá
+          <div class="text-center mt-4 text-muted">
+            C0622G1 - Website đấu giá
+          </div>
         </div>
       </div>
     </div>

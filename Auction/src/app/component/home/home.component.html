@@ -1,5 +1,4 @@
   <div class="app">
-  <app-header></app-header>
   <div class="slide">
     <div class="container-fluid">
       <div class="row mt-2">
@@ -124,45 +123,45 @@
         <div class="col-lg-12">
           <div class="row" *ngIf="pageProducts">
             <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4" *ngFor="let product of pageProducts.content, let i = index;">
-              <div class="card product">
-                <img id="image__main{{i}}" height="248" src="{{product.imgUrlProducts[0]?.url}}" class="d-block w-100 card-img" alt="">
-                <ul class="carousel__images d-flex justify-content-center">
-                  <li value="{{j}}" class="image__item img-selected{{i}}" *ngFor="let img of product.imgUrlProducts,let j = index;">
-                    <img (click)="changeImage($event, i, j)" class="d-block w-100" height="30" src="{{img.url}}" width="" alt="">
-                  </li>
-                </ul>
-                <div class="card-body">
-                  <p class="mb-2 card__title" title="{{product.name}}">{{product.name| titlecase}}</p>
-                  <span class="product-status"
-                  [ngClass]="product.auctionStatus?.id == 1 ?'auction':
-                  product.auctionStatus?.id == 2 ?'auctioning':
-                  product.auctionStatus?.id == 3 ?'auctioned':''">
-                    {{product.auctionStatus.name}}
-                  </span>
-                  <p class="product__price">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></p>
-                  <p class="time">
-                    <span class="time__hh mx-2">09</span>
-                    <span class=" mx-2">:</span>
-                    <span class="time__hh mx-2">09</span>
-                    <span class=" mx-2">:</span>
-                    <span class="time__hh mx-2">09</span>
-                  </p>
-                  <div class="modal__product">
-                    <button [routerLink]="['/auction/', product.id]" *ngIf="product.auctionStatus?.id == 1"
-                            class=" btn__auction">
-                      <span class="btn__auction--title">Đấu giá</span>
-                    </button>
-                    <button [routerLink]="['/auction/', product.id]" *ngIf="product.auctionStatus?.id == 2"
-                            class=" btn__auctioning">
-                      <span class="btn__auctioning--title">Tham gia</span>
-                    </button>
-                    <button [routerLink]="['/auction/', product.id]" *ngIf="product.auctionStatus?.id == 3"
-                            class=" btn btn__auctioned">
-                      <span class="btn__auctioned--title">Xem thêm</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+<!--              <div class="card product">-->
+<!--                <img id="image__main{{i}}" height="248" src="{{product.imgUrlProducts[0]?.url}}" class="d-block w-100 card-img" alt="">-->
+<!--                <ul class="carousel__images d-flex justify-content-center">-->
+<!--                  <li value="{{j}}" class="image__item img-selected{{i}}" *ngFor="let img of product.imgUrlProducts,let j = index;">-->
+<!--                    <img (click)="changeImage($event, i, j)" class="d-block w-100" height="30" src="{{img.url}}" width="" alt="">-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--                <div class="card-body">-->
+<!--                  <p class="mb-2 card__title" title="{{product.name}}">{{product.name| titlecase}}</p>-->
+<!--                  <span class="product-status"-->
+<!--                  [ngClass]="product.auctionStatus?.id == 1 ?'auction':-->
+<!--                  product.auctionStatus?.id == 2 ?'auctioning':-->
+<!--                  product.auctionStatus?.id == 3 ?'auctioned':''">-->
+<!--                    {{product.auctionStatus.name}}-->
+<!--                  </span>-->
+<!--                  <p class="product__price">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></p>-->
+<!--                  <p class="time">-->
+<!--                    <span class="time__hh mx-2">09</span>-->
+<!--                    <span class=" mx-2">:</span>-->
+<!--                    <span class="time__hh mx-2">09</span>-->
+<!--                    <span class=" mx-2">:</span>-->
+<!--                    <span class="time__hh mx-2">09</span>-->
+<!--                  </p>-->
+<!--                  <div class="modal__product">-->
+<!--                    <button [routerLink]="['/auction/', product.id]" *ngIf="product.auctionStatus?.id == 1"-->
+<!--                            class=" btn__auction">-->
+<!--                      <span class="btn__auction&#45;&#45;title">Đấu giá</span>-->
+<!--                    </button>-->
+<!--                    <button [routerLink]="['/auction/', product.id]" *ngIf="product.auctionStatus?.id == 2"-->
+<!--                            class=" btn__auctioning">-->
+<!--                      <span class="btn__auctioning&#45;&#45;title">Tham gia</span>-->
+<!--                    </button>-->
+<!--                    <button [routerLink]="['/auction/', product.id]" *ngIf="product.auctionStatus?.id == 3"-->
+<!--                            class=" btn btn__auctioned">-->
+<!--                      <span class="btn__auctioned&#45;&#45;title">Xem thêm</span>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
@@ -173,5 +172,4 @@
   <div class="more mt-2 mb-2 d-flex justify-content-center">
     <button *ngIf="pageHasNext + 1 < pageProducts?.totalPages" class="btn btn-outline-danger" (click)="gotoPageNumber(rfSearch?.value, pageHasNext + 1)">Xem thêm</button>
   </div>
-  <app-footer></app-footer>
 </div>
