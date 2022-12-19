@@ -2,9 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ToastrModule} from "ngx-toastr";
-import {HttpClientModule} from "@angular/common/http";
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
@@ -23,7 +20,7 @@ import {HomeComponent} from './component/home/home.component';
 import {RegisterComponent} from './security/register/register.component';
 import {ResetPasswordComponent} from './security/reset-password/reset-password.component';
 import {AuctionRequestComponent} from './component/auction-request/auction-request.component';
-import {ProductDetailComponent} from './component/product/product-detail/product-detail.component';
+import {ProductReviewComponent} from './component/product/product-review/product-review.component';
 import {VerificationComponent} from './security/verification/verification.component';
 import {VerifyResetPasswordComponent} from './security/verify-reset-password/verify-reset-password.component';
 import {AuctionComponent} from './component/auction/auction.component';
@@ -36,8 +33,12 @@ import { AccountResetPassComponent } from './component/account-reset-pass/accoun
 import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
+import { ListProductsComponent } from './component/product/list-products/list-products.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+import {HttpClientModule} from '@angular/common/http';
 import { TransactionComponent } from './component/transaction/transaction.component';
-import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
+import { LockaccountUserComponent } from './component/user/lockaccount-user/lockaccount-user.component';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
@@ -49,6 +50,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
 import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
+import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
 
 
 const googleLoginOptions = {
@@ -78,9 +80,11 @@ const googleLoginOptions = {
     RegisterComponent,
     ResetPasswordComponent,
     AuctionRequestComponent,
-    ProductDetailComponent,
+    ProductReviewComponent,
     VerificationComponent,
     VerifyResetPasswordComponent,
+    TransactionComponent,
+    LockaccountUserComponent,
     RegisterWithGoogleComponent,
     AuctionComponent,
     AuctionProductDetailComponent,
@@ -93,6 +97,7 @@ const googleLoginOptions = {
     MethodPaymentComponent,
     PaymentReceiptComponent,
     TransactionComponent,
+    ListProductsComponent,
     AuctionProductAddComponent,
     PaymentReceiptComponent,
     TransactionComponent,

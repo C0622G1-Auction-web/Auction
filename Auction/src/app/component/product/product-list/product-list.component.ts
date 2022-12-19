@@ -28,7 +28,6 @@ export class ProductListComponent implements OnInit {
    * Function: get list of status of product auctions
    * @return list Product , page
    */
-
   public findAll() {
     this.productService.findAll(this.page, this.pageSize).subscribe(value => {
       console.log("a")
