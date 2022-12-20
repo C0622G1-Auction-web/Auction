@@ -65,6 +65,7 @@ a {
 
 .user__info:hover .btn__logout{
   display: flex;
+  flex-direction: column;
 }
 
 .btn__logout {

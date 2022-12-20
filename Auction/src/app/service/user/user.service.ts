@@ -1,10 +1,13 @@
-import {User} from '../../model/user/user';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {UserType} from "../../model/user/user-type";
+import {UserListDto} from "../../dto/user-list-dto";
+import {User} from '../../model/user/user';
 import {Observable} from 'rxjs';
 import {UserEditDto} from "../../dto/user-edit-dto";
+import {UnlockUsers} from "../../model/user/unlock-users";
+
 
 @Injectable({
   providedIn: 'root'
@@ -59,40 +62,28 @@ export class UserService {
     return this._httpClient.get<User>(environment.api_url_list_user + '/' + id, this.httpOptions)
   }
 
+
   /**
    * Create by: HungNV
    * Date created: 16/12/2022
    * @return User
    */
-  findUserById(value): Observable<User> {
-    return this._httpClient.get<User>(environment.userUrl + "/find/" + value, this.httpOptions);
+  findUserById(value: number): Observable<User> {
+    return this._httpClient.get<User>(environment.userUrl + "find/" + value);
   }
 
-
-  createUser(user: User): Observable<User> {
-    console.log(user)
-    return this._httpClient.post<User>(environment.uri_api_create_user_v1_user, user);
-  }
-
-  getAllUser(): Observable<User[]> {
-    return null;
-  }
 
   /**
    * Create by: NguyenNQ
    * Date created: 15/12/2022
    * @return User
    */
-
-  saveaddAcountUser(user: User): Observable<User> {
-
+  saveaddAcountUser(user: User):
+    Observable<User> {
     console.log(user);
     return this._httpClient.post<User>('http://localhost:8080/api/user/v1/add', user);
   }
 
-  findTopUser(): Observable<any> {
-    return this._httpClient.get<any>(environment.API_TOP_USER)
-  }
 
   /**
    * Create by: HaiNT
@@ -103,17 +94,30 @@ export class UserService {
     return this._httpClient.put<UserEditDto>(environment.api_url_list_user + '/' + id, user);
   }
 
-  updateUser(id: number, user: User): Observable<User> {
-    return this._httpClient.put<User>(environment.uri_api_update_user_v1_user + '/' + user.id, user);
+  /**
+   * Create by: HaiNT
+   * Date created: 16/12/2022
+   * @return User
+   */
+  unlock(unlockIds: number[]): Observable<any> {
+    return this._httpClient.post<UserEditDto[]>(environment.api_url_list_user + '/unlockUser', unlockIds);
   }
 
-  findUserByIdd(userId: number): Observable<User> {
-    return this._httpClient.get<User>(environment.userUrl + userId);
+  /**
+   * Create by: HaiNT
+   * Date created: 16/12/2022
+   * @return User
+   */
+
+  findByListId(unlockIds: number[]): Observable<UnlockUsers[]> {
+    return this._httpClient.post<UnlockUsers[]>(environment.api_url_list_user_list_id, unlockIds);
   }
 
-  findUserByIdServer(userId: number): Observable<User> {
-    return this._httpClient.get<User>(environment.uri_api_find_by_id_user_v1_user + userId);
+  /**
+   * Created: QuangND
+   * Date: 21/12/2022
+   */
+  getAllUserChat():Observable<User[]>{
+    return  this._httpClient.get<User[]>('http://localhost:8080/api/v1/users/getAll');
   }
-
 }
-

@@ -11,6 +11,24 @@
   box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.35);
 }
 
+#right-col {
+  padding: 2% 8% 2% 8%;
+}
+
+table, th, td{
+  border:1px solid #868585;
+  padding: 5px 0 5px 10px;
+}
+table{
+  border-collapse:collapse;
+}
+table tr:nth-child(odd){
+  background-color:#eee;
+}
+table tr:nth-child(even){
+  background-color:white;
+}
+
 h1 {
   text-align: center;
   color: blue;
@@ -31,3 +49,27 @@ h1 {
 #review-btns {
   padding-top: 5%;
 }
+
+/* BEGIN Img format */
+.carousel__images {
+  overflow-x: scroll;
+}
+.carousel__images::-webkit-scrollbar {
+  display: none;
+}
+.image__item {
+  min-width: 45px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.image__item.actived {
+  border: 1px solid rgba(231, 76, 60, 0.41);
+  border-radius: 4px;
+  /*box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.35);*/
+}
+.image__item:hover {
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* End Img format */

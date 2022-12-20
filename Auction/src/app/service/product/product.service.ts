@@ -18,6 +18,8 @@ import {Reason} from '../../model/product/reason';
 import {DataResult} from '../../model/product/data_result';
 import {catchError} from 'rxjs/operators';
 import {ProductDto} from '../../model/product/iProduct_dto';
+import {ImgDetailDto} from "../../model/product/img-detail-dto";
+import {PageProductDto} from "../../model/product/page-product-dto";
 
 
 
@@ -112,8 +114,8 @@ export class ProductService {
    * Function: get all and search Products
    * Date: 15/11/2022
    */
-  getPageProductRoleAdmin(searchProduct: any, pageNumber): Observable<PageProduct> {
-    return this._httpClient.post<PageProduct>(
+  getPageProductRoleAdmin(searchProduct: any, pageNumber): Observable<PageProductDto> {
+    return this._httpClient.post<PageProductDto>(
       environment.api_url_products + '?page=' + pageNumber,
       searchProduct);
   }
@@ -210,5 +212,9 @@ export class ProductService {
   setProductDetailId(id: any) {
     console.log('tao gia tri cho id', id);
     this.productDetailId = id;
+  }
+
+  getImgsByProductId(id: number): Observable<ImgDetailDto[]> {
+    return this._httpClient.get<ImgDetailDto[]>(environment.api_url_get_imgs + id);
   }
 }

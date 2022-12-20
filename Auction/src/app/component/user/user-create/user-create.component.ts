@@ -72,7 +72,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   submitCreateUser() {
-    this.userService.createUser(this.userCreateForm.value).subscribe(data => {
+    this.userService.saveaddAcountUser(this.userCreateForm.value).subscribe(data => {
       this.router.navigateByUrl('');
     });
 

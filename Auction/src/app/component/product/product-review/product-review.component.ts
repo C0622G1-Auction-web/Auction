@@ -4,6 +4,9 @@ import {NotificationService} from '../../../service/notification/notification.se
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDtoRoleAdmin} from '../../../model/product/product-dto-role-admin';
 import {Reason} from '../../../model/product/reason';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Title} from "@angular/platform-browser";
+import {ImgDetailDto} from "../../../model/product/img-detail-dto";
 
 @Component({
   selector: 'app-product-detail',
@@ -21,12 +24,16 @@ export class ProductReviewComponent implements OnInit {
   product: ProductDtoRoleAdmin;
   reason: Reason | undefined;
   invalidProduct: boolean;
+  imgs: ImgDetailDto[];
+  rfReason: FormGroup;
 
   constructor(private _productService: ProductService,
               private _notificationService: NotificationService,
               private _activatedRoute: ActivatedRoute,
-              private router: Router) {
-
+              private router: Router,
+              private _formBuilder: FormBuilder,
+              private _titleService: Title) {
+    this._titleService.setTitle("Duyệt sản phẩm");
   }
 
   ngOnInit(): void {
@@ -40,18 +47,29 @@ export class ProductReviewComponent implements OnInit {
    */
   getInfo() {
     const id = +this._activatedRoute.snapshot.params.id;
+
+    this._productService.getImgsByProductId(id).subscribe(data => {
+      this.imgs = data;
+    }, err => {
+      this._notificationService.showErrorNotification('Có lỗi khi tải hình ảnh sản phẩm!');
+    });
+
+    this._productService.getReason(id).subscribe(data => {
+      console.log('ly do' + data);
+      this.reason = data;
+      this.reason.productId = id;
+      console.log(this.reason);
+    });
+
     this._productService.findByDtoId(id).subscribe(data => {
+      console.log('spham' + data);
       this.product = data;
       this.invalidProduct = this.product.reviewStatusId == 3;
       console.log(this.invalidProduct);
-      this._productService.getReason(id).subscribe(data => {
-        this.reason = data;
-        this.reason.productId = id;
-        console.log(this.reason);
-      });
     }, error => {
       this._notificationService.showErrorNotification('Có lỗi khi tải thông tin sản phẩm!');
     });
+
   }
 
   /**
@@ -62,6 +80,12 @@ export class ProductReviewComponent implements OnInit {
   doNotReview() {
     if (!this.invalidProduct) {
       this.invalidProduct = true;
+      this.rfReason = this._formBuilder.group({
+        reason: ['', [
+          Validators.required,
+          Validators.maxLength(250)
+        ]]
+      })
     } else {
       console.log(this.reason);
       this._productService.writeReason(this.reason).subscribe(data => {
@@ -91,4 +115,26 @@ export class ProductReviewComponent implements OnInit {
     });
   }
 
+  changeImage(event: any, i: any, j: number) {
+    const src = event.target.src;
+    const imgs = document.querySelectorAll('.img-selected' + i);
+    document.getElementById('image__main' + i).setAttribute('src', src);
+    imgs.forEach(value => {
+      if (value.getAttribute('value') == j + '') {
+        value.classList.add('actived');
+      } else {
+        value.classList.remove('actived');
+      }
+    });
+  }
+
+  selectedChangImage() {
+    setTimeout(() => {
+      const imgF = document.querySelectorAll('.carousel__images');
+      console.log(imgF);
+      imgF.forEach(value => {
+        value.children[0].classList.add('actived');
+      });
+    }, 500);
+  }
 }

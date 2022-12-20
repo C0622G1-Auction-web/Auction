@@ -16,6 +16,7 @@ import {PriceStepService} from 'src/app/service/product/price-step.service';
 import {ProductService} from 'src/app/service/product/product.service';
 import {UserService} from 'src/app/service/user/user.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {TokenService} from "../../../service/security/token.service";
 
 export const checkStartTime: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const startTime = new Date(control.get("startTime").value).getTime();
@@ -68,6 +69,7 @@ export class AuctionProductAddComponent implements OnInit {
   selectedFile: any[] = [];
   messageCreate = "";
   messageImage = "";
+  currentUser: User;
 
   constructor(private _formBuilder: FormBuilder,
               private _productService: ProductService,
@@ -76,7 +78,8 @@ export class AuctionProductAddComponent implements OnInit {
               private _userService: UserService,
               private _storage: AngularFireStorage,
               private _imageProductService: ImageProductService,
-              private _toast: ToastrService) {
+              private _toast: ToastrService,
+              private _tokenService: TokenService) {
   }
 
   ngOnInit(): void {
@@ -87,6 +90,11 @@ export class AuctionProductAddComponent implements OnInit {
     this._priceStepService.getListPriceStep().subscribe(data => {
       this.priceStepList = data;
     })
+
+    if (this._tokenService.isLogged()) {
+      this.currentUser = JSON.parse(this._tokenService.getUser());
+    }
+
     this.formCreateProduct = this._formBuilder.group({
       id: ['', [Validators.required]],
       name: ['', [Validators.required, Validators.pattern("^[A-Z][a-z]*([ ][A-Z][a-z]+)*$")]],
@@ -98,12 +106,13 @@ export class AuctionProductAddComponent implements OnInit {
       registerDay: ['', [Validators.required]],
       priceStep: ['', [Validators.required]],
       category: ['', [Validators.required]],
-      user: ['', [Validators.required]]
+      user: [this.currentUser.id, [Validators.required]]
     }, {validators: [checkStartTime, checkEndTime]})
   };
 
   addNewProduct() {
     this.productDto = this.formCreateProduct.value;
+    console.log(this.productDto);
     this._productService.addProduct(this.productDto).subscribe(data => {
         if (this.img.length !== 0) {
           for (let i = 0; i < this.img.length; i++) {

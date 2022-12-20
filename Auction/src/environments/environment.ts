@@ -3,15 +3,26 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false, firebaseConfig: {
-    apiKey: 'AIzaSyDV8RZyn7riFw087ES5nA05z4ON5axBO28',
-    authDomain: 'test-42050.firebaseapp.com',
-    databaseURL: 'https://test-42050-default-rtdb.asia-southeast1.firebasedatabase.app',
-    projectId: 'test-42050',
-    storageBucket: 'test-42050.appspot.com',
-    messagingSenderId: '902879698828',
-    appId: '1:902879698828:web:2d7346b0c1c599d08540a9',
-    measurementId: 'G-XEHPX24EFX'
+  production: false,
+  // firebaseConfig: {
+  //   apiKey: 'AIzaSyDV8RZyn7riFw087ES5nA05z4ON5axBO28',
+  //   authDomain: 'test-42050.firebaseapp.com',
+  //   databaseURL: 'https://test-42050-default-rtdb.asia-southeast1.firebasedatabase.app',
+  //   projectId: 'test-42050',
+  //   storageBucket: 'test-42050.appspot.com',
+  //   messagingSenderId: '902879698828',
+  //   appId: '1:902879698828:web:2d7346b0c1c599d08540a9',
+  //   measurementId: 'G-XEHPX24EFX'
+  // },
+  firebaseConfig: {
+    apiKey: "AIzaSyBFqqq1BOcFnqRPAx_Vq8ewdQiAUPkJbrE",
+    authDomain: "eng-cogency-370914.firebaseapp.com",
+    databaseURL: "https://eng-cogency-370914-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "eng-cogency-370914",
+    storageBucket: "eng-cogency-370914.appspot.com",
+    messagingSenderId: "985488924079",
+    appId: "1:985488924079:web:28e91f3779f4563b42235a",
+    measurementId: "G-M2T7R4CP93"
   },
   categoryUrl: 'http://localhost:8080/api/v1/products/category',
   priceStepUrl: 'http://localhost:8080/api/v1/products/priceStep',
@@ -19,7 +30,7 @@ export const environment = {
   productSearchUrl: 'http://localhost:8080/api/v1/products/search',
   userUrl: 'http://localhost:8080/api/v1/users',
   urlAddAccountUser: 'http://localhost:8080/api/user/v1/add',
-  api_url_products: 'http://localhost:8080/api/v1/products',
+  api_url_products: 'http://localhost:8080/api/v1/products/search-by-admin',
   api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
   api_url_list_category: 'http://localhost:8080/api/v1/category',
   api_url_list_user: 'http://localhost:8080/api/v1/users',
@@ -49,8 +60,10 @@ export const environment = {
   uri_api_update_user_v1_user: 'http://localhost:8080/api/v1/users/update',
   uri_api_find_by_id_user_v1_user: 'http://localhost:8080/api/v1/users/find/',
   LOGIN_API: 'http://localhost:8080/api/v1/auth/login',
-  GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
-  DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json'
+  GOOGLE_LOGIN_API: 'http://localhost:8080/api/v1/auth/google',
+  DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
+  api_url_list_user_list_id: 'http://localhost:8080/api/v1/users/find-by-list-id',
+  api_url_get_imgs: 'http://localhost:8080/api/v1/products/imgs/',
 };
 
 /*

@@ -12,7 +12,6 @@ export class GuideService {
   constructor(private _httpClient: HttpClient) {
   }
 
-
   create(guide: Guide):Observable<Guide>{
     return this._httpClient.post<Guide>(environment.API_URL_GUIDE, guide)
   }
@@ -21,5 +20,9 @@ export class GuideService {
   }
   getGuideById(id: number):Observable<Guide> {
     return this._httpClient.get<Guide>(environment.API_URL_GUIDE+'/find/'+id)
+  }
+
+  searchByContent(title: string): Observable<Guide[]> {
+    return this._httpClient.get<Guide[]>(environment.API_URL_GUIDE + `?title=` + title);
   }
 }

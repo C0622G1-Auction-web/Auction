@@ -59,8 +59,6 @@ import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "a
 import {LoginComponent} from "./security/login/login.component";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 
-
-
 const googleLoginOptions = {
   scope: 'profile email',
   plugin_name: 'login'

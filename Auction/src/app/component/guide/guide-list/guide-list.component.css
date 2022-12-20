@@ -1,132 +1,159 @@
 * {
-  box-sizing: border-box !important;
-}
-
-body {
-  background-color: #f5f5f5 !important;
-  width: 100vw;
-  height: 100vh;
-}
-
-h1 {
-  font-family: Helvetica, sans-serif;
-  color: #006699;
-}
-
-h6 {
-  font-family: Helvetica, serif;
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-left: 0px;
-  padding: 0.5rem;
-}
-
-.boxed {
-  width: 485px;
-
-  height: 710px;
-  max-height: 710px;
-  padding: 3px 32px 32px !important;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0px 3px 6px #00000029;
-  overflow: auto;
-}
-
-.search {
-  border-radius: 12px;
-}
-
-.question-link {
-  margin-left: 10px;
-  color: #006699;
   text-decoration: none;
 }
-
-.question-link:hover {
-  color: #006699;
-  text-decoration: underline !important;
-}
-
-.question-item {
-  height: 30px;
-}
-
-.question-item > label {
-  line-height: 20px;
-}
-
-.form-input {
+.detail-container {
+  display: block;
   width: 100%;
-  padding-bottom: 3px;
-  position: relative;
+  background: #fff;
+  padding: 60px 0;
+}
+.detail-cate-tit h1 {
+  display: block;
+  width: 100%;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(20,30,210);
+  margin: 0 0 30px 0;
+  padding: 0;
+}
+h1 {
+  line-height: 1.1;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  background: #fff;
+}
+.faq-search-input input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  border-radius: 2px;
+  border: 1px solid #D4D4D4;
+}
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: start;
+  appearance: auto;
+  cursor: text;
+  background-color: field;
+}
+.material-icons.md-24 {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
   display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+  font-size: 24px;
+  margin-right: 0px;
 }
-
-.form-input > input {
-  border: none;
-  outline: none;
-  width: 100%;
-}
-
-.form-input::after {
-  content: "";
+.faq-search-input object {
   position: absolute;
-  bottom: 1px;
-  left: 0;
+  top: 8px;
+  right: 8px;
+  opacity: 0.54;
+}
+.faq-search-input {
+  display: block;
   width: 100%;
-  height: 1px;
-  background-color: #000000;
-  transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1),
-    height 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  height: 40px;
+  position: relative;
 }
-
-.form-input:has(input:focus)::after {
+.toggle-qa {
+  padding-top: 30px !important;
+}
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.panel-default {
+  border-color: #ddd;
+}
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+.pd-card-info-heading {
+  border-radius: 2px;
+  overflow: hidden;
+  color: #545454;
+}
+.pd-card-info-tit {
+  display: block;
   width: 100%;
-  height: 2px;
-  background-color: #006699;
+  border-radius: 2px;
+  padding-right: 15px;
+  padding-left: 5px;
+  background: #EBEBEB;
+  margin: 0;
 }
-
-.form-icon {
-  width: 30px;
-  height: 30px;
+h4 {
+  font-size: 18px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+  padding: 0;
+  color: inherit;
 }
-
+.pd-card-info-tit p {
+  display: block;
+  padding: 12px 0;
+  width: 100%;
+  min-height: 24px;
+  line-height: 24px;
+  transition: all 0.15s ease;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #545454;
+  text-transform: uppercase;
+  text-decoration: none !important;
+}
+a {
+  background-color: transparent;
+}
+.collapse.in {
+  display: block;
+}
+p {
+  width: 760px !important;
+  margin-bottom: 0px !important;
+}
 .edit-button {
   width: 28px;
   height: 28px;
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  position: relative;
 }
-
 .edit-button:hover {
-  background-color: #d1e7f8;
+  background-color: #D1E7F8;
   border-radius: 50%;
-}
-
-.py-5 {
-  padding-top: 0rem !important;
-  padding-bottom: 0rem !important;
-  padding-left: 0rem !important;
-  background-color: #fe6432;
-  border-radius: 12px;
-}
-
-.modal-dialog {
-  background-color: #fe6432;
-  border-radius: 12px;
-}
-
-.modal-content {
-  background-color: #fe6432;
-}
-
-.btn-close {
-  position: absolute;
-  left: 0px;
-  top: 12px;
-  width: 50px;
-  margin-right: 0px;
 }

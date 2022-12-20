@@ -2,47 +2,49 @@
 
   <div class="row">
 
-    <div class="col-lg-2 sidebar__left" style="height: 100vh">
-      <nav>
-        <ul class="menu">
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa fa-home"></i>
-              Trang chủ
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa-solid fa-book"></i>
-              Quản lý sản phẩm
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa-solid fa-user-pen"></i>
-              Quản lý nhân viên
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa-solid fa-handshake"></i>
-              Quản lý giao dịch
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <div class="col-lg-2 sidebar__left">
+      <div>
+        <nav>
+          <ul class="menu">
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/home">
+                <i class="menu__icon fa fa-home"></i>
+                Trang chủ
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/products">
+                <i class="menu__icon fa-solid fa-book"></i>
+                Quản lý sản phẩm
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/user/list">
+                <i class="menu__icon fa-solid fa-user-pen"></i>
+                Quản lý nhân viên
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/transaction">
+                <i class="menu__icon fa-solid fa-handshake"></i>
+                Quản lý giao dịch
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
 
     <div class="col-lg-10">
-      <h1 class="mt-5">Quản lý thành viên</h1>
+      <h1 class="mt-5" style="text-align: center">Quản lý thành viên</h1>
       <hr class="mb-5">
 
       <div class="mt-2 row">
-        <form *ngIf="rfSearch && pageUsers" [formGroup]="rfSearch"
+        <form *ngIf="rfSearch " [formGroup]="rfSearch"
               (ngSubmit)="goToPage(0)">
           <div class="row">
             <div class="col-2">
@@ -50,33 +52,57 @@
               <div class="form-floating mb-4">
                 <input formControlName="idSearch"
                        type="text" placeholder="Mã thành viên:"
-                       id="floatingId" class="form-control form-control-underlined"/>
+                       id="floatingId" class="form-control form-control-underlined"
+                       [ngClass]="(rfSearch.controls['idSearch'].touched) ?
+                       (rfSearch.controls['idSearch'].errors ? 'is-invalid': '' ) : '' ">
                 <label for="floatingId">Mã thành viên:</label>
+              </div>
+              <div *ngIf="rfSearch.controls['idSearch'].hasError('pattern')
+                             && rfSearch.controls['idSearch'].touched" style="color: red">
+                Mã bạn nhập không đúng định dạng.
               </div>
             </div>
 
             <div class="col-2">
-              <div class="form-floating mb-4">
+              <div class="form-floating ">
                 <input formControlName="nameSearch"
                        id="floatingName" type="text" placeholder="Họ và tên:"
-                       class="form-control form-control-underlined"/>
+                       class="form-control form-control-underlined"
+                       [ngClass]="(rfSearch.controls['nameSearch'].touched) ?
+                       (rfSearch.controls['nameSearch'].errors ? 'is-invalid': '' ) : '' ">
                 <label for="floatingName">Họ và tên:</label>
+              </div>
+              <div *ngIf="rfSearch.controls['nameSearch'].hasError('pattern')
+                             && rfSearch.controls['nameSearch'].touched" style="color: red">
+                Tên bạn nhập không đúng định dạng.
               </div>
             </div>
             <div class="col-2">
               <div class="form-floating mb-4">
                 <input formControlName="addressSearch"
                        id="floatingAddress" type="text" placeholder="Địa chỉ:"
-                       class="form-control form-control-underlined"/>
+                       class="form-control form-control-underlined"
+                       [ngClass]="(rfSearch.controls['addressSearch'].touched) ?
+                       (rfSearch.controls['addressSearch'].errors ? 'is-invalid': '' ) : '' ">
                 <label for="floatingAddress">Địa chỉ:</label>
+              </div>
+              <div *ngIf="rfSearch.controls['addressSearch'].hasError('pattern')
+                             && rfSearch.controls['addressSearch'].touched" style="color: red">
+                Địa chỉ bạn nhập không đúng định dạng.
               </div>
             </div>
             <div class="col-2">
               <div class="form-floating mb-4">
                 <input formControlName="emailSearch"
                        id="floatingEmail" type="email" placeholder="Email:"
-                       class="form-control form-control-underlined"/>
+                       class="form-control form-control-underlined"
+                       [ngClass]="(rfSearch.controls['emailSearch'].touched) ?
+                       (rfSearch.controls['emailSearch'].errors ? 'is-invalid': '' ) : '' ">
                 <label for="floatingEmail">Email:</label>
+              </div>
+              <div *ngIf="rfSearch.controls['emailSearch'].hasError('pattern')
+                             && rfSearch.controls['emailSearch'].touched" style="color: red">
+                Địa chỉ bạn nhập không đúng định dạng.
               </div>
             </div>
             <div class="col-2">
@@ -92,48 +118,55 @@
               </div>
             </div>
             <div class="col-1 ">
-              <input class="btn btn-info myMT" type="submit" value="Lọc kết quả"/>
+              <input class="btn btn-info myMT" type="submit" [disabled]="!rfSearch.valid" value="Lọc kết quả"/>
+              <input class="btn btn-success myMT" type="button" value="Hoàn tác lọc" (click)="resetFormAndData()"/>
             </div>
           </div>
-
         </form>
 
-        <div>
-          <a type="button" class="btn btn-danger">Xoá <i class="fa-regular fa-trash-can"></i> </a>
-          <a type="button" class="btn btn-danger">Khoá <i class="fa-solid fa-lock"></i> </a>
-          <a type="button" class="btn btn-danger">Mở khoá <i class="fa-solid fa-lock"></i> </a>
-          <a type="button" class="btn btn-danger">Thêm mới <i class="fa-solid fa-user-plus"></i> </a>
+        <div class="row">
+          <div class="col-2">
+            <button class="btn btn-primary" data-bs-toggle="modal"
+                    (click)="sendToUnlockGroupModal()" data-bs-target="#deleteGroupModal"
+                    [disabled]="unlockIds.length == 0">
+              <i class="fa-solid fa-unlock"></i> Mở khoá
+            </button>
+          </div >
+          <div class="col-2">
+            <a type="button" class="btn btn-danger">Khoá <i class="fa-solid fa-lock"></i> </a>
+          </div>
+          <div class="col-2">
+            <a type="button" class="btn btn-danger">Thêm mới <i class="fa-solid fa-user-plus"></i> </a>
+          </div>
+
         </div>
 
         <div class=" mt-2 row container" style="padding-left: 2%;">
-          <table class="  mt-2 table table-striped table-bordered">
+          <table  class="  mt-2 table table-striped table-bordered">
             <thead>
             <tr>
-              <th>
-                <div class="form-check">
-                  <input id="checkAll" class="form-check-input" type="checkbox" value=""/>
-                </div>
-              </th>
               <th>STT</th>
-              <th>Mã thành viên</th>
+              <th>ID</th>
               <th>Tên thành viên</th>
-              <th>Địa chỉ</th>
+              <th> Địa chỉ</th>
               <th>Xếp hạng</th>
               <th>Email</th>
               <th>SĐT</th>
-              <th>Lần đăng nhập cuối</th>
-              <th>Điểm cống hiến</th>
+              <th width="100px">Lần đăng nhập cuối</th>
+              <th width="7%">Điểm cống hiến</th>
               <th>Tính năng</th>
+              <th class="text-center">
+                <button class="btn btn-primary" (click)="addAllToUnlock()">
+                  <i class="fa-solid fa-unlock"></i>
+                </button>
+              </th>
             </tr>
             </thead>
-            <tbody *ngIf="pageUsers">
+            <tbody *ngIf="pageUsers != null">
             <tr *ngFor="let x of pageUsers.content; let i = index ">
-              <td>
-                <div class="form-check"><input class="form-check-input" type="checkbox" value=""/></div>
-              </td>
-              <td>{{pageUsers.number * 3 + i + 1}}</td>
+              <td>{{pageUsers.number * 5 + i + 1}}</td>
               <td>{{x.id}}</td>
-              <td>{{x.firstName}} {{x.lastName}}</td>
+              <td>{{x.lastName}} {{x.firstName}} </td>
               <td>{{x.address.town}}, {{x.address.district}}, {{x.address.city}} </td>
               <td>{{x.userType.name}}</td>
               <td>{{x.email}}</td>
@@ -145,19 +178,32 @@
                 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDelete"
                         [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-pen-to-square"
                                                               style="color: darkgoldenrod"></i>
-                </button> |
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
-                        [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-lock "></i>
                 </button>
+                |
+                <button *ngIf="x.account.statusLock ; else no" type="button" class="btn btn-danger"
+                        data-bs-toggle="modal" data-bs-target="#modalLock"
+                        (click)="modalById(x.id)"><i class="fa-solid fa-lock "></i>
+                </button>
+                <ng-template #no>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUnlock"
+                          (click)="modalById(x.id)"><i class="fa-solid fa-unlock"></i>
+                  </button>
+                </ng-template>
+
+              </td>
+              <td class="text-center">
+                <input class="delete-checkbox" type="checkbox" [checked]="unlockIds.includes(x.id)"
+                       (click)="addToUnlock(x.id)"/>
               </td>
             </tbody>
           </table>
-
-          <nav aria-label="Page navigation example" class="p-0 d-flex justify-content-end">
+          <h1 *ngIf="pageUsers == null" style="color: red;text-align: center">Không tìm thấy </h1>
+          <!--Phân trang-->
+          <nav *ngIf="pageUsers != null" aria-label="Page navigation example" class="p-0 d-flex justify-content-end">
             <ul class="pagination">
               <li class="page-item" [ngClass]="pageUsers.number == 0 ? 'disabled' : ''">
         <span class="page-link" (click)="goToPage(pageUsers.number - 1)">
-          Previous
+          Trang trước
         </span>
               </li>
               <li *ngFor="let pageNumber of [].constructor(pageUsers.totalPages); let i = index" class="page-item"
@@ -165,14 +211,69 @@
                 <span (click)="goToPage(i)" class="page-link">{{i + 1}}</span>
               </li>
               <li class="page-item" [ngClass]="pageUsers.totalPages == pageUsers.number+1 ? 'disabled' : ''">
-                <a class="page-link" (click)="goToPage(pageUsers.number + 1)">Next</a>
+                <a class="page-link" (click)="goToPage(pageUsers.number + 1)">Trang sau</a>
               </li>
             </ul>
           </nav>
 
+        </div>
+        <div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal mở Khoá-->
+<div *ngIf="user" class="modal fade" id="modalUnlock" tabindex="-1" aria-labelledby="exampleModalLabel-Unlock"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel-Unlock">Xác nhận</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let item of unlockUsers">
+          Mở khoá thành viên có <strong>Mã thành viên là:</strong> <strong style="color: red">{{item.id}}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+          <button id="deleteAccept" class="btn btn-warning" data-bs-dismiss="modal"
+                  (click)="unlock()">Xác nhận
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteGroupModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Xóa giao dịch</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let item of unlockUsers">
+          Mở khoá thành viên có <strong>Mã thành viên là:</strong> <strong style="color: red">{{item.id}}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button id="deleteCancel" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ bỏ</button>
+          <button id="deleteAccept1" class="btn btn-warning" data-bs-dismiss="modal"
+                  (click)="unlock()">Xác nhận
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -102,7 +102,9 @@ export class LoginComponent implements OnInit {
         if (req.token == null) {
           const emailToRegister = req.email;
 
-          this.router.navigateByUrl('/registerWithGoogle/' + emailToRegister);
+          this.authService.setEmailGoogle(emailToRegister);
+
+          this.router.navigateByUrl('/registerWithGoogle');
 
         } else {
 

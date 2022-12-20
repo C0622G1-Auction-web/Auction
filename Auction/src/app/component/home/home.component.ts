@@ -143,10 +143,10 @@ export class HomeComponent implements OnInit {
   }
 
   getTop() {
-    this._userService.findTopUser().subscribe(data => {
-      this.topUser = data;
-      console.log(data);
-    })
+    // this._userService.findTopUser().subscribe(data => {
+    //   this.topUser = data;
+    //   console.log(data);
+    // })
   }
 
   setValueProductId(id: any) {

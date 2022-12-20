@@ -8,6 +8,9 @@ import {FirebaseApp} from "@angular/fire";
 import {v4 as uuidv4} from "uuid";
 import {Chat} from "../../../model/chat/chat";
 import {environment} from "../../../../environments/environment";
+import {User} from "../../../model/user/user";
+import {TokenService} from "../../../service/security/token.service";
+import {Account} from "../../../model/account/account";
 
 @Component({
   selector: 'app-chat-user',
@@ -20,15 +23,23 @@ export class ChatUserComponent implements OnInit {
   app: FirebaseApp;
   db: Database;
   form: FormGroup;
-  username = 'user';
+  username = '';
   message = '';
   chats: Chat[] = [];
+  currentUser: User;
+  nameUser: string;
+  checkLogged = false;
+  accountRole: string;
+  currentAccount: Account;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private tokenService: TokenService
+  ) {
     this.app = initializeApp(environment.firebaseConfig);
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
-      'username': ['user']
+      'username': ['']
     });
   }
 
@@ -37,11 +48,10 @@ export class ChatUserComponent implements OnInit {
     chat.timestamp = new Date().toString();
     chat.id = uuidv4();
     this.chats = [];
-    firebase.database().ref('chat').push(chat);
-    console.log(this.chats)
+    firebase.database().ref('/chat/' + this.username).push(chat);
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
-      'username': [chat.username],
+      'username': [this.username],
     });
     this.heiht();
     this.autoScroll();
@@ -49,12 +59,32 @@ export class ChatUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const dbRef = firebase.database().ref('/chat');
+    if (this.tokenService.isLogged()) {
+      this.checkLogged = true;
+
+      const roles = this.tokenService.getRole();
+
+      for (let i = 0; i < roles.length; i++) {
+
+        if (roles[i] === 'ROLE_ADMIN') {
+          this.accountRole = 'ROLE_ADMIN'
+        }
+      }
+      this.currentUser = JSON.parse(this.tokenService.getUser());
+      this.nameUser = this.currentUser.lastName + ' ' + this.currentUser.firstName;
+      this.currentAccount = JSON.parse(this.tokenService.getAccount());
+      this.username = this.currentAccount.username;
+
+
+    }
+
+    const dbRef = firebase.database().ref('/chat/' + this.username);
     dbRef.on('value', (snapshot: any) => {
       this.chats = [];
       const data = snapshot.val();
       for (let id in data) {
         this.chats.push(data[id])
+        console.log(this.chats)
       }
       this.autoScroll();
     })

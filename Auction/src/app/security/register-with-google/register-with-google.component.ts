@@ -7,6 +7,7 @@ import {AddressService} from "../../service/address/address.service";
 import {UserService} from "../../service/user/user.service";
 import {ToastrService} from 'ngx-toastr';
 import {City} from "../../model/address/city";
+import {AuthService} from "../../service/security/auth.service";
 
 @Component({
   selector: 'app-register-with-google',
@@ -33,22 +34,19 @@ export class RegisterWithGoogleComponent implements OnInit {
     private addressService: AddressService,
     private userService: UserService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((params) => {
-      this.emailGoogle = params.get('email');
-    });
+    this.emailGoogle = this.authService.emailGoogle;
 
     this.getCreateForm();
 
     this.addressService.getAllCities();
 
     this.cities =  this.addressService.cities;
-
-    // console.log(this.cities);
   }
 
   getCreateForm() {
@@ -79,7 +77,7 @@ export class RegisterWithGoogleComponent implements OnInit {
     this.rfRegisterGoogle.controls.district.setValue(this.currentDistrict);
     this.rfRegisterGoogle.controls.town.setValue(this.currentWard);
 
-    this.userService.createUser(this.rfRegisterGoogle.value).subscribe(data => {
+    this.userService.saveaddAcountUser(this.rfRegisterGoogle.value).subscribe(data => {
 
       this.toastr.success('Đăng ký thành công, mời bạn đăng nhập')
       this.router.navigateByUrl('login')
@@ -90,7 +88,7 @@ export class RegisterWithGoogleComponent implements OnInit {
   selectCity() {
     this.cityIdSeleted = this.rfRegisterGoogle.value.city;
 
-    this.addressService.getAllAdress().subscribe(data => {
+    this.addressService.getAllAddress().subscribe(data => {
 
       this.districts = [];
 
@@ -107,7 +105,7 @@ export class RegisterWithGoogleComponent implements OnInit {
   selectDistrict() {
     this.districtIdSeleted = this.rfRegisterGoogle.value.district;
 
-    this.addressService.getAllAdress().subscribe(data => {
+    this.addressService.getAllAddress().subscribe(data => {
 
       this.wards = [];
 
@@ -124,7 +122,7 @@ export class RegisterWithGoogleComponent implements OnInit {
   selectWard() {
     this.wardIdSeleted = this.rfRegisterGoogle.value.town;
 
-    this.addressService.getAllAdress().subscribe(data => {
+    this.addressService.getAllAddress().subscribe(data => {
 
       this.currentWard = data[this.cityIdSeleted].Districts[this.districtIdSeleted].Wards[this.wardIdSeleted].Name;
     });

@@ -8,12 +8,12 @@
                                     <i [routerLink]="['home']" class="fa-brands fa-suse"></i>
                                 </span>
             </li>
-            <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item" (click)="topTop()">
+            <li [routerLink]="['/products']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item" (click)="topTop()">
                                 <span class="menu__link ">
                                     Quản lý sản phẩm
                                 </span>
             </li>
-            <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
+            <li [routerLink]="['/user/list']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
               <span class="menu__link ">Quản lý người dùng</span>
             </li>
             <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
@@ -25,7 +25,7 @@
             <li class="menu__item">
                                 <span class="menu__link">
                                     <i class="fa-solid fa-circle-question mx-1"></i>
-                                    <span class="label_guide">Hướng dẫn</span>
+                                    <span routerLink="/guide" class="label_guide">Hướng dẫn</span>
                                 </span>
             </li>
           </ul>
@@ -41,12 +41,20 @@
           </div>
           <div *ngIf="checkLogin">
             <div class="user__info">
-               <span class="mx-2">Xin chào {{nameUser}}</span>
+               <span class="mx-2 text-white">Xin chào {{nameUser}}</span>
               <img src="{{currentUser.avatar}}" class="avatar">
-              <span class="btn__logout">
-                <span (click)="logOut()" class="b__logout">Đăng xuất</span>
-              </span>
+              <div>
+              <ul class="btn__logout">
+                <li>
+                  <span (click)="logOut()" class="b__logout">Đăng xuất</span>
+                </li>
+                <li routerLink="/chat/support" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" >
+                  <span class="b__logout">Phòng chat admin</span>
+                </li>
+              </ul>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
