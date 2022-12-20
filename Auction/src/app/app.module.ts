@@ -39,6 +39,8 @@ import {ToastrModule} from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
 import { TransactionComponent } from './component/transaction/transaction.component';
 import { LockaccountUserComponent } from './component/user/lockaccount-user/lockaccount-user.component';
+import {CKEditorComponent, CKEditorModule} from "@ckeditor/ckeditor5-angular";
+import {RxReactiveFormsModule} from "@rxweb/reactive-form-validators";
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
@@ -57,6 +59,7 @@ const googleLoginOptions = {
   scope: 'profile email',
   plugin_name: 'login'
 };
+
 
 @NgModule({
   declarations: [
@@ -117,6 +120,8 @@ const googleLoginOptions = {
     ToastrModule.forRoot(),
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    CKEditorModule,
+    RxReactiveFormsModule,
     SocialLoginModule
   ],
   providers: [

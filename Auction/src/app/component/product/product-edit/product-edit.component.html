@@ -1,6 +1,7 @@
-<div class="d-flex justify-content-center align-items-center" style="height: 100vh">
-  <div class="bg-add-product">
-    <div class="boxed shadow-md h-100 ms-auto">
+<app-header></app-header>
+<div class="d-flex justify-content-center align-items-center mt-2 mb-2">
+    <div class="boxed shadow h-100 ">
+      <div *ngIf="!formEditProduct"><p style="color: red;margin-top: 10px">Lỗi trang rồi !!!!!</p></div>
       <form *ngIf="formEditProduct" class="form" [formGroup]="formEditProduct" (ngSubmit)="updateProduct(id)">
         <fieldset>
           <legend>
@@ -16,10 +17,12 @@
         <div class="mb-2">
           <div class="d-flex align-items-center mb-2">
             <object data="assets/icons/interface-edit.svg" width="20" height="20"></object>
-            <label class="form-label ms-2">Tên sản phẩm<span style="color: red"> (*)</span>:</label>
+            <label class="form-label ms-2">Tên sản phẩm<span style="color: red">(*)</span>:</label>
           </div>
           <input type="text" class="form-control" formControlName="name"
-                 [ngClass]="formEditProduct.controls['name'].invalid ?'is-invalid':'is-valid'"/>
+                 [ngClass]="formEditProduct.controls['name'].touched
+                 && formEditProduct.controls['name'].invalid?'is-invalid':formEditProduct.controls['name'].touched
+                 && formEditProduct.controls['name'].valid ?'is-valid':''"/>
           <div class="invalid-feedback">
             <div *ngIf="formEditProduct.controls['name'].errors?.required
         && (formEditProduct.controls['name'].touched)">
@@ -39,12 +42,14 @@
         <div class="mb-2">
           <div class="d-flex align-items-center mb-2">
             <object data="assets/icons/icon-people.svg" width="20" height="20"></object>
-            <label class="form-label ms-2">Mã người đăng<span style="color: red"> (*)</span>:</label>
+            <label class="form-label ms-2">Mã người đăng<span style="color: red">(*)</span>:</label>
           </div>
           <div class="d-flex align-items-center mb-2">
             <input #testNum formControlName="user" style="width: 50%" type="number" class="form-control"
                    formControlName="user"
-                   [ngClass]="formEditProduct.controls['user'].invalid ? 'is-invalid':'is-valid'"/>
+                   [ngClass]="formEditProduct.controls['user'].touched
+                 && formEditProduct.controls['user'].invalid?'is-invalid':formEditProduct.controls['user'].touched
+                 && formEditProduct.controls['user'].valid ?'is-valid':''"/>
             <button type="button" class="btn btn-primary d-flex justify-content-center mx-3"
                     (click)="findUserById(testNum)">
               <object data="assets/icons/check-people.svg" width="20" height="20"
@@ -73,7 +78,8 @@
             <label class="form-label ms-2">Thông tin người đăng:</label>
           </div>
           <textarea *ngIf="userFind" class="form-control" disabled>
-                   {{checkUser}}
+            Mã người đăng: {{userFind.id}}
+            Tên người đăng: {{userFind.firstName}} {{userFind.lastName}}
             </textarea>
           <textarea *ngIf="!userFind" class="form-control" disabled>
                   {{checkUser}}
@@ -83,10 +89,12 @@
         <div class="mb-2">
           <div class="d-flex align-items-center mb-2">
             <object data="assets/icons/dollar.svg" width="20" height="20"></object>
-            <label class="form-label ms-2">Giá ban đầu<span style="color: red"> (*)</span>:</label>
+            <label class="form-label ms-2">Giá ban đầu<span style="color: red">(*)</span>:</label>
           </div>
           <input type="number" class="form-control" formControlName="initialPrice"
-                 [ngClass]="formEditProduct.controls['initialPrice'].invalid ?'is-invalid':'is-valid'"/>
+                 [ngClass]="formEditProduct.controls['initialPrice'].touched
+                 && formEditProduct.controls['initialPrice'].invalid?'is-invalid':formEditProduct.controls['initialPrice'].touched
+                 && formEditProduct.controls['initialPrice'].valid ?'is-valid':''"/>
           <div class="invalid-feedback">
             <div *ngIf="formEditProduct.controls['initialPrice'].errors?.required
         && (formEditProduct.controls['initialPrice'].touched)">
@@ -103,11 +111,13 @@
           <div class="d-flex align-items-center mb-2">
             <object data="assets/icons/money-increase.svg" width="20" height="20"></object>
             <label class="form-label ms-2">Mỗi lần tăng ít nhất<span
-              style="color: red"> (*)</span>:</label>
+              style="color: red">(*)</span>:</label>
           </div>
           <select class="form-select" aria-label="Default select example"
                   formControlName="priceStep"
-                  [ngClass]="formEditProduct.controls['priceStep'].invalid ?'is-invalid':'is-valid'">
+                  [ngClass]="formEditProduct.controls['priceStep'].touched
+                 && formEditProduct.controls['priceStep'].invalid?'is-invalid':formEditProduct.controls['priceStep'].touched
+                 && formEditProduct.controls['priceStep'].valid ?'is-valid':''">
             <option *ngFor="let item of priceStepList" [ngValue]="item.id">{{item.step}}</option>
           </select>
           <div class="invalid-feedback">
@@ -121,11 +131,13 @@
         <div class="mb-2">
           <div class="d-flex align-items-center mb-2">
             <object data="assets/icons/category.svg" width="20" height="20"></object>
-            <label class="form-label ms-2">Chủng loại<span style="color: red">(*)</span>:</label>
+            <label class="form-label ms-2">Danh mục<span style="color: red">(*)</span>:</label>
           </div>
           <select formControlName="category" class="form-select"
                   aria-label="Default select example"
-                  [ngClass]="formEditProduct.controls['category'].invalid ?'is-invalid':'is-valid'">
+                  [ngClass]="formEditProduct.controls['category'].touched
+                 && formEditProduct.controls['category'].invalid?'is-invalid':formEditProduct.controls['category'].touched
+                 && formEditProduct.controls['category'].valid ?'is-valid':''">
             <option *ngFor="let item of categoryList" [ngValue]="item.id">{{item.name}}</option>
           </select>
           <div class="invalid-feedback">
@@ -141,11 +153,13 @@
             <object data="assets/icons/image.svg" width="20" height="20"></object>
             <label class="form-label ms-2">Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label>
           </div>
-          <input type="file"
+          <input accept="image/png, image/jpeg" type="file"
                  multiple
                  (change)="showPreview($event)"
                  autocomplete="off" class="custom-file-input form-control" formControlName="imageProduct"
-                 [ngClass]="formEditProduct.controls['imageProduct'].invalid ?'is-invalid':'is-valid'">
+                 [ngClass]="formEditProduct.controls['imageProduct'].touched
+                 && formEditProduct.controls['imageProduct'].invalid?'is-invalid':formEditProduct.controls['imageProduct'].touched
+                 && formEditProduct.controls['imageProduct'].valid ?'is-valid':''">
           <div class="invalid-feedback d-block">
             <div *ngIf="formEditProduct.controls['imageProduct'].errors?.required
         && (formEditProduct.controls['imageProduct'].touched)">
@@ -153,8 +167,8 @@
             </div>
           </div>
         </div>
+        <div *ngIf="messageEdit !=''">{{messageEdit}}</div>
         <div class="d-flex justify-content-left" style="overflow-x: scroll">
-          <div *ngIf="messageEdit !=''">{{messageEdit}}</div>
           <div *ngFor="let img of imgs,let i = index" style="margin-right: 8px">
             <div style="position: relative">
               <img class="d-block" style="height: 84px" src="{{img.url}}">
@@ -176,14 +190,16 @@
         </div>
 
 
-        <div class="mb-2">
+        <div  class="mb-2">
           <div class="d-flex align-items-center mb-2">
             <object data="assets/icons/information.svg" width="20" height="20"></object>
             <label class="form-label ms-2">Thông tin chi tiết<span
               style="color: red">(*)</span>:</label>
           </div>
-          <textarea class="form-control" formControlName="description"
-                    [ngClass]="formEditProduct.controls['description'].invalid ?'is-invalid':'is-valid'"></textarea>
+          <ckeditor [editor]="editor" formControlName="description" (ready)="onReady($event)"
+                    [ngClass]="formEditProduct.controls['description'].touched
+                 && formEditProduct.controls['description'].invalid?'is-invalid':formEditProduct.controls['description'].touched
+                 && formEditProduct.controls['description'].valid ?'is-valid':''"></ckeditor>
           <div class="invalid-feedback">
             <div *ngIf="formEditProduct.controls['description'].errors?.required
         && (formEditProduct.controls['description'].touched)">
@@ -196,10 +212,12 @@
           <div class="d-flex align-items-center mb-2">
             <object data="assets/icons/hour-end.svg" width="20" height="20"></object>
             <label class="form-label ms-2">Thời gian bắt đầu<span
-              style="color: red"> (*)</span>:</label>
+              style="color: red">(*)</span>:</label>
           </div>
           <input type="datetime-local" class="form-control" formControlName="startTime"
-                 [ngClass]="formEditProduct.errors?.checkStartTime||formEditProduct.controls['startTime'].invalid ?'is-invalid':'is-valid'"/>
+                 [ngClass]="formEditProduct.controls['startTime'].touched
+                 && formEditProduct.controls['startTime'].invalid?'is-invalid':formEditProduct.controls['startTime'].touched
+                 && formEditProduct.controls['startTime'].valid ?'is-valid':''"/>
           <div class="invalid-feedback">
             <div *ngIf="formEditProduct.errors?.checkStartTime
         && (formEditProduct.controls['startTime'].touched)">
@@ -215,10 +233,12 @@
           <div class="d-flex align-items-center mb-2">
             <object data="assets/icons/hour-start.svg" width="20" height="20"></object>
             <label class="form-label ms-2">Thời gian kết thúc<span
-              style="color: red"> (*)</span>:</label>
+              style="color: red">(*)</span>:</label>
           </div>
           <input type="datetime-local" class="form-control" formControlName="endTime"
-                 [ngClass]="formEditProduct.errors?.checkEndTime||formEditProduct.controls['endTime'].invalid ?'is-invalid':'is-valid'"/>
+                 [ngClass]="formEditProduct.errors?.checkEndTime||formEditProduct.controls['endTime'].touched
+                 && formEditProduct.controls['endTime'].invalid?'is-invalid':formEditProduct.controls['endTime'].touched
+                 && formEditProduct.controls['endTime'].valid ?'is-valid':''"/>
           <div class="invalid-feedback">
             <div *ngIf="formEditProduct.errors?.checkEndTime
         && (formEditProduct.controls['endTime'].touched)">
@@ -251,15 +271,15 @@
             <p>Hủy</p>
           </button>
         </div>
-
-      </form>
-
-      <div class="mb-2">
+        <div class="mb-2">
             <span style="font-size: 15px" class="fst-italic">
               Trường có dấu <span style="color: red"> (*)</span> là bắt
               buộc,không được bỏ trống
             </span>
-      </div>
+        </div>
+      </form>
     </div>
-  </div>
 </div>
+<app-footer></app-footer>
+
+

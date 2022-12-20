@@ -10,7 +10,7 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, 
 import {PriceStep} from '../../../model/product/price-step';
 import {Category} from '../../../model/product/category';
 import {User} from '../../../model/user/user';
-
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {finalize} from "rxjs/operators";
 import {ImgUrlProduct} from "../../../model/product/img-url-product";
 import {AngularFireStorage} from "@angular/fire/storage";
@@ -18,11 +18,12 @@ import {ImageProductService} from "../../../service/product/image-product.servic
 import {ImgUrlProductDto} from "../../../model/product/dto/img-url-product-dto";
 import {ProductDto} from "../../../model/product/dto/product-dto";
 import {ToastrService} from "ngx-toastr";
+import {RxwebValidators} from "@rxweb/reactive-form-validators";
 
 export const checkStartTime: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const startTime = new Date(control.get("startTime").value).getTime();
   const dateNow = new Date().getTime();
-  if (startTime - dateNow < 0) {
+  if (startTime - dateNow < 3 * 24 * 60 * 60 * 1000) {
     return {"checkStartTime": true};
   } else {
     return null;
@@ -33,7 +34,7 @@ export const checkEndTime: ValidatorFn = (control: AbstractControl): ValidationE
   console.log(startTime)
   const endTime = new Date(control.get("endTime").value).getTime();
   console.log(endTime)
-  if (endTime - startTime < 0 && startTime && endTime) {
+  if (endTime - startTime > 30 * 24 * 60 * 60 * 1000 && endTime && startTime || endTime - startTime < 0) {
     return {"checkEndTime": true};
   } else {
     return null;
@@ -48,7 +49,15 @@ export const checkEndTime: ValidatorFn = (control: AbstractControl): ValidationE
 })
 export class ProductAddComponent implements OnInit {
 
-  loadingImage: boolean;
+  editor = ClassicEditor;
+
+  onReady(editor) {
+    editor.ui.getEditableElement().parentElement.insertBefore(
+      editor.ui.view.toolbar.element,
+      editor.ui.getEditableElement()
+    );
+  }
+
   messageCreate = "";
   product: Product;
   productDto: ProductDto;
@@ -60,7 +69,9 @@ export class ProductAddComponent implements OnInit {
   imgs: any[] = [];
   img: any[] = [];
   disabled: any;
-  checkUser = "";
+  checkUser: string;
+  text: string;
+  listCheckImage: any[] = [];
 
   constructor(private _formBuilder: FormBuilder,
               private _productService: ProductService,
@@ -96,7 +107,7 @@ export class ProductAddComponent implements OnInit {
   }
 
   addNewProduct() {
-    if (this.formCreateProduct.valid) {
+    if (this.formCreateProduct.valid && this.imgs.length != 0) {
       this.productDto = this.formCreateProduct.value;
       console.log(this.formCreateProduct.value)
       this._productService.save(this.productDto).subscribe(data => {
@@ -114,8 +125,8 @@ export class ProductAddComponent implements OnInit {
         }
         this._toast.success("Thêm mới sản phẩm thành công!");
       });
-    }else {
-      this._toast.error("Thêmm mới sản phẩm thất bại!");
+    } else {
+      this._toast.error("Thêm mới sản phẩm thất bại!");
     }
   }
 
@@ -124,24 +135,19 @@ export class ProductAddComponent implements OnInit {
     this._userService.findUserById(testNum.value).subscribe(data => {
       this.userFind = data;
       this.formCreateProduct.patchValue({user: this.userFind.id})
-      console.log(this.userFind);
-      this.checkUser = "Mã người đăng: " + this.userFind.id + "\n" + "Tên người đăng: " + this.userFind.firstName + " " + this.userFind.lastName;
-
     }, error => {
       this.checkUser = "Không tìm thấy thông tin người đăng!"
     })
   }
 
   showPreview(event: any) {
+    this.messageCreate = "Đang tải ảnh vui lòng đợi........";
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       this.selectedFile = event.target.files;
     }
     if (this.selectedFile.length !== 0) {
-      setTimeout(() => {
-        this.messageCreate = "Đang tải ảnh vui lòng đợi........";
-      }, 3000)
       for (let i = 0; i < this.selectedFile.length; i++) {
         let selectedImage = this.selectedFile[i];
         const n = Date.now();
@@ -163,11 +169,18 @@ export class ProductAddComponent implements OnInit {
   deleteImageNew(index) {
     this.imgs.splice(index, 1)
     this._toast.error("Bạn đã xóa 1 ảnh!")
-    console.log(index)
   }
 
   resetFindUserById(testNum) {
     testNum.removeAttribute('disabled')
   }
 
+
+  checkFile: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    this.imgs = control.value;
+    if (this.imgs.length > 6) {
+      return {"checkFile": true};
+    }
+    return null;
+  }
 }
