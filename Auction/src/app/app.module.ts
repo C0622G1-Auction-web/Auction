@@ -49,6 +49,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
 import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
+import {CustomPipePipe} from "./component/product/product-list/product-pipe";
+import { AuctionProductHistoryComponent } from './component/auction/auction-product-history/auction-product-history.component';
 
 
 const googleLoginOptions = {
@@ -100,7 +102,9 @@ const googleLoginOptions = {
     ChatAdminComponent,
     UserCreateComponent,
     UserUpdateComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    CustomPipePipe,
+    AuctionProductHistoryComponent
   ],
   imports: [
     ReactiveFormsModule,

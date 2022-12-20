@@ -19,6 +19,8 @@ import {ChatUserComponent} from "./component/chat/chat-user/chat-user.component"
 import {ChatAdminComponent} from "./component/chat/chat-admin/chat-admin.component";
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
+import {ProductListComponent} from "./component/product/product-list/product-list.component";
+import {AuctionProductHistoryComponent} from "./component/auction/auction-product-history/auction-product-history.component";
 
 const routes: Routes = [
   {
@@ -114,7 +116,10 @@ const routes: Routes = [
   },
   {path:'user/update/:id', component: UserUpdateComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
+  {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent},
+
+  {path:'user/product/list', component:ProductListComponent},
+  {path: 'user/auction/pruduct/list',component:AuctionProductHistoryComponent}
 ];
 
 @NgModule({
