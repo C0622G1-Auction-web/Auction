@@ -17,8 +17,8 @@ import {ProductDtoRoleAdmin} from '../../model/product/product-dto-role-admin';
 import {Reason} from '../../model/product/reason';
 import {DataResult} from '../../model/product/data_result';
 import {catchError} from 'rxjs/operators';
+import {ImgDetailDto} from '../../model/product/img_detail_dto';
 import {ProductDto} from '../../model/product/iProduct_dto';
-
 
 
 @Injectable({
@@ -113,6 +113,7 @@ export class ProductService {
   getAllAndSearchToPage(rfSearch: any, pageNumber: any) {
     return this._httpClient.post<PageProduct>(environment.productSearchUrl + '?page=' + pageNumber, rfSearch);
   }
+
   /**
    * Created: GiangLBH
    * Function: find product by selected ids
@@ -192,5 +193,9 @@ export class ProductService {
 
   update(productDto, id): Observable<Product> {
     return this._httpClient.put<Product>(environment.productUrl + '/update/' + id, productDto);
+  }
+
+  getImgsByProductId(id: number): Observable<ImgDetailDto[]> {
+    return this._httpClient.get<ImgDetailDto[]>(environment.api_url_get_imgs + id);
   }
 }
