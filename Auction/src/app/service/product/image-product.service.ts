@@ -28,7 +28,7 @@ export class ImageProductService {
   }
 
   getListImgProductId(id: number): Observable<ImgUrlProduct[]> {
-    return this._httpClient.get<ImgUrlProduct[]>(environment.imageUrl + "/" + id);
+    return this._httpClient.get<ImgUrlProduct[]>(environment.imageUrl + "/" + id, this.httpOptions);
   }
 
   update(image, id): Observable<ImgUrlProduct> {

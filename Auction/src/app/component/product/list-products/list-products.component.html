@@ -1,38 +1,41 @@
+<!--<app-header></app-header>-->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-2 sidebar__left" style="height: auto">
-      <nav>
-        <ul class="menu">
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa fa-home"></i>
-              Trang chủ
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa-solid fa-book"></i>
-              Quản lý sản phẩm
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa-solid fa-user-pen"></i>
-              Quản lý nhân viên
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa-solid fa-handshake"></i>
-              Quản lý giao dịch
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <div class="col-lg-2 sidebar__left" id="side-bar">
+      <div>
+        <nav>
+          <ul class="menu">
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/home">
+                <i class="menu__icon fa fa-home"></i>
+                Trang chủ
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="menu__item active">
+              <a class="menu__link" routerLink="/products">
+                <i class="menu__icon fa-solid fa-book"></i>
+                Quản lý sản phẩm
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/user/list">
+                <i class="menu__icon fa-solid fa-user-pen"></i>
+                Quản lý nhân viên
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/transaction">
+                <i class="menu__icon fa-solid fa-handshake"></i>
+                Quản lý giao dịch
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
 
     <div class="col-lg-10" id="content">
@@ -69,12 +72,12 @@
                 <div *ngIf="rfSearch.controls['sellerName'].hasError('pattern') &&
                    rfSearch.controls['sellerName'].touched &&
                   !rfSearch.controls['sellerName'].hasError('maxlength')" style="color: red">
-                  Tên người bán không được chứa số hay ký tự đặc biệt.
+                  Tên người đăng sai định dạng.
                 </div>
               </div>
             </div>
             <div class="col-4" id="form-btn">
-              <button class="btn btn-primary" type="submit" [disabled]="rfSearch.invalid">>
+              <button class="btn btn-primary" type="submit" [disabled]="rfSearch.invalid">
                 <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả
               </button>
               <button class="btn btn-success" (click)="resetFormAndData()">
@@ -86,8 +89,7 @@
             <div class="col-4">
               <div class="form-floating mb-4 form-inp">
                 <select class="form-select form-select-underlined" id="floatingCategory"
-                        formControlName="categoryName"
-                        [ngClass]="(rfSearch.controls['categoryName'].touched)?'is-valid':''">
+                        formControlName="categoryName">
                   <option value="">---- Tất cả ----</option>
                   <option *ngFor="let item of categories" [value]="item.name">{{item.name}}</option>
                 </select>
@@ -97,8 +99,7 @@
             <div class="col-4">
               <div class="form-floating mb-4 form-inp">
                 <select class="form-select form-select-underlined" id="floatingAuctionStatus"
-                        formControlName="auctionStatusName"
-                        [ngClass]="(rfSearch.controls['auctionStatusName'].touched)?'is-valid':''">
+                        formControlName="auctionStatusName">
                   <option value="">----- Tất cả -----</option>
                   <option *ngFor="let item of auctionStatus" [value]="item.name">{{item.name}}</option>
                 </select>
@@ -108,8 +109,7 @@
             <div class="col-4">
               <div class="form-floating mb-4" id="form-floating-price">
                 <select class="form-select form-select-underlined" id="floatingPrice"
-                        formControlName="priceRange"
-                        [ngClass]="(rfSearch.controls['priceRange'].touched)?'is-valid':''">>
+                        formControlName="priceRange">
                   <option *ngFor="let item of priceRanges" [value]="item.id">{{item.name}}</option>
                 </select>
                 <label for="floatingPrice">Giá sản phẩm</label>
@@ -123,18 +123,18 @@
                *ngIf="pageProducts != null">
           <thead>
           <tr>
-            <th>STT</th>
+            <th>No</th>
             <th>ID</th>
-            <th>Tên Sản phẩm</th>
+            <th width=20%>Tên Sản phẩm</th>
             <th>Chủng loại</th>
-            <th>Người đăng</th>
-            <th>Giá ban đầu</th>
-            <th>Trạng thái duyệt</th>
-            <th>Ngày đấu giá</th>
-            <th>Tình trạng</th>
+            <th  width=11%>Người đăng</th>
+            <th width=11%>Giá ban đầu (VNĐ)</th>
+            <th width=11%>Trạng thái duyệt</th>
+            <th width=10%>Ngày đấu giá</th>
+            <th width=11%>Tình trạng</th>
             <th>Sửa</th>
-            <th class="text-center">
-              <button class="btn" (click)="addAllToDelete()">
+            <th class="text-center" width=10>
+              <button class="btn " (click)="addAllToDelete()">
                 <i class="fa-regular fa-trash-can delete-group-icon"></i>
               </button>
             </th>
@@ -142,17 +142,17 @@
           </thead>
           <tbody>
           <tr *ngFor="let item of pageProducts.content; index as i ">
-            <td>{{pageProducts.size * pageProducts.number + i + 1}}</td>
-            <td>{{item.id}}</td>
+            <td class="text-center">{{pageProducts.size * pageProducts.number + i + 1}}</td>
+            <td class="text-center">{{item.id}}</td>
             <td><a type="button" class="view"
                    [routerLink]="item.reviewStatusId == 2 ? ['/auction/',item.id] :['/products/review/',item.id]">
               <span class="text-decoration-underline">{{item.name}}</span></a>
             </td>
             <td>{{item.category}}</td>
             <td>{{item.userName}}</td>
-            <td>{{item.initialPrice}}</td>
+            <td class="text-end">{{item.initialPrice | number}}</td>
             <td>{{item.reviewStatus}}</td>
-            <td>{{item.startTime}}</td>
+            <td class="text-end">{{item.startTime | date : 'dd/MM/y hh:mm:ss a'}}</td>
             <td>{{item.auctionStatus}}</td>
             <td class="text-center"><a [routerLink]="['/product/edit/',item.id]">
               <i class="fa-regular fa-pen-to-square edit-icon"></i></a></td>
@@ -165,7 +165,7 @@
         </table>
         <h3 *ngIf="pageProducts == null" id="null-result-noti">Không tìm thấy kết quả phù hợp.</h3>
         <!--            Phân trang-->
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between" id="last-row">
           <div>
             <a routerLink="/product/create" class="btn btn-primary" role="button">
               <i class="fa-solid fa-square-plus"></i> Thêm sản phẩm
@@ -176,20 +176,20 @@
               <ul class="pagination">
                 <li class="page-item"><a class="page-link"
                                          [ngClass]="pageProducts.first ? 'disabled': ''"
-                                         (click)="gotoPage(0)">First</a></li>
+                                         (click)="gotoPage(0)">Trang đầu</a></li>
                 <li class="page-item"><a class="page-link"
                                          [ngClass]="pageProducts.first ? 'disabled': ''"
-                                         (click)="gotoPage(pageProducts.number - 1)">Previous</a>
+                                         (click)="gotoPage(pageProducts.number - 1)">Trang trước</a>
                 </li>
                 <li class="page-item active"><a class="page-link">
                   {{pageProducts.number + 1}}/{{pageProducts.totalPages}}</a></li>
                 <li class="page-item"><a class="page-link"
                                          [ngClass]="pageProducts.last ? 'disabled': ''"
-                                         (click)="gotoPage(pageProducts.number + 1)">Next</a>
+                                         (click)="gotoPage(pageProducts.number + 1)">Trang sau</a>
                 </li>
                 <li class="page-item"><a class="page-link"
                                          [ngClass]="pageProducts.last ? 'disabled': ''"
-                                         (click)="gotoPage(pageProducts.totalPages - 1)">Last</a>
+                                         (click)="gotoPage(pageProducts.totalPages - 1)">Trang cuối</a>
                 </li>
               </ul>
             </nav>
@@ -232,3 +232,4 @@
     </div>
   </div>
 </div>
+<!--<app-footer></app-footer>-->

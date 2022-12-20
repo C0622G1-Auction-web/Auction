@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="container">
   <div class="borderFull">
     <div class="row">
@@ -11,7 +12,7 @@
               <div class="row" id="img-col">
                 <div class="col-lg-12 d-flex justify-content-center align-items-center">
                   <div class="mt-2 card card-body w-50" style="border: solid; color: green">
-                    <img id="image__main{{1}}" height="600" src="{{imgs[0]?.url}}" class="d-block w-100 card-img"
+                    <img id="image__main{{1}}" height="500" src="{{imgs[0]?.url}}" class="d-block w-100 card-img"
                          alt="">
                     <ul class="carousel__images d-flex justify-content-center">
                       <li value="{{j}}" class="image__item img-selected{{1}}" *ngFor="let img of imgs,let j = index;">
@@ -45,19 +46,19 @@
                     </tr>
                     <tr>
                       <td>Giá ban đầu</td>
-                      <td>{{product.initialPrice}}</td>
+                      <td>{{product.initialPrice | number}} VNĐ</td>
                     </tr>
                     <tr>
                       <td>Bước giá</td>
-                      <td>{{product.priceStep}}</td>
+                      <td>{{product.priceStep | number}}  VNĐ</td>
                     </tr>
                     <tr>
                       <td>Bắt đầu đấu giá</td>
-                      <td>{{product.startTime}}</td>
+                      <td>{{product.startTime | date : 'dd/MM/y hh:mm:ss a'}}</td>
                     </tr>
                     <tr>
                       <td>Kết thúc đấu giá</td>
-                      <td>{{product.endTime}}</td>
+                      <td>{{product.endTime | date : 'dd/MM/y hh:mm:ss a'}}</td>
                     </tr>
                     <tr>
                       <td>Thông tin chi tiết</td>
@@ -70,7 +71,7 @@
                       </td>
                     </tr>
 
-                    <tr *ngIf="invalidProduct">
+                    <tr *ngIf="invalidProduct && product.reviewStatusId != 3">
                       <td><label for="reason-input">Lý do khoá</label></td>
                       <td>
                         <form *ngIf="rfReason" [formGroup]="rfReason">
@@ -120,3 +121,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

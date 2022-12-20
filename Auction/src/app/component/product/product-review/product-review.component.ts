@@ -4,10 +4,9 @@ import {NotificationService} from '../../../service/notification/notification.se
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDtoRoleAdmin} from '../../../model/product/product-dto-role-admin';
 import {Reason} from '../../../model/product/reason';
-import {ImageProductService} from '../../../service/product/image-product.service';
 import {ImgDetailDto} from '../../../model/product/img_detail_dto';
-import {forEachComment} from 'tslint';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-product-detail',
@@ -28,13 +27,13 @@ export class ProductReviewComponent implements OnInit {
   imgs: ImgDetailDto[];
   rfReason: FormGroup;
 
-
   constructor(private _productService: ProductService,
               private _notificationService: NotificationService,
               private _activatedRoute: ActivatedRoute,
               private router: Router,
-              private _formBuilder: FormBuilder) {
-
+              private _formBuilder: FormBuilder,
+              private _titleService: Title) {
+    this._titleService.setTitle("Duyệt sản phẩm");
   }
 
   ngOnInit(): void {
@@ -138,5 +137,4 @@ export class ProductReviewComponent implements OnInit {
       });
     }, 500);
   }
-
 }

@@ -42,7 +42,7 @@ const routes: Routes = [
   {path: 'transaction', component: TransactionComponent},
 
   {
-    path: 'home',
+    path: 'hoUme',
     component: HomeComponent
   },
   {
