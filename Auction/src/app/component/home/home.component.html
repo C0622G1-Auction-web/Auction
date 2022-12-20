@@ -1,9 +1,9 @@
-  <div class="app">
+  <div class="app container">
   <app-header></app-header>
-  <div class="slide">
+  <div class="my__slide">
     <div class="container-fluid">
       <div class="row mt-2">
-        <div class="col-lg-10 slide">
+        <div class="col-lg-10 p-0">
           <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
@@ -80,10 +80,10 @@
   <form class="filter" *ngIf="rfSearch" [formGroup]="rfSearch" (ngSubmit)="gotoPage(this.rfSearch.value)">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12 p-0">
           <div class="filter">
-            <ul class="category">
-              <li class="category__item" [ngClass]="rfSearch?.value.categoryID == '' ? 'active' : ''">
+            <ul class="category d-flex flex-wrap">
+              <li class="category__item mb-2" [ngClass]="rfSearch?.value.categoryID == '' ? 'active' : ''">
                 <span (click)="setValueCategorySearch('',
                                                       rfSearch.value.rangePrice,
                                                       rfSearch.value.productAuctionStatus,
@@ -91,7 +91,7 @@
                   Tất cả
                 </span>
               </li>
-              <li class="category__item" *ngFor="let category of categorys, let i = index;"
+              <li class="category__item mb-2" *ngFor="let category of categorys, let i = index;"
               [ngClass]="rfSearch.value.categoryID == i + 1 ? 'active' : ''">
                 <span (click)="setValueCategorySearch(category.id,
                                                       rfSearch.value.rangePrice,
@@ -100,18 +100,36 @@
                     {{category.name}}
                 </span>
               </li>
+              <li class="category__item mb-2" [ngClass]="auctionStatusId == '2' ? 'active' : ''">
+                <span (click)="setValueAuctionProductStatusSearch(categoryIDSearch,
+                                                      rfSearch.value.rangePrice,
+                                                      '2',
+                                                      rfSearch.value.name)" class="category_text">
+                    Đang đấu giá
+                </span>
+              </li>
+              <li class="category__item mb-2" [ngClass]="auctionStatusId == '3' ? 'active' : ''">
+                <span (click)="setValueAuctionProductStatusSearch(categoryIDSearch,
+                                                      rfSearch.value.rangePrice,
+                                                      '3',
+                                                      rfSearch.value.name)" class="category_text">
+                    Đã kết thúc
+                </span>
+              </li>
             </ul>
-            <form action="" class="form__filter d-flex" [formGroup] = "rfSearch" (ngSubmit)="gotoPage(rfSearch.value)">
-              <div class="form_search">
-                <input  type="text" formControlName="name" class="input__search" placeholder="Bạn cần tìm gì?...">
-                <button class="btn__search">Tìm kiếm</button>
-              </div>
+            <form action="" class=" w-100 form__filter d-flex" [formGroup] = "rfSearch" (ngSubmit)="gotoPage(rfSearch.value)">
               <select class="select__price" formControlName="rangePrice" (change)="gotoPage(this.rfSearch.value)">
-                <option class="text-center" value="999999999999999999">--Chọn mức giá--</option>
+                <option class="text-center" value="999999999999999999">
+                  <span>Mức giá</span>
+                </option>
                 <option class="text-center" value="5000000">Nhỏ hơn 5 triệu</option>
                 <option class="text-center" value="30000000">Nhỏ hơn 30 triệu</option>
                 <option class="text-center" value="50000000">Tất cả</option>
               </select>
+              <div class="form_search">
+                <input  type="text" formControlName="name" class="input__search" placeholder="Bạn cần tìm gì?...">
+                <button class="btn__search">Tìm kiếm</button>
+              </div>
             </form>
           </div>
         </div>
@@ -120,13 +138,11 @@
   </form>
   <div class="content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="row" *ngIf="pageProducts">
+     <div class="row" style="margin: 0 -24px;" *ngIf="pageProducts">
             <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4" *ngFor="let product of pageProducts.content, let i = index;">
               <div class="card product">
-                <img id="image__main{{i}}" height="248" src="{{product.imgUrlProducts[0]?.url}}" class="d-block w-100 card-img" alt="">
-                <ul class="carousel__images d-flex justify-content-center">
+                <img id="image__main{{i}}" height="226" src="{{product.imgUrlProducts[0]?.url}}" class="d-block w-100 card-img" alt="">
+                <ul class="carousel__images d-flex justify-content-left">
                   <li value="{{j}}" class="image__item img-selected{{i}}" *ngFor="let img of product.imgUrlProducts,let j = index;">
                     <img (click)="changeImage($event, i, j)" class="d-block w-100" height="30" src="{{img.url}}" width="" alt="">
                   </li>
@@ -166,12 +182,13 @@
             </div>
           </div>
         </div>
-
-      </div>
-    </div>
   </div>
   <div class="more mt-2 mb-2 d-flex justify-content-center">
     <button *ngIf="pageHasNext + 1 < pageProducts?.totalPages" class="btn btn-outline-danger" (click)="gotoPageNumber(rfSearch?.value, pageHasNext + 1)">Xem thêm</button>
   </div>
   <app-footer></app-footer>
 </div>
+
+  <div>
+
+  </div>

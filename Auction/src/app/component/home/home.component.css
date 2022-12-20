@@ -35,7 +35,7 @@ a {
   text-align: right;
   color: #e74c3c;
   position: absolute;
-  top: 214px;
+  top: 184px;
   right: 0;
   left: 0;
   margin: 0;
@@ -47,9 +47,15 @@ a {
   color: transparent;
 }
 
+.select__price{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
 .form__filter {
-  flex: 1;
-  width:40%;
+  width:100%;
   justify-content: space-between;
 }
 
@@ -75,11 +81,6 @@ a {
   color: #ecf0f1;
 }
 
-.sidebar__left,
-.sidebar__right {
-  background-color: #ecf0f1;
-}
-
 .sidebar__right{
   background: transparent;
 }
@@ -91,7 +92,7 @@ a {
 }
 .sidebar__right {
   padding: 0;
-  padding-right: 12px;
+  padding-left: 12px;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -105,12 +106,16 @@ a {
   padding-top: 12px;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: start;
+}
+
+select::-ms-expand {
+  display: none;
 }
 
 .form_search {
-  width: 50%;
-  padding-right: 8px;
+  width: 80%;
+  padding-left: 8px;
   position: relative;
   display: flex;
   align-items: center;
@@ -118,7 +123,7 @@ a {
 
 .btn__search {
   position: absolute;
-  right: 12px;
+  right: 3px;
   border-radius: 25px;
   border: none;
   background: #e74c3c;
@@ -132,6 +137,7 @@ a {
   border-radius: 25px;
   outline: none;
   width: 50%;
+  position: relative;
 }
 .input__search {
   width: 100%;
@@ -151,11 +157,6 @@ a {
   width: 100%;
   border-radius: 2px 2px 0 0;
 }
-
-.filter {
-  margin-top: 24px;
-}
-
 .category {
   display: flex;
 }
@@ -172,12 +173,23 @@ a {
 .category__item i {
   margin-right: 4px;
 }
-
+#top{
+  position: relative;
+}
 .category__item:hover {
   background-color: #e74c3c;
   color: #ecf0f1;
 }
 
+
+#select ::after{
+  content: "";
+  display: block;
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+}
 .category__item.active {
   background-color: #e74c3c;
   color: #ecf0f1;
@@ -207,10 +219,12 @@ a {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 30%;
-  background-color: rgba(122, 121, 121, 0.22);
+  height: 15%;
+  background-color: rgb(139 139 139 / 17%);
   animation: top-down 0.3s ease-in-out;
   border-radius: 0 0 4px 4px;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes top-down {
@@ -237,10 +251,6 @@ a {
   align-items: center;
   justify-content: center;
   width: 75%;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 50%;
-  transform: translateX(-50%);
 }
 .btn__auctioning {
   background: linear-gradient(to right, #11998e, #38ef7d);
@@ -278,6 +288,11 @@ a {
 .product {
   position: relative;
 }
+
+.card-body {
+ padding: 0 8px 8px 8px;
+}
+
 .carousel__images {
   overflow-x: scroll;
 }
@@ -303,11 +318,11 @@ a {
   left: 0;
   position: absolute;
   display: block;
-  padding: 4px 8px;
+  padding: 2px 8px;
   background: linear-gradient(to right, #c21500, #ffc500);
-  font-size: 16px;
+  font-size: 12px;
   color: #ecf0f1;
-  border-radius:4px 0 4px 0;
+  border-radius: 8px 0 8px 0;
   min-width: 60%;
 }
 
@@ -356,7 +371,7 @@ a {
   .login__btn i {
     display: none;
   }
-  .slide {
+  .my__slide {
     display: none;
   }
   .filter {
@@ -390,6 +405,8 @@ a {
   .select__price, .form_search{
     width: 48%;
   }
+
+
   .input__search {
     width: 100%;
     margin-left: 0 !important;
