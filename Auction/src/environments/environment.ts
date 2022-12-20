@@ -48,7 +48,7 @@ export const environment = {
   api_url_create_img_url: 'http://localhost:8080/api/v1/products/img/create',
   uri_api_update_user_v1_user: 'http://localhost:8080/api/v1/users/update',
   uri_api_find_by_id_user_v1_user: 'http://localhost:8080/api/v1/users/find/',
-  LOGIN_API: 'http://localhost:8080/api/auth/login',
+  LOGIN_API: 'http://localhost:8080/api/v1/auth/login',
   GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
   DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json'
 };

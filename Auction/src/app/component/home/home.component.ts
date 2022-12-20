@@ -7,6 +7,9 @@ import {CategoryService} from "../../service/product/category.service";
 import {ImgUrlProduct} from "../../model/product/img-url-product";
 import {formatCurrency, getCurrencySymbol} from "@angular/common";
 import {UserService} from "../../service/user/user.service";
+import {SocketService} from "../../service/socket/socket.service";
+import {Title} from "@angular/platform-browser";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -28,9 +31,13 @@ export class HomeComponent implements OnInit {
   constructor(private _productService: ProductService,
               private _formBuilder: FormBuilder,
               private _categoryService: CategoryService,
-              private _userService: UserService) { }
+              private _userService: UserService,
+              private _socketService: SocketService,
+              private _titleService: Title,
+              private _route: Router) { }
 
   ngOnInit(): void {
+    this._titleService.setTitle('Trang Chủ');
     this.rfSearch = this._formBuilder.group({
       name: [''],
       categoryID: [''],
@@ -140,5 +147,11 @@ export class HomeComponent implements OnInit {
       this.topUser = data;
       console.log(data);
     })
+  }
+
+  setValueProductId(id: any) {
+    this._productService.setProductDetailId(id);
+    this._route.navigate(['auction-detail', id]);
+    console.log('bat dau truyen ', id);
   }
 }

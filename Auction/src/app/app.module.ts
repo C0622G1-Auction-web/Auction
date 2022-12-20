@@ -24,33 +24,41 @@ import {ProductReviewComponent} from './component/product/product-review/product
 import {VerificationComponent} from './security/verification/verification.component';
 import {VerifyResetPasswordComponent} from './security/verify-reset-password/verify-reset-password.component';
 import {AuctionComponent} from './component/auction/auction.component';
-import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
-import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
-import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
-import { PaymentCartComponent } from './component/payment-cart/payment-cart.component';
-import { AccountForgotPassComponent } from './component/account-forgot-pass/account-forgot-pass.component';
-import { AccountResetPassComponent } from './component/account-reset-pass/account-reset-pass.component';
-import { AddressPaymentComponent } from './component/payment/address-payment/address-payment.component';
-import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
-import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
-import { ListProductsComponent } from './component/product/list-products/list-products.component';
+import {
+  AuctionProductDetailComponent
+} from './component/auction/auction-product-detail/auction-product-detail.component';
+import {
+  InfomationAuctionBuyerComponent
+} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
+import {
+  InfomationAuctionSellerComponent
+} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
+import {PaymentCartComponent} from './component/payment-cart/payment-cart.component';
+import {AccountForgotPassComponent} from './component/account-forgot-pass/account-forgot-pass.component';
+import {AccountResetPassComponent} from './component/account-reset-pass/account-reset-pass.component';
+import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
+import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
+import {PaymentReceiptComponent} from './component/payment-receipt/payment-receipt.component';
+import {ListProductsComponent} from './component/product/list-products/list-products.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
-import { TransactionComponent } from './component/transaction/transaction.component';
-import { LockaccountUserComponent } from './component/user/lockaccount-user/lockaccount-user.component';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
-import { AuctionProductAddComponent } from './component/auction/auction-product-add/auction-product-add.component';
-import { LoginComponent } from './component/security/login/login.component';
-import { ChatUserComponent } from './component/chat/chat-user/chat-user.component';
-import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {TransactionComponent} from './component/transaction/transaction.component';
+import {LockaccountUserComponent} from './component/user/lockaccount-user/lockaccount-user.component';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from 'src/environments/environment';
+import {AuctionProductAddComponent} from './component/auction/auction-product-add/auction-product-add.component';
+import {ChatUserComponent} from './component/chat/chat-user/chat-user.component';
+import {ChatAdminComponent} from './component/chat/chat-admin/chat-admin.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
-import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
+import {RegisterWithGoogleComponent} from './security/register-with-google/register-with-google.component';
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
+import {LoginComponent} from "./security/login/login.component";
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
+
 
 
 const googleLoginOptions = {
@@ -117,7 +125,8 @@ const googleLoginOptions = {
     ToastrModule.forRoot(),
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    SocialLoginModule
+    SocialLoginModule,
+    CKEditorModule
   ],
   providers: [
     {

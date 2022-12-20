@@ -1,9 +1,8 @@
-  <div class="app container">
-  <app-header></app-header>
+<div class="app container">
   <div class="my__slide">
     <div class="container-fluid">
       <div class="row mt-2">
-        <div class="col-lg-10 p-0">
+        <div class="col-lg-10 p-0" style="margin-left: -12px; margin-right: -12px">
           <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
@@ -15,18 +14,23 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="https://salt.tikicdn.com/cache/w1080/ts/tikimsp/c9/9b/c2/2d30734356a0f9577a966c7c673ac5c4.png.webp" class="d-block w-100" alt="..." height="400">
+                <img
+                  src="https://salt.tikicdn.com/cache/w1080/ts/tikimsp/c9/9b/c2/2d30734356a0f9577a966c7c673ac5c4.png.webp"
+                  class="d-block w-100" alt="..." height="400">
                 <div class="carousel-caption d-none d-md-block">
                 </div>
               </div>
               <div class="carousel-item">
-                <img src="https://salt.tikicdn.com/cache/w1080/ts/tikimsp/e5/0f/43/31d7c26ed78fab94754e29ad66c67980.png.webp" class="d-block w-100" alt="..." height="400">
+                <img
+                  src="https://salt.tikicdn.com/cache/w1080/ts/tikimsp/e5/0f/43/31d7c26ed78fab94754e29ad66c67980.png.webp"
+                  class="d-block w-100" alt="..." height="400">
 
                 <div class="carousel-caption d-none d-md-block">
                 </div>
               </div>
               <div class="carousel-item">
-                <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2018/12/1/644302/IMG_1554.jpg" class="d-block w-100" alt="..." height="400">
+                <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2018/12/1/644302/IMG_1554.jpg"
+                     class="d-block w-100" alt="..." height="400">
                 <div class="carousel-caption d-none d-md-block">
                 </div>
               </div>
@@ -51,7 +55,9 @@
                 <span class="text-danger">đ 90.000.000</span>
               </p>
             </div>
-            <img src="https://gomtruongan.vn/uploads/products/15082022074910/bat-tu-bao-ty-huu-da-ngoc-hoang-long-kem-de-co-nho_15082022074910.jpg" height="120px" class="d-block w-100" alt="">
+            <img
+              src="https://gomtruongan.vn/uploads/products/15082022074910/bat-tu-bao-ty-huu-da-ngoc-hoang-long-kem-de-co-nho_15082022074910.jpg"
+              height="120px" class="d-block w-100" alt="">
 
           </div>
           <div class="my__card w-100" style="border: none;">
@@ -61,7 +67,9 @@
                 <span class="text-danger">đ 80.000.000</span>
               </p>
             </div>
-            <img src="https://gomtruongan.vn/uploads/products/11032021094801/dieu-bat-men-ran-hoa-sen-boc-dong_11032021094801.jpg" height="120px" class="d-block w-100" alt="">
+            <img
+              src="https://gomtruongan.vn/uploads/products/11032021094801/dieu-bat-men-ran-hoa-sen-boc-dong_11032021094801.jpg"
+              height="120px" class="d-block w-100" alt="">
           </div>
           <div class="my__card w-100" style="border: none;">
             <div class="my__card__body">
@@ -70,7 +78,9 @@
                 <span class="text-danger">đ 80.000.000</span>
               </p>
             </div>
-            <img src="https://gomtruongan.vn/uploads/products/11032021075646/dieu-bat-men-ran-boc-dong-son-thuy_11032021075646.jpg" height="120px" class="d-block w-100" alt="">
+            <img
+              src="https://gomtruongan.vn/uploads/products/11032021075646/dieu-bat-men-ran-boc-dong-son-thuy_11032021075646.jpg"
+              height="120px" class="d-block w-100" alt="">
           </div>
         </div>
       </div>
@@ -92,7 +102,7 @@
                 </span>
               </li>
               <li class="category__item mb-2" *ngFor="let category of categorys, let i = index;"
-              [ngClass]="rfSearch.value.categoryID == i + 1 ? 'active' : ''">
+                  [ngClass]="rfSearch.value.categoryID == i + 1 ? 'active' : ''">
                 <span (click)="setValueCategorySearch(category.id,
                                                       rfSearch.value.rangePrice,
                                                       rfSearch.value.productAuctionStatus,
@@ -117,7 +127,8 @@
                 </span>
               </li>
             </ul>
-            <form action="" class=" w-100 form__filter d-flex" [formGroup] = "rfSearch" (ngSubmit)="gotoPage(rfSearch.value)">
+            <form action="" class=" w-100 form__filter d-flex" [formGroup]="rfSearch"
+                  (ngSubmit)="gotoPage(rfSearch.value)">
               <select class="select__price" formControlName="rangePrice" (change)="gotoPage(this.rfSearch.value)">
                 <option class="text-center" value="999999999999999999">
                   <span>Mức giá</span>
@@ -127,7 +138,7 @@
                 <option class="text-center" value="50000000">Tất cả</option>
               </select>
               <div class="form_search">
-                <input  type="text" formControlName="name" class="input__search" placeholder="Bạn cần tìm gì?...">
+                <input type="text" formControlName="name" class="input__search" placeholder="Bạn cần tìm gì?...">
                 <button class="btn__search">Tìm kiếm</button>
               </div>
             </form>
@@ -138,57 +149,58 @@
   </form>
   <div class="content">
     <div class="container-fluid">
-     <div class="row" style="margin: 0 -24px;" *ngIf="pageProducts">
-            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4" *ngFor="let product of pageProducts.content, let i = index;">
-              <div class="card product">
-                <img id="image__main{{i}}" height="226" src="{{product.imgUrlProducts[0]?.url}}" class="d-block w-100 card-img" alt="">
-                <ul class="carousel__images d-flex justify-content-left">
-                  <li value="{{j}}" class="image__item img-selected{{i}}" *ngFor="let img of product.imgUrlProducts,let j = index;">
-                    <img (click)="changeImage($event, i, j)" class="d-block w-100" height="30" src="{{img.url}}" width="" alt="">
-                  </li>
-                </ul>
-                <div class="card-body">
-                  <p class="mb-2 card__title" title="{{product.name}}">{{product.name| titlecase}}</p>
-                  <span class="product-status"
-                  [ngClass]="product.auctionStatus?.id == 1 ?'auction':
+      <div class="row" style="margin: 0 -24px;" *ngIf="pageProducts">
+        <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4"
+             *ngFor="let product of pageProducts.content, let i = index;">
+          <div class="card product">
+            <img id="image__main{{i}}" height="226" src="{{product.imgUrlProducts[0]?.url}}"
+                 class="d-block w-100 card-img" alt="">
+            <ul class="carousel__images d-flex justify-content-left">
+              <li value="{{j}}" class="image__item img-selected{{i}}"
+                  *ngFor="let img of product.imgUrlProducts,let j = index;">
+                <img (click)="changeImage($event, i, j)" class="d-block w-100" height="30" src="{{img.url}}" width=""
+                     alt="">
+              </li>
+            </ul>
+            <div class="card-body">
+              <p class="mb-2 card__title" title="{{product.name}}">{{product.name| titlecase}}</p>
+              <span class="product-status"
+                    [ngClass]="product.auctionStatus?.id == 1 ?'auction':
                   product.auctionStatus?.id == 2 ?'auctioning':
                   product.auctionStatus?.id == 3 ?'auctioned':''">
                     {{product.auctionStatus.name}}
                   </span>
-                  <p class="product__price">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></p>
-                  <p class="time">
-                    <span class="time__hh mx-2">09</span>
-                    <span class=" mx-2">:</span>
-                    <span class="time__hh mx-2">09</span>
-                    <span class=" mx-2">:</span>
-                    <span class="time__hh mx-2">09</span>
-                  </p>
-                  <div class="modal__product">
-                    <button [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 1"
-                            class=" btn__auction">
-                      <span class="btn__auction--title">Đấu giá</span>
-                    </button>
-                    <button [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 2"
-                            class=" btn__auctioning">
-                      <span class="btn__auctioning--title">Tham gia</span>
-                    </button>
-                    <button [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 3"
-                            class=" btn btn__auctioned">
-                      <span class="btn__auctioned--title">Xem thêm</span>
-                    </button>
-                  </div>
-                </div>
+              <p class="product__price">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></p>
+              <p class="time">
+                <span class="time__hh mx-2">09</span>
+                <span class=" mx-2">:</span>
+                <span class="time__hh mx-2">09</span>
+                <span class=" mx-2">:</span>
+                <span class="time__hh mx-2">09</span>
+              </p>
+              <div class="modal__product">
+                <button (click)="setValueProductId(product.id)" *ngIf="product.auctionStatus?.id == 1"
+                        class=" btn__auction">
+                  <span class="btn__auction--title">Đấu giá</span>
+                </button>
+                <button (click)="setValueProductId(product.id)" [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 2"
+                        class=" btn__auctioning">
+                  <span class="btn__auctioning--title">Tham gia</span>
+                </button>
+                <button (click)="setValueProductId(product.id)" [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 3"
+                        class=" btn btn__auctioned">
+                  <span class="btn__auctioned--title">Xem thêm</span>
+                </button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
   </div>
   <div class="more mt-2 mb-2 d-flex justify-content-center">
-    <button *ngIf="pageHasNext + 1 < pageProducts?.totalPages" class="btn btn-outline-danger" (click)="gotoPageNumber(rfSearch?.value, pageHasNext + 1)">Xem thêm</button>
+    <button *ngIf="pageHasNext + 1 < pageProducts?.totalPages" class="btn btn-outline-danger"
+            (click)="gotoPageNumber(rfSearch?.value, pageHasNext + 1)">Xem thêm
+    </button>
   </div>
-  <app-footer></app-footer>
 </div>
-
-  <div>
-
-  </div>

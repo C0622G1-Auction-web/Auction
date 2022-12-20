@@ -1,23 +1,26 @@
-  <div class="header">
+  <div class="container header">
     <div class="container-fluid">
       <div class="row">
         <div class="header__menu">
           <ul class="menu d-flex align-items-center m-0">
             <li class="menu__item band">
                                 <span class="menu__link logo">
-                                    <i class="fa-brands fa-suse"></i>
+                                    <i [routerLink]="['home']" class="fa-brands fa-suse"></i>
                                 </span>
             </li>
-            <li class="menu__item" (click)="topTop()">
+            <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item" (click)="topTop()">
                                 <span class="menu__link ">
                                     Quản lý sản phẩm
                                 </span>
             </li>
-            <li class="menu__item">
+            <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
               <span class="menu__link ">Quản lý người dùng</span>
             </li>
-            <li class="menu__item">
+            <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
               <span class="menu__link ">Quản lý giao dịch</span>
+            </li>
+            <li [routerLink]="['auction/product/add']" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="menu__item">
+              <span class="menu__link ">Đấu giá sản phẩm</span>
             </li>
             <li class="menu__item">
                                 <span class="menu__link">
@@ -26,22 +29,22 @@
                                 </span>
             </li>
           </ul>
-          <div class="login d-flex" style="display: none">
+          <div *ngIf="!checkLogin" class="login d-flex" style="display: none">
             <button class="login__btn mx-2">
               <i class="fa-solid fa-circle-user"></i>
               Đăng ký
             </button>
-            <button class="login__btn">
+            <button routerLink="/login" class="login__btn">
               <i class="fa-solid fa-right-to-bracket"></i>
               Đăng nhập
             </button>
           </div>
-          <div login>
+          <div *ngIf="checkLogin">
             <div class="user__info">
-               <span class="mx-2">Xin chào Name</span>
-              <img src="" class="avatar">
+               <span class="mx-2">Xin chào {{nameUser}}</span>
+              <img src="{{currentUser.avatar}}" class="avatar">
               <span class="btn__logout">
-                <span class="b__logout">Đăng xuất</span>
+                <span (click)="logOut()" class="b__logout">Đăng xuất</span>
               </span>
             </div>
           </div>

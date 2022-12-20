@@ -5,6 +5,10 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn} 
 import {Auction} from "../../../model/auction/auction";
 import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-product-id";
 import {ActivatedRoute} from "@angular/router";
+import {SocketService} from "../../../service/socket/socket.service";
+import {TokenService} from "../../../service/security/token.service";
+import {User} from "../../../model/user/user";
+import {Account} from "../../../model/account/account";
 
 
 @Component({
@@ -19,29 +23,58 @@ export class AuctionProductDetailComponent implements OnInit {
   auctionPrice: number;
   rfAuction: FormGroup;
   newAuction: Auction;
-  auctionPage : PageAuctionByProductId;
   idProductDetail;
-
+  checkLogin = false;
+  accountRole: string;
+  currentAccount: Account;
 
   constructor(private _auctionService: AuctionService,
               private _formBuilder: FormBuilder,
-              private _acRoute: ActivatedRoute) {
+              private _acRoute: ActivatedRoute,
+              private _socketService: SocketService,
+              private _tokenService: TokenService) {
   }
 
   ngOnInit(): void {
+    if (this._tokenService.isLogged()) {
+      this.checkLogin = true;
+      this.currentAccount = JSON.parse(this._tokenService.getAccount());
+      const roles = this._tokenService.getRole();
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i] === "ROLE_ADMIN") {
+          this.accountRole = "ROLE_ADMIN"
+        }
+      }
+
+      console.log('accountId: ' + this.currentAccount.id);
+    }
+
+
     this.idProductDetail = this._acRoute.snapshot.params.productId;
+    this._socketService.setProductIdDetail(this.idProductDetail);
     this._auctionService.getAuctionByProductId(this.idProductDetail).subscribe(
       data => {
         this.productDetail = data;
-        console.log('productDetail', this.productDetail);
         this.rfAuction = this._formBuilder.group({
           currentPrice: [this.productDetail.maxCurrentPrice],
           userId: [5],
           productId: [this.idProductDetail]
-        }, {validators: [this.checkAuctionPrice]});
+        }, {validators: [this.checkAuctionPrice]})
         this.selectedChangImage();
       }
     )
+
+    this._socketService.auctionSubject.subscribe(data => {
+      // console.log('d: ' + JSON.stringify(data));
+      this.productDetail = {
+        ...this.productDetail,
+        maxCurrentPrice: data.currentPrice
+      }
+
+      this.rfAuction.get('currentPrice').setValue(data.currentPrice);
+
+      // console.log(JSON.stringify(this.rfAuction.value));
+    })
   }
 
   /**
@@ -133,9 +166,7 @@ export class AuctionProductDetailComponent implements OnInit {
     // @ts-ignore
   checkAuctionPrice: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const auctionPrice = control.get("currentPrice").value;
-    console.log('gia dau', auctionPrice);
     if (auctionPrice < (Number(this.productDetail.maxCurrentPrice) + Number(this.productDetail.priceStep.step))) {
-      console.log('aloooo');
       return {"checkAuctionPrice": true};
     }
     return null;
@@ -146,13 +177,17 @@ export class AuctionProductDetailComponent implements OnInit {
    * Date: 19/12/2022
    */
   onAuction() {
-    this._auctionService.addNewAuction(this.rfAuction.value).subscribe(
-      data => {
-        this.newAuction = data;
-        document.getElementById('auto-reload').click();
-        this.ngOnInit();
-      }
-    )
+    // this._auctionService.addNewAuction(this.rfAuction.value).subscribe(
+    //   data => {
+    //     this.newAuction = data;
+    //     document.getElementById('auto-reload').click();
+    //     this.ngOnInit();
+    //   }
+    // )
+
+    this._socketService.createAuctionUsingWebsocket(this.rfAuction.value);
+    document.getElementById('auto-reload').click();
+    this.ngOnInit();
 
   }
 
@@ -172,7 +207,6 @@ export class AuctionProductDetailComponent implements OnInit {
   selectedChangImage() {
     setTimeout(() => {
       const imgF = document.querySelectorAll('.carousel__images');
-      console.log(imgF);
       imgF.forEach(value => {
         value.children[0].classList.add('actived');
       });

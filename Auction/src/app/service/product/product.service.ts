@@ -28,6 +28,7 @@ export class ProductService {
 
 
   private product: Product[];
+  private productDetailId: any;
 
 
   constructor(protected _httpClient: HttpClient) {
@@ -90,6 +91,13 @@ export class ProductService {
     return this._httpClient.get<ReviewStatus[]>(this.API_URL + 'listReviewStatus');
   }
 
+  /**
+   * Created: SonPT
+   * date: 20/12/2022
+   */
+  addProduct(productDto: ProductDto): Observable<Product> {
+    return this._httpClient.post<Product>('http://localhost:8080/api/v1/products/create', productDto);
+  }
   /**
    * Created: SangDD
    * Function: show page product and search
@@ -192,5 +200,15 @@ export class ProductService {
 
   update(productDto, id): Observable<Product> {
     return this._httpClient.put<Product>(environment.productUrl + '/update/' + id, productDto);
+  }
+
+  getProductDetailId() {
+    console.log('Lay ra id', this.productDetailId);
+    return this.productDetailId;
+  }
+
+  setProductDetailId(id: any) {
+    console.log('tao gia tri cho id', id);
+    this.productDetailId = id;
   }
 }

@@ -18,13 +18,13 @@ import {RegisterWithGoogleComponent} from "./security/register-with-google/regis
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
 import {AuctionProductAddComponent} from './component/auction/auction-product-add/auction-product-add.component';
-import {LoginComponent} from './component/security/login/login.component';
 import {GuideAddComponent} from "./component/guide/guide-add/guide-add.component";
 import {GuideEditComponent} from "./component/guide/guide-edit/guide-edit.component";
 import {ChatUserComponent} from "./component/chat/chat-user/chat-user.component";
 import {ChatAdminComponent} from "./component/chat/chat-admin/chat-admin.component";
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
+import {LoginComponent} from "./security/login/login.component";
 
 const routes: Routes = [
   {path: 'products', component: ListProductsComponent},
@@ -51,7 +51,6 @@ const routes: Routes = [
   {path: 'methodPayment', component: MethodPaymentComponent},
   {path: 'login', component: LoginComponent},
   {path: 'methodPayment', component: MethodPaymentComponent},
-  {path: 'login', component: LoginComponent},
   {path: 'guide', component: GuideListComponent},
   {path: 'guide/edit/:id', component: GuideEditComponent},
   {path: 'guide/add', component: GuideAddComponent},
@@ -60,8 +59,7 @@ const routes: Routes = [
   {path: "auction-detail/:productId", component: AuctionProductDetailComponent},
   {path: "user/create", component: UserCreateComponent},
   {path: 'user/update/:id', component: UserUpdateComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
+  {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent},
 ];
 
 @NgModule({
