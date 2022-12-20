@@ -51,11 +51,7 @@ export class GuideEditComponent implements OnInit {
       this.editGuideForm = this._formBuilder.group({
         id: [data.id],
         title: [data.title, [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern('^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ0-9,.?! ]*$')]],
-<<<<<<< HEAD
-        content: [data.content, [Validators.required, Validators.minLength(30), Validators.maxLength(1000)]]
-=======
         content: [data.content, [Validators.required, Validators.minLength(30), Validators.maxLength(2000)]]
->>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
       })
     })
   }

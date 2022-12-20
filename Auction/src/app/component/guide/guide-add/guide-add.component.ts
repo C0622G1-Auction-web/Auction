@@ -7,10 +7,7 @@ import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
 import {ImgUrlGuideService} from "../../../service/guide/img-url-guide.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
-<<<<<<< HEAD
-=======
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
->>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
 @Component({
   selector: 'app-guide-add',
   templateUrl: './guide-add.component.html',
