@@ -42,7 +42,7 @@ export class ProductService {
     return throwError(errorMessage);
   };
 
-  private API_URL = '  http://localhost:8080/';
+  // private API_URL = '  http://localhost:8080/';
 
   findAllPriceStep(): Observable<PriceStep[]> {
     return this._httpClient.get<PriceStep[]>(environment.api_url_list_price_step);

@@ -8,7 +8,7 @@ import {Auction} from '../../model/auction/auction';
 @Injectable({
   providedIn: 'root'
 })
-export class AuctionService {
+export class  AuctionService {
 
   // tslint:disable-next-line:variable-name
   constructor(private _httpClient: HttpClient) {
@@ -21,7 +21,7 @@ export class AuctionService {
    * @return product if productId exist or error if does not exist
    */
   getAuctionByProductId(productId: number): Observable<Product> {
-    return this._httpClient.get<Product>(environment.API_URL_AUCTION + '/auction-detail/' + productId);
+    return this._httpClient.get<Product>(environment.API_URL_AUCTION+'/auction-detail/'+ productId);
   }
 
   /**
@@ -45,5 +45,6 @@ export class AuctionService {
   addNewAuction(auction: Auction): Observable<Auction> {
     return this._httpClient.post<Auction>(environment.API_URL_AUCTION, auction);
   }
+
 }
 

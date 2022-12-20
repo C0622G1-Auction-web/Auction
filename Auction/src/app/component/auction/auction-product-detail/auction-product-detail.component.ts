@@ -3,8 +3,8 @@ import {AuctionService} from "../../../service/auction/auction.service";
 import {Product} from "../../../model/product/product";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {Auction} from "../../../model/auction/auction";
-import {Router} from "@angular/router";
-import {Stomp} from "@stomp/stompjs";
+import {SocketService} from "../../../service/socket/socket.service";
+import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-product-id";
 
 
 @Component({
@@ -18,19 +18,17 @@ export class AuctionProductDetailComponent implements OnInit {
   productDetail: Product;
   auctionPrice: number;
   rfAuction: FormGroup;
-  newAuction: Auction;
-
 
   constructor(private _auctionService: AuctionService,
               private _formBuilder: FormBuilder,
-              private _router: Router) {
+              private _socketService: SocketService) {
   }
 
   ngOnInit(): void {
+
     this._auctionService.getAuctionByProductId(1).subscribe(
       data => {
         this.productDetail = data;
-        console.log(this.productDetail);
         this.rfAuction = this._formBuilder.group({
           currentPrice: [this.productDetail.maxCurrentPrice],
           userId: [5],
@@ -39,6 +37,18 @@ export class AuctionProductDetailComponent implements OnInit {
         this.selectedChangImage();
       }
     )
+
+    this._socketService.auctionSubject.subscribe(data => {
+      // console.log('d: ' + JSON.stringify(data));
+      this.productDetail = {
+        ...this.productDetail,
+        maxCurrentPrice: data.currentPrice
+      }
+
+      this.rfAuction.get('currentPrice').setValue(data.currentPrice);
+
+      // console.log(JSON.stringify(this.rfAuction.value));
+    })
   }
 
   /**
@@ -97,7 +107,6 @@ export class AuctionProductDetailComponent implements OnInit {
       })
       // this.stateExistsSync('currentPrice');
       this.checkAuctionPrice(this.rfAuction);
-      console.log('curentPrice', this.rfAuction.value.currentPrice);
     }
 
   }
@@ -133,9 +142,7 @@ export class AuctionProductDetailComponent implements OnInit {
     // @ts-ignore
   checkAuctionPrice: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const auctionPrice = control.get("currentPrice").value;
-    console.log('gia dau', auctionPrice);
     if (auctionPrice < (Number(this.productDetail.maxCurrentPrice) + Number(this.productDetail.priceStep.step))) {
-      console.log('aloooo');
       return {"checkAuctionPrice": true};
     }
     return null;
@@ -144,26 +151,23 @@ export class AuctionProductDetailComponent implements OnInit {
   /**
    * Created by: TienBM,
    * Date created: 16/12/2022
-   * Function: Submit
+   * Function: Auction
    */
-  onSubmit() {
-
-  }
-
   onAuction() {
-    console.log((this.rfAuction.value));
-    this._auctionService.addNewAuction(this.rfAuction.value).subscribe(
-      data => {
-        this.newAuction = data;
-        console.log(this.newAuction)
-        // Tự động reload
-        // this._router.navigate(['/auction-detail',7]).then(() => {
-        //   location.reload();
-        // })
-        document.getElementById('auto-reload').click();
-        this.ngOnInit();
-      }
-    )
+    // this._auctionService.addNewAuction(this.rfAuction.value).subscribe(
+    //   data => {
+    //     this.newAuction = data;
+    //     // Tự động reload
+    //     // this._router.navigate(['/auction-detail',7]).then(() => {
+    //     //   location.reload();
+    //     // })
+    //     document.getElementById('auto-reload').click();
+    //     this.ngOnInit();
+    //   }
+    // )
+    this._socketService.createAuctionUsingWebsocket(this.rfAuction.value);
+    document.getElementById('auto-reload').click();
+    this.ngOnInit();
   }
 
   changeImage(event: any, i: any, j: number) {
@@ -182,7 +186,6 @@ export class AuctionProductDetailComponent implements OnInit {
   selectedChangImage() {
     setTimeout(() => {
       const imgF = document.querySelectorAll('.carousel__images');
-      console.log(imgF);
       imgF.forEach(value => {
         value.children[0].classList.add('actived');
       });

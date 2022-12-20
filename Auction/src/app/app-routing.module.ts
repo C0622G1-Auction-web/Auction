@@ -12,7 +12,7 @@ import {UserListComponent} from './component/user/user-list/user-list.component'
 import {UserEditComponent} from './component/user/user-edit/user-edit.component';
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
-import {LoginComponent} from "./component/security/login/login.component";
+import {LoginComponent} from "./component/security/login/login.component"
 
 const routes: Routes = [
   {
@@ -68,6 +68,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
+
+
+
 

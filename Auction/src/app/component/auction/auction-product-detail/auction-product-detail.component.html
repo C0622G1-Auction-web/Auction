@@ -39,10 +39,10 @@
       <div class=" card card-body">
         <h3 class=" alert text-center" style="background: #E74C3C;color: white">{{productDetail.name}}</h3>
         <div class="d-flex justify-content-center">
-          <img id="image__main{{1}}"  src="{{productDetail.imgUrlProducts[0]?.url}}" class="d-block w-75 card-img text-center" alt="">
+          <img id="image__main{{1}}"  src="{{productDetail?.imgUrlProducts[0]?.url}}" class="d-block w-75 card-img text-center" alt="">
         </div>
         <ul class="carousel__images d-flex justify-content-center">
-          <li value="{{j}}" class="image__item img-selected{{1}}" *ngFor="let img of productDetail.imgUrlProducts,let j = index;">
+          <li value="{{j}}" class="image__item img-selected{{1}}" *ngFor="let img of productDetail?.imgUrlProducts,let j = index;">
             <img (click)="changeImage($event, 1, j)" class="d-block w-100" height="50" src="{{img.url}}" width="" alt="">
           </li>
         </ul>
@@ -154,9 +154,9 @@
 
               <div class="w-100 d-flex mt-3">
                 <button class="btn btn-danger w-25" type="button" style="font-size: 25px"
-                        (click)="reduceAuctionPriceByPriceStep()">-
+                        (click)="reduceAuctionPriceByPriceStep()" [disabled]="rfAuction.invalid">-
                 </button>
-                <button type="submit" class="hammer btn btn-danger w-50 mx-2"
+                <button type="button" class="hammer btn btn-danger w-50 mx-2"
                         style="font-size: 25px;font-weight: bold" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop" [disabled]="rfAuction.invalid">
                   <i class="fa-solid fa-gavel mx-3" style="font-size: 30px"></i>

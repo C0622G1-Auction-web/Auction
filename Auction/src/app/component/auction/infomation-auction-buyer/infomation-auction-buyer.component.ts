@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuctionService} from "../../../service/auction/auction.service";
 import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-product-id";
+import {SocketService} from "../../../service/socket/socket.service";
 
 @Component({
   selector: 'app-infomation-auction-buyer',
@@ -9,20 +10,15 @@ import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-pro
 })
 export class InfomationAuctionBuyerComponent implements OnInit {
   auctionPageByProductId: PageAuctionByProductId
-  productId: number;
-  private user: any;
 
 
-  constructor(private auctionService: AuctionService) {
+  constructor(private _auctionService: AuctionService,
+              private _socketService: SocketService) {
   }
 
   ngOnInit(): void {
-    this.auctionService.getAuctionPageByProductId(1, 0).subscribe(
-      data => {
-        this.auctionPageByProductId = data;
-        console.log(this.auctionPageByProductId);
-      }
-    )
+    this._socketService.connect();
+    this.auctionPageByProductId = this._socketService.auctionPageByProductId;
   }
 
   /**
@@ -32,7 +28,7 @@ export class InfomationAuctionBuyerComponent implements OnInit {
    * @param i : pageNumber
    */
   goToPage(i: number) {
-    this.auctionService.getAuctionPageByProductId(1, i).subscribe(
+    this._auctionService.getAuctionPageByProductId(1, i).subscribe(
       data => {
         this.auctionPageByProductId = data;
       }
