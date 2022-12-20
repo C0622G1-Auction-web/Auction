@@ -1,12 +1,10 @@
+import {User} from '../../model/user/user';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {UserType} from "../../model/user/user-type";
-import {UserListDto} from "../../dto/user-list-dto";
-import {User} from '../../model/user/user';
 import {Observable} from 'rxjs';
 import {UserEditDto} from "../../dto/user-edit-dto";
-
 
 @Injectable({
   providedIn: 'root'
@@ -71,21 +69,30 @@ export class UserService {
   }
 
 
+  createUser(user: User): Observable<User> {
+    console.log(user)
+    return this._httpClient.post<User>(environment.uri_api_create_user_v1_user, user);
+  }
+
   getAllUser(): Observable<User[]> {
     return null;
   }
-
 
   /**
    * Create by: NguyenNQ
    * Date created: 15/12/2022
    * @return User
    */
+
   saveaddAcountUser(user: User): Observable<User> {
+
     console.log(user);
     return this._httpClient.post<User>('http://localhost:8080/api/user/v1/add', user);
   }
 
+  findTopUser(): Observable<any> {
+    return this._httpClient.get<any>(environment.API_TOP_USER)
+  }
 
   /**
    * Create by: HaiNT
@@ -96,6 +103,17 @@ export class UserService {
     return this._httpClient.put<UserEditDto>(environment.api_url_list_user + '/' + id, user);
   }
 
+  updateUser(id: number, user: User): Observable<User> {
+    return this._httpClient.put<User>(environment.uri_api_update_user_v1_user + '/' + user.id, user);
+  }
+
+  findUserByIdd(userId: number): Observable<User> {
+    return this._httpClient.get<User>(environment.userUrl + userId);
+  }
+
+  findUserByIdServer(userId: number): Observable<User> {
+    return this._httpClient.get<User>(environment.uri_api_find_by_id_user_v1_user + userId);
+  }
 
 }
 

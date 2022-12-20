@@ -98,7 +98,7 @@ export class ProductAddComponent implements OnInit {
       initialPrice: ["", [Validators.required, Validators.pattern('\\d+$')]],
       startTime: ["", [Validators.required]],
       endTime: ["", [Validators.required]],
-      imageProduct: [[], [Validators.required]],
+      imageProduct: ["", [Validators.required]],
       registerDay: [],
       priceStep: ["", [Validators.required]],
       category: ["", [Validators.required]],
@@ -147,7 +147,7 @@ export class ProductAddComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.selectedFile = event.target.files;
     }
-    if (this.selectedFile.length !== 0 && this.selectedFile.length < 6) {
+    if (this.selectedFile.length !== 0) {
       for (let i = 0; i < this.selectedFile.length; i++) {
         let selectedImage = this.selectedFile[i];
         const n = Date.now();
@@ -163,13 +163,11 @@ export class ProductAddComponent implements OnInit {
         ).subscribe(() => {
         });
       }
-      this.formCreateProduct.patchValue({imageProduct: this.imgs})
     }
   }
 
   deleteImageNew(index) {
     this.imgs.splice(index, 1)
-    this.formCreateProduct.patchValue({imageProduct: this.imgs})
     this._toast.error("Bạn đã xóa 1 ảnh!")
   }
 
@@ -178,12 +176,11 @@ export class ProductAddComponent implements OnInit {
   }
 
 
-  // checkFileType: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  //   const files: FileReader[] = control.value;
-  //   console.log(files.length)
-  //   if (files.length > 6 ) {
-  //     return   {"checkStartTime": true};
-  //     }
-  //   return null;
-  // }
+  checkFile: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    this.imgs = control.value;
+    if (this.imgs.length > 6) {
+      return {"checkFile": true};
+    }
+    return null;
+  }
 }

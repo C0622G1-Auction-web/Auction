@@ -35,7 +35,7 @@ body {
 }
 .boxed {
   width: 700px;
-  height: 100%;
+  height: auto;
   border: 5px solid;
   border-image-slice: 1;
   border-color: rgb(189, 214, 236);
@@ -43,7 +43,7 @@ body {
   border-radius: 8px;
   box-shadow: 4px 2px 4px 1px rgb(238, 243, 247);
   background-color: rgb(238, 243, 247) !important;
-  overflow: auto;
+  /*overflow: auto;*/
 }
 
 .boxed::-webkit-scrollbar {

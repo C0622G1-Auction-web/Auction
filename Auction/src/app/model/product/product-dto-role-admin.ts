@@ -1,10 +1,8 @@
-import {PriceStep} from './price-step';
-import {ReviewStatus} from './review-status';
-import {AuctionStatus} from '../auction/auction-status';
-import {Category} from './category';
-import {ImgUrlProduct} from './img-url-product';
-import {User} from '../user/user';
-
+/**
+ * Create by: GiangLBH
+ * User for screen: Product-manager Role: Admin
+ * Date: 17/12/2022
+ */
 export interface ProductDtoRoleAdmin {
   id?: number;
   deleteStatus?: boolean;
@@ -15,8 +13,11 @@ export interface ProductDtoRoleAdmin {
   endTime?: string;
   priceStep?: string;
   reviewStatus?: string;
+  reviewStatusId?: number;
   auctionStatus?: string;
   category?: string;
   registerDay?: string;
   userName?: string;
+  userId?: number;
+  userEmail?: string;
 }

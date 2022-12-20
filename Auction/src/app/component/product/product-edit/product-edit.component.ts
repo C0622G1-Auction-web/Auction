@@ -63,19 +63,14 @@ export class ProductEditComponent implements OnInit {
   getFormEdit() {
     this._activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get("id");
-      this._productService.findById(this.id).subscribe(product => {
+      this._productService.findByIdd(this.id).subscribe(product => {
         this.productFind = product;
-        console.log(product);
-        this._userService.findUserById(product.user.id).subscribe(u => {
-          this.userFind = u;
-          console.log(u);
+        this._userService.findUserById(product.user.id).subscribe(data => {
+          this.userFind = data;
           this.formEditProduct.patchValue({user: this.userFind.id})
-          this.checkUser = "Mã người đăng: " + this.userFind.id + "\n" + "Tên người đăng: " + this.userFind.firstName + " " + this.userFind.lastName;
         });
-        console.log(this.productFind);
         this._imageProductService.getListImgProductId(this.productFind.id).subscribe(value => {
           this.imgs = value;
-          console.log(value);
         });
         this.formEditProduct = this._formBuilder.group({
           id: [product.id, [Validators.required]],
@@ -155,6 +150,7 @@ export class ProductEditComponent implements OnInit {
       this.productDto = this.formEditProduct.value;
       console.log(this.formEditProduct.value)
       this._productService.update(this.productDto, id).subscribe(data => {
+        this._toast.success("Cập nhật sản phẩm thành công!");
         if (this.imgCreate.length !== 0) {
           for (let i = 0; i < this.imgCreate.length; i++) {
             const image: ImgUrlProductDto = {
@@ -166,18 +162,16 @@ export class ProductEditComponent implements OnInit {
             });
           }
         }
-      }, error => {
-        this._toast.error("Cập nhật sản phẩm thất bại!");
       });
-      this._toast.success("Cập nhật sản phẩm thành công!");
       if (this.idImageList.length !== 0) {
         for (let j = 0; j < this.idImageList.length; j++) {
           console.log(this.idImageList[j])
           this.deleteImageById(this.idImageList[j])
         }
       }
+    }else {
+      this._toast.error("Cập nhật sản phẩm thất bại!");
     }
-    this._toast.error("Cập nhật sản phẩm thất bại!");
   }
 
   deleteImage(i, img) {

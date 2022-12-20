@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TransactionAuction} from "../../model/transaction/transaction";
 import {environment} from "../../../environments/environment";
+import {PageTransaction} from "../../model/transaction/page-transaction";
 
 
 @Injectable({
@@ -19,27 +20,23 @@ export class TransactionService {
    * Date created 16/12/2022
    * Function: List transaction
    */
-  findAll(): Observable<TransactionAuction> {
-    return this._httpClient.get<TransactionAuction>(environment.transactionUrl)
+  findAll(searchTransaction: any, pageNumber): Observable<PageTransaction> {
+    return this._httpClient.post<PageTransaction>(
+      environment.transactionUrl + '?page=' + pageNumber,
+      searchTransaction);
   }
 
   /**
    * Created HuyNV
    * Date created 16/12/2022
-   * Function: search transaction
+   * Function: delete transaction
    */
-  search(rfSearch: any): Observable<TransactionAuction[]> {
-    if (!(rfSearch.searchUserPost.length) && !(rfSearch.searchUserBuying.length)
-      && !(rfSearch.searchProductName.length)
-      && !(rfSearch.searchCurrentPrice.length)
-      && !(rfSearch.searchPayStatus.length)) {
-      return this._httpClient.get<TransactionAuction[]>(environment.transactionUrl);
-    }
-    return this._httpClient.get<TransactionAuction[]>(environment.transactionUrl +
-      '?product.user.firstName_like=' + rfSearch.searchUserPost +
-      '&auction.user.firstName_like=' + rfSearch.searchUserBuying +
-      '&product.name_like=' + rfSearch.searchProductName +
-      '&auction.currentPrice=' + rfSearch.searchCurrentPrice +
-      '&auction.auctionStatus_like=' + rfSearch.searchPayStatus);
+  findByListId(deleteIds: number[]): Observable<TransactionAuction[]> {
+    return this._httpClient.post<TransactionAuction[]>(environment.transactionFindByListIdUrl, deleteIds);
   }
+
+  deleteByListId(deleteIds: number[]): Observable<any> {
+    return this._httpClient.post<any>(environment.transactionDeleteUrl, deleteIds);
+  }
+
 }

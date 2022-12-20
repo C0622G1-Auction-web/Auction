@@ -1,0 +1,123 @@
+* {
+  font-family: "Noto Sans", serif !important;
+  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 16px;
+  font: inherit;
+  vertical-align: baseline;
+}
+h1 {
+  font-size: 32px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.boxed {
+  width: 460px;
+  max-height: 800px;
+  border: 5px solid;
+  border-image-slice: 1;
+  border-color: rgb(189, 214, 236);
+  padding: 0px 20px;
+  border-radius: 8px;
+  background-color: transparent;
+  box-shadow: 4px 2px 4px 1px rgb(238, 243, 247);
+  background-color: rgb(238, 243, 247) !important;
+  overflow: auto;
+}
+
+button {
+  width: 200px;
+  border-radius: 20px;
+}
+
+.auction {
+  width: 100%;
+  height: 850px;
+  margin: auto 0;
+  display: flex;
+  box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.35);
+  background-size: cover;
+  background-image: url("https://media.istockphoto.com/id/934890574/photo/law-and-justice-concept.jpg?s=612x612&w=0&k=20&c=RAo4rrJPoTJjz2QRWrKr-Z68H2Xg8XjnIbyIBaVDQ0k=");
+  background-color: white;
+  border-radius: 20px;
+}
+
+.slide {
+  animation: slide 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation-iteration-count: infinite;
+  animation-delay: 0.2;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(0px);
+  }
+  10% {
+    transform: translateY(1px);
+  }
+  20% {
+    transform: translateY(2px);
+  }
+  30% {
+    transform: translateY(2px);
+  }
+  40% {
+    transform: translateY(1px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  60% {
+    transform: translateY(-1px);
+  }
+  70% {
+    transform: translateY(-2px);
+  }
+  80% {
+    transform: translateY(-2px);
+  }
+  90% {
+    transform: translateY(-1px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+input[type="file"]::file-selector-button {
+  background-color: #0d6efd;
+  color: white;
+}
+
+input[type="file"]:hover::file-selector-button {
+  background-color: #0d6efd !important;
+  color: white !important;
+}
+
+.modal-content {
+  width: 1200px !important;
+}
+
+.modal-content {
+  background-color: transparent !important;
+  border: none;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: fit-content;
+  }
+}
+
+.btn-close {
+  position: absolute;
+  left: 28px;
+  top: 40px;
+  width: 50px;
+}

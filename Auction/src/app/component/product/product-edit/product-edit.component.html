@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="d-flex justify-content-center align-items-center mt-2 mb-2" style="height: 100vh">
+<div class="d-flex justify-content-center align-items-center mt-2 mb-2">
     <div class="boxed shadow h-100 ">
       <div *ngIf="!formEditProduct"><p style="color: red;margin-top: 10px">Lỗi trang rồi !!!!!</p></div>
       <form *ngIf="formEditProduct" class="form" [formGroup]="formEditProduct" (ngSubmit)="updateProduct(id)">

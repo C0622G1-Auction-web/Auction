@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-
-import {ImgUrlProduct} from "../../model/product/img-url-product";
 import {Observable} from "rxjs";
+import {ImgUrlProduct} from "../../model/product/img-url-product";
 import {environment} from "../../../environments/environment";
-import {ImgUrlProductDto} from "../../model/product/dto/img-url-product-dto";
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +37,5 @@ export class ImageProductService {
   delete(id: number): Observable<ImgUrlProduct> {
     return this._httpClient.delete<ImgUrlProduct>(environment.imageUrl + "/delete/" + id)
   }
+
 }
