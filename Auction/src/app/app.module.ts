@@ -21,7 +21,6 @@ import {GuideEditComponent} from './component/guide/guide-edit/guide-edit.compon
 import {GuideDeleteComponent} from './component/guide/guide-delete/guide-delete.component';
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
 import {HomeComponent} from './component/home/home.component';
-import {LoginComponent} from './component/security/login/login.component';
 import {RegisterComponent} from './component/security/register/register.component';
 import {AuctionRequestComponent} from './component/auction-request/auction-request.component';
 import {ProductDetailComponent} from './component/product/product-detail/product-detail.component';
@@ -41,9 +40,13 @@ import {PaymentReceiptComponent} from './component/payment/payment-receipt/payme
 import {TransactionComponent} from './component/transaction/transaction.component';
 // @ts-ignore
 import {GoogleLoginProvider, SocialAuthServiceConfig} from 'angularx-social-login';
-import {InfomationAuctionSellerComponent} from "./component/auction/infomation-auction-seller/infomation-auction-seller.component";
+import {
+  InfomationAuctionSellerComponent
+} from "./component/auction/infomation-auction-seller/infomation-auction-seller.component";
 import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
 import {AccountForgotPassComponent} from "./component/security/account-forgot-pass/account-forgot-pass.component";
+import {LoginComponent} from "./component/security/login/login.component";
+
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -68,7 +71,6 @@ const googleLoginOptions = {
     GuideDeleteComponent,
     GuideListComponent,
     HomeComponent,
-    LoginComponent,
     RegisterComponent,
     AuctionRequestComponent,
     ProductDetailComponent,
@@ -85,7 +87,8 @@ const googleLoginOptions = {
     PaymentReceiptComponent,
     TransactionComponent,
     PaymentReceiptComponent,
-    TransactionComponent
+    TransactionComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

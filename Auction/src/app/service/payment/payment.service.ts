@@ -18,6 +18,7 @@ export class PaymentService {
   paymentDtoList: PaymentDto[];
 
   total: number;
+  idArray: number[];
 
 
   constructor(private _httpClient: HttpClient,
@@ -79,12 +80,6 @@ export class PaymentService {
   }
 
 
-  sendId(idList: string[]): Observable<Payment[]> {
-    const params = new HttpParams({
-      fromObject: {id: idList}
-    });
-    return this._httpClient.get<Payment[]>(API_URL, {params});
-  }
 
   findPaymentList(): Observable<PaymentDto[]> {
     return this._httpClient.get<PaymentDto[]>(API_URL_RECEIPT);

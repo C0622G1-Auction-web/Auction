@@ -1,5 +1,5 @@
 export interface PaymentDto {
-  id?: number;
+  code?: number;
   firstName?: string;
   lastName?: string;
   email?: string;

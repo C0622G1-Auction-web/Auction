@@ -12,9 +12,10 @@ import {UserListComponent} from './component/user/user-list/user-list.component'
 import {UserEditComponent} from './component/user/user-edit/user-edit.component';
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
-import {LoginComponent} from "./component/security/login/login.component";
 import {AccountResetPassComponent} from "./component/security/account-reset-pass/account-reset-pass.component";
 import {AccountForgotPassComponent} from "./component/security/account-forgot-pass/account-forgot-pass.component";
+import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
+import {LoginComponent} from "./component/security/login/login.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
 
   {
     path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: '',
     component: HomeComponent
   },
   {
@@ -60,13 +65,13 @@ const routes: Routes = [
   {
     path: 'confirmAddress', component: AddressPaymentComponent
   },
-
   {
     path: 'methodPayment', component: MethodPaymentComponent
   },
-  {path: 'login', component: LoginComponent},
-  {path:'account/reset_password', component: AccountResetPassComponent},
-  {path:'account/forgot_password', component: AccountForgotPassComponent},
+  {path: 'account/reset_password', component: AccountResetPassComponent},
+  {path: 'account/forgot_password', component: AccountForgotPassComponent},
+  {path: 'cart', component: PaymentCartComponent},
+  {path: 'login', component: LoginComponent}
 
 ];
 
