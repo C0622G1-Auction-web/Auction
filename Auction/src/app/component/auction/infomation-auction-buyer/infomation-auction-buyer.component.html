@@ -31,6 +31,19 @@
       </table>
       <div class="d-flex justify-content-center">
         <nav aria-label="Page navigation example" class="d-flex justify-content-end">
+          <ul class="pagination" *ngIf="auctionPageByProductId">
+<!--            <li class="page-item pointer" [ngClass]="auctionPageByProductId.number == 0 ? 'disabled': ''">-->
+              <span class="page-link" (click)="goToPage(auctionPageByProductId.number - 1)">Previous</span>
+<!--            </li>-->
+<!--            <li class="page-item pointer"-->
+                *ngFor="let pageNumber of [].constructor(auctionPageByProductId.totalPages), let i = index"
+                [ngClass]="auctionPageByProductId.number == i ?'active': ''">
+<!--              <span class="page-link" (click)="goToPage(i)">{{i + 1}}</span>-->
+<!--            </li>-->
+<!--            <li class="page-item pointer"-->
+                [ngClass]="auctionPageByProductId.number + 1 == auctionPageByProductId.totalPages ? 'disabled': ''">
+              <span class="page-link" (click)="goToPage(auctionPageByProductId.number + 1)">Next</span>
+<!--            </li>-->
           <ul class="my__pagination" *ngIf="auctionPageByProductId">
             <li class="my__page-item pointer" [ngClass]="auctionPageByProductId.number == 0 ? 'disabled': ''">
               <span class="page-link" (click)="goToPage(auctionPageByProductId.number - 1)">

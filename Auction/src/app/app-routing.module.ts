@@ -8,6 +8,12 @@ import {TransactionComponent} from './component/transaction/transaction.componen
 import {HomeComponent} from './component/home/home.component';
 import {UserListComponent} from './component/user/user-list/user-list.component';
 import {UserEditComponent} from './component/user/user-edit/user-edit.component';
+import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
+import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
+import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
+import {LoginComponent} from './component/security/login/login.component';
+import {AccountResetPassComponent} from './component/security/account-reset-pass/account-reset-pass.component';
+import {AccountForgotPassComponent} from './component/security/account-forgot-pass/account-forgot-pass.component';
 import {UserAddComponent} from './component/user/user-add/user-add.component';
 import {LockaccountUserComponent} from './component/user/lockaccount-user/lockaccount-user.component';
 import {ListProductsComponent} from './component/product/list-products/list-products.component';
@@ -104,7 +110,8 @@ const routes: Routes = [
   {
     path: "home",
     component: HomeComponent
-
+  }, {
+    path: 'receipt', component: PaymentReceiptComponent,
   },
   {
     path: "user/list",
@@ -133,10 +140,10 @@ const routes: Routes = [
     component: AuctionProductDetailComponent,
   },
   {
+    path: 'confirmAddress', component: PaymentReceiptComponent
     path: 'confirmAddress',
     component: AddressPaymentComponent
   },
-
   {
     path: 'methodPayment',
     component: MethodPaymentComponent
@@ -147,6 +154,11 @@ const routes: Routes = [
   },
   {
     path: 'methodPayment', component: MethodPaymentComponent
+  },
+  {path: 'login', component: LoginComponent},
+  {path: 'account/reset_password', component: AccountResetPassComponent},
+  {path: 'account/forgot_password', component: AccountForgotPassComponent},
+];
   }, {path: 'login', component: LoginComponent},
 {
   path: 'product/add',
@@ -186,7 +198,6 @@ const routes: Routes = [
   {path:'registerWithGoogle/:email', component: RegisterWithGoogleComponent},
   {path:'chat/visitor', component: ChatVisitorComponent
   }];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

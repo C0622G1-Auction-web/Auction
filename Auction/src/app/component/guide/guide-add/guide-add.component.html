@@ -4,6 +4,15 @@
 -->
 
 <div class="container ">
+  <h3 class="center">Tạo Mới Hướng Dẫn</h3>
+  <div class="guide w-50" style=" box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.35);">
+
+<!--    <form [formGroup]="guideForm" *ngIf="guideForm" (ngSubmit)="craeteGuide()" >-->
+<!--    <form [formGroup]="guideForm" id="guideform" (ngSubmit)="craeteGuide()">-->
+      <div class="row">
+        <label for="title" class="form-label">Chủ đề (<span style="color: red">*</span>)</label>
+        <input formControlName="title" id="title" type="text" placeholder=" Chọn chủ đề" class="form-control">
+      </div>
 
   <div class="row">
     <div class="col-lg-6">
@@ -84,6 +93,10 @@
                alt="">
         </div>
       </div>
+<!--    </form>-->
+
+<!--    </form>-->
+<!--    <a [routerLink]="['/guide/edit',42]" > show</a>-->
     </div>
   </div>
 </div>

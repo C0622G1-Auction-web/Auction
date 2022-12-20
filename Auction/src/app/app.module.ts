@@ -24,9 +24,22 @@ import {ProductReviewComponent} from './component/product/product-review/product
 import {VerificationComponent} from './security/verification/verification.component';
 import {VerifyResetPasswordComponent} from './security/verify-reset-password/verify-reset-password.component';
 import {AuctionComponent} from './component/auction/auction.component';
-import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
-import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
+import {
+  AuctionProductDetailComponent
+} from './component/auction/auction-product-detail/auction-product-detail.component';
+import {
+  InfomationAuctionBuyerComponent
+} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
+import {AccountResetPassComponent} from './component/security/account-reset-pass/account-reset-pass.component';
+
+import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
+import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
+import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
+import {TransactionComponent} from './component/transaction/transaction.component';
+
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
+import {PaymentCartComponent} from './component/payment/payment-cart/payment-cart.component';
+import {AccountForgotPassComponent} from './component/security/account-forgot-pass/account-forgot-pass.component';
 import { ListProductsComponent } from './component/product/list-products/list-products.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
@@ -127,6 +140,21 @@ const googleLoginOptions = {
     CKEditorModule
   ],
   providers: [
+    // {
+    //   provide: 'SocialAuthServiceConfig',
+    //   useValue: {
+    //     autoLogin: false,
+    //     providers: [
+    //       {
+    //         id: GoogleLoginProvider.PROVIDER_ID,
+    //         provider: new GoogleLoginProvider(
+    //           '360980124241-cu5j4vb8mfob7il8h62oa320t8ldoi7l.apps.googleusercontent.com',
+    //           googleLoginOptions
+    //         )
+    //       },
+    //     ]
+    //   } as SocialAuthServiceConfig,
+    // }
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
