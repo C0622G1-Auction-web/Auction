@@ -104,6 +104,11 @@ h1 {
 /*End-Search*/
 
 /*Begin-List*/
+#null-result-noti {
+  text-align: center;
+  color: red;
+}
+
 #list-row {
   width: 100%;
   padding: 2% 2% 0 5%;
@@ -120,6 +125,11 @@ h1 {
   color: green;
 }
 
+.delete-group-icon {
+  font-size: 23px;
+  color: red;
+}
+
 td a {
   border: none;
   background: transparent;
@@ -127,3 +137,10 @@ td a {
 }
 
 /*End-List*/
+
+/* Begin Pagination */
+.pagination li a:hover {
+  cursor: pointer;
+}
+
+/* End Pagination */

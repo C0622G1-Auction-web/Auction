@@ -1,0 +1,33 @@
+.border {
+  border: solid darkgray 1px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.register {
+  margin-top: 32px;
+  display: flex;
+  padding: 32px 24px;
+  box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.35);
+}
+
+h1 {
+  text-align: center;
+  color: blue;
+}
+
+#review-btns {
+  padding-top: 4%;
+}
+
+.container {
+  padding-bottom: 5%;
+}
+
+#img-col {
+  padding-top: 3%;
+}
+
+#review-btns {
+  padding-top: 5%;
+}
