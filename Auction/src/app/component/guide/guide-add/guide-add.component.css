@@ -34,3 +34,6 @@ form label {
   color: white;
   cursor: pointer;
 }
+:host ::ng-deep .ck .ck-toolbar {
+  font-size: 17px;
+}

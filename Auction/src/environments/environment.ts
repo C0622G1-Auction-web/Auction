@@ -9,6 +9,20 @@ export const environment = {
   api_url_list_user: 'http://localhost:8080/api/v1/users',
   api_url_list_img_url: 'http://localhost:8080/api/v1/users/{id}',
   API_URL_GUIDE:'http://localhost:8080/api/v1/guide',
+<<<<<<< HEAD
+=======
+  // API_URL_AUCTION: 'http://localhost:8080/auction/api',
+  firebaseConfig: {
+    apiKey: "AIzaSyBFqqq1BOcFnqRPAx_Vq8ewdQiAUPkJbrE",
+    authDomain: "eng-cogency-370914.firebaseapp.com",
+    databaseURL: "https://eng-cogency-370914-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "eng-cogency-370914",
+    storageBucket: "eng-cogency-370914.appspot.com",
+    messagingSenderId: "985488924079",
+    appId: "1:985488924079:web:28e91f3779f4563b42235a",
+    measurementId: "G-M2T7R4CP93"
+  },
+>>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
   api_url_order_status: 'http://localhost:8080/api/v1/payments',
   categoryUrl: 'http://localhost:8080/api/v1/products/category',
   priceStepUrl: 'http://localhost:8080/api/v1/products/priceStep',

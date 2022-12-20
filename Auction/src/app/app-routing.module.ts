@@ -17,8 +17,12 @@ import {GuideAddComponent} from "./component/guide/guide-add/guide-add.component
 import {GuideEditComponent} from "./component/guide/guide-edit/guide-edit.component";
 import {ChatUserComponent} from "./component/chat/chat-user/chat-user.component";
 import {ChatAdminComponent} from "./component/chat/chat-admin/chat-admin.component";
+<<<<<<< HEAD
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
+=======
+import {ChatVisitorComponent} from "./component/chat/chat-visitor/chat-visitor.component";
+>>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
 
 const routes: Routes = [
   {
@@ -100,14 +104,15 @@ const routes: Routes = [
 
   },
   {
-    path:'auction/chat/user',
+    path:'chat/user',
     component: ChatUserComponent
   },
   {
-    path:'auction/chat/support',
+    path:'chat/support',
     component: ChatAdminComponent
   },
   {
+<<<<<<< HEAD
     path: "auction/:productId", component: AuctionProductDetailComponent},
   {
     path:"user/create",component:UserCreateComponent
@@ -116,6 +121,12 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
 ];
+=======
+    path:'chat/visitor',
+    component: ChatVisitorComponent
+  }];
+
+>>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

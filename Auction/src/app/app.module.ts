@@ -37,7 +37,10 @@ import { AddressPaymentComponent } from './component/payment/address-payment/add
 import { MethodPaymentComponent } from './component/payment/method-payment/method-payment.component';
 import { PaymentReceiptComponent } from './component/payment-receipt/payment-receipt.component';
 import { TransactionComponent } from './component/transaction/transaction.component';
+<<<<<<< HEAD
 import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
+=======
+>>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
@@ -45,12 +48,18 @@ import { AuctionProductAddComponent } from './component/auction/auction-product-
 import { LoginComponent } from './component/security/login/login.component';
 import { ChatUserComponent } from './component/chat/chat-user/chat-user.component';
 import { ChatAdminComponent } from './component/chat/chat-admin/chat-admin.component';
+<<<<<<< HEAD
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
 import { RegisterWithGoogleComponent } from './security/register-with-google/register-with-google.component';
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 
 
+=======
+import {SocialLoginModule} from "angularx-social-login";
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ChatVisitorComponent } from './component/chat/chat-visitor/chat-visitor.component';
+>>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
 const googleLoginOptions = {
   scope: 'profile email',
   plugin_name: 'login'
@@ -98,9 +107,13 @@ const googleLoginOptions = {
     TransactionComponent,
     ChatUserComponent,
     ChatAdminComponent,
+<<<<<<< HEAD
     UserCreateComponent,
     UserUpdateComponent,
     UserCreateComponent
+=======
+    ChatVisitorComponent
+>>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
   ],
   imports: [
     ReactiveFormsModule,
@@ -110,16 +123,20 @@ const googleLoginOptions = {
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+<<<<<<< HEAD
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SocialLoginModule
+=======
+    AppRoutingModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+    SocialLoginModule,
+    CKEditorModule
+>>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
   ],
-  providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
         providers: [
+<<<<<<< HEAD
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
@@ -130,6 +147,9 @@ const googleLoginOptions = {
         ]
       } as SocialAuthServiceConfig,
     }
+=======
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig}
+>>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
   ],
   bootstrap: [AppComponent]
 })

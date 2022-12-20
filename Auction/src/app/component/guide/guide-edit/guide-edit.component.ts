@@ -8,6 +8,7 @@ import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
 import {finalize} from "rxjs/operators";
 import {Guide} from "../../../model/guide/guide";
 import {ToastrService} from "ngx-toastr";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 /*Create by QuangND
 * Component of screen Edit a Guide
@@ -19,6 +20,7 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./guide-edit.component.css']
 })
 export class GuideEditComponent implements OnInit {
+  public Editor = ClassicEditor;
   editGuideForm: FormGroup;
   guide: Guide;
   selectedImages: any[] = [];
@@ -49,7 +51,11 @@ export class GuideEditComponent implements OnInit {
       this.editGuideForm = this._formBuilder.group({
         id: [data.id],
         title: [data.title, [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern('^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ0-9,.?! ]*$')]],
+<<<<<<< HEAD
         content: [data.content, [Validators.required, Validators.minLength(30), Validators.maxLength(1000)]]
+=======
+        content: [data.content, [Validators.required, Validators.minLength(30), Validators.maxLength(2000)]]
+>>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
       })
     })
   }
@@ -63,8 +69,8 @@ export class GuideEditComponent implements OnInit {
       console.log(this.editGuideForm.value)
       this._guideService.update(this.guide).subscribe(data => {
         this._toastService.success('Cập nhật hướng dẫn thành công', 'Update Guide!', {
-            positionClass: 'toast-top-right',
-            timeOut: 7000,
+            positionClass: 'toast-bottom-right',
+            timeOut: 4000,
           }
         )
         if (this.imgCreate.length !== 0) {
@@ -144,5 +150,9 @@ export class GuideEditComponent implements OnInit {
   deleteImageById(id: number) {
     this._imgUrlGuideService.delete(id).subscribe(data => {
     });
+  }
+
+  resetEditForm() {
+    this.ngOnInit();
   }
 }
