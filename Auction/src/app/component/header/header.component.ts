@@ -10,6 +10,11 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
+
+  topTop() {
+    document.getElementById('top').click();
+  };
 
 }

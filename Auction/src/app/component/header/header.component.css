@@ -52,6 +52,51 @@ a {
   /* box-shadow: 2px 2px 8px rgba(255, 255, 255, 0.35); */
 
 }
+
+.avatar {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+.user__info{
+  display: flex;
+  position: relative;
+}
+
+.user__info:hover .btn__logout{
+  display: flex;
+}
+
+.btn__logout {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 150px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(245, 245, 245, 0.66);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
+  padding: 8px 0;
+  border-radius: 2px;
+  ;
+}
+
+.b__logout {
+  border: none;
+  border: 1px solid white;
+  background-color: #fa5d2f;
+  color: white;
+  padding: 4px 8px;
+  width: 90%;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.b__logout:hover {
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
+}
+
 .logo {
   background-color: #c0392b;
 

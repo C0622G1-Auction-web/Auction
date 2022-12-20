@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit {
   rfSearch: FormGroup;
   categorys: Category[];
   pageHasNext: number = 0;
+  categoryIDSearch = '';
+  auctionStatusId = '';
+  isSelectedAuction = '';
   topUser: any;
 
   constructor(private _productService: ProductService,
@@ -39,6 +42,7 @@ export class HomeComponent implements OnInit {
     });
     this.gotoPage(this.rfSearch.value);
     this.selectedChangImage();
+    this.getTop()
   }
 
   /**
@@ -77,11 +81,28 @@ export class HomeComponent implements OnInit {
                          rangePrice: any,
                          productAuctionStatus = '',
                          name: string ) {
-    this.rfSearch.setValue({name: name,
-      categoryID: categoryId,
-      rangePrice: rangePrice,
+    this.categoryIDSearch = categoryId;
+    this.rfSearch.setValue({name: name.trim(),
+      categoryID: categoryId+''.trim(),
+      rangePrice: rangePrice+''.trim(),
       productAuctionStatus: productAuctionStatus})
    this.gotoPage(this.rfSearch.value);
+  }
+
+  setValueAuctionProductStatusSearch(categoryId: any,
+                         rangePrice: any,
+                         productAuctionStatus: string,
+                         name: string ) {
+    if(this.isSelectedAuction == productAuctionStatus) {
+      productAuctionStatus = '';
+    }
+    this.auctionStatusId = productAuctionStatus;
+    this.rfSearch.setValue({name: name.trim(),
+      categoryID: categoryId+''.trim(),
+      rangePrice: rangePrice+''.trim(),
+      productAuctionStatus: productAuctionStatus});
+    this.isSelectedAuction = productAuctionStatus;
+    this.gotoPage(this.rfSearch.value);
   }
 
   /**
@@ -116,6 +137,7 @@ export class HomeComponent implements OnInit {
 
   getTop() {
     this._userService.findTopUser().subscribe(data => {
+      this.topUser = data;
       console.log(data);
     })
   }
