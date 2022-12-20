@@ -8,28 +8,25 @@
                                     <i class="fa-brands fa-suse"></i>
                                 </span>
             </li>
-            <li class="menu__item">
+            <li class="menu__item" (click)="topTop()">
                                 <span class="menu__link ">
-                                    Đang đấu giá
+                                    Quản lý sản phẩm
                                 </span>
             </li>
             <li class="menu__item">
-              <span class="menu__link ">Đã kết thúc</span>
+              <span class="menu__link ">Quản lý người dùng</span>
             </li>
             <li class="menu__item">
-              <span class="menu__link ">Top</span>
-            </li>
-            <li class="menu__item">
-              <span class="menu__link ">Trang quản lý</span>
+              <span class="menu__link ">Quản lý giao dịch</span>
             </li>
             <li class="menu__item">
                                 <span class="menu__link">
-                                    <i class="fa-solid fa-circle-question"></i>
+                                    <i class="fa-solid fa-circle-question mx-1"></i>
                                     <span class="label_guide">Hướng dẫn</span>
                                 </span>
             </li>
           </ul>
-          <div class="login d-flex">
+          <div class="login d-flex" style="display: none">
             <button class="login__btn mx-2">
               <i class="fa-solid fa-circle-user"></i>
               Đăng ký
@@ -38,6 +35,15 @@
               <i class="fa-solid fa-right-to-bracket"></i>
               Đăng nhập
             </button>
+          </div>
+          <div login>
+            <div class="user__info">
+               <span class="mx-2">Xin chào Name</span>
+              <img src="" class="avatar">
+              <span class="btn__logout">
+                <span class="b__logout">Đăng xuất</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -154,3 +160,4 @@
 <!--      </div>-->
 <!--    </div>-->
 <!--  </div>-->
+

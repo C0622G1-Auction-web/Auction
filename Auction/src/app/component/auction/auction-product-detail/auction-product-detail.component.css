@@ -1,0 +1,145 @@
+.carousel-indicators button.thumbnail {
+  width: 60px;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+}
+
+.carousel-indicators button.thumbnail:not(.active) {
+  opacity: 0.7;
+}
+
+.carousel-indicators {
+  position: static;
+}
+
+@media screen and (min-width: 990px) {
+  .carousel {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 10px;
+
+}
+
+.hammer {
+  font-weight: bold;
+  font-size: 30px;
+}
+li {
+  list-style: none;
+
+}
+.carousel__images {
+  overflow-x: scroll;
+}
+.carousel__images::-webkit-scrollbar {
+  display: none;
+}
+.image__item {
+  min-width: 45px;
+  margin: 12px;
+  cursor: pointer;
+  border: 3px solid rgba(245, 76, 59, 0);
+
+}
+
+.image__item.actived {
+  border: 3px solid rgba(245, 76, 59, 0.67);
+  border-radius: 4px;
+  /*box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.35);*/
+}
+.image__item:hover {
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
+}
+.currency {
+  font-weight: bold;
+  font-size: 24px;
+  color: #dc3545;
+  text-align: center;
+  padding: 4px 0 !important;
+  border-radius: 4px;
+
+}
+
+.title-currency {
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 4px 0 !important;
+  color: red;
+  text-align: center;
+  /*margin-bottom: -15px;*/
+}
+#title-buyer {
+  /*color: white;*/
+
+}
+#title-seller {
+
+  color: white;
+}
+
+.currency-1 {
+  font-weight: bold;
+  font-size: 24px;
+  color: #dc3545;
+  text-align: center;
+}
+
+.title-currency-1 {
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  padding: 4px 0 !important;
+  border-radius: 4px;
+}
+
+.time {
+  font-size: 50px;
+  font-weight: 500;
+  color: #E74C3C;
+  display: flex;
+  justify-content: center;
+}
+
+.time__hh {
+  border-radius: 4px;
+  background: #f5f5f5;
+  padding: 4px;
+  box-shadow: 1px 1px 2px rgba(213, 31, 31, 0.35);
+}
+
+.people-hammer {
+  margin-bottom: -2px;
+  border-radius: 4px;
+  background: #d1e7dd;
+  padding: 4px;
+  box-shadow: 1px 1px 2px rgba(213, 31, 31, 0.35);
+  width: 80%;
+}
+
+.title-detail {
+  font-weight: bold;
+}
+
+.title-detail span {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.card-detail {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.product__price::first-letter {
+  right: 200px;
+  margin-right: 8px;
+}

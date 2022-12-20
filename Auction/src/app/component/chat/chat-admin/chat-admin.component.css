@@ -1,0 +1,358 @@
+/*#myForm {*/
+/*  font-family: sans-serif;*/
+/*}*/
+
+/**{*/
+/*  box-sizing: border-box;*/
+/*}*/
+/*!* Nút Để Mở Chatbox *!*/
+/*.open-chatbox {*/
+/*  background: linear-gradient(to right, #ff5f6d, #ffc371);*/
+/*  color: white;*/
+/*  padding: 18px;*/
+/*  border: none;*/
+/*  cursor: pointer;*/
+/*  opacity: 0.8;*/
+/*  position: fixed;*/
+/*  bottom: 23px;*/
+/*  border-radius: 50%;*/
+/*  right: 30px;*/
+/*  !*width: 80px;*!*/
+/*  display: flex;*/
+/*}*/
+/*.open-chatbox:hover {*/
+/*  padding: 20px;*/
+/*}*/
+
+/*!* Ẩn chatbox mặc định *!*/
+/*.chatbox {*/
+/*  display: none;*/
+/*  position: fixed;*/
+/*  border: none;*/
+/*  bottom: 12px;*/
+/*  right: 12px;*/
+/*  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.35);*/
+/*  border-radius: 10px;*/
+/*  z-index: 9;*/
+/*  background-color: #ecf0f1;*/
+/*}*/
+
+/*.chatbox__start {*/
+/*  !* display: none; *!*/
+/*  position: fixed;*/
+/*  border: none;*/
+/*  bottom: 12px;*/
+/*  right: 350px;*/
+/*  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.35);*/
+/*  border-radius: 10px;*/
+/*  z-index: 9;*/
+/*  background-color: #ecf0f1;*/
+/*}*/
+
+/*.chatbox__start .chatbox__body {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/
+
+/*.form__chat__start {*/
+
+/*}*/
+
+/*.chat__name {*/
+/*  padding: 4px;*/
+/*  text-align: center;*/
+/*  width: 100%;*/
+/*  border-radius: 25px;*/
+/*  outline: none;*/
+/*  border: none;*/
+/*  font-size: 32px;*/
+/*  margin-bottom: 24px;*/
+/*}*/
+
+/*.btn__chat__start {*/
+/*  background: linear-gradient(to right, #ff5f6d, #ffc371);*/
+/*  color: #fdfdfd;*/
+/*  outline: none;*/
+/*  border: none;*/
+/*  padding: 12px;*/
+/*  width: 100%;*/
+/*  border-radius: 25px;*/
+/*}*/
+
+/*p{*/
+/*  padding: 0;*/
+/*  margin: 0;*/
+/*}*/
+/*.chatbox__header {*/
+/*  border-radius: 10px 10px 0 0;*/
+/*  background: linear-gradient(to right, #ff5f6d, #ffc371);*/
+/*  font-family: sans-serif;*/
+/*  color: #FFFFFF;*/
+/*  padding: 12px;*/
+/*}*/
+
+/*!* Thêm style cho form *!*/
+/*.chatbox__body {*/
+/*  width: 300px;*/
+/*  height: 50vh;*/
+/*  padding: 10px;*/
+/*  padding-top: 32px;*/
+/*  overflow-y: scroll;*/
+/*}*/
+
+/*.chatbox__body::-webkit-scrollbar {*/
+/*  display: none;*/
+/*}*/
+
+/*.form__input__message {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*}*/
+
+/*.chatbox__Footer {*/
+/*  background-color: #FFFFFF;*/
+/*  border-radius: 0 0 10px 10px;*/
+
+/*}*/
+
+/*.input__mesage {*/
+/*  width: 85%;*/
+/*  padding: 8px 12px;*/
+/*  outline: none;*/
+/*  border: none;*/
+/*  font-size: 16px;*/
+/*  border-radius: 0 0 0 10px;*/
+/*  border-right: 2px solid #ecf0f1;*/
+
+/*}*/
+/*.send {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  width: 15%;*/
+/*  color: #fe6432;*/
+/*}*/
+
+/*.send:hover {*/
+/*  font-size: 20px;*/
+/*  cursor: pointer;*/
+/*}*/
+/*.date-time {*/
+/*  display: block;*/
+/*  width: 100%;*/
+/*  text-align: center;*/
+/*  font-size: 12px;*/
+/*  color: #868686;*/
+/*}*/
+
+/*.admin__message {*/
+/*  background: linear-gradient(to right, #ff5f6d, #ffc371);*/
+/*  color: #fdfdfd;*/
+/*  padding: 8px;;*/
+/*  border-radius: 0 8px 8px 8px;*/
+/*  margin-bottom: 24px;*/
+/*  border: none;*/
+/*}*/
+/*.me__box {*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*  justify-content: flex-end;*/
+/*}*/
+/*.me__message{*/
+/*  text-align: right;*/
+/*  border: none;*/
+/*  background-color: #fdfdfd;*/
+/*  margin-bottom: 24px;*/
+/*  border-radius: 10px;*/
+/*  padding: 8px;*/
+/*  display: inline-block;*/
+/*}*/
+
+/*#minimize {*/
+/*  cursor: pointer;*/
+/*}*/
+#myForm {
+  font-family: sans-serif;
+}
+
+*{
+  box-sizing: border-box;
+}
+/* Nút Để Mở Chatbox */
+.open-chatbox {
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  padding: 18px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  border-radius: 50%;
+  right: 30px;
+  /*width: 80px;*/
+  display: flex;
+}
+.open-chatbox:hover {
+  padding: 20px;
+}
+
+/* Ẩn chatbox mặc định */
+.chatbox {
+  position: fixed;
+  border: none;
+  bottom: 12px;
+  right: 12px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  z-index: 9;
+  background-color: #ecf0f1;
+}
+
+.chatbox__start {
+  /* display: none; */
+  position: fixed;
+  border: none;
+  bottom: 12px;
+  right: 350px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  z-index: 9;
+  background-color: #ecf0f1;
+}
+
+.chatbox__start .chatbox__body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form__chat__start {
+
+}
+
+.chat__name {
+  padding: 4px;
+  text-align: center;
+  width: 100%;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+.btn__chat__start {
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: #fdfdfd;
+  outline: none;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 25px;
+}
+
+p{
+  padding: 0;
+  margin: 0;
+}
+.chatbox__header {
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  font-family: sans-serif;
+  color: #FFFFFF;
+  padding: 12px;
+}
+
+/* Thêm style cho form */
+.chatbox__body {
+  width: 300px;
+  height: 50vh;
+  padding: 10px;
+  padding-top: 32px;
+  overflow-y: scroll;
+}
+
+.chatbox__body::-webkit-scrollbar {
+  display: none;
+}
+
+.form__input__message {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chatbox__Footer {
+  background-color: #FFFFFF;
+  border-radius: 0 0 10px 10px;
+
+}
+
+.input__mesage {
+  width: 85%;
+  padding: 8px 12px;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  border-radius: 0 0 0 10px;
+  border-right: 2px solid #ecf0f1;
+
+}
+.send {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  color: #fe6432;
+}
+
+.send:hover {
+  font-size: 20px;
+  cursor: pointer;
+}
+.date-time {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #868686;
+  clear: both;
+}
+
+.user__message {
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: #fdfdfd;
+  padding: 8px;
+  border-radius: 0 8px 8px 8px;
+  margin-bottom: 24px;
+  border: none;
+  float: left;
+}
+.me__box {
+  /*display: flex;*/
+  /*flex-wrap: wrap;*/
+  /*justify-content: flex-end;*/
+}
+textarea {
+  resize: none;
+  outline: none;
+  cursor: default;
+}
+textarea::-webkit-scrollbar {
+  display: none;
+}
+.me__message{
+  text-align: right;
+  border: none;
+  background-color: #c7c6c669;
+  margin-bottom: 24px;
+  border-radius: 10px;
+  padding: 8px;
+  display: inline-block;
+  float: right;
+  line-height: 100%;
+}
+#minimize {
+  cursor: pointer;
+}

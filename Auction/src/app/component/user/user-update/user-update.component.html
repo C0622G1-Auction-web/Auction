@@ -1,0 +1,214 @@
+<form *ngIf="updateUserForm" [formGroup]="updateUserForm" (ngSubmit)="updateUser(id)">
+<div  style="background-color: #eee">
+  <div class="container">
+    <div class="borderFull">
+      <div class="row" style="padding:32px 0">
+        <div class="profile" style="background-color: white;border-radius: 20px">
+          <div class="bgd d-flex align-items-center w-50">
+            <div class="h-100 w-100"
+                 style="background-size: cover; background: url('https://i.pinimg.com/736x/43/69/a0/4369a065ab04219b041ef2cd23387255.jpg') no-repeat;border-top-left-radius: 20px; border-bottom-left-radius: 20px">
+            </div>
+          </div>
+          <div class="w-50 p-3">
+            <div class="row">
+              <div class="text-center">
+                <div class="row mb-3" style="font-size: 20px">
+                  <h3>Sửa hồ sơ cá nhân</h3>
+                </div>
+              </div>
+              <div class="col-lg-3"></div>
+            </div>
+            <div class="row" style="height: 10px"></div>
+            <div class="row">
+              <div class="col-lg-3" style="padding-left: 42%;">
+                <input  type="file" id="file" style=" font-size: 35px;width: 3em;height: 3em;border-radius: 50%;background: #008578;"
+                        #userPhoto
+                        multiple
+                        (change)="showPreview($event)"
+                        name="image"
+                        autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
+              </div>
+              <div *ngFor=" let item of imgs">
+                <img style="height: 200px; width: 200px" src="{{item}}">
+              </div>
+            </div>
+            <div class="row" style="height: 25px"></div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class="form-floating flex-grow-1">
+                    <input type="text" class="form-control" id="floatingFistName"
+                           placeholder="Tên đăng nhập"
+                           aria-label="Tên đăng nhập" aria-describedby="basic-addon2" formControlName="firstName">
+                    <label for="floatingFistName">Họ</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon14"><i
+                    class="fa-solid fa-user"></i></span>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class=" form-floating flex-grow-1">
+                    <input type="text" class="form-control" id="floatingName"
+                           placeholder="Name"formControlName="lastName">
+                    <label for="floatingName">Tên</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon2"><i
+                    class="fa-solid fa-user"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class="form-floating flex-grow-1">
+                    <input type="text" class="form-control" id="floatingLogin"
+                           placeholder="Tên đăng nhập"
+                           aria-label="Tên đăng nhập" aria-describedby="basic-addon2"
+                     formControlName="username">
+                    <label for="floatingLogin">Tên đăng nhập</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon1"><i
+                    class="fa-solid fa-user"></i></span>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class="form-floating flex-grow-1">
+                    <input type="email" class="form-control" id="floatingEmail"
+                           placeholder="Email"
+                           aria-label="Email" aria-describedby="basic-addon2"
+                    formControlName="email">
+                    <label for="floatingEmail">Email</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon3"><i
+                    class="fa-solid fa-envelope"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class="form-floating flex-grow-1">
+                    <input type="text" class="form-control" id="floatingPhone"
+                           placeholder="PhoneNumber"
+                           aria-label="PhoneNumber" aria-describedby="basic-addon2" formControlName="phone">
+                    <label for="floatingPhone">Số điện thoại</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon5"><i
+                    class="fa-solid fa-phone-flip"></i></span>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class=" form-floating flex-grow-1">
+                    <input type="text" class="form-control" id="floatingDateOfBirth"
+                           placeholder="DateOfBirth" formControlName="birthDay">
+                    <label for="floatingDateOfBirth">Ngày sinh</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon4"><i
+                    class="fa-regular fa-calendar"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <div>
+                  <select class="form-control"id="city" aria-label=".form-select-sm" >
+                    <option formControlName="city" value="city" selected>Chọn tỉnh thành</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div>
+                  <select class="form-control" id="district" aria-label=".form-select-sm">
+                    <option value="" selected>Chọn quận huyện</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div>
+                  <select class="form-control" id="ward" aria-label=".form-select-sm">
+                    <option value="" selected>Chọn phường xã</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class="form-floating flex-grow-1">
+                    <input type="text" class="form-control" id="floatingAddress"
+                           placeholder="Address"
+                           aria-label="Address" aria-describedby="basic-addon2" formControlName="detailAddress">
+                    <label for="floatingAddress">Địa chỉ chi tiết</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon7"><i
+                    class="fa-solid fa-location-dot"></i></span>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class="form-floating flex-grow-1">
+                    <input type="text" class="form-control" id="floatingIdCard"
+                           placeholder="IdCard" formControlName="idCard">
+                    <label for="floatingIdCard">CMND</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon6"><i
+                    class="fa-regular fa-id-card"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class=" input-group mb-3">
+                  <div class="form-floating flex-grow-1">
+                    <input type="password" class="form-control" id="floatingPassword"
+                           placeholder="name@example.com"
+                           aria-label="name@example.com" aria-describedby="basic-addon2" formControlName="password">
+                    <label for="floatingPassword">Mật khẩu hiện tại</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon8"><i
+                    class="fa-solid fa-lock"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class="form-floating flex-grow-1">
+                    <input type="password" class="form-control" id="floatingVerification"
+                           placeholder="name@example.com"
+                           aria-label="name@example.com" aria-describedby="basic-addon2">
+                    <label for="floatingVerification">Mật khẩu mới</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon10"><i
+                    class="fa-solid fa-key"></i></span>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                  <div class="form-floating flex-grow-1">
+                    <input type="password" class="form-control" id="floatingConfirmVerification"
+                           placeholder="Mã xác minh">
+                    <label for="floatingConfirmVerification">Xác nhận mật khẩu</label>
+                  </div>
+                  <span class="input-group-text" id="basic-addon11"><i
+                    class="fa-solid fa-circle-check"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="height: 10px"></div>
+            <div class="row">
+              <div class="d-flex ">
+                <button type="submit" class="btn btn-primary mx-2">Cập nhật</button>
+                <button type="reset" class="btn btn-warning">Đặt lại</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
