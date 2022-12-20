@@ -19,6 +19,7 @@ import {checkStartTime} from "../product-add/product-add.component";
 import {ToastrService} from "ngx-toastr";
 import {checkEndTime} from "../product-add/product-add.component";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-product-edit',
@@ -26,7 +27,6 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-
   editor = ClassicEditor;
   productDto: ProductDto;
   categoryList: Category[] = [];
@@ -50,8 +50,9 @@ export class ProductEditComponent implements OnInit {
               private _storage: AngularFireStorage,
               private _imageProductService: ImageProductService,
               private _activatedRoute: ActivatedRoute,
-              private _toast: ToastrService) {
-
+              private _toast: ToastrService,
+              private titleService: Title) {
+    this.titleService.setTitle("Chỉnh sửa sản phẩm")
   }
 
   ngOnInit(): void {
@@ -166,7 +167,7 @@ export class ProductEditComponent implements OnInit {
           this.deleteImageById(this.idImageList[j])
         }
       }
-    }else {
+    } else {
       this._toast.error("Cập nhật sản phẩm thất bại!");
     }
   }

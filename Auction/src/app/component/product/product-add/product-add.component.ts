@@ -19,6 +19,7 @@ import {ImgUrlProductDto} from "../../../model/product/dto/img-url-product-dto";
 import {ProductDto} from "../../../model/product/dto/product-dto";
 import {ToastrService} from "ngx-toastr";
 import {RxwebValidators} from "@rxweb/reactive-form-validators";
+import {Title} from "@angular/platform-browser";
 
 export const checkStartTime: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const startTime = new Date(control.get("startTime").value).getTime();
@@ -80,7 +81,9 @@ export class ProductAddComponent implements OnInit {
               private _userService: UserService,
               private _storage: AngularFireStorage,
               private _imageProductService: ImageProductService,
-              private _toast: ToastrService) {
+              private _toast: ToastrService,
+              private titleService: Title) {
+    this.titleService.setTitle("Thêm sản phẩm")
   }
 
   ngOnInit(): void {
