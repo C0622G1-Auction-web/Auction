@@ -28,7 +28,6 @@ import {UserUpdateComponent} from "./component/user/user-update/user-update.comp
 import {ChatVisitorComponent} from "./component/chat/chat-visitor/chat-visitor.component";
 
 const routes: Routes = [
-<<<<<<< HEAD
   {path: 'products', component: ListProductsComponent},
   {path: 'products/review/:id',component: ProductReviewComponent},
   {path: 'product/create', component: ProductAddComponent},
@@ -62,7 +61,6 @@ const routes: Routes = [
   {path: "auction-detail/:productId", component: AuctionProductDetailComponent},
   {path: "user/create", component: UserCreateComponent},
   {path: 'user/update/:id', component: UserUpdateComponent},
-=======
   {
     path: "product/create",
     component: ProductAddComponent
@@ -155,9 +153,8 @@ const routes: Routes = [
     path:"user/create",component:UserCreateComponent
   },
   {path:'user/update/:id', component: UserUpdateComponent},
->>>>>>> c4ca9cde769f41b5bd48ddb37a27c70ce7b25498
-  {path: 'login', component: LoginComponent},
-  {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent},
+  {path:'login', component: LoginComponent},
+  {path:'registerWithGoogle/:email', component: RegisterWithGoogleComponent},
   {path:'chat/visitor', component: ChatVisitorComponent
   }];
 
