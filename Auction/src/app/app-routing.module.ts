@@ -60,7 +60,7 @@ const routes: Routes = [
     path: 'auction/:productId', component: AuctionProductDetailComponent,
   },
   {
-    path: 'confirmAddress', component: AddressPaymentComponent
+    path: 'confirmAddress', component: PaymentReceiptComponent
   },
   {
     path: 'methodPayment', component: MethodPaymentComponent

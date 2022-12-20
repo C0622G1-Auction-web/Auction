@@ -5,6 +5,7 @@ import {PaymentDto} from '../../model/payment/payment-dto';
 import {jsPDF} from 'jspdf';
 import html2canvas from 'html2canvas';
 import {PaymentService} from '../../../service/payment/payment.service';
+import {render} from 'creditcardpayments/creditCardPayments';
 
 @Component({
   selector: 'app-payment-receipt',
@@ -15,11 +16,23 @@ export class PaymentReceiptComponent implements OnInit {
 
   paymentList: PaymentDto[];
   paymentBill: number | undefined;
+  paypal: string;
   @ViewChild('content', {static: true}) ab: ElementRef<HTMLImageElement>;
 
   // tslint:disable-next-line:variable-name
   constructor(private _paymentService: PaymentService) {
     this.findPaymentList();
+    this.paypal = (this.paymentBill / 22000) + '';
+    render(
+      {
+        id: '#paypal',
+        value: '10.00',
+        currency: 'VND',
+        onApprove: (details) => {
+          alert('Thanh toán thành công');
+        }
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -39,6 +52,7 @@ export class PaymentReceiptComponent implements OnInit {
     });
   }
 
+
   convertToPDF() {
     html2canvas(this.ab.nativeElement).then(canvas => {
       const imgData = canvas.toDataURL('image/jpeg');
@@ -53,4 +67,8 @@ export class PaymentReceiptComponent implements OnInit {
     });
   }
 
+  goToPay() {
+    // @ts-ignore
+    document.querySelector('.pills-profile-tab').click();
+  }
 }

@@ -15,7 +15,7 @@ export class PaymentCartComponent implements OnInit {
 
 
   // tslint:disable-next-line:variable-name
-  constructor(private _paymentService: PaymentService,) {
+  constructor(private _paymentService: PaymentService) {
   }
 
   ngOnInit(): void {
@@ -29,14 +29,4 @@ export class PaymentCartComponent implements OnInit {
 
   }
 
-
-  sendId() {
-    this._paymentService.sendId(this.idList).subscribe(data => {
-      console.log(data);
-    }, err => {
-      console.log('err');
-    }, () => {
-      console.log('done');
-    });
-  }
 }

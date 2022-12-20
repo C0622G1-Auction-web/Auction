@@ -1,8 +1,6 @@
 *:not(i) {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
 }
 
 .card {
@@ -17,7 +15,6 @@ img.center {
   margin-right: auto;
   width: 200px;
   float: right;
-  margin-top: 10px;
   opacity: inherit;
 }
 
