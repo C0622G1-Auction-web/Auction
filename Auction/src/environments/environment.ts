@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+<<<<<<< HEAD
   production: false, firebaseConfig: {
     apiKey: 'AIzaSyDV8RZyn7riFw087ES5nA05z4ON5axBO28',
     authDomain: 'test-42050.firebaseapp.com',
@@ -13,6 +14,26 @@ export const environment = {
     appId: '1:902879698828:web:2d7346b0c1c599d08540a9',
     measurementId: 'G-XEHPX24EFX'
   },
+=======
+  production: false,
+  api_url_list_price_step: 'http://localhost:8080/api/v1/pricestep',
+  api_url_list_category: 'http://localhost:8080/api/v1/category',
+  api_url_list_user: 'http://localhost:8080/api/v1/users',
+  api_url_list_img_url: 'http://localhost:8080/api/v1/users/{id}',
+  API_URL_GUIDE:'http://localhost:8080/api/v1/guide',
+  // API_URL_AUCTION: 'http://localhost:8080/auction/api',
+  firebaseConfig: {
+    apiKey: "AIzaSyBFqqq1BOcFnqRPAx_Vq8ewdQiAUPkJbrE",
+    authDomain: "eng-cogency-370914.firebaseapp.com",
+    databaseURL: "https://eng-cogency-370914-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "eng-cogency-370914",
+    storageBucket: "eng-cogency-370914.appspot.com",
+    messagingSenderId: "985488924079",
+    appId: "1:985488924079:web:28e91f3779f4563b42235a",
+    measurementId: "G-M2T7R4CP93"
+  },
+  api_url_order_status: 'http://localhost:8080/api/v1/payments',
+>>>>>>> c4ca9cde769f41b5bd48ddb37a27c70ce7b25498
   categoryUrl: 'http://localhost:8080/api/v1/products/category',
   priceStepUrl: 'http://localhost:8080/api/v1/products/priceStep',
   transactionUrl: 'http://localhost:8080/auction/api/transaction',
@@ -46,8 +67,14 @@ export const environment = {
   GOOGLE_SIGN_IN_API: 'http://localhost:8080/api/v1/auth/google',
   uri_api_create_user_v1_user: 'http://localhost:8080/api/v1/users/create',
   api_url_create_img_url: 'http://localhost:8080/api/v1/products/img/create',
+<<<<<<< HEAD
   uri_api_update_user_v1_user: 'http://localhost:8080/api/v1/users/update',
   uri_api_find_by_id_user_v1_user: 'http://localhost:8080/api/v1/users/find/',
+=======
+  API_URL_AUCTION: "http://localhost:8080/auction/api",
+  uri_api_update_user_v1_user: "http://localhost:8080/api/v1/users/update",
+  uri_api_find_by_id_user_v1_user: "http://localhost:8080/api/v1/users/find/",
+>>>>>>> c4ca9cde769f41b5bd48ddb37a27c70ce7b25498
   LOGIN_API: 'http://localhost:8080/api/auth/login',
   GOOGLE_LOGIN_API: 'http://localhost:8080/api/auth/google',
   DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json'

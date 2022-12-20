@@ -25,8 +25,10 @@ import {ChatUserComponent} from "./component/chat/chat-user/chat-user.component"
 import {ChatAdminComponent} from "./component/chat/chat-admin/chat-admin.component";
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
+import {ChatVisitorComponent} from "./component/chat/chat-visitor/chat-visitor.component";
 
 const routes: Routes = [
+<<<<<<< HEAD
   {path: 'products', component: ListProductsComponent},
   {path: 'products/review/:id',component: ProductReviewComponent},
   {path: 'product/create', component: ProductAddComponent},
@@ -60,9 +62,105 @@ const routes: Routes = [
   {path: "auction-detail/:productId", component: AuctionProductDetailComponent},
   {path: "user/create", component: UserCreateComponent},
   {path: 'user/update/:id', component: UserUpdateComponent},
+=======
+  {
+    path: "product/create",
+    component: ProductAddComponent
+  },
+  {
+    path: "product/edit",
+    component: ProductEditComponent
+  },
+
+  {path: "aa", component: TransactionComponent},
+
+  {
+    path: "home",
+    component: HomeComponent
+
+  },
+  {
+    path: "user/list",
+    component: UserListComponent
+  },
+  {
+    path: "user/edit",
+    component: UserEditComponent
+  },
+  {
+    path: 'product/add',
+    component: ProductAddComponent
+  }, {
+    path: 'guide',
+    component: GuideListComponent
+  },
+  {
+    path: 'auction/product/add',
+    component: AuctionProductAddComponent
+  }, {
+    path: 'guide',
+    component: GuideListComponent
+  },
+  {
+    path: 'auction/:productId',
+    component: AuctionProductDetailComponent,
+  },
+  {
+    path: 'confirmAddress',
+    component: AddressPaymentComponent
+  },
+
+  {
+    path: 'methodPayment',
+    component: MethodPaymentComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'methodPayment', component: MethodPaymentComponent
+  }, {path: 'login', component: LoginComponent},
+{
+  path: 'product/add',
+  component: ProductAddComponent
+},
+  {
+  path: 'guide',
+  component: GuideListComponent
+},
+  {
+    path: 'guide/edit/:id',
+    component: GuideEditComponent
+  },
+  {
+    path:'guide/add',
+    component:GuideAddComponent
+  },
+  {
+    path: "auction/:productId", component: AuctionProductDetailComponent,
+
+  },
+  {
+    path:'chat/user',
+    component: ChatUserComponent
+  },
+  {
+    path:'chat/support',
+    component: ChatAdminComponent
+  },
+  {
+    path: "auction/:productId", component: AuctionProductDetailComponent},
+  {
+    path:"user/create",component:UserCreateComponent
+  },
+  {path:'user/update/:id', component: UserUpdateComponent},
+>>>>>>> c4ca9cde769f41b5bd48ddb37a27c70ce7b25498
   {path: 'login', component: LoginComponent},
-  {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent}
-];
+  {path: 'registerWithGoogle/:email', component: RegisterWithGoogleComponent},
+  {path:'chat/visitor', component: ChatVisitorComponent
+  }];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
