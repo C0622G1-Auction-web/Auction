@@ -76,7 +76,7 @@ export class ProductEditComponent implements OnInit {
           id: [product.id, [Validators.required]],
           name: [product.name, [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
           description: [product.description, [Validators.required]],
-          initialPrice: [product.initialPrice, [Validators.required, Validators.pattern('\\d+$')]],
+          initialPrice: [product.initialPrice, [Validators.required, Validators.pattern('\\d+')]],
           startTime: [product.startTime, [Validators.required]],
           endTime: [product.endTime, [Validators.required]],
           registerDay: [product.registerDay],
@@ -84,7 +84,7 @@ export class ProductEditComponent implements OnInit {
           category: [product.category.id],
           reviewStatus: [product.reviewStatus.id],
           auctionStatus: [product.auctionStatus.id],
-          user: ["", [Validators.required, Validators.pattern('\\d+$')]],
+          user: ["", [Validators.required, Validators.pattern('\\d+')]],
           imageProduct: ["", [Validators.required]],
         }, {validators: [checkStartTime, checkEndTime]});
       });
@@ -148,7 +148,6 @@ export class ProductEditComponent implements OnInit {
   updateProduct(id) {
     if (this.formEditProduct.valid) {
       this.productDto = this.formEditProduct.value;
-      console.log(this.formEditProduct.value)
       this._productService.update(this.productDto, id).subscribe(data => {
         this._toast.success("Cập nhật sản phẩm thành công!");
         if (this.imgCreate.length !== 0) {
@@ -157,7 +156,6 @@ export class ProductEditComponent implements OnInit {
               url: this.imgCreate[i],
               product: data.id
             };
-            console.log(image);
             this._imageProductService.create(image).subscribe(() => {
             });
           }
@@ -165,7 +163,6 @@ export class ProductEditComponent implements OnInit {
       });
       if (this.idImageList.length !== 0) {
         for (let j = 0; j < this.idImageList.length; j++) {
-          console.log(this.idImageList[j])
           this.deleteImageById(this.idImageList[j])
         }
       }

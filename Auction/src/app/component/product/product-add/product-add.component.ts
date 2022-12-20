@@ -91,19 +91,7 @@ export class ProductAddComponent implements OnInit {
     this._priceStepService.getListPriceStep().subscribe(data => {
       this.priceStepList = data;
     })
-    this.formCreateProduct = this._formBuilder.group({
-      id: [],
-      name: ["", [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
-      description: ["", [Validators.required]],
-      initialPrice: ["", [Validators.required, Validators.pattern('\\d+$')]],
-      startTime: ["", [Validators.required]],
-      endTime: ["", [Validators.required]],
-      imageProduct: ["", [Validators.required]],
-      registerDay: [],
-      priceStep: ["", [Validators.required]],
-      category: ["", [Validators.required]],
-      user: ["", [Validators.required, Validators.pattern('\\d+$')]]
-    }, {validators: [checkStartTime, checkEndTime]});
+    this.getFormCreate();
   }
 
   addNewProduct() {
@@ -111,14 +99,12 @@ export class ProductAddComponent implements OnInit {
       this.productDto = this.formCreateProduct.value;
       console.log(this.formCreateProduct.value)
       this._productService.save(this.productDto).subscribe(data => {
-        console.log(data)
         if (this.imgs.length !== 0) {
           for (let i = 0; i < this.imgs.length; i++) {
             const image: ImgUrlProductDto = {
               url: this.imgs[i],
               product: data.id
             };
-            console.log(image);
             this._imageProductService.create(image).subscribe(() => {
             })
           }
@@ -167,8 +153,9 @@ export class ProductAddComponent implements OnInit {
   }
 
   deleteImageNew(index) {
-    this.imgs.splice(index, 1)
+    this.imgs.splice(index, 1);
     this._toast.error("Bạn đã xóa 1 ảnh!")
+
   }
 
   resetFindUserById(testNum) {
@@ -176,11 +163,32 @@ export class ProductAddComponent implements OnInit {
   }
 
 
-  checkFile: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    this.imgs = control.value;
-    if (this.imgs.length > 6) {
-      return {"checkFile": true};
-    }
-    return null;
+  private getFormCreate() {
+    this.formCreateProduct = this._formBuilder.group({
+      id: [],
+      name: ["", [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
+      description: ["", [Validators.required]],
+      initialPrice: ["", [Validators.required, Validators.pattern('\\d+')]],
+      startTime: ["", [Validators.required]],
+      endTime: ["", [Validators.required]],
+      imageProduct: ["", [Validators.required]],
+      registerDay: [],
+      priceStep: ["", [Validators.required]],
+      category: ["", [Validators.required]],
+      user: ["", [Validators.required, Validators.pattern('\\d+')]]
+    }, {validators: [checkStartTime, checkEndTime]});
   }
+
+  // checkImage(event: any) {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(event.target.files[0]);
+  //   this.selectedFile = event.target.files;
+  //   for (let i = 0; i < this.selectedFile.length; i++) {
+  //     const text = this.selectedFile[i].name.substring(this.selectedFile[i].name.lastIndexOf(".") + 1).toLocaleLowerCase()
+  //     if (text == 'jpg' || text == 'png') {
+  //     } else {
+  //       this.text = "Chỉ hỗ trợ jpg hoặc png !"
+  //     }
+  //   }
+  // }
 }
