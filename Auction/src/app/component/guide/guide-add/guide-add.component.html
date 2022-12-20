@@ -16,13 +16,13 @@
                    [ngClass]="guideForm.controls['title'].touched && guideForm.controls['title'].invalid?'is-invalid':guideForm.controls['title'].touched && guideForm.controls['title'].valid ?'is-valid':''"/>
             <div class="invalid-feedback">
               <div *ngIf="guideForm.controls['title'].errors?.required">
-                <span>Chủ đề không được bỏ trống</span>
+                <span>Chủ đề không được bỏ trống.</span>
               </div>
               <div *ngIf="guideForm.controls['title'].errors?.minlength||guideForm.controls['title'].errors?.maxlength">
-                <span>Tên chủ đề quá dài hoặc quá ngắn</span>
+                <span>Tên chủ đề quá dài hoặc quá ngắn<10-100>.</span>
               </div>
               <div *ngIf="guideForm.controls['title'].errors?.pattern">
-                <span>Tên chủ đề không được chứa ký tự đặc biệt</span>
+                <span>Tên chủ đề không được chứa ký tự đặc biệt.</span>
               </div>
             </div>
           </div>
@@ -30,16 +30,16 @@
           <div class="row">
             <label for="floatingTextarea">Nội dung (<span style="color: red">*</span>)</label>
 
-            <textarea formControlName="content" class="form-control" rows="6" placeholder="Ghi nội dung ở đây"
+            <ckeditor [editor]="Editor" formControlName="content" class="form-control" rows="6" placeholder="Ghi nội dung ở đây"
                       id="floatingTextarea"
-                      [ngClass]="guideForm.controls['content'].touched && guideForm.controls['content'].invalid?'is-invalid':guideForm.controls['content'].touched && guideForm.controls['title'].valid ?'is-valid':''"></textarea>
+                      [ngClass]="guideForm.controls['content'].touched && guideForm.controls['content'].invalid?'is-invalid':guideForm.controls['content'].touched && guideForm.controls['content'].valid ?'is-valid':''"></ckeditor>
             <div class="invalid-feedback">
               <div *ngIf="guideForm.controls['content'].errors?.required">
-                <span>Nội dung không được bỏ trống</span>
+                <span>Nội dung không được bỏ trống.</span>
               </div>
               <div
                 *ngIf="guideForm.controls['content'].errors?.minlength||guideForm.controls['content'].errors?.maxlength">
-                <span>Nội dung quá dài hoặc quá ngắn</span>
+                <span>Nội dung quá dài hoặc quá ngắn <30-2000>.</span>
               </div>
             </div>
           </div>
@@ -69,6 +69,9 @@
             <button class="btn btn-primary w-100" type="submit" [disabled]="!guideForm.valid ">
               Thêm Hướng dẫn
             </button>
+            <button  class="btn btn-primary w-100 mt-10 " style="margin-top: 10px" type="reset" >
+              Đặt Lại
+            </button>
           </div>
         </form>
       </div>
@@ -77,7 +80,7 @@
       <div class="row bdg d-flex align-items-center w-50">
         <div class="d-block w-50">
           <img style="width: 600px; height: 500px; margin-top: 100px"
-               src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmdbcdn.b-cdn.net%2Fimg%2FPhotos%2Fnew-templates%2Fbootstrap-registration%2Fdraw1.webp"
+               src="https://img.lovepik.com/free-png/20211213/lovepik-blue-notebook-png-image_401565364_wh1200.png"
                alt="">
         </div>
       </div>

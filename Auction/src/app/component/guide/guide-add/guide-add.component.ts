@@ -7,6 +7,7 @@ import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
 import {ImgUrlGuideService} from "../../../service/guide/img-url-guide.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-guide-add',
   templateUrl: './guide-add.component.html',
@@ -23,6 +24,7 @@ export class GuideAddComponent implements OnInit {
   imgCreate: any[]=[];
   messageCreate: String;
   id: number;
+  public Editor = ClassicEditor;
   constructor(private _guideService:GuideService,
               private _formBuilder: FormBuilder,
               private _storage:AngularFireStorage,
@@ -33,7 +35,7 @@ export class GuideAddComponent implements OnInit {
   ngOnInit(): void {
     this.guideForm =this._formBuilder.group({
       title:['',[Validators.required,Validators.minLength(10),Validators.maxLength(100),Validators.pattern('^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ0-9,.?! ]*$')]],
-      content:['',[Validators.required, Validators.minLength(30),Validators.maxLength(1000)]]
+      content:['',[Validators.required, Validators.minLength(30),Validators.maxLength(2000)]]
     })
   }
 
@@ -43,8 +45,8 @@ export class GuideAddComponent implements OnInit {
   createGuide(){
     this._guideService.create(this.guideForm.value).subscribe(data => {
       this._toastService.success('Thêm mới hướng dẫn thành công', 'Create Guide!', {
-          positionClass: 'toast-top-right',
-          timeOut: 7000,
+        positionClass: 'toast-bottom-right',
+          timeOut: 4000,
         }
       )
       if (this.imgCreate.length !== 0) {
