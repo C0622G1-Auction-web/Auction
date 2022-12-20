@@ -44,6 +44,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AuctionProductAddComponent } from './component/auction/auction-product-add/auction-product-add.component';
 import { LoginComponent } from './component/security/login/login.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -95,8 +96,9 @@ const googleLoginOptions = {
     ToastrModule.forRoot(),
     AppRoutingModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
-  ],
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+    CKEditorModule
+    ],
   providers: [
     {
       provide: 'SocialAuthServiceConfig',

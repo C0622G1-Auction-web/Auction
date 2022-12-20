@@ -17,7 +17,7 @@ export class AppComponent {
     console.log('alo');
     this._toastService.success('hello', 'info', {
       timeOut: 3000,
-      positionClass: 'toast-top-right'
+      positionClass: 'toast-top-center'
     });
   }
 }

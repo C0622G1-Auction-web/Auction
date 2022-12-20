@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Guide } from 'src/app/model/guide/guide';
 import { User } from 'src/app/model/user/user';
 import { environment } from 'src/environments/environment';
 
@@ -19,8 +20,9 @@ export class UserService {
     return this._httpClient.post<User>('http://localhost:8080/api/v1/users/create', user);
   }
 
-  getAllUser(): Observable<User[]> {
-    return null;
+  findAllUser() {
+    return this._httpClient.get<User[]>(
+      environment.api_url_list_user);
   }
 
     // updateUser(user: User): Observable<User> {

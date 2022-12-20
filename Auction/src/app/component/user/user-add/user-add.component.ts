@@ -24,7 +24,7 @@ export class UserAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userSevice.getAllUser().subscribe(data => {
+    this.userSevice.findAllUser().subscribe(data => {
       this.addUser = data;
       // Viet doing...
       // this.addUser = this.builder.group({

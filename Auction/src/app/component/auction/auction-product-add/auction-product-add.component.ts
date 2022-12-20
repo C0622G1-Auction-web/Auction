@@ -15,6 +15,7 @@ import { ImageProductService } from 'src/app/service/product/image-product.servi
 import { PriceStepService } from 'src/app/service/product/price-step.service';
 import { ProductService } from 'src/app/service/product/product.service';
 import { UserService } from 'src/app/service/user/user.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export const checkStartTime: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const startTime = new Date(control.get("startTime").value).getTime();
@@ -31,7 +32,7 @@ export const checkEndTime: ValidatorFn = (control: AbstractControl): ValidationE
   console.log(startTime)
   const endTime = new Date(control.get("endTime").value).getTime();
   console.log(endTime)
-  if (endTime - startTime < 0 && startTime && endTime) {
+  if (endTime - startTime > 30*24*60*60 && startTime && endTime || endTime - startTime <0) {
     return {"checkEndTime": true};
   } else {
     return null;
@@ -45,6 +46,15 @@ export const checkEndTime: ValidatorFn = (control: AbstractControl): ValidationE
 })
 export class AuctionProductAddComponent implements OnInit {
 
+  public Editor = ClassicEditor;
+
+  public onReady( editor ) {
+    editor.ui.getEditableElement().parentElement.insertBefore(
+        editor.ui.view.toolbar.element,
+        editor.ui.getEditableElement()
+    );
+}
+
   product: Product;
   productDto: ProductDto;
   categoryList: Category[] = [];
@@ -56,6 +66,8 @@ export class AuctionProductAddComponent implements OnInit {
   img: any[] = [];
   error: any;
   selectedFile: any[] = [];
+  messageCreate = "" ;
+  messageImage = "";
   
 
   constructor(private _formBuilder: FormBuilder,
@@ -77,12 +89,13 @@ export class AuctionProductAddComponent implements OnInit {
         this.priceStepList = data;
       })
       this.formCreateProduct = this._formBuilder.group({
-        id: ['', [Validators.required, Validators.pattern("[A-Za-z\\s]+")]],
-        name: ['', [Validators.required]],
+        id: ['', [Validators.required]],
+        name: ['', [Validators.required, Validators.pattern("^[A-Z][a-z]*([ ][A-Z][a-z]+)*$")]],
         description: ['', [Validators.required]],
         initialPrice: ['', [Validators.required, Validators.min(0), Validators.pattern("\\d+")]],
         startTime: ['', [Validators.required]],
         endTime: ['', [Validators.required]],
+        imageProduct: ['', [Validators.required]],
         registerDay: ['', [Validators.required]],
         priceStep: ['', [Validators.required]],
         category: ['', [Validators.required]],
@@ -120,6 +133,7 @@ export class AuctionProductAddComponent implements OnInit {
     }
   
     showPreview(event: any) {
+      this.messageImage = "Đang tải ảnh vui lòng đợi một lát"
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.readAsDataURL(event.target.files[0]);
@@ -137,6 +151,7 @@ export class AuctionProductAddComponent implements OnInit {
           this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
             finalize(() => {
               fileRef.getDownloadURL().subscribe(url => {
+                this.messageImage = "";
                 this.img.push(url);
                 console.log(url);
             
@@ -150,10 +165,14 @@ export class AuctionProductAddComponent implements OnInit {
 
     deleteImageNew(index) {
       this.img.splice(index, 1)
-      console.log(index)
+      this._toast.error("Bạn đã xóa 1 ảnh!")
     }
   
     resetFindUserById(testNum) {
       testNum.removeAttribute('disabled')
+    }
+
+    resetForm(){
+      this.ngOnInit;
     }
 }

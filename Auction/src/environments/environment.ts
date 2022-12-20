@@ -30,6 +30,7 @@ export const environment = {
   GOOGLE_SIGN_IN_API: 'http://localhost:8080/api/v1/auth/google',
   uri_api_create_user_v1_user:"http://localhost:8080/api/v1/users/create",
   api_url_create_img_url: 'http://localhost:8080/api/v1/products/img/create',
+  api_url_list_guide: 'http://localhost:8080/api/guide'
 };
 
 /*
