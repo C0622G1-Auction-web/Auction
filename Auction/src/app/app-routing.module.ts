@@ -1,9 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {GuideListComponent} from './component/guide/guide-list/guide-list.component';
-import {
-  AuctionProductDetailComponent
-} from './component/auction/auction-product-detail/auction-product-detail.component';
+import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
 import {ProductAddComponent} from './component/product/product-add/product-add.component';
 import {ProductEditComponent} from './component/product/product-edit/product-edit.component';
 import {TransactionComponent} from './component/transaction/transaction.component';
@@ -34,6 +32,37 @@ const routes: Routes = [
   {path: "home", component: HomeComponent},
   {path: "",component: HomeComponent},
   {path: 'transaction', component: TransactionComponent},
+  {
+    path: 'hoUme',
+    component: HomeComponent
+  },
+  {
+    path: 'user/list',
+    component: UserListComponent
+  },
+  {
+    path: 'user/edit/:id',
+    component: UserEditComponent
+  },
+  {
+    path: 'user/add',
+    component: UserAddComponent
+  },
+  {
+    path: 'user/lockaccount',
+    component: LockaccountUserComponent
+  },
+  {
+    path: 'product/add',
+    component: ProductAddComponent
+  }, {
+    path: 'guide',
+    component: GuideListComponent
+  },
+  {
+    path: 'auction/:productId', component: AuctionProductDetailComponent,
+
+  },
   {path: 'aa',component: TransactionComponent},
   {path: 'transaction', component: TransactionComponent},
   {path: 'user/list', component: UserListComponent},

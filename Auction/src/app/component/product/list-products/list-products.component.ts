@@ -11,6 +11,7 @@ import {AuctionStatusService} from '../../../service/product/auction-status.serv
 import {AuctionStatus} from '../../../model/product/auction-status';
 import {ProductDelete} from '../../../model/product/product-delete';
 import {ActivatedRoute} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list-products',
@@ -40,7 +41,9 @@ export class ListProductsComponent implements OnInit {
               private _categoryService: CategoryService,
               private _auctionStatusService: AuctionStatusService,
               private _priceRangeService: PriceRangeService,
-              private _activatedRoute: ActivatedRoute) {
+              private _activatedRoute: ActivatedRoute,
+              private _titleService: Title) {
+    this._titleService.setTitle("Quản lý sản phẩm");
   }
 
   ngOnInit(): void {
@@ -60,10 +63,12 @@ export class ListProductsComponent implements OnInit {
    * Date: 17/12/2022
    */
   searchByRoleAdmin(pageNumber: number) {
+    console.log("vao page");
+    console.log(this.rfSearch.value);
     this._productService.getPageProductRoleAdmin(this.rfSearch.value, pageNumber).subscribe(data => {
       this.pageProducts = data;
     }, error => {
-      this._notificationService.showErrorNotification('Không thể kết nối đến Server');
+      this._notificationService.showErrorNotification('Không thể kết nối đến Server.');
     });
   }
 
@@ -75,12 +80,11 @@ export class ListProductsComponent implements OnInit {
   createSearchForm() {
     this.rfSearch = this._formBuilder.group({
       productName: ['', [
-        Validators.pattern('^[A-Za-z0-9]+$'),
         Validators.maxLength(50)
       ]],
       categoryName: [''],
       sellerName: ['', [
-        Validators.pattern('^[A-Za-z]+$'),
+        Validators.pattern('^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$'),
         Validators.maxLength(50)
       ]],
       priceRange: [1],
@@ -154,7 +158,7 @@ export class ListProductsComponent implements OnInit {
     this._productService.findByListId(this.deleteIds).subscribe(data => {
       this.deleteProducts = data;
     }, error => {
-      this._notificationService.showErrorNotification('Không thể tìm thấy sản phẩm');
+      this._notificationService.showErrorNotification('Không thể tìm thấy sản phẩm.');
     });
   }
 
@@ -165,9 +169,9 @@ export class ListProductsComponent implements OnInit {
    */
   delete() {
     this._productService.delete(this.deleteIds).subscribe(data => {
-      this._notificationService.showSuccessNotification('Xoá thành công!');
+      this._notificationService.showSuccessNotification('Xoá thành công.');
     }, error => {
-      this._notificationService.showErrorNotification('Có lỗi khi xoá');
+      this._notificationService.showErrorNotification('Có lỗi khi xoá.');
     }, () => {
       this.ngOnInit();
     });
@@ -183,7 +187,7 @@ export class ListProductsComponent implements OnInit {
       data => {
         this.categories = data;
       }, error => {
-        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ!');
+        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ.');
       }
     );
   }
@@ -198,7 +202,7 @@ export class ListProductsComponent implements OnInit {
       data => {
         this.priceRanges = data;
       }, error => {
-        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ!');
+        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ.');
       }
     );
   }
@@ -213,7 +217,7 @@ export class ListProductsComponent implements OnInit {
       data => {
         this.auctionStatus = data;
       }, error => {
-        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ!');
+        this._notificationService.showErrorNotification('Có lỗi khi tải dữ liệu từ máy chủ.');
       }
     );
   }
