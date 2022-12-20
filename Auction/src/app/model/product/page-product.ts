@@ -4,14 +4,14 @@ export interface PageProduct {
   content: Product[],
   pageable: {
     sort: {
-      empty: boolean,
-      sorted: boolean,
+      empty: boolean;
+      sorted: boolean;
       unsorted: true
-    },
-    offset: number,
-    pageNumber: number,
-    pageSize: number,
-    paged: true,
+    };
+    offset: number;
+    pageNumber: number;
+    pageSize: number;
+    paged: true;
     unpaged: boolean
   },
   totalPages: number,

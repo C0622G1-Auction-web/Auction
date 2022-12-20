@@ -1,7 +1,16 @@
 import {Component, OnInit} from '@angular/core';
+<<<<<<< HEAD
 import {ProductService} from "../../../service/product/product.service";
 import {PageProductHistory} from "../../../model/product/dto/page-product-history";
 import Swal from 'sweetalert2';
+=======
+import {BehaviorSubject, Observable} from 'rxjs';
+import {ProductService} from '../../../service/product/product.service';
+import {Product} from '../../../model/product/product';
+import {ProductDto} from '../../../model/product/iProduct_dto';
+import {TokenService} from '../../../service/security/token.service';
+
+>>>>>>> 5714c40573654cb9aae9819492ecce425c282eee
 
 
 @Component({
@@ -12,13 +21,21 @@ import Swal from 'sweetalert2';
 export class ProductListComponent implements OnInit {
   page = 1;
   pageSize = 5;
+<<<<<<< HEAD
   p: number = 1;
   pageHistory: PageProductHistory;
   giaSuId = 1;
   nameProduct:string;
   idCancel : number;
+=======
+  action: boolean;
 
-  constructor(private productService: ProductService) {
+>>>>>>> 5714c40573654cb9aae9819492ecce425c282eee
+
+  total$: Observable<number>;
+  iproductDto$: BehaviorSubject<Product[]>;
+
+  constructor(private productService: ProductService, tokenService: TokenService) {
   }
 
   ngOnInit(): void {
@@ -32,6 +49,7 @@ export class ProductListComponent implements OnInit {
    * @return list Product , page
    */
 
+<<<<<<< HEAD
 
 
   public findAll(id: number, pageNumber: number) {
@@ -70,7 +88,23 @@ this.nameProduct = value.name
           this.page = 1;
           this.ngOnInit();
         });
+=======
+  public findAll() {
+    this.productService.findAll(this.page, this.pageSize).subscribe(value => {
+      if (value != null) {
+        this.action = true;
+        this.total$ = new BehaviorSubject<number>(value.totalElements);
+        this.iproductDto$ = new BehaviorSubject<Product[]>(value.content);
+
+      console.log('a');
+      if (value != null) {
+        this.action = true;
+        this.total$ = new BehaviorSubject<number>(value.totalElements);
+        this.iproductDto$ = new BehaviorSubject<ProductDto[]>(value.content);
+
+      } else {
+        this.action = false;
+>>>>>>> 5714c40573654cb9aae9819492ecce425c282eee
       }
-    });
   }
 }

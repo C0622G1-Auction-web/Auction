@@ -2,9 +2,21 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+<<<<<<< HEAD
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+=======
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
+<<<<<<< HEAD
+=======
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ToastrModule} from 'ngx-toastr';
+>>>>>>> 1c04260d79ced8bb06fc31fbbc4f0d73d4a42edc
+>>>>>>> 5714c40573654cb9aae9819492ecce425c282eee
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {ProductListComponent} from './component/product/product-list/product-list.component';
