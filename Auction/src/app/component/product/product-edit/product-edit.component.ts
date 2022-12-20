@@ -18,7 +18,7 @@ import {ProductAddComponent} from '../product-add/product-add.component';
 import {checkStartTime} from "../product-add/product-add.component";
 import {ToastrService} from "ngx-toastr";
 import {checkEndTime} from "../product-add/product-add.component";
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {ClassicEditor} from '@ckeditor/ckeditor5-build-classic';
 import {Title} from "@angular/platform-browser";
 
 @Component({

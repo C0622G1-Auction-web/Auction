@@ -10,7 +10,7 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, 
 import {PriceStep} from '../../../model/product/price-step';
 import {Category} from '../../../model/product/category';
 import {User} from '../../../model/user/user';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {ClassicEditor} from '@ckeditor/ckeditor5-build-classic';
 import {finalize} from "rxjs/operators";
 import {ImgUrlProduct} from "../../../model/product/img-url-product";
 import {AngularFireStorage} from "@angular/fire/storage";
@@ -18,7 +18,6 @@ import {ImageProductService} from "../../../service/product/image-product.servic
 import {ImgUrlProductDto} from "../../../model/product/dto/img-url-product-dto";
 import {ProductDto} from "../../../model/product/dto/product-dto";
 import {ToastrService} from "ngx-toastr";
-import {RxwebValidators} from "@rxweb/reactive-form-validators";
 import {Title} from "@angular/platform-browser";
 
 export const checkStartTime: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
