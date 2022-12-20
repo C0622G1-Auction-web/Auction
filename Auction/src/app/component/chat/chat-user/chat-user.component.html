@@ -13,11 +13,12 @@
       <p>C0622G1 xin chào, bất cứ một lời nhắn nào, hãy gửi cho chúng tôi</p>
     </div>
     <div class="me__box" *ngFor="let chat of chats">
+      <span class="user_name">{{chat.username}}</span>
       <span class="date-time">{{chat.timestamp | date:'dd/MM/yyyy HH:mm:ss'}}</span>
       <textarea readonly *ngIf="chat.username ==='admin'" class="admin__message">
         {{chat.message}}
       </textarea>
-      <textarea readonly *ngIf="chat.username ==='user'" class="me__message">
+      <textarea readonly *ngIf="chat.username !=='admin'" class="me__message">
         {{chat.message}}
       </textarea>
     </div>

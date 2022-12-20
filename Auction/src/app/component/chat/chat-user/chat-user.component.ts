@@ -20,7 +20,7 @@ export class ChatUserComponent implements OnInit {
   app: FirebaseApp;
   db: Database;
   form: FormGroup;
-  username = 'user';
+  username = 'Giang';
   message = '';
   chats: Chat[] = [];
 
@@ -28,8 +28,9 @@ export class ChatUserComponent implements OnInit {
     this.app = initializeApp(environment.firebaseConfig);
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
-      'username': ['user']
+      'username': ['Giang']
     });
+    firebase.database().ref('chat/giang').remove();
   }
 
   onChatSubmit(form: any) {
@@ -37,7 +38,7 @@ export class ChatUserComponent implements OnInit {
     chat.timestamp = new Date().toString();
     chat.id = uuidv4();
     this.chats = [];
-    firebase.database().ref('chat').push(chat);
+    firebase.database().ref('chat/giang').push(chat);
     console.log(this.chats)
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
@@ -45,17 +46,17 @@ export class ChatUserComponent implements OnInit {
     });
     this.heiht();
     this.autoScroll();
-
   }
 
   ngOnInit(): void {
-    const dbRef = firebase.database().ref('/chat');
+    const dbRef = firebase.database().ref('chat').child('giang');
     dbRef.on('value', (snapshot: any) => {
       this.chats = [];
       const data = snapshot.val();
       for (let id in data) {
         this.chats.push(data[id])
       }
+      this.heiht();
       this.autoScroll();
     })
   }
@@ -84,6 +85,5 @@ export class ChatUserComponent implements OnInit {
         value.setAttribute("style", "height:" + value.scrollHeight + "px;overflow-y:hidden;");
       });
     });
-
   }
 }
