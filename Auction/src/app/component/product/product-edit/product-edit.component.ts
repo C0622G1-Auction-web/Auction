@@ -18,6 +18,7 @@ import {ProductAddComponent} from '../product-add/product-add.component';
 import {checkStartTime} from "../product-add/product-add.component";
 import {ToastrService} from "ngx-toastr";
 import {checkEndTime} from "../product-add/product-add.component";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-product-edit',
@@ -25,6 +26,8 @@ import {checkEndTime} from "../product-add/product-add.component";
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
+
+  editor = ClassicEditor;
   productDto: ProductDto;
   categoryList: Category[] = [];
   priceStepList: PriceStep[] = [];
@@ -118,6 +121,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   showPreview(event: any) {
+    this.messageEdit = "Đang tải ảnh vui lòng đợi........";
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -127,9 +131,6 @@ export class ProductEditComponent implements OnInit {
     }
     console.log(this.selectedFile);
     if (this.selectedFile.length !== 0) {
-      setTimeout(() => {
-        this.messageEdit = "Đang tải ảnh vui lòng đợi........";
-      }, 3000)
       for (let i = 0; i < this.selectedFile.length; i++) {
         let selectedImage = this.selectedFile[i];
         const n = Date.now();
@@ -165,7 +166,7 @@ export class ProductEditComponent implements OnInit {
             });
           }
         }
-      },error => {
+      }, error => {
         this._toast.error("Cập nhật sản phẩm thất bại!");
       });
       this._toast.success("Cập nhật sản phẩm thành công!");
@@ -203,4 +204,10 @@ export class ProductEditComponent implements OnInit {
     this.ngOnInit();
   }
 
+  onReady(editor) {
+    editor.ui.getEditableElement().parentElement.insertBefore(
+      editor.ui.view.toolbar.element,
+      editor.ui.getEditableElement()
+    );
+  }
 }

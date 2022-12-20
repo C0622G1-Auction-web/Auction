@@ -44,6 +44,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TransactionComponent } from './component/transaction/transaction.component';
 import { LockaccountUserComponent } from './component/user/lockaccount-user/lockaccount-user.component';
+import {CKEditorComponent, CKEditorModule} from "@ckeditor/ckeditor5-angular";
+import {RxReactiveFormsModule} from "@rxweb/reactive-form-validators";
 
 @NgModule({
   declarations: [
@@ -94,8 +96,9 @@ import { LockaccountUserComponent } from './component/user/lockaccount-user/lock
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
-
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    CKEditorModule,
+    RxReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

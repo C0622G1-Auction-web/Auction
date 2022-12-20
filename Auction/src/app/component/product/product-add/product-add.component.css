@@ -30,12 +30,12 @@ body {
   height: 100vh;
 }
 #product-model {
-  /*display: flex;*/
+  display: flex;
   justify-content: center;
 }
 .boxed {
-  width: 500px;
-  max-height: 800px;
+  width: 700px;
+  height: 100%;
   border: 5px solid;
   border-image-slice: 1;
   border-color: rgb(189, 214, 236);
@@ -44,22 +44,7 @@ body {
   box-shadow: 4px 2px 4px 1px rgb(238, 243, 247);
   background-color: rgb(238, 243, 247) !important;
   overflow: auto;
-  margin-right: 8%;
 }
-
-.bg-add-product {
-  display: flex;
-  border-radius: 8px;
-
-  align-items: center;
-  justify-content: right;
-  height: 90%;
-  background-image: url("https://media.istockphoto.com/id/934890574/photo/law-and-justice-concept.jpg?s=612x612&w=0&k=20&c=RAo4rrJPoTJjz2QRWrKr-Z68H2Xg8XjnIbyIBaVDQ0k=");
-  width: 70%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 
 .boxed::-webkit-scrollbar {
   display: none;
@@ -110,23 +95,9 @@ button {
     transform: translateY(0px);
   }
 }
-.modal-content {
-  width: 1200px !important;
+:host ::ng-deep .ck .ck-toolbar {
+  font-size: 13px;
 }
-.modal-content {
-  background-color: transparent !important;
-  border: none;
-}
-@media (min-width: 576px) {
-  .modal-dialog {
-    max-width: fit-content;
-  }
-}
-.close {
-  position: absolute;
-  left: 28px;
-  top: 40px;
-  width: 50px;
-  background: none;
-  font-size: 25px;
+.invalid-feedback{
+  font-size: 13px;
 }
