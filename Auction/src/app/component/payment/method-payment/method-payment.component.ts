@@ -3,6 +3,7 @@ import {render} from 'creditcardpayments/creditCardPayments';
 import {PaymentService} from '../../../service/payment/payment.service';
 import {PaymentDto} from '../../../dto/payment-dto';
 import {Observable} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-method-payment',
@@ -31,9 +32,9 @@ export class MethodPaymentComponent implements OnInit {
       }
     );
   }
+  constructor() { }
 
   ngOnInit(): void {
-
   }
 
 }

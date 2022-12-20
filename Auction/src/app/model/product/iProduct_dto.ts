@@ -4,4 +4,5 @@ export interface ProductDto {
   RegisterDay?: string;
   Review?: string;
   IsDelete?: string;
+
 }

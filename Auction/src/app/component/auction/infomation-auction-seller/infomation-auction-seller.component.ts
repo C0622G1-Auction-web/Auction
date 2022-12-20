@@ -3,6 +3,7 @@ import {AuctionService} from "../../../service/auction/auction.service";
 import {Auction} from "../../../model/auction/auction";
 import {Product} from "../../../model/product/product";
 import {User} from "../../../model/user/user";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-infomation-auction-seller',
@@ -11,13 +12,16 @@ import {User} from "../../../model/user/user";
 })
 export class InfomationAuctionSellerComponent implements OnInit {
   productAuction: Product;
+  idProductDetail;
 
 
-  constructor(private _auctionService: AuctionService) {
+  constructor(private _auctionService: AuctionService,
+              private _acRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this._auctionService.getAuctionByProductId(2).subscribe(
+    this.idProductDetail = this._acRoute.snapshot.params.productId;
+    this._auctionService.getAuctionByProductId(this.idProductDetail).subscribe(
       data => {
         this.productAuction = data;
         console.log("product",this.productAuction);

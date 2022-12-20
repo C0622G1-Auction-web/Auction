@@ -1,72 +1,162 @@
-<div class="app">
-<!--  <app-header></app-header>-->
-<!--  <form class="filter" *ngIf="rfSearch" [formGroup]="rfSearch" (ngSubmit)="gotoPage()">-->
+  <div class="app container">
+  <app-header></app-header>
+  <div class="my__slide">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="filter">
-            <ul class="category">
-              <li class="category__item">
-                                    <span (click)="setValueCategorySearch('')" class="category_text">
-                                        Tất cả
-                                    </span>
-              </li>
-              <li class="category__item active">
-                                    <span class="category_text">
-                                        <i class="fa-solid fa-computer"></i>
-                                        <span class="label">Công nghệ</span>
-                                    </span>
-              </li>
-              <li class="category__item">
-                                    <span class="category_text">
-                                        <i class="fa-regular fa-image"></i>
-                                        <span class="label">Tranh ảnh</span>
-                                    </span>
-              </li>
-              <li class="category__item">
-                                    <span class="category_text">
-                                        <i class="fa-solid fa-couch"></i>
-                                        <span class="label">Gia dụng</span>
-                                    </span>
-              </li>
-              <li class="category__item">
-                                    <span class="category_text">
-                                        <i class="fa-solid fa-shapes"></i>
-                                       <span class="label">Khác</span>
-                                    </span>
-              </li>
-            </ul>
-            <form action="" class="form__filter d-flex">
-              <div class="form_search">
-                <input  type="text" class="input__search mx-2" placeholder="Bạn cần tìm gì?...">
+      <div class="row mt-2">
+        <div class="col-lg-10 p-0">
+          <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                      class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                      aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                      aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="https://salt.tikicdn.com/cache/w1080/ts/tikimsp/c9/9b/c2/2d30734356a0f9577a966c7c673ac5c4.png.webp" class="d-block w-100" alt="..." height="400">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
               </div>
-              <select class="select__price">
-                <option value="">--Chọn mức giá--</option>
-                <option value="">Nhỏ hơn 5 triệu</option>
-                <option value="">Từ 5 triệu đến 30 triệu</option>
-                <option value="">Lớn hơn 30 triệu</option>
-              </select>
-            </form>
+              <div class="carousel-item">
+                <img src="https://salt.tikicdn.com/cache/w1080/ts/tikimsp/e5/0f/43/31d7c26ed78fab94754e29ad66c67980.png.webp" class="d-block w-100" alt="..." height="400">
 
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2018/12/1/644302/IMG_1554.jpg" class="d-block w-100" alt="..." height="400">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button"
+                    data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button"
+                    data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-2 sidebar__right">
+          <div class="my__card w-100" style="border: none;">
+            <div class="my__card__body">
+              <p class="d-flex justify-content-between">
+                <span><i class="fa-solid fa-crown text-warning"></i> 1</span>
+                <span class="text-danger">đ 90.000.000</span>
+              </p>
+            </div>
+            <img src="https://gomtruongan.vn/uploads/products/15082022074910/bat-tu-bao-ty-huu-da-ngoc-hoang-long-kem-de-co-nho_15082022074910.jpg" height="120px" class="d-block w-100" alt="">
+
+          </div>
+          <div class="my__card w-100" style="border: none;">
+            <div class="my__card__body">
+              <p class="d-flex justify-content-between">
+                <span><i class="fa-solid fa-crown text-warning"></i> 2</span>
+                <span class="text-danger">đ 80.000.000</span>
+              </p>
+            </div>
+            <img src="https://gomtruongan.vn/uploads/products/11032021094801/dieu-bat-men-ran-hoa-sen-boc-dong_11032021094801.jpg" height="120px" class="d-block w-100" alt="">
+          </div>
+          <div class="my__card w-100" style="border: none;">
+            <div class="my__card__body">
+              <p class="d-flex justify-content-between">
+                <span><i class="fa-solid fa-crown text-warning"></i> 3</span>
+                <span class="text-danger">đ 80.000.000</span>
+              </p>
+            </div>
+            <img src="https://gomtruongan.vn/uploads/products/11032021075646/dieu-bat-men-ran-boc-dong-son-thuy_11032021075646.jpg" height="120px" class="d-block w-100" alt="">
           </div>
         </div>
       </div>
     </div>
-<!--  </form>-->
+  </div>
 
-  <div class="content">
+  <form class="filter" *ngIf="rfSearch" [formGroup]="rfSearch" (ngSubmit)="gotoPage(this.rfSearch.value)">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-12">
-          <div class="row">
-            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
+        <div class="col-lg-12 p-0">
+          <div class="filter">
+            <ul class="category d-flex flex-wrap">
+              <li class="category__item mb-2" [ngClass]="rfSearch?.value.categoryID == '' ? 'active' : ''">
+                <span (click)="setValueCategorySearch('',
+                                                      rfSearch.value.rangePrice,
+                                                      rfSearch.value.productAuctionStatus,
+                                                      rfSearch.value.name)" class="category_text">
+                  Tất cả
+                </span>
+              </li>
+              <li class="category__item mb-2" *ngFor="let category of categorys, let i = index;"
+              [ngClass]="rfSearch.value.categoryID == i + 1 ? 'active' : ''">
+                <span (click)="setValueCategorySearch(category.id,
+                                                      rfSearch.value.rangePrice,
+                                                      rfSearch.value.productAuctionStatus,
+                                                      rfSearch.value.name)" class="category_text">
+                    {{category.name}}
+                </span>
+              </li>
+              <li class="category__item mb-2" [ngClass]="auctionStatusId == '2' ? 'active' : ''">
+                <span (click)="setValueAuctionProductStatusSearch(categoryIDSearch,
+                                                      rfSearch.value.rangePrice,
+                                                      '2',
+                                                      rfSearch.value.name)" class="category_text">
+                    Đang đấu giá
+                </span>
+              </li>
+              <li class="category__item mb-2" [ngClass]="auctionStatusId == '3' ? 'active' : ''">
+                <span (click)="setValueAuctionProductStatusSearch(categoryIDSearch,
+                                                      rfSearch.value.rangePrice,
+                                                      '3',
+                                                      rfSearch.value.name)" class="category_text">
+                    Đã kết thúc
+                </span>
+              </li>
+            </ul>
+            <form action="" class=" w-100 form__filter d-flex" [formGroup] = "rfSearch" (ngSubmit)="gotoPage(rfSearch.value)">
+              <select class="select__price" formControlName="rangePrice" (change)="gotoPage(this.rfSearch.value)">
+                <option class="text-center" value="999999999999999999">
+                  <span>Mức giá</span>
+                </option>
+                <option class="text-center" value="5000000">Nhỏ hơn 5 triệu</option>
+                <option class="text-center" value="30000000">Nhỏ hơn 30 triệu</option>
+                <option class="text-center" value="50000000">Tất cả</option>
+              </select>
+              <div class="form_search">
+                <input  type="text" formControlName="name" class="input__search" placeholder="Bạn cần tìm gì?...">
+                <button class="btn__search">Tìm kiếm</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="content">
+    <div class="container-fluid">
+     <div class="row" style="margin: 0 -24px;" *ngIf="pageProducts">
+            <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4" *ngFor="let product of pageProducts.content, let i = index;">
               <div class="card product">
-                <img height="250" src="../../images/image1.jpg" class="d-block w-100 card-img" alt="">
+                <img id="image__main{{i}}" height="226" src="{{product.imgUrlProducts[0]?.url}}" class="d-block w-100 card-img" alt="">
+                <ul class="carousel__images d-flex justify-content-left">
+                  <li value="{{j}}" class="image__item img-selected{{i}}" *ngFor="let img of product.imgUrlProducts,let j = index;">
+                    <img (click)="changeImage($event, i, j)" class="d-block w-100" height="30" src="{{img.url}}" width="" alt="">
+                  </li>
+                </ul>
                 <div class="card-body">
-                  <h5 class="mb-2">Bình cổ nhà Lê Mx-02</h5>
-
-                  <span class="product-status auctioning">Đang đấu giá</span>
-                  <p class="time mb-2">
+                  <p class="mb-2 card__title" title="{{product.name}}">{{product.name| titlecase}}</p>
+                  <span class="product-status"
+                  [ngClass]="product.auctionStatus?.id == 1 ?'auction':
+                  product.auctionStatus?.id == 2 ?'auctioning':
+                  product.auctionStatus?.id == 3 ?'auctioned':''">
+                    {{product.auctionStatus.name}}
+                  </span>
+                  <p class="product__price">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></p>
+                  <p class="time">
                     <span class="time__hh mx-2">09</span>
                     <span class=" mx-2">:</span>
                     <span class="time__hh mx-2">09</span>
@@ -215,15 +305,32 @@
                   </p>
                   <div class="d-flex justify-content-between">
                     <button href="#" class="w-100 btn__auction">Đấu Giá</button>slide
+                  <div class="modal__product">
+                    <button [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 1"
+                            class=" btn__auction">
+                      <span class="btn__auction--title">Đấu giá</span>
+                    </button>
+                    <button [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 2"
+                            class=" btn__auctioning">
+                      <span class="btn__auctioning--title">Tham gia</span>
+                    </button>
+                    <button [routerLink]="['/auction-detail/', product.id]" *ngIf="product.auctionStatus?.id == 3"
+                            class=" btn btn__auctioned">
+                      <span class="btn__auctioned--title">Xem thêm</span>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-      </div>
-    </div>
   </div>
-<!--  <app-footer></app-footer>-->
+  <div class="more mt-2 mb-2 d-flex justify-content-center">
+    <button *ngIf="pageHasNext + 1 < pageProducts?.totalPages" class="btn btn-outline-danger" (click)="gotoPageNumber(rfSearch?.value, pageHasNext + 1)">Xem thêm</button>
+  </div>
+  <app-footer></app-footer>
 </div>
+
+  <div>
+
+  </div>

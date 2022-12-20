@@ -12,14 +12,19 @@ export interface Product {
   initialPrice?: number;
   startTime?: string;
   endTime?: string;
-  registerDay?: string;
+  deleteStatus?: boolean;
+  imgUrlProducts?: ImgUrlProduct[];
+  auctions?: any;
   priceStep?: PriceStep;
   reviewStatus?: ReviewStatus;
   auctionStatus?: AuctionStatus;
   category?: Category;
-  imgUrlProducts?: any;
   maxCurrentPrice?: number;
-  imgUrlProduct?: ImgUrlProduct;
   imgs?: any;
+  registerDay?: string;
   user?: User;
+  nameProduct: String;
+  RegisterDay: String;
+  Review: String;
+  IsDelete: String;
 }

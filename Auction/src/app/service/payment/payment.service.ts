@@ -9,6 +9,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 const URL_API = `${environment.api_url_order_status}`;
 const API_URL_RECEIPT = `${environment.api_url_order_status}`;
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +72,5 @@ export class PaymentService {
   getPaymentList(userId: string): Observable<PaymentDto[]> {
     return this._httpClient.get<PaymentDto[]>(API_URL_RECEIPT + '/' + userId + '/list');
   }
-}
 
+}

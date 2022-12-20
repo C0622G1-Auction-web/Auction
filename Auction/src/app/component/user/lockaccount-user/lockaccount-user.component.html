@@ -1,0 +1,28 @@
+
+<body>
+<form style="margin-top: 30px; max-width: 450px; padding-bottom: 5px" class=" container-fluid shadow">
+  <div>
+    <h1 class="text-center mb-4"> Khóa thành viên</h1>
+  </div>
+  <div class="mb-2">Thời gian khóa:</div>
+  <div style="margin-top: 20px" class="mb-2">
+    Từ ngày: <input type="date" style="margin-right: 10px">
+    Đến:<input type="date" style="margin-right: 10px">
+  </div>
+  <div class="mb-2">
+    Bạn có thực sự muốn khóa:
+    <textarea rows="4" class="form-control" formControlName=""></textarea>
+  </div>
+  <div class="mb-2">
+    Lí do:
+    <textarea class="form-control" formControlName=""></textarea>
+  </div>
+  <div class=" text-center mb-4" style="margin-top: 20px">
+    <button type="submit" class="btn btn-primary" style="margin-right: 10px">Khóa</button>
+    <a routerLink="">
+      <button class="btn btn-primary">Hủy</button>
+    </a>
+  </div>
+</form>
+</body>
+
