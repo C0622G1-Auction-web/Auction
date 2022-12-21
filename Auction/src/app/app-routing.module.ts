@@ -53,7 +53,7 @@ const routes: Routes = [
     component: UserAddComponent
   },
   {
-    path: 'user/lockaccount',
+    path: 'user/lock/:id',
     component: LockaccountUserComponent
   },
   {

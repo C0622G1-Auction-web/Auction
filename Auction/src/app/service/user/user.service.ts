@@ -81,7 +81,7 @@ export class UserService {
   saveaddAcountUser(user: User):
     Observable<User> {
     console.log(user);
-    return this._httpClient.post<User>('http://localhost:8080/api/user/v1/add', user);
+    return this._httpClient.post<User>(environment.NQV_SAVE_USER, user);
   }
 
 

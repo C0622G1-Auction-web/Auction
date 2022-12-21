@@ -176,7 +176,7 @@
                     </div>
                     <div *ngIf="rfUser.controls['phone'].hasError('required')
                              && rfUser.controls['phone'].touched" style="color: red">
-                      CMND không được bỏ trống.
+                      SDT không được bỏ trống.
                     </div>
                   </div>
                   <div class="col-lg-6">
@@ -227,8 +227,8 @@
                              required
                              formControlName="district" (click)="changStatusDistrict1()"
                              value="{{rfUser.value.district}}"
-                             [ngClass]="(rfUser.controls['email'].touched) ?
-                               (rfUser.controls['email'].errors ? 'is-invalid' : 'is-valid') : '' ">
+                             [ngClass]="(rfUser.controls['district'].touched) ?
+                               (rfUser.controls['district'].errors ? 'is-invalid' : 'is-valid') : '' ">
                       <label for="district1">Huyện/Quận :</label>
                       <ng-template #district1>
                         <select formControlName="district" (change)="selectDistrict()"

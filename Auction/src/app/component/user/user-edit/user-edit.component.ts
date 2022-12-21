@@ -9,6 +9,7 @@ import {City} from 'src/app/model/address/city';
 import {District} from 'src/app/model/address/district';
 import {Ward} from 'src/app/model/address/ward';
 import {AddressService} from 'src/app/service/address/address.service';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-user-edit',
@@ -40,11 +41,12 @@ export class UserEditComponent implements OnInit {
               private _toast: ToastrService,
               private _router: Router,
               private _addressService: AddressService,
+              private _titleService: Title,
   ) {
+    this._titleService.setTitle("Chỉnh sửa thành viên");
   }
 
   ngOnInit(): void {
-
     this.status = 0;
     this._activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');

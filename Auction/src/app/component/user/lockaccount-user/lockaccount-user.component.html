@@ -1,28 +1,72 @@
-
-<body>
-<form style="margin-top: 30px; max-width: 450px; padding-bottom: 5px" class=" container-fluid shadow">
+<form style="margin-top: 30px; max-width: 450px; padding-bottom: 5px; background-color: #fdf7ed"
+      class=" container-fluid shadow"
+      [formGroup]="rfLockAccount" *ngIf="rfLockAccount" (ngSubmit)="lock()">
+  <div class="row text-center mt-5">
+    <h2 style="margin-top: 10px">Khóa Thành Viên</h2>
+  </div>
+  <div class="mb-3" style="margin-top:20px">
+    <p><label for="select_id"> Vui Lòng chọn ID<span style="color:red">(*)</span>:</label></p>
+  </div>
   <div>
-    <h1 class="text-center mb-4"> Khóa thành viên</h1>
+    <select id="select_id" (change)="hanDlerLock($event)" class="form-control" style="width: 150px"
+            formArrayName="accountId"
+            [ngClass]="(rfLockAccount.controls['startDay'].touched)?(rfLockAccount.controls['startDay'].invalid) ? 'is-invalid':'is-valid':''">
+      <option selected value="0">----Chọn ID----</option>
+      <option *ngFor="let idLock of idListR" [value]="idLock">{{idLock}}</option>
+      <div class="invalid-feedback">
+        <div *ngIf="rfLockAccount.controls['startDay'].errors?.required && rfLockAccount.controls['startDay'].touched">
+          Không được để trống.
+        </div>
+      </div>
+    </select>
   </div>
-  <div class="mb-2">Thời gian khóa:</div>
-  <div style="margin-top: 20px" class="mb-2">
-    Từ ngày: <input type="date" style="margin-right: 10px">
-    Đến:<input type="date" style="margin-right: 10px">
+  <div style="margin-top: 20px" class="mb-3">
+    <label for="startday">
+      Ngày băt đầu khóa:<span style="color:red">(*)</span>
+    </label>
+    <input class="form-control" type="date" style="margin-right: 10px" id="startday" formControlName="startDay"
+           [ngClass]="(rfLockAccount.controls['startDay'].touched)?(rfLockAccount.controls['startDay'].invalid) ? 'is-invalid':'is-valid':''">
+    <div class="invalid-feedback">
+      <div *ngIf="rfLockAccount.controls['startDay'].errors?.required && rfLockAccount.controls['startDay'].touched">
+        Không được để trống.
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="endday">Ngày kết thúc khóa:<span style="color:red">(*)</span></label>
+    <input class="form-control" type="date" style="margin-right: 10px" id=endday formControlName="endDay"
+           [ngClass]="(rfLockAccount.controls['endDay'].touched)?(rfLockAccount.controls['endDay'].invalid) ? 'is-invalid':'is-valid':''">
+    <div class="invalid-feedback">
+      <div *ngIf="rfLockAccount.controls['endDay'].errors?.required && rfLockAccount.controls['endDay'].touched">
+        Không được để trống.
+      </div>
+    </div>
   </div>
   <div class="mb-2">
-    Bạn có thực sự muốn khóa:
-    <textarea rows="4" class="form-control" formControlName=""></textarea>
+    <label for="reason"> Lí do bị khóa:<span style="color:red">(*)</span></label>
+    <textarea class="form-control" formControlName="reason" id="reason"
+              [ngClass]="(rfLockAccount.controls['reason'].touched)?(rfLockAccount.controls['reason'].invalid) ? 'is-invalid':'is-valid':''">
+    </textarea>
+
+    <div class="invalid-feedback">
+      <div *ngIf="rfLockAccount.controls['reason'].errors?.required && rfLockAccount.controls['reason'].touched">
+        Không được để trống
+      </div>
+    </div>
   </div>
-  <div class="mb-2">
-    Lí do:
-    <textarea class="form-control" formControlName=""></textarea>
+  <div class="mb-2" *ngIf="account">
+    Bạn có thực sự muốn khóa tài khoản: <span style="color: red; font-size: 20px">{{account?.name}}</span>
+  </div>
+  <div hidden>
+    <input formControlName="accountId">
   </div>
   <div class=" text-center mb-4" style="margin-top: 20px">
-    <button type="submit" class="btn btn-primary" style="margin-right: 10px">Khóa</button>
-    <a routerLink="">
+    <button type="submit" [disabled]="!this.rfLockAccount.valid" class="btn btn-primary"
+            style="margin-right: 10px">Khóa
+    </button>
+    <a routerLink="user/list'">
       <button class="btn btn-primary">Hủy</button>
     </a>
   </div>
+  <span style="font-size: 15px" class="fst-italic">Trường có dấu <span style="color: red">*</span> là bắt buộc, không được bỏ trống.</span>
 </form>
-</body>
-

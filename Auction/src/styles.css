@@ -1,8 +1,9 @@
-
 /**
 Create by: HaiNT
 Date created: 13/12/2022
  */
+
+
 .myMT {
   margin-top: 20px;
 }
@@ -30,16 +31,53 @@ Date created: 13/12/2022
 
 
 /* huy sidebar */
-.sidebar__left {
-  background: #535151;
 
+.sidebar__left {
+  background-color: #fe6432;
+  padding-top: 12px;
+  z-index: 5;
+}
+
+.sidebar__left i {
+  margin-right: 4px;
+}
+
+
+.box {
+  margin-top: 64px;
+  position: fixed;
+  height: 85vh;
+}
+
+ul, p {
+  padding: 0;
+  margin: 0;
+}
+
+#search-row {
+  display: flex;
+}
+
+table, tr, td {
+  font-size: 14px;
+}
+
+app-header {
+  left: 0;
+  right: 0;
+  z-index: 10;
+  position: fixed;
 }
 
 .menu {
   padding: 0;
   padding-top: 24px;
-  background: #535151;
+  background-color: #fe6432;
   margin: 0;
+}
+
+.box {
+  display: flex;
 }
 
 .menu__item {
@@ -47,10 +85,9 @@ Date created: 13/12/2022
   list-style-type: none;
   cursor: pointer;
   margin-bottom: 12px;
-}
-
-.menu__icon {
-  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu__link {
@@ -71,6 +108,11 @@ Date created: 13/12/2022
 .menu__item:hover .menu__link {
   color: #0a0a0a;
 }
+
+.form-control:focus {
+  box-shadow: none;
+}
+
 /**
 Create by: HaiNT
 Date created: 13/12/2022

@@ -1,64 +1,138 @@
-
-<<<<<<< HEAD
-<div class="row text-center mt-3">
-  <h2 style="margin-top: 10px">Thêm Thành viên</h2>
-</div>
 <form
-  class=" container-fluid shadow" style="margin-top: 30px; max-width: 450px" [formGroup]="addUser">
+  class="container-fluid shadow " style="margin-top: 30px; max-width: 450px; background-color: #fdf7ed" [formGroup]="rfAddUser" *ngIf="rfAddUser" (ngSubmit)="addAccountUser()">
   <div>
-    <div class="mb-2">
-      Họ:
-      <input type="text" class="form-control" formControlName="fisrtName" >
+    <div class="row text-center mt-3 ">
+      <h2 style="margin-top: 10px">Thêm Thành Viên</h2>
+    </div>
+    <div class="mb-2" style="margin-top: 20px">
+      <label for="ho">Họ:<span style="color:red">(*)</span></label>
+      <input type="text" class="form-control" formControlName="fisrtName" id="ho"
+             [ngClass]="(rfAddUser.controls['fisrtName'].touched)?(rfAddUser.controls['fisrtName'].invalid) ? 'is-invalid':'is-valid':''">
+      <div class="invalid-feedback">
+        <div *ngIf="rfAddUser.controls['fisrtName'].errors?.required && rfAddUser.controls['fisrtName'].touched"
+             style="color: red">
+          Không được để trống.
+        </div>
+      </div>
     </div>
     <div class="mb-2">
-      Tên:
-      <input type="text" class="form-control" formControlName="lastName" >
+      <label for="username">Tên:<span style="color:red">(*)</span></label>
+      <input type="text" class="form-control" formControlName="username" id="username"
+             [ngClass]="(rfAddUser.controls['username'].touched)?(rfAddUser.controls['username'].invalid) ? 'is-invalid':'is-valid':''">
+      <div class="invalid-feedback">
+        <div *ngIf="rfAddUser.controls['username'].errors?.required && rfAddUser.controls['username'].touched">
+          Không được để trống.
+        </div>
+      </div>
     </div>
     <div class="mb-2">
-      Tên đăng nhập:
-      <input type="text" class="form-control" formControlName="username" >
+      <label for="ten">Tên đăng nhập:<span style="color:red">(*)</span></label>
+      <input type="text" class="form-control" formControlName="lastName" id="ten"
+             [ngClass]="(rfAddUser.controls['lastName'].touched)?(rfAddUser.controls['lastName'].invalid) ? 'is-invalid':'is-valid':''">
+      <div class="invalid-feedback">
+        <div *ngIf="rfAddUser.controls['lastName'].errors?.required && rfAddUser.controls['lastName'].touched">
+          Không được để trống.
+        </div>
+      </div>
     </div>
     <div class="mb-2">
-      Ngày sinh:
-      <input type="date" class="form-control" formControlName="birthDay" >
+      <label for="ngaysinh">Ngày sinh:<span style="color:red">(*)</span></label>
+      <input type="date" class="form-control" formControlName="birthDay" id="ngaysinh"
+             [ngClass]="(rfAddUser.controls['birthDay'].touched)?(rfAddUser.controls['birthDay'].invalid) ? 'is-invalid':'is-valid':''">
+      <div class="invalid-feedback">
+        <div *ngIf="rfAddUser.controls['birthDay'].errors?.required && rfAddUser.controls['birthDay'].touched">
+          Không được để trống.
+        </div>
+      </div>
     </div>
     <div class="mb-2">
-      Email:
-      <input type="text" class="form-control" formControlName="email" >
+      <label for="email">Email:<span style="color:red">(*)</span></label>
+      <input type="text" class="form-control" formControlName="email" id="email"
+             [ngClass]="(rfAddUser.controls['email'].touched)?(rfAddUser.controls['email'].invalid) ? 'is-invalid':'is-valid':''">
+      <div class="invalid-feedback">
+        <div *ngIf="rfAddUser.errors?.exist && rfAddUser.controls['email'].touched"
+             style="color: red">
+          Email đã tồn tại.
+        </div>
+        <div *ngIf="rfAddUser.controls['email'].errors?.required && rfAddUser.controls['email'].touched">
+          Không được để trống.
+        </div>
+      </div>
     </div>
     <div class="mb-2">
-      Số điện thoại:
-      <input type="text" class="form-control" formControlName="phone" >
+      <label for="sdt">Số điện thoại:<span style="color:red">(*)</span></label>
+      <input type="text" class="form-control" formControlName="phone" id="sdt"
+             [ngClass]="(rfAddUser.controls['phone'].touched)?(rfAddUser.controls['phone'].invalid) ? 'is-invalid':'is-valid':''">
+      <div class="invalid-feedback">
+        <div *ngIf="rfAddUser.controls['phone'].errors?.required && rfAddUser.controls['phone'].touched">
+          Không được để trống.
+        </div>
+      </div>
     </div>
     <div class="mb-2">
-      Số CMND:
-      <input type="text" class="form-control" formControlName="idCard">
+      <label foe="cmnd">Số CMND:<span style="color:red">(*)</span></label>
+      <input type="text" class="form-control" formControlName="idCard" id="cmnd"
+             [ngClass]="(rfAddUser.controls['idCard'].touched)?(rfAddUser.controls['idCard'].invalid) ? 'is-invalid':'is-valid':''">
+      <div class="invalid-feedback">
+        <div *ngIf="rfAddUser.controls['idCard'].errors?.required && rfAddUser.controls['idCard'].touched">
+          Không được để trống.
+        </div>
+      </div>
     </div>
-    <div class="mb-2">
-      Số nhà:
-      <input type="text" class="form-control" formControlName="detailAddress" >
+    <div class="mb-3">
+      <select formControlName="city" (change)="selectCity()" class="form-control" id="city"
+              aria-label=".form-select-sm">
+        <option value="">---Tỉnh/ Thành Phố---</option>
+        <option *ngFor="let x of cities" [ngValue]="x.id">{{x.name}}</option>
+      </select>
+      <div *ngIf="rfAddUser.controls['city'].hasError('required') &&
+                   rfAddUser.controls['city'].touched" style="color: red">
+        Tỉnh thành không được bỏ trống.
+      </div>
     </div>
-    <div class="mb-2">
-      Phường/Xã:
-      <input type="text" class="form-control" formControlName="town"  >
+    <div class="mb-3">
+      <select formControlName="district" (change)="selectDistrict()" class="form-control" id="district"
+              aria-label=".form-select-sm">
+        <option value="">---Quận /huyện---</option>
+        <option *ngFor="let x of districts" [ngValue]="x.id">{{x.name}}</option>
+      </select>
+      <div *ngIf="rfAddUser.controls['district'].hasError('required') &&
+                   rfAddUser.controls['district'].touched" style="color: red">
+        Quận /huyện không được bỏ trống.
+      </div>
     </div>
-    <div class="mb-2">
-      Quận /huyện:
-      <input type="text" class="form-control" formControlName="district">
+    <div class="mb-3">
+      <select formControlName="town" (change)="selectWard()" class="form-control" id="town"
+              aria-label=".form-select-sm">
+        <option value="">---Phường/Xã---</option>
+        <option *ngFor="let x of wards" [ngValue]="x.id">{{x.name}}</option>
+      </select>
+      <div *ngIf="rfAddUser.controls['town'].hasError('required') &&
+                   rfAddUser.controls['town'].touched" style="color: red">
+        Phường/Xã không được bỏ trống.
+      </div>
     </div>
-    <div class="mb-2">
-      Tỉnh:
-      <input type="text" class="form-control" formControlName="city" >
+
+    <div class="mb-3">
+      <label for="sonha">Số nhà:<span style="color:red">(*)</span></label>
+      <input type="text" class="form-control" formControlName="detailAddress" id="sonha"
+             [ngClass]="(rfAddUser.controls['detailAddress'].touched)?(rfAddUser.controls['detailAddress'].invalid) ? 'is-invalid':'is-valid':''">
+      <div class="invalid-feedback">
+        <div
+          *ngIf="rfAddUser.controls['detailAddress'].errors?.required && rfAddUser.controls['detailAddress'].touched">
+          Không được để trống
+        </div>
+      </div>
     </div>
   </div>
   <div class="text-center mb-4" style="margin-top:20px">
-    <button type="submit" class="btn btn-primary" style="margin-right: 10px">Thêm mới</button>
+    <button type="submit"  [disabled]="!this.rfAddUser.valid" class="btn btn-primary" style="margin-right: 10px">Thêm mới</button>
     <a routerLink="">
       <button class="btn btn-primary" style="margin-right: 10px">Hủy</button>
     </a>
     <button type="reset" class="btn btn-primary">Nhập lại</button>
   </div>
+  <div class="mb-2">
+    <span style="font-size: 15px" class="fst-italic">Trường có dấu <span style="color: red">*</span> là bắt buộc, không được bỏ trống.</span>
+  </div>
 </form>
-
-
-

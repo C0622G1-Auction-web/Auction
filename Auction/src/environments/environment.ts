@@ -32,6 +32,11 @@ export const environment = {
   productUrl: 'http://localhost:8080/api/v1/products',
   imageUrl: 'http://localhost:8080/api/v1/products/img',
   DIA_GIOI_VIETNAM_API: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+  NQV_SAVE_USER:'http://localhost:8080/api/v1/users/add',
+  NQV_GET_ACCOUNT_BY_ID_API: 'http://localhost:8080/api/v1/accounts/getAccountById',
+  NQV_LOCK_ACCOUNT:'http://localhost:8080/api/v1/users/lockUser',
+  NQV_DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
+  NQV_URL_VALIDATE_ADD_USER:'http://localhost:8080/api/v1/users/findall',
 };
 
 /*
