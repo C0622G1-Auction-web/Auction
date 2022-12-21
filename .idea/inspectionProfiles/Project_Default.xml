@@ -2,6 +2,18 @@
   <profile version="1.0">
     <option name="myName" value="Project Default" />
 <<<<<<< HEAD
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="ng-click" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
     <inspection_tool class="TypeScriptUnresolvedVariable" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
 =======
@@ -12,6 +24,7 @@
 =======
     <inspection_tool class="AngularInvalidImportedOrDeclaredSymbol" enabled="false" level="ERROR" enabled_by_default="false" />
 >>>>>>> 7231c158a9e231f26c0d00a489fc0e266ad52c53
+>>>>>>> f2578481c32de0e205c4566675aa17f618e28262
     <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
       <option name="processCode" value="true" />
       <option name="processLiterals" value="true" />

@@ -42,3 +42,6 @@ input[type="checkbox"] {
 .text-orange{
   color: #fa6132;
 }
+body{
+  font-family: 'Roboto', sans-serif;
+}

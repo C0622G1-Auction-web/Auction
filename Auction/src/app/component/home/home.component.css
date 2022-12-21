@@ -106,7 +106,7 @@ a {
   padding-top: 12px;
   width: 100%;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }
 
 select::-ms-expand {

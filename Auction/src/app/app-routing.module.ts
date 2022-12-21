@@ -9,9 +9,8 @@ import {HomeComponent} from './component/home/home.component';
 import {UserListComponent} from './component/user/user-list/user-list.component';
 import {UserEditComponent} from './component/user/user-edit/user-edit.component';
 import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
-import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
-import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
-import {LoginComponent} from './component/security/login/login.component';
+import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
+
 import {AccountResetPassComponent} from './component/security/account-reset-pass/account-reset-pass.component';
 import {AccountForgotPassComponent} from './component/security/account-forgot-pass/account-forgot-pass.component';
 import {UserAddComponent} from './component/user/user-add/user-add.component';
@@ -41,6 +40,10 @@ const routes: Routes = [
   {path: 'transaction', component: TransactionComponent},
   {
     path: 'hoUme',
+    component: HomeComponent
+  },
+  {
+    path: '',
     component: HomeComponent
   },
   {
@@ -104,6 +107,14 @@ const routes: Routes = [
     path: "product/edit",
     component: ProductEditComponent
   },
+  {
+    path: 'methodPayment', component: MethodPaymentComponent
+  },
+  {path: 'account/reset_password', component: AccountResetPassComponent},
+  {path: 'account/forgot_password', component: AccountForgotPassComponent},
+  {path: 'cart', component: PaymentCartComponent},
+  {path: 'login', component: LoginComponent},
+
 
   {path: "aa", component: TransactionComponent},
 
@@ -140,7 +151,8 @@ const routes: Routes = [
     component: AuctionProductDetailComponent,
   },
   {
-    path: 'confirmAddress', component: PaymentReceiptComponent
+    path: 'confirmAddress', component: PaymentReceiptComponent},
+  {
     path: 'confirmAddress',
     component: AddressPaymentComponent
   },
@@ -158,8 +170,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'account/reset_password', component: AccountResetPassComponent},
   {path: 'account/forgot_password', component: AccountForgotPassComponent},
-];
-  }, {path: 'login', component: LoginComponent},
+
+  {path: 'login', component: LoginComponent},
 {
   path: 'product/add',
   component: ProductAddComponent

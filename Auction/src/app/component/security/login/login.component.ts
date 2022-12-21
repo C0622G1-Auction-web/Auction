@@ -1,17 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
 
 // @ts-ignore
 // import {GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
-
-import {AuthService} from '../../../service/security/auth.service';
-import {TokenService} from '../../../service/security/token.service';
-import {Googletoken} from '../../../security/oauth2/googletoken';
-import {MessageRespone} from '../../../model/security/message-respone';
-import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {ToastrService} from "ngx-toastr";
@@ -27,6 +17,7 @@ import {Googletoken} from "../../../security/oauth2/googletoken";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   rfLogin: FormGroup;
@@ -99,8 +90,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/login');
         console.log('Đăng nhập thất bại');
       }
-
-    });
+    })
   }
 
   /**
@@ -135,33 +125,34 @@ export class LoginComponent implements OnInit {
   //     });
   //   });
   // }
-  loginWithGoogle() {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
-      this.socialUser = data;
-
-      const googleToken = new Googletoken(this.socialUser.idToken);
-
-      this.authService.googleLogin(googleToken).subscribe(req => {
-
-        if (req.token == null) {
-          const emailToRegister = req.email;
-
-            this.router.navigateByUrl('/registerWithGoogle/' + emailToRegister);
-
-        } else {
-
-          this.tokenService.setAccountLocal(req.account);
-          this.tokenService.setTokenLocal(req.token);
-          this.tokenService.setUserLocal(req.user);
-          this.tokenService.setRoleLocal(req.roles);
-
-          this.router.navigate(['/home']).then(() => {
-            location.reload();
-          });
-
-        }
-      });
-    });
-  }
+  // loginWithGoogle() {
+  //   this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+  //     this.socialUser = data;
+  //
+  //     const googleToken = new Googletoken(this.socialUser.idToken);
+  //
+  //     this.authService.googleLogin(googleToken).subscribe(req => {
+  //
+  //       if (req.token == null) {
+  //         const emailToRegister = req.email;
+  //
+  //         this.router.navigateByUrl('/registerWithGoogle/' + emailToRegister);
+  //           this.router.navigateByUrl('/registerWithGoogle/' + emailToRegister);
+  //
+  //       } else {
+  //
+  //         this.tokenService.setAccountLocal(req.account);
+  //         this.tokenService.setTokenLocal(req.token);
+  //         this.tokenService.setUserLocal(req.user);
+  //         this.tokenService.setRoleLocal(req.roles);
+  //
+  //         this.router.navigate(['/home']).then(() => {
+  //           location.reload();
+  //         });
+  //
+  //       }
+  //     });
+  //   });
+  // }
 
 }

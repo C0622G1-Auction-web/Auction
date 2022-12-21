@@ -16,7 +16,7 @@
           <td>{{i+1}}</td>
           <td>{{item.currentPrice}}</td>
           <td class="text-center">{{item.auctionTime}}</td>
-          <td>{{item.fullName |titlecase}}</td>
+<!--          <td>{{item.fullName |titlecase}}</td>-->
         </tr>
         </tbody>
       <ng-template #pageAuctionIsEmpty>
@@ -44,6 +44,7 @@
                 [ngClass]="auctionPageByProductId.number + 1 == auctionPageByProductId.totalPages ? 'disabled': ''">
               <span class="page-link" (click)="goToPage(auctionPageByProductId.number + 1)">Next</span>
 <!--            </li>-->
+          </ul>
           <ul class="my__pagination" *ngIf="auctionPageByProductId">
             <li class="my__page-item pointer" [ngClass]="auctionPageByProductId.number == 0 ? 'disabled': ''">
               <span class="page-link" (click)="goToPage(auctionPageByProductId.number - 1)">

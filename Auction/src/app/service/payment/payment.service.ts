@@ -9,12 +9,15 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 const URL_API = `${environment.api_url_order_status}`;
 const API_URL_RECEIPT = `${environment.api_url_order_status}`;
-import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
+  paymentDtoList: PaymentDto[];
+
+  total: number;
+
   idArray: number [] = [1, 2, 8];
 
   // tslint:disable-next-line:variable-name
@@ -33,6 +36,55 @@ export class PaymentService {
    * Function: to find payment by List id
    * @return product list dto
    */
+  getListPayment(): Observable<PaymentDto[]> {
+    return this._httpClient.get<PaymentDto[]>(URL_API + '/find-by-list-id');
+  }
+
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   * Function: get total bill
+   * @return product list
+   */
+  getTotalBill(): Observable<PaymentDto> {
+    return this._httpClient.get<PaymentDto>(URL_API + '/get-total-bill');
+  }
+
+
+  // /**
+  //  * Create by: BaoBC
+  //  * Date created: 16/12/2022
+  //  */
+  // getPaymentList(paymentDtoList: PaymentDto[]) {
+  //   this.paymentDtoList = paymentDtoList;
+  // }
+
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   */
+  getToTal(total: number) {
+    this.total = total;
+  }
+
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   */
+  getListPaymentDto(): PaymentDto[] {
+    return this.paymentDtoList;
+  }
+
+  /**
+   * Create by: BaoBC
+   * Date created: 16/12/2022
+   */
+  getTotalBillDto(): number {
+    return this.total;
+  }
+
+
+
   findPaymentList(): Observable<PaymentDto[]> {
     return this._httpClient.post<PaymentDto[]>(API_URL_RECEIPT, this.idArray);
   }

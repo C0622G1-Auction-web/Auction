@@ -30,24 +30,19 @@ import {
 import {
   InfomationAuctionBuyerComponent
 } from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
-import {AccountResetPassComponent} from './component/security/account-reset-pass/account-reset-pass.component';
 
-import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
-import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
-import {PaymentReceiptComponent} from './component/payment/payment-receipt/payment-receipt.component';
-import {TransactionComponent} from './component/transaction/transaction.component';
+// @ts-ignore
+import {
+} from "./component/auction/infomation-auction-seller/infomation-auction-seller.component";
+
+
 
 import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
-import {PaymentCartComponent} from './component/payment/payment-cart/payment-cart.component';
-import {AccountForgotPassComponent} from './component/security/account-forgot-pass/account-forgot-pass.component';
 import { ListProductsComponent } from './component/product/list-products/list-products.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
 import { LockaccountUserComponent } from './component/user/lockaccount-user/lockaccount-user.component';
-import {PaymentCartComponent} from './component/payment-cart/payment-cart.component';
-import {AccountForgotPassComponent} from './component/account-forgot-pass/account-forgot-pass.component';
-import {AccountResetPassComponent} from './component/account-reset-pass/account-reset-pass.component';
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
 import {PaymentReceiptComponent} from './component/payment-receipt/payment-receipt.component';
@@ -64,8 +59,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserUpdateComponent} from "./component/user/user-update/user-update.component";
 import {RegisterWithGoogleComponent} from './security/register-with-google/register-with-google.component';
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
+// @ts-ignore
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {ChatVisitorComponent} from './component/chat/chat-visitor/chat-visitor.component';
+import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
+import {AccountForgotPassComponent} from "./component/security/account-forgot-pass/account-forgot-pass.component";
+import {AccountResetPassComponent} from "./component/security/account-reset-pass/account-reset-pass.component";
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -90,7 +89,6 @@ const googleLoginOptions = {
     GuideDeleteComponent,
     GuideListComponent,
     HomeComponent,
-    LoginComponent,
     RegisterComponent,
     ResetPasswordComponent,
     AuctionRequestComponent,
@@ -115,6 +113,7 @@ const googleLoginOptions = {
     AuctionProductAddComponent,
     PaymentReceiptComponent,
     TransactionComponent,
+    LoginComponent,
     ChatUserComponent,
     ChatAdminComponent,
     UserCreateComponent,
@@ -137,7 +136,8 @@ const googleLoginOptions = {
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
     SocialLoginModule,
-    CKEditorModule
+    CKEditorModule,
+    ReactiveFormsModule
   ],
   providers: [
     // {

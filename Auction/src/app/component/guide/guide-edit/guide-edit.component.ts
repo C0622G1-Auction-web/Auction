@@ -8,6 +8,7 @@ import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
 import {finalize} from "rxjs/operators";
 import {Guide} from "../../../model/guide/guide";
 import {ToastrService} from "ngx-toastr";
+// @ts-ignore
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 /*Create by QuangND
