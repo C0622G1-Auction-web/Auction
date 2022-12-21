@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuctionService} from "../../../service/auction/auction.service";
 import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-product-id";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-infomation-auction-buyer',
@@ -9,19 +10,22 @@ import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-pro
 })
 export class InfomationAuctionBuyerComponent implements OnInit {
   auctionPageByProductId: PageAuctionByProductId
-  productId: number;
-  private user: any;
+  idProductDetail;
 
 
-  constructor(private auctionService: AuctionService) {
+  constructor(private _auctionService: AuctionService,
+              private _acRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.auctionService.getAuctionPageByProductId(2, 0).subscribe(
+    this.idProductDetail = this._acRoute.snapshot.params.productId;
+    this._auctionService.getAuctionPageByProductId(this.idProductDetail, 0).subscribe(
       data => {
         this.auctionPageByProductId = data;
+      }, error => {
+        console.log('Chưa có đấu giá nào...')
       }
-    )
+    );
   }
 
   /**
@@ -31,7 +35,7 @@ export class InfomationAuctionBuyerComponent implements OnInit {
    * @param i : pageNumber
    */
   goToPage(i: number) {
-    this.auctionService.getAuctionPageByProductId(2, i).subscribe(
+    this._auctionService.getAuctionPageByProductId(this.idProductDetail, i).subscribe(
       data => {
         this.auctionPageByProductId = data;
       }

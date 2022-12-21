@@ -1,8 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {PaymentDto} from '../../../dto/payment-dto';
-import {PaymentService} from '../../../service/payment/payment.service';
-import {Payment} from '../../../model/payment/payment';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-address-payment',
@@ -11,35 +7,28 @@ import {Payment} from '../../../model/payment/payment';
 })
 export class AddressPaymentComponent implements OnInit {
 
-  paymentDtoList: PaymentDto[];
-
-  total: number;
-
-  constructor(private paymentService: PaymentService) {
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getListPayment();
-    this.getTotalBill();
   }
 
-  getListPayment() {
-    this.paymentService.getListPayment().subscribe(value => {
-      if (value != null) {
-        this.paymentDtoList = value;
-        console.log(value);
-      }
-    });
-  }
+  // getListPayment() {
+  //   this.paymentService.getListPayment().subscribe(value => {
+  //     if (value != null) {
+  //       this.paymentDtoList = value;
+  //       console.log(value);
+  //     }
+  //   });
+  // }
 
-  getTotalBill() {
-    this.paymentService.getTotalBill().subscribe(value => {
-      this.total = value.totalBill;
-    });
-  }
-
-  redirectPayment() {
-    // this.paymentService.getPaymentList(this.paymentDtoList);
-    this.paymentService.getToTal(this.total);
-  }
+  // getTotalBill() {
+  //   this.paymentService.getTotalBill().subscribe(value => {
+  //     this.total = value.totalBill;
+  //   });
+  // }
+  //
+  // redirectPayment() {
+  //   // this.paymentService.getPaymentList(this.paymentDtoList);
+  //   this.paymentService.getToTal(this.total);
+  // }
 }

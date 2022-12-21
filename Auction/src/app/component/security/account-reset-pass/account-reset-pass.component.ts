@@ -4,12 +4,12 @@ import {AccountService} from "../../../service/account/account.service";
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   ValidatorFn,
   Validators,
   ValidationErrors
 } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({

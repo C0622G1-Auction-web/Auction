@@ -1,4 +1,4 @@
-import {Auction} from '../auction/auction';
+import {Auction} from "../auction/auction";
 
 export interface Payment {
   id?: number;

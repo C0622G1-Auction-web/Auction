@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {render} from 'creditcardpayments/creditCardPayments';
 import {PaymentService} from '../../../service/payment/payment.service';
 import {PaymentDto} from '../../../dto/payment-dto';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-method-payment',
@@ -10,15 +11,15 @@ import {PaymentDto} from '../../../dto/payment-dto';
 })
 export class MethodPaymentComponent implements OnInit {
 
-  paymentDtoList: PaymentDto[];
-  total: number;
+  paymentDtoList: Observable<PaymentDto[]>;
+  total: Observable<PaymentDto[]>;
 
   paypal: string;
   // tslint:disable-next-line:variable-name
   constructor(private _paymentService: PaymentService) {
-    this.paymentDtoList =  this._paymentService.getListPaymentDto();
-    this.total = this._paymentService.getTotalBillDto();
-    this.paypal = (this.total / 23.570) + '';
+    this.paymentDtoList =  this._paymentService.findPaymentList();
+    this.total = this._paymentService.findPaymentList();
+    this.paypal = (this.total +'23.570') + '';
     render(
       {
         id: '#myPaypal',
@@ -32,7 +33,6 @@ export class MethodPaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
 }

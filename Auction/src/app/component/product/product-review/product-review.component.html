@@ -1,0 +1,124 @@
+<app-header></app-header>
+<div class="container">
+  <div class="borderFull">
+    <div class="row">
+      <div class="register">
+        <div class="container">
+          <div class="row text-center">
+            <h1>Duyệt sản phẩm</h1>
+          </div>
+          <div class="row" *ngIf="product">
+            <div class="col-6">
+              <div class="row" id="img-col">
+                <div class="col-lg-12 d-flex justify-content-center align-items-center">
+                  <div class="mt-2 card card-body w-50" style="border: solid; color: green">
+                    <img id="image__main{{1}}" height="500" src="{{imgs[0]?.url}}" class="d-block w-100 card-img"
+                         alt="">
+                    <ul class="carousel__images d-flex justify-content-center">
+                      <li value="{{j}}" class="image__item img-selected{{1}}" *ngFor="let img of imgs,let j = index;">
+                        <img (click)="changeImage($event, 1, j)" class="d-block w-100" height="50" src="{{img.url}}"
+                             width="" alt="">
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="container-fluid">
+                <div class="row mt-4">
+                  <table id="customer_table" class="table table-striped table-bordered">
+                    <tr>
+                      <td width="28%">Tên sản phẩm</td>
+                      <td width="72%">{{product.name}}</td>
+                    </tr>
+                    <tr>
+                      <td>Thông tin người đăng</td>
+                      <td>
+                        Id: {{product.userId}}<br>
+                        Tên đầy đủ: {{product.userName}}<br>
+                        Email: {{product.userName}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Chủng loại</td>
+                      <td>{{product.category}}</td>
+                    </tr>
+                    <tr>
+                      <td>Giá ban đầu</td>
+                      <td>{{product.initialPrice | number}} VNĐ</td>
+                    </tr>
+                    <tr>
+                      <td>Bước giá</td>
+                      <td>{{product.priceStep | number}}  VNĐ</td>
+                    </tr>
+                    <tr>
+                      <td>Bắt đầu đấu giá</td>
+                      <td>{{product.startTime | date : 'dd/MM/y hh:mm:ss a'}}</td>
+                    </tr>
+                    <tr>
+                      <td>Kết thúc đấu giá</td>
+                      <td>{{product.endTime | date : 'dd/MM/y hh:mm:ss a'}}</td>
+                    </tr>
+                    <tr>
+                      <td>Thông tin chi tiết</td>
+                      <td>{{product.description}}
+                      </td>
+                    </tr>
+                    <tr *ngIf="product.reviewStatusId == 3">
+                      <td>Lý do khoá</td>
+                      <td>{{reason.reason}}
+                      </td>
+                    </tr>
+
+                    <tr *ngIf="invalidProduct && product.reviewStatusId != 3">
+                      <td><label for="reason-input">Lý do khoá</label></td>
+                      <td>
+                        <form *ngIf="rfReason" [formGroup]="rfReason">
+                          <input type="text" class="form-control"
+                                 id="reason-input"
+                                 formControlName="reason"
+                                 [(ngModel)]="reason.reason">
+                          <div *ngIf="rfReason.controls['reason'].hasError('required') &&
+                               rfReason.controls['reason'].touched" style="color: red">
+                            Vui lòng nhập lý do không duyệt sản phẩm.
+                          </div>
+                          <div *ngIf="rfReason.controls['reason'].hasError('maxlength') &&
+                                rfReason.controls['reason'].touched" style="color: red">
+                            Lý do không được quá 250 ký tự.
+                          </div>
+                        </form>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="row" id="review-btns">
+                <div class="col-4">
+                  <a *ngIf="product.reviewStatusId == 1"
+                     (click)="review()" class="btn btn-success" role="button" style="width: 140px">
+                    <i class="fa-solid fa-check"></i> Duyệt
+                  </a>
+                </div>
+                <div class="col-4">
+                  <button *ngIf="product.reviewStatusId == 1"
+                          (click)="doNotReview()" class="btn btn-warning" role="button" style="width: 140px"
+                          [disabled]="invalidProduct && rfReason.invalid ">
+                    <i class="fa-solid fa-xmark"></i> Không duyệt
+                  </button>
+                </div>
+                <div class="col-4">
+                  <a routerLink="/products" class="btn btn-secondary" role="button"
+                     style="width: 140px">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> Quay lại
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

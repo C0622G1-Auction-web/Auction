@@ -3,7 +3,6 @@ import {PaymentService} from "../../../service/payment/payment.service";
 import {PaymentDto} from "../../../dto/payment-dto";
 import {FormGroup, FormBuilder} from '@angular/forms';
 
-
 @Component({
   selector: 'app-payment-cart',
   templateUrl: './payment-cart.component.html',
@@ -26,6 +25,7 @@ export class PaymentCartComponent implements OnInit {
               private _formBuilder: FormBuilder) {
   }
 
+
   ngOnInit(): void {
     this.paymentListId = [];
     this._paymentService.getPaymentList(this.userId).subscribe(data => {
@@ -34,6 +34,7 @@ export class PaymentCartComponent implements OnInit {
       console.log(err);
     }, () => {
       console.log("done");
+
     });
 
   }

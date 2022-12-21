@@ -1,3 +1,36 @@
+
+<app-header></app-header>
+<!-- Auction Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body d-flex justify-content-center flex-wrap">
+        <img class="d-block w-auto mb-3" height="300px" src="{{productDetail.imgUrlProducts[0]?.url}}" alt="">
+        <p class="mt-2 w-100" style="text-align: center;font-size: 20px;margin-bottom: -10px">
+          Đấu giá ngay sản phẩm
+          <span style="color: red;font-weight: bold;font-size: 20px">{{productDetail.name|titlecase}}</span>
+          với mức giá
+          <span style="color: red;font-weight: bold;font-size: 20px">{{rfAuction.value.currentPrice}}</span> ?
+        </p>
+      </div>
+      <hr>
+      <div class="row mb-3" style="text-align: center">
+        <div class="col-lg-6">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                  style="padding: 10px;font-size: 20px;width: 85%">Đóng
+          </button>
+        </div>
+        <div class="col-lg-6">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                  style="padding: 10px;font-size: 20px;width: 85%" (click)="onAuction()">Xác Nhận
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--Content-->
 <div *ngIf="productDetail" class="container">
   <h3 class="mt-3 alert alert-success text-center" style="color:black">{{productDetail.name}}</h3>
@@ -42,13 +75,26 @@
               </div>
             </div>
           </div>
+<div *ngIf="productDetail" class="container-fluid">
+  <div class="row bg bg-light">
+    <div class="col-lg-7 mt-5 ">
+      <div class=" card card-body">
+        <h3 class=" alert text-center" style="background: #E74C3C;color: white">{{productDetail.name}}</h3>
+        <div class="d-flex justify-content-center">
+          <img id="image__main{{1}}"  src="{{productDetail?.imgUrlProducts[0]?.url}}" class="d-block w-75 card-img text-center" alt="">
         </div>
+        <ul class="carousel__images d-flex justify-content-center">
+          <li value="{{j}}" class="image__item img-selected{{1}}" *ngFor="let img of productDetail?.imgUrlProducts,let j = index;">
+            <img (click)="changeImage($event, 1, j)" class="d-block w-100" height="50" src="{{img.url}}" width="" alt="">
+          </li>
+        </ul>
       </div>
-      <div class="row" style="margin-right: 10px">
+
+      <div class="row mb-5">
         <div class="col-lg-12">
-          <div class="mt-5">
+          <div class="mt-4">
             <div class="card text-center">
-              <div class="card-header" style="background: #d1e7dd">
+              <div class="card-header" style="background: #E74C3C">
                 <ul class="nav nav-tabs card-header-tabs">
                   <li class="nav-item">
                     <button id="title-hammer"
@@ -61,9 +107,9 @@
               <div id="show-hammer">
                 <div class="row">
                   <div class="col-lg-6">
-                    <div class="card-body card-detail text-lg-start">
+                    <div class="card-body card-detail text-lg-start mt-3">
                       <span class="card-text title-detail">Ngày Bắt Đầu</span>
-                      <span class="card-text">{{productDetail.startTime}}</span>
+                      <span class="card-text">{{productDetail.startTime | date:"dd/MM/yyyy HH:mm:ss"}}</span>
                     </div>
                   </div>
                 </div>
@@ -73,22 +119,24 @@
                   <div class="col-lg-6">
                     <div class="card-body card-detail text-lg-start">
                       <span class="card-text title-detail">Ngày Kết Thúc</span>
-                      <span class="card-text">{{productDetail.endTime}}</span>
+                      <span class="card-text">{{productDetail.endTime | date:"dd/MM/yyyy HH:mm:ss"}}</span>
                     </div>
                   </div>
                 </div>
                 <hr>
-                <div class="row">
+                <div class="row mt-4 mb-4">
                   <div class="col-lg-12">
-                    <p style="text-align: left;margin-left: 15px;font-weight: bold">Mô tả</p>
-                    <div class="card-body card-detail text-lg-start">
-                      <blockquote class="blockquote"
-                                  style="text-align: left;font-size: 15px;margin-top: -15px">
-                        <p>{{productDetail.description}}</p>
-                      </blockquote>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <span class="card-text title-detail">Mô Tả Sản Phẩm</span>
+                      </div>
+                      <div class="col-lg-9" style="text-align: justify">
+                        <span style="padding-right: 40px;display: block">{{productDetail.description}}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -96,19 +144,14 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 mt-4 card card-body">
-      <div class="time mt-0">
-        <span class="time__hh mx-2">09</span>
-        <span class=" mx-2">:</span>
-        <span class="time__hh mx-2">09</span>
-        <span class=" mx-2">:</span>
-        <span class="time__hh mx-2">09</span>
-      </div>
-      <div>
-        <div class="card mt-4">
-          <p class="title-currency-1 card-text alert alert-info"
-             style="color: white;background-color: #2c3b59">Giá Gốc</p>
-          <h5 class="currency-1 card-title" style="color:#2c3b59;">{{productDetail.initialPrice}}<sup>đ</sup></h5>
+    <div class="col-lg-5 mt-5">
+      <div class="card card-body">
+        <div class="time mt-0">
+          <span class="time__hh mx-2">09</span>
+          <span class=" mx-2">:</span>
+          <span class="time__hh mx-2">09</span>
+          <span class=" mx-2">:</span>
+          <span class="time__hh mx-2">09</span>
         </div>
         <div class="card mt-4">
           <p class="title-currency card-text alert alert-danger"
@@ -142,39 +185,26 @@
               </div>
             </div>
 <!--          </form>-->
+        <div>
+          <div class="d-flex justify-content-between">
+            <div class="card mt-3" style="width: 49%">
+              <p class="title-currency-1"
+                 style="color: white;background-color: #2c3b59">Giá Gốc</p>
+              <h5 class="currency-1 card-title product__price"
+                  style="color:#2c3b59;">{{productDetail.initialPrice|currency:'VND'}}</h5>
+            </div>
 
-
-        </div>
-
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="mt-4">
-              <div class="card text-center">
-                <div class="card-header" style="background: #d1e7dd">
-                  <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                      <button id="title-buyer"
-                              class="nav-link active" aria-current="true" (click)="onChangeAuction()" type="button">
-                        Lượt Đấu Giá
-                      </button>
-                    </li>
-                    <li class="nav-item">
-                      <button style="background-color:#d1e7dd" id="title-seller"
-                              class="nav-link active" aria-current="true"
-                              type="button" (click)="onChangeAuction()">
-                        Chủ Sản Phẩm
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+            <div class="card mt-3" style="width: 48%;">
+              <p class="title-currency-1"
+                 style="color: white;background-color: #2c3b59">Bước Giá</p>
+              <h5 class="currency-1 card-title product__price"
+                  style="color:#00434c">{{productDetail.priceStep.step|currency:'VND'}}</h5>
             </div>
           </div>
-          <div *ngIf="changeBuyer">
-<!--            <app-infomation-auction-buyer></app-infomation-auction-buyer>-->
-          </div>
-          <div *ngIf="changeSeller">
-<!--            <app-infomation-auction-seller></app-infomation-auction-seller>-->
+          <div class="card mt-3">
+            <p class="title-currency"
+               style="color: white;background-color: #dc3545">Giá Đấu</p>
+            <h5 class="currency card-title product__price">{{productDetail.maxCurrentPrice|currency:'VND'}}</h5>
           </div>
         </div>
       </div>
@@ -182,57 +212,77 @@
   </div>
 <!--</div>-->
 
+          <div *ngIf="productDetail?.auctionStatus.id != 3"
+               class="input-group mt-3 d-flex align-items-center justify-content-center">
 
-<!--<script>-->
-<!--  function showInfoHammer() {-->
-<!--    var showProduct = document.getElementById("show-product");-->
-<!--    var titleProduct = document.getElementById("title-product");-->
-<!--    showProduct.style.display = "none";-->
-<!--    titleProduct.style.backgroundColor = "transparent";-->
+            <form class="d-flex flex-wrap" *ngIf="rfAuction" [formGroup]="rfAuction">
 
-<!--    var showHamer = document.getElementById("show-hammer");-->
-<!--    var titleHammer = document.getElementById("title-hammer");-->
-<!--    showHamer.style.display = "block";-->
-<!--    titleHammer.style.backgroundColor = "#ffffff";-->
-<!--  }-->
+              <input hidden formControlName="userId">
+              <input hidden formControlName="productId">
 
-<!--  function showInfoProduct() {-->
-<!--    var showHamer = document.getElementById("show-hammer");-->
-<!--    showHamer.style.display = "none";-->
-<!--    var titleHammer = document.getElementById("title-hammer");-->
-<!--    titleHammer.style.backgroundColor = "transparent";-->
+              <input class="form-control w-100" [value]="rfAuction.value.currentPrice" type="number"
+                     style="font-size: 24px; font-weight: bold; text-align: right"
+                     formControlName="currentPrice"
+                     [ngClass]="rfAuction.errors?.checkAuctionPrice?'is-invalid':''">
+              <div class="invalid-feedback">
+                <div
+                  *ngIf="rfAuction.errors?.checkAuctionPrice && rfAuction.controls['currentPrice'].touched">
+                  <p class="text-center">Giá Đấu Phải Lớn Hơn Giá Hiện Tại Một Bước Giá</p>
+                </div>
+              </div>
 
-<!--    var showProduct = document.getElementById("show-product");-->
-<!--    var titleProduct = document.getElementById("title-product");-->
-<!--    showProduct.style.display = "block";-->
-<!--    titleProduct.style.backgroundColor = "#ffffff";-->
-<!--  }-->
+              <div class="w-100 d-flex mt-3">
+                <button class="btn btn-danger w-25" type="button" style="font-size: 25px"
+                        (click)="reduceAuctionPriceByPriceStep()">-
+                </button>
+                <button type="submit" class="hammer btn btn-danger w-50 mx-2"
+                        style="font-size: 25px;font-weight: bold" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop" [disabled]="rfAuction.invalid">
+                  <i class="fa-solid fa-gavel mx-3" style="font-size: 30px"></i>
+                </button>
+                <button class="btn btn-danger w-25" type="button" style="font-size: 25px"
+                        (click)="increaseAuctionPriceByPriceStep()">+
+                </button>
+              </div>
 
-<!--  function showInfoBuyer() {-->
-<!--    var showBuyer = document.getElementById("show-buyer");-->
-<!--    showBuyer.style.display = "block";-->
-<!--    var titleBuyer = document.getElementById("title-buyer");-->
-<!--    titleBuyer.style.backgroundColor = "#ffffff";-->
 
-<!--    var showSeller = document.getElementById("show-seller");-->
-<!--    showSeller.style.display = "none";-->
-<!--    var titleSeller = document.getElementById("title-seller");-->
-<!--    titleSeller.style.backgroundColor = "transparent";-->
-<!--  }-->
 
-<!--  function showInfoSeller() {-->
-<!--    var showBuyer = document.getElementById("show-buyer");-->
-<!--    showBuyer.style.display = "none";-->
-<!--    var titleBuyer = document.getElementById("title-buyer");-->
-<!--    titleBuyer.style.backgroundColor = "transparent";-->
-
-<!--    var showSeller = document.getElementById("show-seller");-->
-<!--    showSeller.style.display = "block";-->
-<!--    var titleSeller = document.getElementById("title-seller");-->
-<!--    titleSeller.style.backgroundColor = "#ffffff";-->
-<!--  }-->
-<!--</script>-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-
+            </form>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="mt-4">
+                <div class="card text-center">
+                  <div class="card-header" style="background: #E74C3C">
+                    <ul class="nav nav-tabs card-header-tabs">
+                      <li class="nav-item">
+                        <button id="title-buyer" style="border: none;"
+                                class="nav-link active" aria-current="true" (click)="onChangeInfoSeller()" type="button">
+                          Lượt Đấu Giá
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button style=" background-color:#E74C3C; border: none;" id="title-seller"
+                                class="nav-link active" aria-current="true"
+                                type="button" (click)="onChangeInfoAuction()">
+                          Chủ Sản Phẩm
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="changeBuyer">
+              <app-infomation-auction-buyer></app-infomation-auction-buyer>
+            </div>
+            <div *ngIf="changeSeller">
+              <app-infomation-auction-seller></app-infomation-auction-seller>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

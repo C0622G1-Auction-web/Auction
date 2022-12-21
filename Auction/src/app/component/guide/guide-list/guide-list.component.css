@@ -13,16 +13,24 @@ h1 {
   color: #006699;
 }
 
+h6 {
+  font-family: Helvetica, serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 0px;
+  padding: 0.5rem;
+}
+
 .boxed {
-  width: 400px;
-  height: fit-content;
-  /* border: 5px solid; */
-  /* border-image-slice: 1; */
-  /* border-color: #D1E7F8; */
-  padding: 40px 32px 32px !important;
-  /* border-radius: 12px; */
+  width: 485px;
+
+  height: 710px;
+  max-height: 710px;
+  padding: 3px 32px 32px !important;
+  border-radius: 12px;
   background-color: #ffffff;
   box-shadow: 0px 3px 6px #00000029;
+  overflow: auto;
 }
 
 .search {
@@ -70,7 +78,7 @@ h1 {
   height: 1px;
   background-color: #000000;
   transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1),
-  height 180ms cubic-bezier(0.4, 0, 0.2, 1);
+    height 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .form-input:has(input:focus)::after {
@@ -96,4 +104,29 @@ h1 {
 .edit-button:hover {
   background-color: #d1e7f8;
   border-radius: 50%;
+}
+
+.py-5 {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+  background-color: #fe6432;
+  border-radius: 12px;
+}
+
+.modal-dialog {
+  background-color: #fe6432;
+  border-radius: 12px;
+}
+
+.modal-content {
+  background-color: #fe6432;
+}
+
+.btn-close {
+  position: absolute;
+  left: 0px;
+  top: 12px;
+  width: 50px;
+  margin-right: 0px;
 }
