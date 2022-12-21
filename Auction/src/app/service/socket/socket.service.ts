@@ -22,14 +22,13 @@ export class SocketService implements OnInit {
   constructor(private _auctionService: AuctionService,
               private _productService: ProductService) {
 
+  }
+
+  ngOnInit() {
     this.productIdDetail = this._productService.getProductDetailId();
     console.log('2 constructor');
     console.log('product id Contructor', this.productIdDetail);
     this.getAllAuction();
-
-  }
-
-  ngOnInit() {
   }
 
   connect() {
@@ -56,6 +55,7 @@ export class SocketService implements OnInit {
 
 
   getAllAuction() {
+    console.log('productIdDetail: ' + this.productIdDetail)
       this._auctionService.getAuctionPageByProductId(this.productIdDetail, 0).subscribe(
         data => {
           this.auctionPageByProductId = data;
