@@ -17,8 +17,10 @@ import {ProductDtoRoleAdmin} from '../../model/product/product-dto-role-admin';
 import {Reason} from '../../model/product/reason';
 import {DataResult} from '../../model/product/data_result';
 import {catchError} from 'rxjs/operators';
-import {ImgDetailDto} from '../../model/product/img_detail_dto';
 import {ProductDto} from '../../model/product/iProduct_dto';
+import {ImgDetailDto} from "../../model/product/img-detail-dto";
+import {PageProductDto} from "../../model/product/page-product-dto";
+
 
 
 @Injectable({
@@ -28,6 +30,7 @@ export class ProductService {
 
 
   private product: Product[];
+  private productDetailId: any;
 
 
   constructor(protected _httpClient: HttpClient) {
@@ -91,6 +94,13 @@ export class ProductService {
   }
 
   /**
+   * Created: SonPT
+   * date: 20/12/2022
+   */
+  addProduct(productDto: ProductDto): Observable<Product> {
+    return this._httpClient.post<Product>('http://localhost:8080/api/v1/products/create', productDto);
+  }
+  /**
    * Created: SangDD
    * Function: show page product and search
    * Date: 15/11/2022
@@ -104,8 +114,8 @@ export class ProductService {
    * Function: get all and search Products
    * Date: 15/11/2022
    */
-  getPageProductRoleAdmin(searchProduct: any, pageNumber): Observable<PageProduct> {
-    return this._httpClient.post<PageProduct>(
+  getPageProductRoleAdmin(searchProduct: any, pageNumber): Observable<PageProductDto> {
+    return this._httpClient.post<PageProductDto>(
       environment.api_url_products + '?page=' + pageNumber,
       searchProduct);
   }
@@ -113,7 +123,6 @@ export class ProductService {
   getAllAndSearchToPage(rfSearch: any, pageNumber: any) {
     return this._httpClient.post<PageProduct>(environment.productSearchUrl + '?page=' + pageNumber, rfSearch);
   }
-
   /**
    * Created: GiangLBH
    * Function: find product by selected ids
@@ -193,6 +202,16 @@ export class ProductService {
 
   update(productDto, id): Observable<Product> {
     return this._httpClient.put<Product>(environment.productUrl + '/update/' + id, productDto);
+  }
+
+  getProductDetailId() {
+    console.log('Lay ra id', this.productDetailId);
+    return this.productDetailId;
+  }
+
+  setProductDetailId(id: any) {
+    console.log('tao gia tri cho id', id);
+    this.productDetailId = id;
   }
 
   getImgsByProductId(id: number): Observable<ImgDetailDto[]> {

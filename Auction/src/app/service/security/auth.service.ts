@@ -10,9 +10,22 @@ import {Googletoken} from "../../security/oauth2/googletoken";
 })
 export class AuthService {
 
+  emailGoogle: string;
+
   constructor(
     private _httpClient: HttpClient
   ) { }
+
+  /**
+   * Created by: DucDH
+   * Date: 21/12/2022
+   * Funtion: Set email google
+   * @param emailGoogle
+   */
+
+  setEmailGoogle(emailGoogle: string) {
+    this.emailGoogle = emailGoogle;
+  }
 
   /**
    * Created by: DucDH

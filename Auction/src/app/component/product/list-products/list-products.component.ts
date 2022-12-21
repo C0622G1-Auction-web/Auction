@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../../service/product/product.service';
 import {NotificationService} from '../../../service/notification/notification.service';
-import {PageProduct} from '../../../model/product/page-product';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Category} from '../../../model/product/category';
 import {ProductPriceRange} from '../../../model/product/product-price-range';
@@ -11,7 +10,8 @@ import {AuctionStatusService} from '../../../service/product/auction-status.serv
 import {AuctionStatus} from '../../../model/product/auction-status';
 import {ProductDelete} from '../../../model/product/product-delete';
 import {ActivatedRoute} from '@angular/router';
-import {Title} from '@angular/platform-browser';
+import {Title} from "@angular/platform-browser";
+import {PageProductDto} from "../../../model/product/page-product-dto";
 
 @Component({
   selector: 'app-list-products',
@@ -26,7 +26,7 @@ import {Title} from '@angular/platform-browser';
  */
 export class ListProductsComponent implements OnInit {
 
-  pageProducts: PageProduct;
+  pageProducts: PageProductDto;
   rfSearch: FormGroup;
   categories: Category[];
   auctionStatus: AuctionStatus[];
@@ -63,9 +63,9 @@ export class ListProductsComponent implements OnInit {
    * Date: 17/12/2022
    */
   searchByRoleAdmin(pageNumber: number) {
-    console.log("vao page");
-    console.log(this.rfSearch.value);
     this._productService.getPageProductRoleAdmin(this.rfSearch.value, pageNumber).subscribe(data => {
+      console.log('okok')
+      console.log(data)
       this.pageProducts = data;
     }, error => {
       this._notificationService.showErrorNotification('Không thể kết nối đến Server.');

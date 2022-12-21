@@ -1,4 +1,3 @@
-<!--<app-header></app-header>-->
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-2 sidebar__left" id="side-bar">
@@ -49,8 +48,7 @@
               <div class="form-floating mb-4 form-inp">
                 <input type="text" placeholder="Tên sản phẩm" id="floatingName"
                        class="form-control form-control-underlined"
-                       formControlName="productName" [ngClass]="(rfSearch.controls['productName'].touched)?
-                       rfSearch.controls['productName'].invalid?'is-invalid':'is-valid':''"/>
+                       formControlName="productName"/>
                 <label for="floatingName">Tên sản phẩm</label>
                 <div *ngIf="rfSearch.controls['productName'].hasError('maxlength') &&
                    rfSearch.controls['productName'].touched" style="color: red">
@@ -62,8 +60,7 @@
               <div class="form-floating mb-4 form-inp">
                 <input type="text" placeholder="Người đăng" id="floatingSeller"
                        class="form-control form-control-underlined"
-                       formControlName="sellerName" [ngClass]="(rfSearch.controls['sellerName'].touched)?
-                       rfSearch.controls['sellerName'].invalid?'is-invalid':'is-valid':''"/>
+                       formControlName="sellerName"/>
                 <label for="floatingSeller">Người đăng</label>
                 <div *ngIf="rfSearch.controls['sellerName'].hasError('maxlength') &&
                    rfSearch.controls['sellerName'].touched" style="color: red">
@@ -81,7 +78,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả
               </button>
               <button class="btn btn-success" (click)="resetFormAndData()">
-                Reset bộ lọc
+                Làm mới bộ lọc
               </button>
             </div>
           </div>
@@ -123,17 +120,15 @@
                *ngIf="pageProducts != null">
           <thead>
           <tr>
-            <th>No</th>
-            <th>ID</th>
-            <th width=20%>Tên Sản phẩm</th>
+            <th width=30%>Tên Sản phẩm</th>
             <th>Chủng loại</th>
-            <th  width=11%>Người đăng</th>
-            <th width=11%>Giá ban đầu (VNĐ)</th>
-            <th width=11%>Trạng thái duyệt</th>
+            <th width=10%>Người đăng</th>
+            <th width=10%>Giá ban đầu (VNĐ)</th>
+            <th width=10%>Trạng thái duyệt</th>
             <th width=10%>Ngày đấu giá</th>
-            <th width=11%>Tình trạng</th>
+            <th width=10%>Tình trạng</th>
             <th>Sửa</th>
-            <th class="text-center" width=10>
+            <th class="text-center">
               <button class="btn " (click)="addAllToDelete()">
                 <i class="fa-regular fa-trash-can delete-group-icon"></i>
               </button>
@@ -141,9 +136,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of pageProducts.content; index as i ">
-            <td class="text-center">{{pageProducts.size * pageProducts.number + i + 1}}</td>
-            <td class="text-center">{{item.id}}</td>
+          <tr *ngFor="let item of pageProducts.content">
             <td><a type="button" class="view"
                    [routerLink]="item.reviewStatusId == 2 ? ['/auction/',item.id] :['/products/review/',item.id]">
               <span class="text-decoration-underline">{{item.name}}</span></a>
@@ -152,7 +145,7 @@
             <td>{{item.userName}}</td>
             <td class="text-end">{{item.initialPrice | number}}</td>
             <td>{{item.reviewStatus}}</td>
-            <td class="text-end">{{item.startTime | date : 'dd/MM/y hh:mm:ss a'}}</td>
+            <td class="text-end">{{item.startTime | date : 'dd/MM/y H:mm:ss'}}</td>
             <td>{{item.auctionStatus}}</td>
             <td class="text-center"><a [routerLink]="['/product/edit/',item.id]">
               <i class="fa-regular fa-pen-to-square edit-icon"></i></a></td>
@@ -232,4 +225,3 @@
     </div>
   </div>
 </div>
-<!--<app-footer></app-footer>-->

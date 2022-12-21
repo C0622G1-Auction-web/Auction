@@ -33,7 +33,7 @@ a {
   /*border-radius: 40px 0 0 0;*/
   font-size: 24px;
   text-align: right;
-  color: #e74c3c;
+  color: #f51902;
   position: absolute;
   top: 184px;
   right: 0;
@@ -83,6 +83,7 @@ a {
 
 .sidebar__right{
   background: transparent;
+  margin-right: -12px;
 }
 .sidebar__right p {
   margin: 0;
@@ -92,11 +93,11 @@ a {
 }
 .sidebar__right {
   padding: 0;
-  padding-left: 12px;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   height: 400px;
+  margin-left: 24px;
 }
 .sidebar__right::-webkit-scrollbar {
   display: none;
@@ -295,9 +296,17 @@ select::-ms-expand {
 
 .carousel__images {
   overflow-x: scroll;
+  width: 100%;
+  display: flex;
 }
 .carousel__images::-webkit-scrollbar {
-  display: none;
+  background-color: whitesmoke;
+  height: 8px;
+  width: 16px;
+}
+.carousel__images::-webkit-scrollbar-thumb{
+  background: rgba(255, 98, 50, 0.9);
+  border-radius: 10px;
 }
 .image__item {
   min-width: 45px;

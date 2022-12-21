@@ -34,7 +34,7 @@ export class UserUpdateComponent implements OnInit {
 
   getUserUpdate(id: number) {
     console.log('ok2')
-    return this._userService.findUserByIdServer(id).subscribe(value => {
+    return this._userService.findUserById(id).subscribe(value => {
       console.log('ok3')
       console.log(value);
       this.updateUserForm = this._builder.group({
@@ -61,9 +61,9 @@ export class UserUpdateComponent implements OnInit {
   }
 
   updateUser(id: number) {
-    const user = this.updateUserForm.value;
-    this._userService.updateUser(id, user).subscribe(value => {
-    })
+    // const user = this.updateUserForm.value;
+    // this._userService.updateUser(id, user).subscribe(value => {
+    // })
   }
 
   showPreview(event: any) {

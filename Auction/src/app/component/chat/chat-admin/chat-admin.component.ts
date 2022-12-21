@@ -1,4 +1,4 @@
-import {Component,  OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FirebaseApp} from "@angular/fire";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Chat} from "../../../model/chat/chat";
@@ -8,7 +8,7 @@ import {v4 as uuidv4} from "uuid";
 import Database = firebase.database.Database;
 import initializeApp = firebase.initializeApp;
 import {ToastrService} from "ngx-toastr";
-import {ChatVisitorService} from "../../../service/chat/chat-visitor.service";
+import {UserService} from "../../../service/user/user.service";
 
 
 @Component({
@@ -17,6 +17,7 @@ import {ChatVisitorService} from "../../../service/chat/chat-visitor.service";
   styleUrls: ['./chat-admin.component.css']
 })
 export class ChatAdminComponent implements OnInit {
+
   userchat: string[] = [];
   title = 'firechat';
   app: FirebaseApp;
@@ -26,13 +27,14 @@ export class ChatAdminComponent implements OnInit {
   message = '';
   chats: Chat[] = [];
   chatInfor: Chat;
-  chatInforVisitor: Chat;
-  itemUser: String = '';
+  itemUser: string = '';
   check: number;
+  // userNamejs: string[];
 
   constructor(private formBuilder: FormBuilder,
               private _toast: ToastrService,
-              private _visitor: ChatVisitorService) {
+              // private _visitor: ChatVisitorService,
+              private _userService:UserService) {
     this.app = initializeApp(environment.firebaseConfig);
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
@@ -57,9 +59,39 @@ export class ChatAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // document.querySelectorAll('li').forEach(value => {
+    //   this.userNamejs.push(value.innerText);
+    // })
+    // console.log(this.userNamejs);
     this.userchat = ['son', 'giang'];
+    this._userService.getAllUserChat().subscribe(data=>{
+      for (let i = 0; i < data.length ; i++) {
+        this.userchat.push(data[i].account.username)
+      }
+      console.log('user chat: ', this.userchat);
+      for (let i = 0; i < this.userchat.length ; i++) {
+        const dbRef = firebase.database().ref('/chat/'+this.userchat[i]);
+        dbRef.once('value', (snapshot) => {
+          const data = snapshot.val();
+          for (let id in data) {
+            this.chatInfor=data[id]
+          }
+          console.log('chat info', this.chatInfor);
+          if(this.chatInfor != undefined) {
+            if(this.chatInfor?.username!='admin') {
+              this._toast.success('New Message From ' + this.chatInfor.username, 'receive',{
+                timeOut: 1000
+              });
+            }
+          }
+        })
+      }
+    }, error => {
+      alert('loi')
+    })
+    console.log(this.userchat);
     for (let i = 0; i < this.userchat.length ; i++) {
-    const dbRef = firebase.database().ref('chat').child(this.userchat[i]);
+      const dbRef = firebase.database().ref('chat').child(this.userchat[i]);
       dbRef.once('value', (snapshot) => {
         const data = snapshot.val();
         for (let id in data) {
@@ -67,27 +99,16 @@ export class ChatAdminComponent implements OnInit {
         }
         if(this.chatInfor.username!='admin') {
           this._toast.success('New Message From ' + this.chatInfor.username, 'receive',{
-            timeOut: 1000
+            timeOut: 2000
           })
         }
       })
     }
-    for (let i = 1; i <= this._visitor.listVisitor().length ; i++) {
-      const checkList = this._visitor.listVisitor();
-      const dbRef = firebase.database().ref('chat').child('khach').child(checkList[1]);
-      dbRef.once('value', (snapshot) => {
-        const data = snapshot.val();
-        for (let id in data) {
-          this.chatInforVisitor=data[id]
-        }
-        if(this.chatInforVisitor.username!='admin') {
-          this._toast.success('New Message From visitor ' + this.chatInforVisitor.username, 'receive',{
-            timeOut: 1000
-          })
-        }
-      })
-    }
-    // @ts-ignore
+    const dbb =firebase.database().ref('chat/khach');
+    dbb.once('value',(snapshot)=>{
+      const data=snapshot.val()
+      console.log(data)
+    })
   }
 
   autoScroll() {
@@ -106,7 +127,6 @@ export class ChatAdminComponent implements OnInit {
   }
 
   chooseUser(item: string) {
-    console.log(this._visitor.listVisitor())
     this.chats = [];
     this.itemUser = item;
     for (let i = 0; i < this.userchat.length; i++) {

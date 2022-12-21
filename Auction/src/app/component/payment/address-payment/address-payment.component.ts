@@ -12,23 +12,4 @@ export class AddressPaymentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getListPayment() {
-    this.paymentService.getListPayment().subscribe(value => {
-      if (value != null) {
-        this.paymentDtoList = value;
-        console.log(value);
-      }
-    });
-  }
-
-  getTotalBill() {
-    this.paymentService.getTotalBill().subscribe(value => {
-      this.total = value.totalBill;
-    });
-  }
-
-  redirectPayment() {
-    // this.paymentService.getPaymentList(this.paymentDtoList);
-    this.paymentService.getToTal(this.total);
-  }
 }

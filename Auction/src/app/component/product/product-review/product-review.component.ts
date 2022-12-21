@@ -4,9 +4,9 @@ import {NotificationService} from '../../../service/notification/notification.se
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDtoRoleAdmin} from '../../../model/product/product-dto-role-admin';
 import {Reason} from '../../../model/product/reason';
-import {ImgDetailDto} from '../../../model/product/img_detail_dto';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Title} from "@angular/platform-browser";
+import {ImgDetailDto} from "../../../model/product/img-detail-dto";
 
 @Component({
   selector: 'app-product-detail',

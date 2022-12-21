@@ -1,6 +1,6 @@
+
 import {Component, OnInit} from '@angular/core';
-import {PaymentService} from '../../../service/payment/payment.service';
-import {PaymentDto} from '../../../dto/payment-dto';
+import {PaymentService} from "../../../service/payment/payment.service";
 
 @Component({
   selector: 'app-payment-cart',
@@ -9,24 +9,11 @@ import {PaymentDto} from '../../../dto/payment-dto';
 })
 export class PaymentCartComponent implements OnInit {
 
-  idList: string[] = ['1', '2', '8'];
-  paymentList: PaymentDto[];
-  userId = '3';
+  idList: string[] =['1','2','8'] ;
 
-
-  // tslint:disable-next-line:variable-name
   constructor(private _paymentService: PaymentService) {
   }
 
   ngOnInit(): void {
-    this._paymentService.getPaymentList(this.userId).subscribe(data => {
-      this.paymentList = data;
-    }, err => {
-      console.log(err);
-    }, () => {
-      console.log('done');
-    });
-
   }
-
 }

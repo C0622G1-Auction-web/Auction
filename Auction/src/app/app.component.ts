@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
+import {TokenService} from "./service/security/token.service";
 
 
 @Component({
@@ -7,11 +8,37 @@ import {ToastrService} from 'ngx-toastr';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Auction';
-  // tslint:disable-next-line:variable-name
-  constructor(private _toastService: ToastrService) {
+export class AppComponent implements OnInit {
+
+
+  ngOnInit(): void {
+    if (this._tokenService.isLogged()) {
+      this.checklogged = true;
+
+      const roles = this._tokenService.getRole();
+
+      for (let i = 0; i < roles.length; i++) {
+
+        if (roles[i] === 'ROLE_ADMIN') {
+          this.accountRole = 'ROLE_ADMIN'
+        }
+
+      }
+    }
   }
+
+  checklogged = false;
+  accountRole: string;
+
+  title = 'Auction';
+
+  // tslint:disable-next-line:variable-name
+  constructor(
+    private _toastService: ToastrService,
+    private _tokenService: TokenService
+  ) {
+  }
+
 
   showMessage() {
     console.log('alo');

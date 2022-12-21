@@ -76,9 +76,9 @@ app-header{
   box-shadow: none;
 }
 
-  .active {
-    background-color: #534c4c;
-  }
+.active {
+  background-color: #534c4c;
+}
 
 /*End sidebar*/
 
@@ -130,7 +130,7 @@ h1 {
 }
 
 #form-btn .btn {
-  margin-left: 10%;
+  margin-left: 3%;
   margin-top: 5%;
 }
 
