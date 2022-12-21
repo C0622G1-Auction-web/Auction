@@ -16,13 +16,4 @@ export class PaymentCartComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  sendId() {
-    this._paymentService.sendId(this.idList).subscribe(data=>{
-      console.log(data);
-    }, err => {
-      console.log('err');
-    }, () => {
-      console.log('done');
-    })
-  }
 }

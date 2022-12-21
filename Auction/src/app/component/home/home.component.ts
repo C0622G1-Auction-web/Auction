@@ -93,13 +93,13 @@ export class HomeComponent implements OnInit {
       categoryID: categoryId+''.trim(),
       rangePrice: rangePrice+''.trim(),
       productAuctionStatus: productAuctionStatus})
-   this.gotoPage(this.rfSearch.value);
+    this.gotoPage(this.rfSearch.value);
   }
 
   setValueAuctionProductStatusSearch(categoryId: any,
-                         rangePrice: any,
-                         productAuctionStatus: string,
-                         name: string ) {
+                                     rangePrice: any,
+                                     productAuctionStatus: string,
+                                     name: string ) {
     if(this.isSelectedAuction == productAuctionStatus) {
       productAuctionStatus = '';
     }

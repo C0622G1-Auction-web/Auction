@@ -33,12 +33,10 @@ import {
 import {
   InfomationAuctionSellerComponent
 } from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
-import {PaymentCartComponent} from './component/payment-cart/payment-cart.component';
 import {AccountForgotPassComponent} from './component/account-forgot-pass/account-forgot-pass.component';
 import {AccountResetPassComponent} from './component/account-reset-pass/account-reset-pass.component';
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
-import {PaymentReceiptComponent} from './component/payment-receipt/payment-receipt.component';
 import {ListProductsComponent} from './component/product/list-products/list-products.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
@@ -56,8 +54,10 @@ import {UserUpdateComponent} from "./component/user/user-update/user-update.comp
 import {RegisterWithGoogleComponent} from './security/register-with-google/register-with-google.component';
 import {UserCreateComponent} from "./component/user/user-create/user-create.component";
 import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
-import {LoginComponent} from "./security/login/login.component";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
+import {LoginComponent} from "./security/login/login.component";
+import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
+import {PaymentReceiptComponent} from "./component/payment/payment-receipt/payment-receipt.component";
 
 const googleLoginOptions = {
   scope: 'profile email',
@@ -82,7 +82,6 @@ const googleLoginOptions = {
     GuideDeleteComponent,
     GuideListComponent,
     HomeComponent,
-    LoginComponent,
     RegisterComponent,
     ResetPasswordComponent,
     AuctionRequestComponent,
@@ -96,22 +95,22 @@ const googleLoginOptions = {
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
     InfomationAuctionSellerComponent,
-    PaymentCartComponent,
     AccountForgotPassComponent,
     AccountResetPassComponent,
     AddressPaymentComponent,
     MethodPaymentComponent,
-    PaymentReceiptComponent,
     TransactionComponent,
     ListProductsComponent,
     AuctionProductAddComponent,
-    PaymentReceiptComponent,
     TransactionComponent,
     ChatUserComponent,
     ChatAdminComponent,
     UserCreateComponent,
     UserUpdateComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    LoginComponent,
+    PaymentCartComponent,
+    PaymentReceiptComponent
   ],
   imports: [
     ReactiveFormsModule,

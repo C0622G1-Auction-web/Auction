@@ -7,6 +7,6 @@ export interface PaymentDto {
   address?: string;
   country?: string;
   productName?: string;
-  productPrice?: string;
+  productPrice?: number;
   description?: string;
 }

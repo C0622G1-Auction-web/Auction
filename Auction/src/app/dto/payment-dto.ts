@@ -6,9 +6,16 @@ export interface PaymentDto {
   phone?: string;
   city?: string;
   district?: string;
+  town?: string;
   detailAddress?: string;
   country?: string;
-  town?: string;
   description?: string;
+  productImage?: string;
+  productName?: string;
+  productPrice?: number;
   totalBill?: number;
 }
+
+
+
+

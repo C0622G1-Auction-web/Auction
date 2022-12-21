@@ -1,49 +1,49 @@
-  <div class="container header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="header__menu">
-          <ul class="menu d-flex align-items-center m-0">
-            <li class="menu__item band">
+<div class="container header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="header__menu">
+        <ul class="menu d-flex align-items-center m-0">
+          <li class="menu__item band">
                                 <span class="menu__link logo">
                                     <i [routerLink]="['home']" class="fa-brands fa-suse"></i>
                                 </span>
-            </li>
-            <li [routerLink]="['/products']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item" (click)="topTop()">
+          </li>
+          <li [routerLink]="['/products']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item" (click)="topTop()">
                                 <span class="menu__link ">
                                     Quản lý sản phẩm
                                 </span>
-            </li>
-            <li [routerLink]="['/user/list']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
-              <span class="menu__link ">Quản lý người dùng</span>
-            </li>
-            <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
-              <span class="menu__link ">Quản lý giao dịch</span>
-            </li>
-            <li [routerLink]="['auction/product/add']" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="menu__item">
-              <span class="menu__link ">Đấu giá sản phẩm</span>
-            </li>
-            <li class="menu__item">
+          </li>
+          <li [routerLink]="['/user/list']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
+            <span class="menu__link ">Quản lý người dùng</span>
+          </li>
+          <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
+            <span class="menu__link ">Quản lý giao dịch</span>
+          </li>
+          <li [routerLink]="['auction/product/add']" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="menu__item">
+            <span class="menu__link ">Đấu giá sản phẩm</span>
+          </li>
+          <li class="menu__item">
                                 <span class="menu__link">
                                     <i class="fa-solid fa-circle-question mx-1"></i>
                                     <span routerLink="/guide" class="label_guide">Hướng dẫn</span>
                                 </span>
-            </li>
-          </ul>
-          <div *ngIf="!checkLogin" class="login d-flex" style="display: none">
-            <button class="login__btn mx-2">
-              <i class="fa-solid fa-circle-user"></i>
-              Đăng ký
-            </button>
-            <button routerLink="/login" class="login__btn">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              Đăng nhập
-            </button>
-          </div>
-          <div *ngIf="checkLogin">
-            <div class="user__info">
-               <span class="mx-2 text-white">Xin chào {{nameUser}}</span>
-              <img src="{{currentUser.avatar}}" class="avatar">
-              <div>
+          </li>
+        </ul>
+        <div *ngIf="!checkLogin" class="login d-flex" style="display: none">
+          <button class="login__btn mx-2">
+            <i class="fa-solid fa-circle-user"></i>
+            Đăng ký
+          </button>
+          <button routerLink="/login" class="login__btn">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Đăng nhập
+          </button>
+        </div>
+        <div *ngIf="checkLogin">
+          <div class="user__info">
+            <span class="mx-2 text-white">Xin chào {{nameUser}}</span>
+            <img src="{{currentUser.avatar}}" class="avatar">
+            <div>
               <ul class="btn__logout">
                 <li>
                   <span (click)="logOut()" class="b__logout">Đăng xuất</span>
@@ -52,47 +52,47 @@
                   <span class="b__logout">Phòng chat admin</span>
                 </li>
               </ul>
-              </div>
             </div>
-
           </div>
+
         </div>
       </div>
+    </div>
 
+  </div>
+</div>
+<nav class="header__mobile header navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <button style="border: 1px solid aliceblue;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- <span class="navbar-toggler-icon"></span> -->
+      <i class="text-white fa-solid fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <p class="nav-link">Trang trủ</p>
+
+        </li>
+        <li class="nav-item">
+          <p class="nav-link">Đang đấu giá</p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link">Đã kết thúc</p>
+        </li>
+        <li class="nav-item">
+          <p class="nav-link">Top</p>
+        </li>
+      </ul>
+      <form class="d-flex justify-content-center" role="search">
+        <button class=" w-50 login__btn mx-2">
+          <i class="fa-solid fa-circle-user"></i>
+          Đăng ký
+        </button>
+        <button class=" w-50 login__btn">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Đăng nhập
+        </button>
+      </form>
     </div>
   </div>
-  <nav class="header__mobile header navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <button style="border: 1px solid aliceblue;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <!-- <span class="navbar-toggler-icon"></span> -->
-        <i class="text-white fa-solid fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <p class="nav-link">Trang trủ</p>
-
-          </li>
-          <li class="nav-item">
-            <p class="nav-link">Đang đấu giá</p>
-          </li>
-          <li class="nav-item">
-            <p class="nav-link">Đã kết thúc</p>
-          </li>
-          <li class="nav-item">
-            <p class="nav-link">Top</p>
-          </li>
-        </ul>
-        <form class="d-flex justify-content-center" role="search">
-          <button class=" w-50 login__btn mx-2">
-            <i class="fa-solid fa-circle-user"></i>
-            Đăng ký
-          </button>
-          <button class=" w-50 login__btn">
-            <i class="fa-solid fa-right-to-bracket"></i>
-            Đăng nhập
-          </button>
-        </form>
-      </div>
-    </div>
-  </nav>
+</nav>
