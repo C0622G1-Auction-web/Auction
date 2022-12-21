@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {UserType} from "../../model/user/user-type";
-import {UserListDto} from "../../dto/user-list-dto";
 import {User} from '../../model/user/user';
 import {Observable} from 'rxjs';
 import {UserEditDto} from "../../dto/user-edit-dto";

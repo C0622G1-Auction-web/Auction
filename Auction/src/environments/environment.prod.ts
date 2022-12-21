@@ -34,6 +34,8 @@ export const environment = {
   api_url_write_reason: apiUrl + '/api/v1/products/reason',
   api_url_get_reason: apiUrl + '/api/v1/products/reason/',
   api_url_do_not_review_product: apiUrl + '/api/v1/products/do-not-review/',
+  api_url_get_imgs: apiUrl + '/api/v1/products/imgs/',
+  api_url_list_user_list_id: apiUrl + '/api/v1/users/find-by-list-id',
   transactionDeleteUrl: apiUrl + '/api/v1/auction/delete',
   transactionFindByListIdUrl: apiUrl + '/api/v1/auction/find-by-list-id',
   api_url_userType: apiUrl + '/api/v1/users/usersType',

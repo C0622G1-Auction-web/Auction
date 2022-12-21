@@ -3,11 +3,6 @@ import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Product} from '../../model/product/product';
-
-import {PriceStep} from '../../model/product/price-step';
-import {Category} from '../../model/product/category';
-import {User} from '../../model/user/user';
-import {ImgUrlProduct} from '../../model/product/img-url-product';
 import {environment} from '../../../environments/environment';
 
 import {ReviewStatus} from '../../model/product/review-status';
@@ -55,23 +50,7 @@ export class ProductService {
     return throwError(errorMessage);
   };
 
-  private API_URL = '  http://localhost:8080/';
-
-  findAllPriceStep(): Observable<PriceStep[]> {
-    return this._httpClient.get<PriceStep[]>(environment.api_url_list_price_step);
-  }
-
-  findAllCategory(): Observable<Category[]> {
-    return this._httpClient.get<Category[]>(environment.api_url_list_category);
-  }
-
-  findAllUser(): Observable<User[]> {
-    return this._httpClient.get<User[]>(environment.api_url_list_user);
-  }
-
-  findAllImageProduct(): Observable<ImgUrlProduct[]> {
-    return this._httpClient.get<ImgUrlProduct[]>(environment.api_url_list_img_url);
-  }
+  private API_URL = 'http://localhost:8080/';
 
   /**
    * Created: HungNV
@@ -87,10 +66,6 @@ export class ProductService {
 
   findAll(curPage: number, numberRecord: number): Observable<DataResult<ProductDto>> {
     return this._httpClient.get<DataResult<ProductDto>>(this.API_URL + 'list?page=' + (curPage - 1) + '&size=' + numberRecord);
-  }
-
-  findAllReview(): Observable<ReviewStatus[]> {
-    return this._httpClient.get<ReviewStatus[]>(this.API_URL + 'listReviewStatus');
   }
 
   /**
@@ -184,15 +159,6 @@ export class ProductService {
    */
   getReason(id: number): Observable<Reason> {
     return this._httpClient.get<Reason>(environment.api_url_get_reason + id);
-  }
-
-  getAll(): Observable<PageProduct> {
-    return this._httpClient.get<PageProduct>(environment.api_url_products);
-  }
-
-
-  saveProduct(product: ProductDto): Observable<number> {
-    return this._httpClient.post<number>(environment.productUrl + '/create', product);
   }
 
   findByIdd(id: number): Observable<Product> {
