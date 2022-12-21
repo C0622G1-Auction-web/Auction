@@ -58,7 +58,7 @@ export class AuctionProductDetailComponent implements OnInit {
         this.rfAuction = this._formBuilder.group({
           currentPrice: [this.productDetail.maxCurrentPrice],
           userId: [5],
-          productId: [this.idProductDetail]
+          productId: [+this.idProductDetail]
         }, {validators: [this.checkAuctionPrice]})
         this.selectedChangImage();
       }

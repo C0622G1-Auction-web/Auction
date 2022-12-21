@@ -16,7 +16,7 @@
           <li [routerLink]="['/user/list']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
             <span class="menu__link ">Quản lý người dùng</span>
           </li>
-          <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
+          <li [routerLink]="['/transaction']"*ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
             <span class="menu__link ">Quản lý giao dịch</span>
           </li>
           <li [routerLink]="['auction/product/add']" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="menu__item">

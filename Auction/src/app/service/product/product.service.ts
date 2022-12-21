@@ -5,7 +5,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Product} from '../../model/product/product';
 import {environment} from '../../../environments/environment';
 
-import {ReviewStatus} from '../../model/product/review-status';
 import {PageProduct} from '../../model/product/page-product';
 import {ProductDelete} from '../../model/product/product-delete';
 import {ProductDtoRoleAdmin} from '../../model/product/product-dto-role-admin';

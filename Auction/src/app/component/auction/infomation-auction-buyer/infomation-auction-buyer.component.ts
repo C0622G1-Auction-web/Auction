@@ -21,13 +21,13 @@ export class InfomationAuctionBuyerComponent implements OnInit {
 
   ngOnInit(): void {
     this.idProductDetail = this._acRoute.snapshot.params.productId;
-    // this._auctionService.getAuctionPageByProductId(this.idProductDetail, 0).subscribe(
-    //   data => {
-    //     this.auctionPageByProductId = data;
-    //   }, error => {
-    //     console.log('Chưa có đấu giá nào...')
-    //   }
-    // );
+    this._auctionService.getAuctionPageByProductId(this.idProductDetail, 0).subscribe(
+      data => {
+        this.auctionPageByProductId = data;
+      }, error => {
+        console.log('Chưa có đấu giá nào...')
+      }
+    );
     this._socketService.connect();
     this._socketService.setProductIdDetail(this.idProductDetail);
     this.auctionPageByProductId = this._socketService.auctionPageByProductId;
