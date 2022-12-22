@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {TokenService} from "../../../service/security/token.service";
 import {User} from "../../../model/user/user";
 import {PaymentDto} from "../../../dto/payment-dto";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-payment-cart',
@@ -27,10 +28,12 @@ export class PaymentCartComponent implements OnInit {
 
   constructor(private _paymentService: PaymentService,
               private _formBuilder: FormBuilder,
-              private _tokenService: TokenService) {
+              private _tokenService: TokenService,
+              private _titleService: Title,) {
   }
 
   ngOnInit(): void {
+    this._titleService.setTitle('Giỏ Hàng');
     if (this._tokenService.isLogged()) {
       this.currentUser = JSON.parse(this._tokenService.getUser());
       this.userId = this.currentUser.id;

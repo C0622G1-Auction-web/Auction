@@ -47,7 +47,7 @@ export class PaymentReceiptComponent implements OnInit {
       for (let i = 0; i < data.length; i++) {
         this.paymentBill += +data[i].productPrice;
       }
-      this.paypal = (this.paymentBill / 23725000).toFixed(2);
+      this.paypal = (this.paymentBill / 23725).toFixed(2);
     }, error => {
       this._paymentService.showErrorMessage('Không thể lấy danh sách');
     });
