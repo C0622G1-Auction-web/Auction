@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {render} from "creditcardpayments/creditCardPayments";
 import html2canvas from "html2canvas";
 import * as jsPDF from "jspdf";
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -28,16 +29,19 @@ export class PaymentReceiptComponent implements OnInit {
   constructor(private _paymentService: PaymentService,
               private _formBuilder: FormBuilder,
               private _router: Router,
+              private _titleService: Title,
               private _activateRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this._titleService.setTitle('Thanh toán');
     this.idList = this._paymentService.getIdList();
     this.findPaymentList();
   }
 
   findPaymentList() {
     this._paymentService.findPaymentList(this.idList).subscribe(data => {
+      console.log(data);
       this.paymentList = data;
       this.paymentBill = 49000;
       for (let i = 0; i < data.length; i++) {
@@ -46,7 +50,7 @@ export class PaymentReceiptComponent implements OnInit {
       this.paypal = (this.paymentBill / 23725000).toFixed(2);
       render(
         {
-          id: '#paypalButtons',
+          id: '#myPaypal',
           value: this.paypal.valueOf(),
           currency: 'USD',
           onApprove: (details) => {

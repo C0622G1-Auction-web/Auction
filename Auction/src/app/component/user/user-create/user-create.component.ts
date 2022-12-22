@@ -237,7 +237,9 @@ export class UserCreateComponent implements OnInit {
   }
 
   onchangeStautus() {
+
     this.status= !this.status;
+    console.log(this.status, this.userCreateForm.valid, this.result);
   }
 
 }
