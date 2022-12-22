@@ -34,7 +34,6 @@ export class ChatVisitorComponent implements OnInit {
       'message': ['', [Validators.required]],
       'username': ['Khách']
     });
-    firebase.database().ref('chat').child('khach').remove();
   }
 
   ngOnInit(): void {

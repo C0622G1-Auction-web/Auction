@@ -154,6 +154,7 @@
                 </div>
               </div>
             </div>
+
             <div class="row" style="display: flex; justify-content: center;  align-items: center">
               <div class="col-3 pe-3">
                 <a (click)="goToPay()" style="background-color: #d53422; border-color:#d53422 " type="button"
@@ -182,8 +183,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-4">
-                  <div id="myPaypal" style="margin-left: 300px"></div>
+                <div class="col-lg-4" style="display: {{display}}" id="paypalBtn">
                 </div>
               </div>
             </div>
@@ -312,16 +312,10 @@
             </div>
           </div>
           <div class="row" style="display: flex; justify-content: center;  align-items: center">
-            <button type="button" class="btn btn-primary"
-                    style="background-color: #d53422;border-color: #d53422; width: 150px;"
+            <button type="button" class="btn btn-primary" style="background-color: #d53422;border-color: #d53422; width: 150px;"
                     data-bs-toggle="modal" data-bs-target="#exampleModal">
               In hóa đơn
             </button>
-            <a type="button" class="btn btn-primary"
-               style="background-color: #d53422;border-color: #d53422;margin-left: 10px; width: 150px;"
-            >
-              Màn hình chính
-            </a>
           </div>
         </div>
       </div>
@@ -357,8 +351,8 @@
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Hóa Đơn</h1>
       </div>
-      <div class="modal-body">
-        <div class="container">
+      <div class="modal-body" >
+        <div class="container" >
           <div class="row" style="background-color: rgb(255 221 217 / 10%);">
             <div class="col-12 pe-3 p-3" style="display: none; text-align: center">
               HÓA ĐƠN

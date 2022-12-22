@@ -48,7 +48,7 @@ export class ChatUserComponent implements OnInit {
     chat.timestamp = new Date().toString();
     chat.id = uuidv4();
     this.chats = [];
-    firebase.database().ref('/chat/' + this.username).push(chat);
+    firebase.database().ref('/chat/user/' + this.username).push(chat);
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
       'username': [this.username],
@@ -82,7 +82,7 @@ export class ChatUserComponent implements OnInit {
       'username': [this.username]
     });
 
-    const dbRef = firebase.database().ref('/chat/' + this.username);
+    const dbRef = firebase.database().ref('/chat/user/' + this.username);
     dbRef.on('value', (snapshot: any) => {
       this.chats = [];
       const data = snapshot.val();

@@ -173,8 +173,8 @@
             <td class="text-end">{{item.currentPrice | number}}</td>
             <td>
               <p *ngIf="item.paymentStatus == 1 && item.deleteStatus === true">Thành công</p>
-              <p *ngIf="item.paymentStatus == 0 && item.deleteStatus === false" style="color: red">Thất bại</p>
-              <p *ngIf="item.paymentStatus == 1 && item.deleteStatus === false">Đang chờ</p>
+              <p *ngIf="item.paymentStatus == 1 && item.deleteStatus === false" style="color: red">Thất bại</p>
+              <p *ngIf="item.paymentStatus == 0 && item.deleteStatus === false">Đang chờ</p>
             </td>
             <td class="text-center">
               <input  class="delete-checkbox" [checked]="deleteIds.includes(item.paymentId)" type="checkbox"

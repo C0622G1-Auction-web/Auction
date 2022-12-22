@@ -71,7 +71,7 @@
                 <hr>
 
                 <div class="row">
-                  <div class="col-lg-12">
+                  <div class="col-lg-6">
                     <div class="card-body card-detail text-lg-start">
                       <span class="card-text title-detail">Ngày Kết Thúc</span>
                       <span class="card-text">{{productDetail.endTime | date:"dd/MM/yyyy HH:mm:ss"}}</span>
@@ -85,10 +85,13 @@
                       <div class="col-lg-3">
                         <span class="card-text title-detail">Mô Tả Sản Phẩm</span>
                       </div>
-
+                      <div class="col-lg-9" style="text-align: justify">
+                        <span style="padding-right: 40px;display: block">{{productDetail.description}}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -96,7 +99,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-lg-5 mt-5">
       <div class="card card-body">
         <div class="time mt-0">
@@ -111,23 +113,22 @@
             <div class="card mt-3" style="width: 49%">
               <p class="title-currency-1"
                  style="color: white;background-color: #2c3b59">Giá Gốc</p>
-              <h5 class="currency-1 card-title product__price"
-                  style="color:#2c3b59;">{{productDetail.initialPrice|currency:'VND'}}</h5>
+              <h5 class="currency-1 card-title product__price currency__title"
+                  style="color:#2c3b59;">{{productDetail.initialPrice|currency: 'VND'}} <sup>đ</sup></h5>
             </div>
 
             <div class="card mt-3" style="width: 48%;">
               <p class="title-currency-1"
                  style="color: white;background-color: #2c3b59">Bước Giá</p>
-              <h5 class="currency-1 card-title product__price"
-                  style="color:#00434c">{{productDetail.priceStep.step|currency:'VND'}}</h5>
+              <h5 class="currency-1 card-title product__price currency__title"
+                  style="color:#00434c">{{productDetail.priceStep.step|currency: 'VND'}} <sup>đ</sup></h5>
             </div>
           </div>
           <div class="card mt-3">
             <p class="title-currency"
                style="color: white;background-color: #dc3545">Giá Đấu</p>
-            <h5 class="currency card-title product__price">{{productDetail.maxCurrentPrice|currency:'VND'}}</h5>
+            <h5 class="currency card-title product__price currency__title">{{productDetail.maxCurrentPrice|currency: 'VND'}} <sup>đ</sup></h5>
           </div>
-
           <div *ngIf="productDetail?.auctionStatus.id != 3"
                class="input-group mt-3 d-flex align-items-center justify-content-center">
 
@@ -139,7 +140,7 @@
               <input class="form-control w-100" [value]="rfAuction.value.currentPrice" type="number"
                      style="font-size: 24px; font-weight: bold; text-align: right"
                      formControlName="currentPrice"
-                     [ngClass]="rfAuction.errors?.checkAuctionPrice?'is-invalid':''">
+                     [ngClass]="rfAuction.errors?.checkAuctionPrice && rfAuction.controls.currentPrice.touched ?'is-invalid':''">
               <div class="invalid-feedback">
                 <div
                   *ngIf="rfAuction.errors?.checkAuctionPrice && rfAuction.controls['currentPrice'].touched">
@@ -203,13 +204,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div style="background: #f8f9fa">
-    <div class="row">
-      <div class=" col-lg-8" style="text-align: justify">
-        <div class="render__description" [innerHTML]="productDetail.description"></div>
       </div>
     </div>
   </div>

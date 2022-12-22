@@ -145,15 +145,28 @@ p {
   margin-bottom: 0px !important;
 }
 .edit-button {
-  width: 28px;
-  height: 28px;
+  width: 18px;
+  height: 18px;
   display: block;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 36px;
+  transform: translate(-50%, -50%);
+}
+.accordion-button {
   position: relative;
 }
 .edit-button:hover {
   background-color: #D1E7F8;
   border-radius: 50%;
+}
+.text {
+  cursor: pointer;
+}
+.panel-body img {
+  width: 275px;
+  height: 183px;
 }

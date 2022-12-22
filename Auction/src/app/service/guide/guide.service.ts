@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Guide} from '../../model/guide/guide';
 import {Observable} from 'rxjs';
 import {environment} from "../../../environments/environment";
+import {ImgUrlGuideDto} from "../../model/guide/img-url-guide";
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +26,9 @@ export class GuideService {
   searchByContent(title: string): Observable<Guide[]> {
     return this._httpClient.get<Guide[]>(environment.API_URL_GUIDE + `?title=` + title);
   }
+
+  findImageGuide(id: number): Observable<ImgUrlGuideDto[]> {
+    return this._httpClient.get<ImgUrlGuideDto[]>('http://localhost:8080/api/v1/guide/image/find/' + id);
+  }
+
 }

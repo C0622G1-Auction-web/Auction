@@ -3,11 +3,9 @@ import {AuctionService} from "../../../service/auction/auction.service";
 import {Product} from "../../../model/product/product";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {Auction} from "../../../model/auction/auction";
-import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-product-id";
 import {ActivatedRoute} from "@angular/router";
 import {SocketService} from "../../../service/socket/socket.service";
 import {TokenService} from "../../../service/security/token.service";
-import {User} from "../../../model/user/user";
 import {Account} from "../../../model/account/account";
 
 
@@ -27,12 +25,19 @@ export class AuctionProductDetailComponent implements OnInit {
   checkLogin = false;
   accountRole: string;
   currentAccount: Account;
+  auctionPageByProductId: any;
+  formattedAmount;
+  amount;
 
   constructor(private _auctionService: AuctionService,
               private _formBuilder: FormBuilder,
               private _acRoute: ActivatedRoute,
               private _socketService: SocketService,
               private _tokenService: TokenService) {
+    this.idProductDetail = this._acRoute.snapshot.params.productId;
+    this._socketService.setProductIdDetail(this.idProductDetail);
+    this._socketService.getAllAuction(this.idProductDetail);
+    this.auctionPageByProductId = this._socketService.auctionPageByProductId;
   }
 
   ngOnInit(): void {
@@ -46,26 +51,22 @@ export class AuctionProductDetailComponent implements OnInit {
         }
       }
 
-      console.log('accountId: ' + this.currentAccount.id);
     }
-
-
-    this.idProductDetail = this._acRoute.snapshot.params.productId;
-    this._socketService.setProductIdDetail(this.idProductDetail);
     this._auctionService.getAuctionByProductId(this.idProductDetail).subscribe(
       data => {
         this.productDetail = data;
         this.rfAuction = this._formBuilder.group({
-          currentPrice: [this.productDetail.maxCurrentPrice],
-          userId: [5],
-          productId: [+this.idProductDetail]
-        }, {validators: [this.checkAuctionPrice]});
+          currentPrice: this.productDetail.maxCurrentPrice,
+          userId: 5,
+          productId: +this.idProductDetail
+        }, {validators: [this.checkAuctionPrice]})
         this.selectedChangImage();
       }
     )
+    // this._socketService.getAllAuction(this.idProductDetail);
+    // console.log('list',this._socketService.getAllAuction(this.idProductDetail));
 
     this._socketService.auctionSubject.subscribe(data => {
-      // console.log('d: ' + JSON.stringify(data));
       this.productDetail = {
         ...this.productDetail,
         maxCurrentPrice: data.currentPrice
@@ -73,8 +74,8 @@ export class AuctionProductDetailComponent implements OnInit {
 
       this.rfAuction.get('currentPrice').setValue(data.currentPrice);
 
-      // console.log(JSON.stringify(this.rfAuction.value));
     })
+
   }
 
   /**
@@ -91,8 +92,6 @@ export class AuctionProductDetailComponent implements OnInit {
     titleSeller.style.backgroundColor = "transparent";
     titleSeller.style.color = 'white';
     titleBuyer.style.color = 'black';
-
-
   }
 
   /**
@@ -109,6 +108,8 @@ export class AuctionProductDetailComponent implements OnInit {
     titleSeller.style.backgroundColor = "#ffffff";
     titleSeller.style.color = 'black';
     titleBuyer.style.color = 'white';
+
+
   }
 
   /**
@@ -145,8 +146,8 @@ export class AuctionProductDetailComponent implements OnInit {
       this.auctionPrice = this.rfAuction.value.currentPrice;
       this.rfAuction.setValue({
         currentPrice: this.auctionPrice,
-        userId: [5],
-        productId: [this.idProductDetail]
+        userId: 5,
+        productId: +this.idProductDetail
       })
       this.checkAuctionPrice(this.rfAuction);
 
@@ -171,22 +172,31 @@ export class AuctionProductDetailComponent implements OnInit {
   }
 
   /**
-   * Created: TienBM
-   * Date: 19/12/2022
+   * Created by: TienBM,
+   * Date created: 16/12/2022
+   * Function: Auction
    */
   onAuction() {
     // this._auctionService.addNewAuction(this.rfAuction.value).subscribe(
     //   data => {
     //     this.newAuction = data;
+    //     // Tự động reload
+    //     // this._router.navigate(['/auction-detail',7]).then(() => {
+    //     //   location.reload();
+    //     // })
     //     document.getElementById('auto-reload').click();
     //     this.ngOnInit();
     //   }
     // )
 
-    this._socketService.createAuctionUsingWebsocket(this.rfAuction.value);
+    this._socketService.createAuctionUsingWebsocket(
+      {
+        ...this.rfAuction.value,
+        productId: +this.rfAuction.value.productId
+      });
+    this._socketService.connect();
     document.getElementById('auto-reload').click();
     this.ngOnInit();
-
   }
 
   changeImage(event: any, i: any, j: number) {
@@ -205,15 +215,9 @@ export class AuctionProductDetailComponent implements OnInit {
   selectedChangImage() {
     setTimeout(() => {
       const imgF = document.querySelectorAll('.carousel__images');
-      const imgC = document.querySelectorAll('.render__description img');
-      console.log(imgC);
       imgF.forEach(value => {
         value.children[0].classList.add('actived');
       });
-      console.log()
-      imgC.forEach((value, key) => {
-        value.classList.add('d-block', 'w-100');
-      });
-    }, 300);
+    }, 500)
   }
 }

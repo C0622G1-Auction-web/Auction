@@ -17,11 +17,12 @@ import {ProductService} from 'src/app/service/product/product.service';
 import {UserService} from 'src/app/service/user/user.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {TokenService} from "../../../service/security/token.service";
+import {Router} from "@angular/router";
 
 export const checkStartTime: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const startTime = new Date(control.get("startTime").value).getTime();
   const dateNow = new Date().getTime();
-  if (startTime - dateNow < 0) {
+  if (startTime - dateNow < 3*24*60*60*1000) {
     return {"checkStartTime": true};
   } else {
     return null;
@@ -33,7 +34,7 @@ export const checkEndTime: ValidatorFn = (control: AbstractControl): ValidationE
   console.log(startTime)
   const endTime = new Date(control.get("endTime").value).getTime();
   console.log(endTime)
-  if (endTime - startTime > 30 * 24 * 60 * 60 && startTime && endTime || endTime - startTime < 0) {
+  if (endTime - startTime > 30 * 24 * 60 * 60*1000 && startTime && endTime || endTime - startTime < 0) {
     return {"checkEndTime": true};
   } else {
     return null;
@@ -79,7 +80,8 @@ export class AuctionProductAddComponent implements OnInit {
               private _storage: AngularFireStorage,
               private _imageProductService: ImageProductService,
               private _toast: ToastrService,
-              private _tokenService: TokenService) {
+              private _tokenService: TokenService,
+              private _router: Router) {
   }
 
   ngOnInit(): void {
@@ -97,7 +99,7 @@ export class AuctionProductAddComponent implements OnInit {
 
     this.formCreateProduct = this._formBuilder.group({
       id: ['', [Validators.required]],
-      name: ['', [Validators.required, Validators.pattern("^[A-Z][a-z]*([ ][A-Z][a-z]+)*$")]],
+      name: ['', [Validators.required, Validators.maxLength(255)]],
       description: ['', [Validators.required]],
       initialPrice: ['', [Validators.required, Validators.min(0), Validators.pattern("\\d+")]],
       startTime: ['', [Validators.required]],
@@ -124,7 +126,11 @@ export class AuctionProductAddComponent implements OnInit {
             })
           }
         }
-        this._toast.success("Chúc mừng bạn đã đấu giá thành công, đợi bộ phận kiểm duyệt xác nhận và thông báo bạn sau nhé !")
+        this._router.navigateByUrl('/home');
+        this._toast.success("Chúc mừng bạn đã đấu giá thành công, đợi bộ phận kiểm duyệt xác nhận và thông báo bạn sau nhé !", '', {
+          timeOut: 3000,
+          progressBar: true
+        })
       },
       error => {
         this._toast.error("Yêu cầu của bạn không được duyệt, vui lòng nhập chính xác điều kiện đấu giá");
@@ -178,7 +184,9 @@ export class AuctionProductAddComponent implements OnInit {
     testNum.removeAttribute('disabled')
   }
 
-  resetForm() {
+  resetForm(file) {
     this.ngOnInit;
+    this.img = [];
+    file.value = "";
   }
 }

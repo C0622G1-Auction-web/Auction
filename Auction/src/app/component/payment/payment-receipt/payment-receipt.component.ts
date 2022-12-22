@@ -48,20 +48,6 @@ export class PaymentReceiptComponent implements OnInit {
         this.paymentBill += +data[i].productPrice;
       }
       this.paypal = (this.paymentBill / 23725000).toFixed(2);
-      render(
-        {
-          id: '#myPaypal',
-          value: this.paypal.valueOf(),
-          currency: 'USD',
-          onApprove: (details) => {
-            console.log('okok123123')
-            this._paymentService.showSuccessMessage("Thanh toán thành công");
-            this.display = 'none';
-            this.displayButton = 'block';
-          }
-        }
-      );
-      console.log(this.paypal);
     }, error => {
       this._paymentService.showErrorMessage('Không thể lấy danh sách');
     });
@@ -80,6 +66,22 @@ export class PaymentReceiptComponent implements OnInit {
     });
   }
 
+  renderPayPalBtn(){
+    document.getElementById("paypalBtn").innerHTML = '<div id="paypalButtons" style="margin-left: 300px"></div>';
+    render(
+      {
+        id: '#paypalButtons',
+        value: this.paypal.valueOf(),
+        currency: 'USD',
+        onApprove: (details) => {
+          this._paymentService.showSuccessMessage("Thanh toán thành công");
+          this.display = 'none';
+          this.displayButton = 'block';
+        }
+      }
+    );
+  }
+
   goToPay() {
     // @ts-ignore
     document.querySelector('.pills-profile-tab').click();
@@ -96,6 +98,7 @@ export class PaymentReceiptComponent implements OnInit {
     }, error => {
       this._paymentService.showErrorMessage('Lưu mô tả vận chuyển thất bại');
     })
+    this.renderPayPalBtn();
   }
 
   goToPay2() {

@@ -1,6 +1,6 @@
 <div style="margin-left: 110px; margin-right: 110px">
   <div class="row">
-    <h1 class="text-center" style="color: #fa6132">LỊCH SỬ ĐĂNG KÝ ĐẤU GIÁ</h1>
+    <h1 class="text-center">Lịch Sử Đấu Giá</h1>
 
   </div>
   <div>
@@ -27,14 +27,15 @@
               <th>Tình Trạng</th>
             </tr>
             </thead>
-            <h3 class="text-danger text-center" *ngIf="pageAuctionProductHistory == null">Bạn không có lịch sử đăng ký</h3>
+            <h3 class="text-danger text-center" *ngIf="pageAuctionProductHistory == null">Bạn không có lịch sử đăng
+              ký</h3>
             <tbody class="text-center">
-            <tr  *ngFor="let item of pageAuctionProductHistory.content ;index as i">
+            <tr *ngFor="let item of pageAuctionProductHistory.content ;index as i">
               <td class="text-center">{{i + 1 + (page - 1) * pageSize}}</td>
               <td>{{item.nameProduct}}</td>
-              <td >{{item.description|CustomPipe}}</td>
-              <td>{{item.priceNow|  currency:'VND':' vnd ' }}</td>
-              <td>{{item.registerDay|date:'dd/MM/yyyy'}}</td>
+              <td [innerHTML]="item.description|CustomPipe"></td>
+              <td>{{item.priceNow|  number }}<sup>đ</sup></td>
+              <td>{{item.registerDay}}</td>
               <td class="text-danger">{{item.auctionStatus}}</td>
             </tr>
             </tbody>
@@ -48,13 +49,25 @@
                     <ul class="pagination">
                       <li class="page-item"><a class="page-link"
                                                [ngClass]="pageAuctionProductHistory.first ? 'disabled': ''"
-                                               (click)="gotoPage(pageAuctionProductHistory.number - 1)">Trang trước</a>
+                                               (click)="gotoPage(0)"> << </a></li>
+                      <li class="page-item" *ngIf="pageAuctionProductHistory.number - 2 > 0">
+                        <a class="page-link"
+                           (click)="gotoPage(pageAuctionProductHistory.number - 3)">{{pageAuctionProductHistory.number - 2}}</a>
                       </li>
-                      <li class="page-item active"><a class="page-link">
-                        {{pageAuctionProductHistory.number + 1}}/{{pageAuctionProductHistory.totalPages}}</a></li>
+                      <li class="page-item" *ngIf="pageAuctionProductHistory.number - 1 > 0">
+                        <a class="page-link"
+                           (click)="gotoPage(pageAuctionProductHistory.number - 2)">{{pageAuctionProductHistory.number - 1}}</a>
+                      </li>
+                      <li class="page-item" *ngIf="pageAuctionProductHistory.number > 0">
+                        <a class="page-link"
+                           (click)="gotoPage(pageAuctionProductHistory.number   - 1)">{{pageAuctionProductHistory.number}}</a>
+                      </li>
+
+                      <li class="page-item active"><a class="page-link">{{pageAuctionProductHistory.number + 1}}</a>
+                      </li>
                       <li class="page-item"><a class="page-link"
-                                               [ngClass]="pageAuctionProductHistory.last ? 'disabled': ''"
-                                               (click)="gotoPage(pageAuctionProductHistory.number + 1)">TRang sau</a>
+                                               disabled
+                      > >> </a>
                       </li>
                     </ul>
                   </nav>

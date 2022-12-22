@@ -159,3 +159,4 @@ export class HomeComponent implements OnInit {
     console.log('bat dau truyen ', id);
   }
 }
+

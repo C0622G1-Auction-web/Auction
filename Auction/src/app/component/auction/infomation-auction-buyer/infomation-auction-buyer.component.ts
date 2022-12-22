@@ -17,20 +17,28 @@ export class InfomationAuctionBuyerComponent implements OnInit {
   constructor(private _auctionService: AuctionService,
               private _acRoute: ActivatedRoute,
               private _socketService: SocketService) {
+    this._socketService.getAllAuction(this.idProductDetail);
   }
 
   ngOnInit(): void {
     this.idProductDetail = this._acRoute.snapshot.params.productId;
-    this._auctionService.getAuctionPageByProductId(this.idProductDetail, 0).subscribe(
-      data => {
-        this.auctionPageByProductId = data;
-      }, error => {
-        console.log('Chưa có đấu giá nào...')
-      }
-    );
+    console.log('idProduct',this.idProductDetail);
+    // this._auctionService.getAuctionPageByProductId(this.idProductDetail, 0).subscribe(
+    //   data => {
+    //     this.auctionPageByProductId = data;
+    //   }, error => {
+    //     console.log('Chưa có đấu giá nào...')
+    //   }
+    // );
+    // this._socketService.getAllAuction(this.idProductDetail);
     this._socketService.connect();
+    console.log('idddđ', this.idProductDetail);
     this._socketService.setProductIdDetail(this.idProductDetail);
-    this.auctionPageByProductId = this._socketService.auctionPageByProductId;
+    this._socketService.listAuctionSubject.subscribe(data =>
+    {
+      console.log('data moi   : ', data);
+      this.auctionPageByProductId = data
+    });
   }
 
   /**

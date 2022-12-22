@@ -9,14 +9,19 @@
 h1 {
   font-size: 32px;
 }
+
+ul, li, p {
+  padding: 0;
+  margin: 0;
+}
 body {
   width: 100vw;
   height: 100vh;
 }
 .boxed {
-  width: 700px;
+  width: 1100px;
   max-height: 950px;
-  border: 5px solid;
+  border: 3px solid;
   border-image-slice: 1;
   border-color: rgb(189, 214, 236);
   padding: 0px 20px;
@@ -25,16 +30,23 @@ body {
   box-shadow: 4px 2px 4px 1px rgb(238, 243, 247);
   background-color: rgb(238, 243, 247) !important;
   overflow: auto;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 button {
   width: 200px;
   border-radius: 20px;
 }
-.app__ {
-  margin-right: 0;
-  margin-left: 12px;
+.auction {
+  width: 110%;
+  height: 960px;
+  margin: auto 0;
+  display: flex;
+  box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.35);
   background-size: cover;
   background-image: url("https://media.istockphoto.com/id/934890574/photo/law-and-justice-concept.jpg?s=612x612&w=0&k=20&c=RAo4rrJPoTJjz2QRWrKr-Z68H2Xg8XjnIbyIBaVDQ0k=");
+  background-color: white;
+  border-radius: 20px;
 }
 .slide {
   animation: slide 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;

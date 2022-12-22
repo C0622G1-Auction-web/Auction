@@ -1,6 +1,6 @@
 <div style="margin-left: 110px ; margin-right: 110px">
   <div div class="row">
-    <h1 class="text-center text-" style="color: #fa6132">LỊCH SỬ ĐĂNG KÝ MẶT HÀNG ĐẤU GIÁ</h1>
+    <h1 class="text-center text-">Lịch Sử Đăng Kí Mặt Hàng Đấu Gía</h1>
   </div>
   <div>
     <div class="row" id="title">
@@ -31,8 +31,8 @@
         <tr *ngFor="let item of pageHistory.content ;index as i">
           <td class="text-center">{{i + 1 + (page - 1) * pageSize}}</td>
           <td>{{item.name}}</td>
-          <td>{{item.description|CustomPipe}}</td>
-          <td>{{item.registerDay|date:'dd/MM/yyyy'}}</td>
+          <td [innerHTML]="item.description|CustomPipe"></td>
+          <td>{{item.registerDay|date:'dd/MM/y H:mm:ss'}}</td>
           <td class="text-danger">{{item.reviewStatus}}</td>
           <td>
           <span *ngIf="item.auctionStatus == 1 && item.isDelete == 'false'">

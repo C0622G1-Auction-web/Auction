@@ -49,7 +49,7 @@ export class ChatAdminComponent implements OnInit {
     chat.id = uuidv4();
     this.chats = [];
     if (this.checkUser) {
-      firebase.database().ref('chat').child(this.itemUser.toString()).push(chat);
+      firebase.database().ref('chat/user').child(this.itemUser.toString()).push(chat);
       console.log(this.chats)
     } else {
       firebase.database().ref('chat/khach').child(this.itemUser.toString()).push(chat);
@@ -65,14 +65,13 @@ export class ChatAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userchat = ['LHT', 'giang'];
     this._userService.getAllUserChat().subscribe(data => {
       console.log(data);
       for (let i = 0; i < data.length; i++) {
         this.userchat.push(data[i].account.username)
       }
       for (let i = 0; i < this.userchat.length; i++) {
-        const dbRef = firebase.database().ref('chat').child(this.userchat[i]);
+        const dbRef = firebase.database().ref('chat/user').child(this.userchat[i]);
         dbRef.once('value', (snapshot) => {
           const data = snapshot.val();
           for (let id in data) {
@@ -151,7 +150,7 @@ export class ChatAdminComponent implements OnInit {
     console.log(this.userchat[this.check])
     console.log(item);
     console.log(this.itemUser)
-    const dbRef = firebase.database().ref('chat');
+    const dbRef = firebase.database().ref('chat/user');
     dbRef.on('value', (snapshot) => {
       this.chats = [];
       const data = snapshot.child(item).val();
