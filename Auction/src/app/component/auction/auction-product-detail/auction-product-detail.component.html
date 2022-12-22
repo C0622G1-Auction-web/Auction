@@ -36,11 +36,14 @@
       <div class=" card card-body">
         <h3 class=" alert text-center" style="background: #E74C3C;color: white">{{productDetail.name}}</h3>
         <div class="d-flex justify-content-center">
-          <img id="image__main{{1}}"  src="{{productDetail?.imgUrlProducts[0]?.url}}" class="d-block w-75 card-img text-center" alt="">
+          <img id="image__main{{1}}" src="{{productDetail?.imgUrlProducts[0]?.url}}"
+               class="d-block w-75 card-img text-center" alt="">
         </div>
         <ul class="carousel__images d-flex justify-content-center">
-          <li value="{{j}}" class="image__item img-selected{{1}}" *ngFor="let img of productDetail?.imgUrlProducts,let j = index;">
-            <img (click)="changeImage($event, 1, j)" class="d-block w-100" height="50" src="{{img.url}}" width="" alt="">
+          <li value="{{j}}" class="image__item img-selected{{1}}"
+              *ngFor="let img of productDetail?.imgUrlProducts,let j = index;">
+            <img (click)="changeImage($event, 1, j)" class="d-block w-100" height="50" src="{{img.url}}" width=""
+                 alt="">
           </li>
         </ul>
       </div>
@@ -127,9 +130,11 @@
           <div class="card mt-3">
             <p class="title-currency"
                style="color: white;background-color: #dc3545">Giá Đấu</p>
-            <h5 class="currency card-title product__price currency__title">{{productDetail.maxCurrentPrice|currency: 'VND'}} <sup>đ</sup></h5>
+            <h5
+              class="currency card-title product__price currency__title">{{productDetail.maxCurrentPrice|currency: 'VND'}}
+              <sup>đ</sup></h5>
           </div>
-          <div *ngIf="productDetail?.auctionStatus.id != 3"
+          <div *ngIf="productDetail?.auctionStatus.id != 3 && checkLogin && accountRole != 'ROLE_ADMIN'"
                class="input-group mt-3 d-flex align-items-center justify-content-center">
 
             <form class="d-flex flex-wrap" *ngIf="rfAuction" [formGroup]="rfAuction">
@@ -164,13 +169,13 @@
             </form>
           </div>
 
-          <!--          <div *ngIf="!checkLogin">-->
-          <!--            <h1>Bạn phải đăng nhập để tiến hành đấu giá</h1>-->
-          <!--          </div>-->
+          <div *ngIf="!checkLogin">
+            <h1>Bạn phải đăng nhập để tiến hành đấu giá</h1>
+          </div>
 
-          <!--          <div *ngIf="checkLogin && productDetail?.auctionStatus.id == 3">-->
-          <!--            <h1>Sản phẩm này đã được đấu giá thành công</h1>-->
-          <!--          </div>-->
+          <div *ngIf="checkLogin && productDetail?.auctionStatus.id == 3">
+            <h1>Sản phẩm này đã được đấu giá thành công</h1>
+          </div>
 
           <div class="row">
             <div class="col-lg-12">
@@ -180,7 +185,8 @@
                     <ul class="nav nav-tabs card-header-tabs">
                       <li class="nav-item">
                         <button id="title-buyer" style="border: none;"
-                                class="nav-link active" aria-current="true" (click)="onChangeInfoSeller()" type="button">
+                                class="nav-link active" aria-current="true" (click)="onChangeInfoSeller()"
+                                type="button">
                           Lượt Đấu Giá
                         </button>
                       </li>

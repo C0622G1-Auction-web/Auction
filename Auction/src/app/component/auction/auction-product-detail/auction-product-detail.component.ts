@@ -7,6 +7,7 @@ import {ActivatedRoute} from "@angular/router";
 import {SocketService} from "../../../service/socket/socket.service";
 import {TokenService} from "../../../service/security/token.service";
 import {Account} from "../../../model/account/account";
+import {User} from "../../../model/user/user";
 
 
 @Component({
@@ -15,6 +16,7 @@ import {Account} from "../../../model/account/account";
   styleUrls: ['./auction-product-detail.component.css']
 })
 export class AuctionProductDetailComponent implements OnInit {
+
   changeBuyer: boolean = true;
   changeSeller: boolean = false;
   productDetail: Product;
@@ -28,6 +30,8 @@ export class AuctionProductDetailComponent implements OnInit {
   auctionPageByProductId: any;
   formattedAmount;
   amount;
+  userId: number = 0;
+  currentUser: User;
 
   constructor(private _auctionService: AuctionService,
               private _formBuilder: FormBuilder,
@@ -51,13 +55,17 @@ export class AuctionProductDetailComponent implements OnInit {
         }
       }
 
+      this.currentUser = JSON.parse(this._tokenService.getUser());
+
+      this.userId = this.currentUser.id;
+
     }
     this._auctionService.getAuctionByProductId(this.idProductDetail).subscribe(
       data => {
         this.productDetail = data;
         this.rfAuction = this._formBuilder.group({
           currentPrice: this.productDetail.maxCurrentPrice,
-          userId: 5,
+          userId: this.userId,
           productId: +this.idProductDetail
         }, {validators: [this.checkAuctionPrice]})
         this.selectedChangImage();
@@ -126,7 +134,7 @@ export class AuctionProductDetailComponent implements OnInit {
       this.auctionPrice = this.rfAuction.value.currentPrice;
       this.rfAuction.setValue({
         currentPrice: this.auctionPrice,
-        userId: 5,
+        userId: this.userId,
         productId: this.idProductDetail
       })
       // this.stateExistsSync('currentPrice');
@@ -146,7 +154,7 @@ export class AuctionProductDetailComponent implements OnInit {
       this.auctionPrice = this.rfAuction.value.currentPrice;
       this.rfAuction.setValue({
         currentPrice: this.auctionPrice,
-        userId: 5,
+        userId: this.userId,
         productId: +this.idProductDetail
       })
       this.checkAuctionPrice(this.rfAuction);

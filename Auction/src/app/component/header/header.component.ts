@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     if (this.tokenService.isLogged()) {
       this.checkLogin = true;
       this.currentUser = JSON.parse(this.tokenService.getUser());
-      this.nameUser = this.currentUser.lastName + ' ' + this.currentUser.firstName;
+      this.nameUser = this.currentUser.firstName + ' ' + this.currentUser.lastName
       const roles = this.tokenService.getRole();
       for (let i = 0; i < roles.length; i++) {
         if (roles[i] === "ROLE_ADMIN") {
