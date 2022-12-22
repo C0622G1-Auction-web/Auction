@@ -3,8 +3,10 @@ import {AuctionService} from "../../../service/auction/auction.service";
 import {Product} from "../../../model/product/product";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {Auction} from "../../../model/auction/auction";
+import {ActivatedRoute} from "@angular/router";
 import {SocketService} from "../../../service/socket/socket.service";
-import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-product-id";
+import {TokenService} from "../../../service/security/token.service";
+import {Account} from "../../../model/account/account";
 
 
 @Component({
@@ -18,28 +20,57 @@ export class AuctionProductDetailComponent implements OnInit {
   productDetail: Product;
   auctionPrice: number;
   rfAuction: FormGroup;
+  newAuction: Auction;
+  idProductDetail;
+  checkLogin = false;
+  accountRole: string;
+  currentAccount: Account;
+  auctionPageByProductId: any;
+  formattedAmount;
+  amount;
 
   constructor(private _auctionService: AuctionService,
               private _formBuilder: FormBuilder,
-              private _socketService: SocketService) {
+              private _acRoute: ActivatedRoute,
+              private _socketService: SocketService,
+              private _tokenService: TokenService) {
+    this.idProductDetail = this._acRoute.snapshot.params.productId;
+    this._socketService.setProductIdDetail(this.idProductDetail);
+    this._socketService.getAllAuction(this.idProductDetail);
+    this.auctionPageByProductId = this._socketService.auctionPageByProductId;
+
+
   }
 
   ngOnInit(): void {
+    if (this._tokenService.isLogged()) {
+      this.checkLogin = true;
+      this.currentAccount = JSON.parse(this._tokenService.getAccount());
+      const roles = this._tokenService.getRole();
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i] === "ROLE_ADMIN") {
+          this.accountRole = "ROLE_ADMIN"
+        }
+      }
 
-    this._auctionService.getAuctionByProductId(1).subscribe(
+    }
+
+
+    this._auctionService.getAuctionByProductId(this.idProductDetail).subscribe(
       data => {
         this.productDetail = data;
         this.rfAuction = this._formBuilder.group({
-          currentPrice: [this.productDetail.maxCurrentPrice],
-          userId: [5],
-          productId: [1]
+          currentPrice: this.productDetail.maxCurrentPrice,
+          userId: 5,
+          productId: +this.idProductDetail
         }, {validators: [this.checkAuctionPrice]})
         this.selectedChangImage();
       }
     )
+    // this._socketService.getAllAuction(this.idProductDetail);
+    // console.log('list',this._socketService.getAllAuction(this.idProductDetail));
 
     this._socketService.auctionSubject.subscribe(data => {
-      // console.log('d: ' + JSON.stringify(data));
       this.productDetail = {
         ...this.productDetail,
         maxCurrentPrice: data.currentPrice
@@ -47,8 +78,8 @@ export class AuctionProductDetailComponent implements OnInit {
 
       this.rfAuction.get('currentPrice').setValue(data.currentPrice);
 
-      // console.log(JSON.stringify(this.rfAuction.value));
     })
+
   }
 
   /**
@@ -93,7 +124,6 @@ export class AuctionProductDetailComponent implements OnInit {
    * Function: Increase Auction Price By Price Step
    */
   increaseAuctionPriceByPriceStep() {
-    console.log(this.rfAuction.value.currentPrice);
     if (this.rfAuction.valid) {
       this.rfAuction.value.currentPrice = Number(this.rfAuction.value.currentPrice) + Number(this.productDetail.priceStep.step);
       this.auctionPrice = this.rfAuction.value.currentPrice;
@@ -103,7 +133,7 @@ export class AuctionProductDetailComponent implements OnInit {
       this.rfAuction.setValue({
         currentPrice: this.auctionPrice,
         userId: 5,
-        productId: 1
+        productId: this.idProductDetail
       })
       // this.stateExistsSync('currentPrice');
       this.checkAuctionPrice(this.rfAuction);
@@ -122,11 +152,10 @@ export class AuctionProductDetailComponent implements OnInit {
       this.auctionPrice = this.rfAuction.value.currentPrice;
       this.rfAuction.setValue({
         currentPrice: this.auctionPrice,
-        userId: [5],
-        productId: [1]
+        userId: 5,
+        productId: +this.idProductDetail
       })
       this.checkAuctionPrice(this.rfAuction);
-      console.log('curentPrice', this.rfAuction.value.currentPrice);
 
     }
   }
@@ -165,7 +194,14 @@ export class AuctionProductDetailComponent implements OnInit {
     //     this.ngOnInit();
     //   }
     // )
-    this._socketService.createAuctionUsingWebsocket(this.rfAuction.value);
+
+    this._socketService.createAuctionUsingWebsocket(
+      {
+        ...this.rfAuction.value,
+        productId: +this.rfAuction.value.productId
+      });
+    this._socketService.connect();
+    this.ngOnInit();
     document.getElementById('auto-reload').click();
     this.ngOnInit();
   }
@@ -191,5 +227,4 @@ export class AuctionProductDetailComponent implements OnInit {
       });
     }, 500)
   }
-
 }

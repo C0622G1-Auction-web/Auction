@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
-
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
-import {MessageRespone} from "../../../model/security/message-respone";
-import {Googletoken} from "../../../security/oauth2/googletoken";
-import {AuthService} from "../../../service/security/auth.service";
-import {TokenService} from "../../../service/security/token.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
+import {AuthService} from "../../service/security/auth.service";
+import {TokenService} from "../../service/security/token.service";
+import {MessageRespone} from "../../model/security/message-respone";
+import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
+import {Googletoken} from "../oauth2/googletoken";
 
 @Component({
   selector: 'app-login',
@@ -20,12 +19,12 @@ export class LoginComponent implements OnInit {
   socialUser: SocialUser;
 
   constructor(
-    private authSocialService: SocialAuthService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
     private authService: AuthService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private socialAuthService: SocialAuthService
   ) {
   }
 
@@ -55,19 +54,15 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.rfLogin.value).subscribe(data => {
-      // tslint:disable-next-line:triple-equals
       if (data.token != undefined) {
 
         if (this.rfLogin.value.rememberMe) {
-          this.tokenService.rememberMe(data.accountId, data.deleteStatus, data.statusLock, data.username,
-            data.token, data.role);
+          this.tokenService.rememberMe(data.token, data.account, data.roles, data.user)
         } else {
-          this.tokenService.setAccountIdSession(data.accountId);
-          this.tokenService.setDeleteStatusSession(data.deleteStatus);
-          this.tokenService.setStatusLockSession(data.statusLock);
-          this.tokenService.setUsernameSession(data.username);
+          this.tokenService.setAccountSession(data.account);
           this.tokenService.setTokenSession(data.token);
-          this.tokenService.setRoleSession(data.role);
+          this.tokenService.setUserSession(data.user);
+          this.tokenService.setRoleSession(data.roles);
         }
 
         this.router.navigate(['/home']).then(() => {
@@ -87,8 +82,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/login');
         console.log('Đăng nhập thất bại');
       }
-
-    });
+    })
   }
 
   /**
@@ -98,7 +92,7 @@ export class LoginComponent implements OnInit {
    */
 
   loginWithGoogle() {
-    this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
       this.socialUser = data;
 
       const googleToken = new Googletoken(this.socialUser.idToken);
@@ -108,11 +102,13 @@ export class LoginComponent implements OnInit {
         if (req.token == null) {
           const emailToRegister = req.email;
 
-          this.router.navigateByUrl('/signUp/' + emailToRegister);
+          this.router.navigateByUrl('/registerWithGoogle/' + emailToRegister);
 
         } else {
 
+          this.tokenService.setAccountLocal(req.account);
           this.tokenService.setTokenLocal(req.token);
+          this.tokenService.setUserLocal(req.user);
           this.tokenService.setRoleLocal(req.roles);
 
           this.router.navigate(['/home']).then(() => {
@@ -123,6 +119,5 @@ export class LoginComponent implements OnInit {
       });
     });
   }
-
 
 }

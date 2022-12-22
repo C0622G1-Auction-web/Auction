@@ -1,6 +1,5 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
-import {Stomp} from "@stomp/stompjs";
 
 @Component({
   selector: 'app-root',
@@ -8,9 +7,7 @@ import {Stomp} from "@stomp/stompjs";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
   title = 'Auction';
-
   // tslint:disable-next-line:variable-name
   constructor(private _toastService: ToastrService) {
   }
@@ -22,5 +19,4 @@ export class AppComponent {
       positionClass: 'toast-top-right'
     });
   }
-
 }

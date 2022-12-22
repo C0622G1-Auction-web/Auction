@@ -7,6 +7,10 @@ import {Stomp} from "@stomp/stompjs";
 import * as  SockJS from 'sockjs-client';
 import {Product} from "../../model/product/product";
 import {Subject} from "rxjs";
+import {ProductService} from "../product/product.service";
+import {AuctionDto} from "../../model/auction/auction-dto";
+import {User} from "../../model/user/user";
+import {PageProduct} from "../../model/product/page-product";
 
 @Injectable({
   providedIn: 'root'
@@ -17,29 +21,41 @@ export class SocketService implements OnInit {
   auction: Auction;
   product: Product;
   auctionSubject: Subject<Auction> = new Subject<Auction>();
+  productIdDetail: any;
+  listAuctionSubject: Subject<PageAuctionByProductId> = new Subject<PageAuctionByProductId>()
+  pageHome: Subject<PageProduct> = new Subject<PageProduct>();
 
-  constructor(private _auctionService: AuctionService) {
-    this.getAllAuction();
+  constructor(private _auctionService: AuctionService,
+              private _productService: ProductService) {
+
+    // this.productIdDetail = this._productService.getProductDetailId();
+    // console.log('2 constructor');
+    // console.log('product id Contructor', this.productIdDetail);
+    // this.getAllAuction();
+
   }
 
   ngOnInit() {
-
   }
 
   connect() {
     const ws = new SockJS("http://localhost:8080/ws")
     this.stompClient = Stomp.over(ws);
     this.stompClient.connect({}, () => {
+      console.log('aaa');
       this.stompClient.subscribe('/topic/auction', data => {
-        const auction = JSON.parse(data.body);
-        console.log(JSON.stringify(auction));
-        this.auctionSubject.next(auction);
-
-        if (this.auctionPageByProductId.content.filter(newAuction => newAuction.id === auction.id)[0]) {
+        console.log('data', data);
+        const auctionDto = JSON.parse(data.body);
+        console.log('JSON-auction', auctionDto);
+        this.auctionSubject.next(auctionDto);
+        this.getAllAuction(this.productIdDetail);
+        // this.getAllProduct(this._productService.getRfSearchHome());
+        // console.log('search',this.getAllProduct(this._productService.getRfSearchHome()));
+        if (this.auctionPageByProductId.content.filter(newAuction => newAuction.id === auctionDto.id)[0]) {
           //exists
           return;
         } else {
-          this.auctionPageByProductId.content.unshift(auction);
+          this.auctionPageByProductId.content.unshift(auctionDto);
           this.auctionPageByProductId.content.pop();
         }
       })
@@ -47,12 +63,22 @@ export class SocketService implements OnInit {
   }
 
 
-  getAllAuction() {
-    this._auctionService.getAuctionPageByProductId(1, 0).subscribe(
+  getAllAuction(productIdDetail?: number) {
+    console.log('productIdDetail: ' + productIdDetail);
+    this._auctionService.getAuctionPageByProductId(productIdDetail ?? this.productIdDetail, 0).subscribe(
       data => {
+        this.listAuctionSubject.next(data);
         this.auctionPageByProductId = data;
-      })
+        console.log('data', data)
+      });
   }
+
+  // getAllProduct(rfSearchHome:any) {
+  //   this._productService.getAllAndSearch(rfSearchHome).subscribe(data => {
+  //     console.log('home', data);
+  //     this.pageHome.next(data);
+  //   })
+  // }
 
   disconnect() {
     if (this.stompClient != null) {
@@ -60,8 +86,23 @@ export class SocketService implements OnInit {
     }
   }
 
-  createAuctionUsingWebsocket(auction: Auction) {
-    this.stompClient.send('/app/auctions', {}, JSON.stringify(auction));
+  createAuctionUsingWebsocket(auctionDto: AuctionDto) {
+    let a: string = 'aaa';
+    let auctionDTo: AuctionDto = {
+      id: 100,
+      currentPrice: 10000000,
+      auctionTime: "2022-12-31",
+      fullName: "Tien",
+      userId: 5,
+      productId: 7,
+      maxCurrentPrice: 10000000
+    };
+    this.stompClient.send('/app/auctions', {}, JSON.stringify(auctionDto));
+    console.log('auction-add', auctionDto);
+  }
+
+  setProductIdDetail(id: any) {
+    this.productIdDetail = id;
   }
 
 }

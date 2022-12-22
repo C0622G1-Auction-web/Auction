@@ -81,6 +81,9 @@ li {
   /*color: white;*/
 
 }
+.currency__title::first-letter {
+  color: transparent;
+}
 #title-seller {
 
   color: white;
@@ -143,4 +146,3 @@ li {
   right: 200px;
   margin-right: 8px;
 }
-

@@ -1,38 +1,91 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {ProductService} from "../../service/product/product.service";
 import {PageProduct} from "../../model/product/page-product";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Category} from "../../model/product/category";
+import {CategoryService} from "../../service/product/category.service";
+import {ImgUrlProduct} from "../../model/product/img-url-product";
+import {formatCurrency, getCurrencySymbol} from "@angular/common";
+import {UserService} from "../../service/user/user.service";
+import {SocketService} from "../../service/socket/socket.service";
+import {Title} from "@angular/platform-browser";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  pageProducts: PageProduct[];
-  rfSearch: FormGroup;
 
-  constructor(private _productService: ProductService, private _formBuilder: FormBuilder) { }
+
+export class HomeComponent implements OnInit {
+  pageProducts: PageProduct;
+  rfSearch: FormGroup;
+  categorys: Category[];
+  pageHasNext: number = 0;
+  categoryIDSearch = '';
+  auctionStatusId = '';
+  isSelectedAuction = '';
+  topUser: any;
+
+  constructor(private _productService: ProductService,
+              private _formBuilder: FormBuilder,
+              private _categoryService: CategoryService,
+              private _userService: UserService,
+              private _socketService: SocketService,
+              private _titleService: Title,
+              private _route: Router) {
+
+  }
 
   ngOnInit(): void {
+    this._titleService.setTitle('Trang Chủ');
     this.rfSearch = this._formBuilder.group({
-       name: [''],
-       categoryID: [''],
-       rangePrice: [''],
-       productAuctionStatus: ['']
+      name: [''],
+      categoryID: [''],
+      rangePrice: ['999999999999999999'],
+      productAuctionStatus: ['']
     });
-    this.gotoPage();
+    // this._socketService.getAllProduct(this.rfSearch.value);
+    // this._socketService.connect();
+    // this._productService.setRfSearchHome(this.rfSearch.value);
+    this._categoryService.getListCategory().subscribe(data => {
+      this.categorys = data;
+    });
+    // this._socketService.pageHome.subscribe(data => {
+    //   this.pageProducts = data;
+    //   console.log('product',  this.pageProducts)
+    // })
+    this.gotoPage(this.rfSearch.value);
+    this.selectedChangImage();
+    this.getTop()
+
   }
 
   /**
    * Created: SangDD
-   * Function: N/A doing...
+   * Function: Get product and seach...
    * Date: 15/11/2022
    */
-  gotoPage() {
+  gotoPage(rfSearch: any) {
     this._productService.getAllAndSearch(this.rfSearch.value).subscribe(data => {
       this.pageProducts = data;
       console.log(data);
+    });
+    this.pageHasNext = 0;
+  }
+
+  /**
+   * Created: SangDD
+   * Function: get all products and search, by page number
+   * Date: 15/11/2022
+   */
+  gotoPageNumber(rfSearch: any, pageNumber: any) {
+    this.pageHasNext += 1;
+    this._productService.getAllAndSearchToPage(this.rfSearch.value, pageNumber).subscribe(data => {
+      data.content.forEach(value => {
+        this.pageProducts.content.push(value);
+      });
     });
   }
 
@@ -40,11 +93,79 @@ export class HomeComponent implements OnInit {
    * Created: SangDD
    * Function: set value for rfSearch
    * Date: 15/11/2022
-   * @param s
    */
-  setValueCategorySearch(s: string) {
-   this.rfSearch.value.name = s;
-   console.log(this.rfSearch.value);
-   this.gotoPage();
+  setValueCategorySearch(categoryId: any,
+                         rangePrice: any,
+                         productAuctionStatus = '',
+                         name: string) {
+    this.categoryIDSearch = categoryId;
+    this.rfSearch.setValue({
+      name: name.trim(),
+      categoryID: categoryId + ''.trim(),
+      rangePrice: rangePrice + ''.trim(),
+      productAuctionStatus: productAuctionStatus
+    })
+    this.gotoPage(this.rfSearch.value);
+  }
+
+  setValueAuctionProductStatusSearch(categoryId: any,
+                                     rangePrice: any,
+                                     productAuctionStatus: string,
+                                     name: string) {
+    if (this.isSelectedAuction == productAuctionStatus) {
+      productAuctionStatus = '';
+    }
+    this.auctionStatusId = productAuctionStatus;
+    this.rfSearch.setValue({
+      name: name.trim(),
+      categoryID: categoryId + ''.trim(),
+      rangePrice: rangePrice + ''.trim(),
+      productAuctionStatus: productAuctionStatus
+    });
+    this.isSelectedAuction = productAuctionStatus;
+    this.gotoPage(this.rfSearch.value);
+  }
+
+  /**
+   * Created: SangDD
+   * date: 18/12/2022
+   * @param event
+   * @param i
+   * @param j
+   */
+  changeImage(event: any, i: any, j: number) {
+    const src = event.target.src;
+    const imgs = document.querySelectorAll('.img-selected' + i);
+    document.getElementById('image__main' + i).setAttribute('src', src);
+    imgs.forEach(value => {
+      if (value.getAttribute('value') == j + '') {
+        value.classList.add('actived');
+      } else {
+        value.classList.remove('actived');
+      }
+    });
+  }
+
+  selectedChangImage() {
+    setTimeout(() => {
+      const imgF = document.querySelectorAll('.carousel__images');
+      console.log(imgF);
+      imgF.forEach(value => {
+        value.children[0]?.classList.add('actived');
+      });
+    }, 500)
+  }
+
+  getTop() {
+    this._userService.findTopUser().subscribe(data => {
+      this.topUser = data;
+      console.log(data);
+    })
+  }
+
+  setValueProductId(id: any) {
+    this._productService.setProductDetailId(id);
+    this._route.navigate(['auction-detail', id]);
+    console.log('bat dau truyen ', id);
   }
 }
