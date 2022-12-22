@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GuideService} from "../../../service/guide/guide.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {ImgUrlGuideService} from "../../../service/guide/img-url-guide.service";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
 import {finalize} from "rxjs/operators";
 import {Guide} from "../../../model/guide/guide";
@@ -35,7 +35,8 @@ export class GuideEditComponent implements OnInit {
               private _storage: AngularFireStorage,
               private _imgUrlGuideService: ImgUrlGuideService,
               private _activatedRouter: ActivatedRoute,
-              private _toastService: ToastrService) {
+              private _toastService: ToastrService,
+              private _route:Router) {
   }
 
   ngOnInit(): void {
@@ -64,11 +65,6 @@ export class GuideEditComponent implements OnInit {
       this.guide = this.editGuideForm.value;
       console.log(this.editGuideForm.value)
       this._guideService.update(this.guide).subscribe(data => {
-        this._toastService.success('Cập nhật hướng dẫn thành công', 'Update Guide!', {
-            positionClass: 'toast-bottom-right',
-            timeOut: 4000,
-          }
-        )
         if (this.imgCreate.length !== 0) {
           for (let i = 0; i < this.imgCreate.length; i++) {
             const image: ImgUrlGuideDto = {
@@ -81,6 +77,12 @@ export class GuideEditComponent implements OnInit {
             })
           }
         }
+        this._toastService.success('Cập nhật hướng dẫn thành công', 'Update Guide!', {
+            positionClass: 'toast-bottom-right',
+            timeOut: 4000,
+          }
+        )
+        this._route.navigateByUrl("/guide")
       })
       if (this.idImageList.length !== 0) {
         for (let j = 0; j < this.idImageList.length; j++) {
@@ -150,5 +152,7 @@ export class GuideEditComponent implements OnInit {
 
   resetEditForm() {
     this.ngOnInit();
+    this.imgCreate=[];
   }
+
 }

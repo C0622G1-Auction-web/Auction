@@ -1,0 +1,90 @@
+<div style="margin-left: 110px; margin-right: 110px">
+  <div class="row">
+    <h1 class="text-center" style="color: #fa6132">LỊCH SỬ ĐĂNG KÝ ĐẤU GIÁ</h1>
+
+  </div>
+  <div>
+    <div>
+      <div class="row" id="title">
+        <marquee direction="right"
+                 direction="left"
+                 behavior="alternate">
+          <img width="70%" height="200px" id="img" onclick="changeImage()"
+               src="https://static.daugiarongviet.vn/uploaded/slide/dau-gia-rong-viet-1_1663042382.jpg"
+               alt="">
+
+        </marquee>
+
+        <div class="row" id="center">
+          <table class="table table-warning table-striped-columns">
+            <thead>
+            <tr class="text-center">
+              <th>STT</th>
+              <th>Tên Sản Phẩm</th>
+              <th>Thông Tin Sản Phẩm</th>
+              <th>Giá Đăng Ký</th>
+              <th>Ngày Đăng Ký</th>
+              <th>Tình Trạng</th>
+            </tr>
+            </thead>
+            <h3 class="text-danger text-center" *ngIf="pageAuctionProductHistory == null">Bạn không có lịch sử đăng ký</h3>
+            <tbody class="text-center">
+            <tr  *ngFor="let item of pageAuctionProductHistory.content ;index as i">
+              <td class="text-center">{{i + 1 + (page - 1) * pageSize}}</td>
+              <td>{{item.nameProduct}}</td>
+              <td >{{item.description|CustomPipe}}</td>
+              <td>{{item.priceNow|  currency:'VND':' vnd ' }}</td>
+              <td>{{item.registerDay|date:'dd/MM/yyyy'}}</td>
+              <td class="text-danger">{{item.auctionStatus}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+              <div>
+                <div *ngIf="pageAuctionProductHistory">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item"><a class="page-link"
+                                               [ngClass]="pageAuctionProductHistory.first ? 'disabled': ''"
+                                               (click)="gotoPage(pageAuctionProductHistory.number - 1)">Trang trước</a>
+                      </li>
+                      <li class="page-item active"><a class="page-link">
+                        {{pageAuctionProductHistory.number + 1}}/{{pageAuctionProductHistory.totalPages}}</a></li>
+                      <li class="page-item"><a class="page-link"
+                                               [ngClass]="pageAuctionProductHistory.last ? 'disabled': ''"
+                                               (click)="gotoPage(pageAuctionProductHistory.number + 1)">TRang sau</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        var index = 1;
+        changeImage = function () {
+          var imgs = ["https://static.daugiarongviet.vn/uploaded/slide/dau-gia-rong-viet-1_1663042382.jpg",
+            "https://hoc11.vn/wp-content/uploads/2021/11/tinh-nang-dau-gia-tren-shopee-live.png",
+            "https://i.ytimg.com/vi/z9iPlspJJ1U/maxresdefault.jpg",
+            "http://blog.abit.vn/wp-content/uploads/2020/04/cach-san-deal-tiki3-2.png",];
+          document.getElementById('img').src = imgs[index];
+          index++;
+          if (index == 4) {
+            index = 0;
+          }
+        }
+        setInterval(changeImage, 2000);
+      </script>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+              crossorigin="anonymous">
+
+      </script>
+    </div>
+  </div>
+</div>

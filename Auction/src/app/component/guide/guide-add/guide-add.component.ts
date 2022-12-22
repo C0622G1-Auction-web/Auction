@@ -5,7 +5,7 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {ImgUrlGuideDto} from "../../../model/guide/img-url-guide";
 import {ImgUrlGuideService} from "../../../service/guide/img-url-guide.service";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
@@ -30,7 +30,8 @@ export class GuideAddComponent implements OnInit {
               private _storage:AngularFireStorage,
               private _imgUrlGuideService: ImgUrlGuideService,
               private _activatedRouter: ActivatedRoute,
-              private _toastService: ToastrService) { }
+              private _toastService: ToastrService,
+              private _route:Router) { }
 
   ngOnInit(): void {
     this.guideForm =this._formBuilder.group({
@@ -44,11 +45,7 @@ export class GuideAddComponent implements OnInit {
   * */
   createGuide(){
     this._guideService.create(this.guideForm.value).subscribe(data => {
-      this._toastService.success('Thêm mới hướng dẫn thành công', 'Create Guide!', {
-        positionClass: 'toast-bottom-right',
-          timeOut: 4000,
-        }
-      )
+
       if (this.imgCreate.length !== 0) {
         for (let i = 0; i < this.imgCreate.length; i++) {
           const image: ImgUrlGuideDto = {
@@ -61,6 +58,12 @@ export class GuideAddComponent implements OnInit {
           })
         }
       }
+      this._toastService.success('Thêm mới hướng dẫn thành công', 'Create Guide!', {
+          positionClass: 'toast-bottom-right',
+          timeOut: 4000,
+        }
+      )
+      this._route.navigateByUrl('/guide');
     });
   }
 
@@ -102,4 +105,8 @@ export class GuideAddComponent implements OnInit {
     console.log(i)
   }
 
+  resetForm() {
+    this.ngOnInit();
+    this.imgCreate=[];
+  }
 }

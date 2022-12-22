@@ -1,50 +1,121 @@
 *:not(i) {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  font-size: 12px;
 }
 
-p{
-  margin-left: 0;
-}
-.card{
+.card {
   background-image: linear-gradient(to bottom right, #fa6132, #d74836);
   color: white;
   border-color: lightslategray;
 }
 
-img.center{
+img.center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 200px;
   float: right;
-  margin-top: 10px;
   opacity: inherit;
 }
-#order{
-  border-width:0.5px;
-  border-style:solid;
-  border-color:lightslategray;
-}
-#pay1, #pay2 {
-  border-width:0.5px;
-  border-style:solid;
-  border-color:lightslategray;
-}
-#address{
 
-}
-#company{
-  display: block;
-  margin-right: auto;
-}
-#image, #image-1, #image-2{
+#image, #image-1, #image-2 {
   height: 75px;
   width: 75px;
 }
-.modal{
-  --bs-modal-width: 1000px;
+
+#pills-home-tab {
+  background-color: #fa6132;
+}
+
+#pills-home-tab.active {
+  background-color: #d74836;
+}
+
+#pills-home-tab {
+  color: whitesmoke;
+}
+
+#pills-profile-tab {
+  background-color: #fa6132;
+}
+
+#pills-profile-tab.active {
+  background-color: #d74836;
+}
+
+#pills-profile-tab {
+  color: whitesmoke;
+}
+
+#pills-contact-tab {
+  background-color: #fa6132;
+}
+
+#pills-contact-tab.active {
+  background-color: #d74836;
+}
+
+#pills-contact-tab {
+  color: whitesmoke;
+}
+
+*:not(i) {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.card {
+  background-image: linear-gradient(to bottom right, #fa6132, #d74836);
+  color: white;
+  border-color: lightslategray;
+}
+
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  float: right;
+  opacity: inherit;
+}
+
+#image, #image-1, #image-2 {
+  height: 75px;
+  width: 75px;
+}
+
+#pills-home-tab {
+  background-color: #fa6132;
+}
+
+#pills-home-tab.active {
+  background-color: #d74836;
+}
+
+#pills-home-tab {
+  color: whitesmoke;
+}
+
+#pills-profile-tab {
+  background-color: #fa6132;
+}
+
+#pills-profile-tab.active {
+  background-color: #d74836;
+}
+
+#pills-profile-tab {
+  color: whitesmoke;
+}
+
+#pills-contact-tab {
+  background-color: #fa6132;
+}
+
+#pills-contact-tab.active {
+  background-color: #d74836;
+}
+
+#pills-contact-tab {
+  color: whitesmoke;
 }

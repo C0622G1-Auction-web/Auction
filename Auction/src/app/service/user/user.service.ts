@@ -68,7 +68,7 @@ export class UserService {
    * @return User
    */
   findUserById(value: number): Observable<User> {
-    return this._httpClient.get<User>(environment.userUrl + "find/" + value);
+    return this._httpClient.get<User>(environment.userUrl + "/find/" + value);
   }
 
 
@@ -119,4 +119,19 @@ export class UserService {
   getAllUserChat():Observable<User[]>{
     return  this._httpClient.get<User[]>('http://localhost:8080/api/v1/users/getAll');
   }
+  findAllUser(): Observable<User[]> {
+    return this._httpClient.get<User[]>(environment.uri_api_find_all_user_v1)
+  }
+  createUser(user: User): Observable<User> {
+    console.log(user)
+    return this._httpClient.post<User>(environment.uri_api_create_user_v1_user, user);
+  }
+  findUserByIdServer(userId: number): Observable<User> {
+    return this._httpClient.get<User>(environment.uri_api_find_by_id_user_v1_user +'/' + userId);
+  }
+
+  updateUser(id: number, user: User): Observable<User> {
+    return this._httpClient.put<User>(environment.uri_api_update_user_v1_user + '/' + user.id, user);
+  }
+
 }

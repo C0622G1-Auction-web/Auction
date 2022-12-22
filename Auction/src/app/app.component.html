@@ -2,3 +2,4 @@
 <router-outlet></router-outlet>
 <app-footer></app-footer>
 <app-chat-user *ngIf="checklogged && accountRole != 'ROLE_ADMIN'"></app-chat-user>
+<app-chat-visitor *ngIf="!checklogged"></app-chat-visitor>

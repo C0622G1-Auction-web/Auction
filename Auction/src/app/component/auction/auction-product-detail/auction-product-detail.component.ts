@@ -59,7 +59,7 @@ export class AuctionProductDetailComponent implements OnInit {
           currentPrice: [this.productDetail.maxCurrentPrice],
           userId: [5],
           productId: [+this.idProductDetail]
-        }, {validators: [this.checkAuctionPrice]})
+        }, {validators: [this.checkAuctionPrice]});
         this.selectedChangImage();
       }
     )
@@ -109,8 +109,6 @@ export class AuctionProductDetailComponent implements OnInit {
     titleSeller.style.backgroundColor = "#ffffff";
     titleSeller.style.color = 'black';
     titleBuyer.style.color = 'white';
-
-
   }
 
   /**
@@ -207,10 +205,15 @@ export class AuctionProductDetailComponent implements OnInit {
   selectedChangImage() {
     setTimeout(() => {
       const imgF = document.querySelectorAll('.carousel__images');
+      const imgC = document.querySelectorAll('.render__description img');
+      console.log(imgC);
       imgF.forEach(value => {
         value.children[0].classList.add('actived');
       });
-    }, 500)
+      console.log()
+      imgC.forEach((value, key) => {
+        value.classList.add('d-block', 'w-100');
+      });
+    }, 300);
   }
-
 }

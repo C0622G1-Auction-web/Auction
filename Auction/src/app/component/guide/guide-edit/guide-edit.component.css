@@ -16,10 +16,12 @@ form label {
 .guide {
   margin-top: 32px;
   margin-bottom: 24px;
+  min-height: 60vh;
 }
 
 #guideform {
   padding: 32px;
+  min-height: 50vh;
 }
 .remove_img {
   padding: 3px;
@@ -27,7 +29,6 @@ form label {
   bottom: 0;
   right: 0;
   margin: 0;
-  box-shadow: 1px, 1px, 4px, rgba(0, 0, 0, 0.35);
   display: block;
   background-color: #ff0000a6;
   border-radius: 2px;

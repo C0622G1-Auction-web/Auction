@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   categoryIDSearch = '';
   auctionStatusId = '';
   isSelectedAuction = '';
-  topUser: any;
+  natedProduct: any;
 
   constructor(private _productService: ProductService,
               private _formBuilder: FormBuilder,
@@ -49,7 +49,8 @@ export class HomeComponent implements OnInit {
     });
     this.gotoPage(this.rfSearch.value);
     this.selectedChangImage();
-    this.getTop()
+    this.getTop();
+
   }
 
   /**
@@ -60,6 +61,9 @@ export class HomeComponent implements OnInit {
   gotoPage(rfSearch: any) {
     this._productService.getAllAndSearch(this.rfSearch.value).subscribe(data => {
       this.pageProducts = data;
+      if(!this.natedProduct) {
+        this.natedProduct = data.content.slice(0, 4);
+      }
       console.log(data);
     });
     this.pageHasNext = 0;

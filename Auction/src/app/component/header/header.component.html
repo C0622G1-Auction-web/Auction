@@ -1,4 +1,4 @@
-<div class="container header">
+<div class="container-fluid  header">
   <div class="container-fluid">
     <div class="row">
       <div class="header__menu">
@@ -14,13 +14,19 @@
                                 </span>
           </li>
           <li [routerLink]="['/user/list']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
-            <span class="menu__link ">Quản lý người dùng</span>
+            <span class="menu__link ">Quản Lý Người Dùng</span>
           </li>
           <li [routerLink]="['/transaction']"*ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
-            <span class="menu__link ">Quản lý giao dịch</span>
+            <span class="menu__link ">Quản Lý Giao Dịch</span>
           </li>
           <li [routerLink]="['auction/product/add']" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="menu__item">
-            <span class="menu__link ">Đấu giá sản phẩm</span>
+            <span class="menu__link ">Đấu Giá Sản phẩm</span>
+          </li>
+          <li [routerLink]="['/cart']" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="menu__item">
+            <span class="menu__link" routerLink="/cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Giỏ Hàng
+            </span>
           </li>
           <li class="menu__item">
                                 <span class="menu__link">
@@ -30,7 +36,7 @@
           </li>
         </ul>
         <div *ngIf="!checkLogin" class="login d-flex" style="display: none">
-          <button class="login__btn mx-2">
+          <button routerLink="/user/create" class="login__btn mx-2">
             <i class="fa-solid fa-circle-user"></i>
             Đăng ký
           </button>
@@ -41,18 +47,26 @@
         </div>
         <div *ngIf="checkLogin">
           <div class="user__info">
-            <span class="mx-2 text-white">Xin chào {{nameUser}}</span>
+            <span class="mx-2 text-white"><span style="font-size: 14px">Xin chào</span> {{nameUser}}</span>
             <img src="{{currentUser.avatar}}" class="avatar">
-            <div>
-              <ul class="btn__logout">
-                <li>
-                  <span (click)="logOut()" class="b__logout">Đăng xuất</span>
+              <ul class="user__info__group">
+                <i class=" up__info fa-solid fa-caret-up"></i>
+                <li class="user__info__item" routerLink="/user/update/{{currentUser.id}}" *ngIf="checkLogin" >
+                  <span>Hồ sơ cá nhân</span>
                 </li>
-                <li routerLink="/chat/support" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" >
-                  <span class="b__logout">Phòng chat admin</span>
+                <li class="user__info__item" routerLink="/chat/support" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" >
+                  <span>Phòng chat admin</span>
+                </li>
+                <li *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="user__info__item">
+                  <span routerLink="historyProduct">Lịch sử đơn hàng</span>
+                </li>
+                <li *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="user__info__item">
+                  <span routerLink="historyAuctionProduct">Lịch sử đấu giá</span>
+                </li>
+                <li class="user__info__item mb-2">
+                  <span (click)="logOut()">Đăng xuất</span>
                 </li>
               </ul>
-            </div>
           </div>
 
         </div>
@@ -84,7 +98,7 @@
         </li>
       </ul>
       <form class="d-flex justify-content-center" role="search">
-        <button class=" w-50 login__btn mx-2">
+        <button [routerLink]="['/user/create']" class=" w-50 login__btn mx-2">
           <i class="fa-solid fa-circle-user"></i>
           Đăng ký
         </button>
@@ -95,4 +109,5 @@
       </form>
     </div>
   </div>
+
 </nav>

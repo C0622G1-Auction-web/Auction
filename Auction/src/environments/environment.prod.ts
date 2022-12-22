@@ -1,4 +1,4 @@
-const apiUrl =  'https://trungdc.synology.me:5152/auction';
+const apiUrl = 'https://trungdc.synology.me:5152/auction';
 export const environment = {
   production: false,
   firebaseConfig: {
@@ -13,7 +13,7 @@ export const environment = {
   },
   categoryUrl: apiUrl + '/api/v1/products/category',
   priceStepUrl: apiUrl + '/api/v1/products/priceStep',
-  transactionUrl: apiUrl + '/auction/api/transaction',
+  transactionUrl: apiUrl + '/api/v1/auction/transaction',
   productSearchUrl: apiUrl + '/api/v1/products/search',
   userUrl: apiUrl + '/api/v1/users',
   urlAddAccountUser: apiUrl + '/api/user/v1/add',
@@ -47,8 +47,16 @@ export const environment = {
   uri_api_create_user_v1_user: apiUrl + '/api/v1/users/create',
   api_url_create_img_url: apiUrl + '/api/v1/products/img/create',
   uri_api_update_user_v1_user: apiUrl + '/api/v1/users/update',
-  uri_api_find_by_id_user_v1_user: apiUrl + '/api/v1/users/find/',
+  uri_api_find_by_id_user_v1_user: apiUrl + '/api/v1/users/getUserById',
+  uri_api_find_all_user_v1: apiUrl + '/api/v1/users/findAll',
+  api_url_product_history_list: apiUrl + '/api/v1/products/list/',
+  api_url_product_auction_canceled: apiUrl + '/api/v1/products/canceled/',
+  api_url_product_auction_history: apiUrl + '/api/v1/auction/list/',
+  NQV_LOCK_ACCOUNT:apiUrl + '/api/v1/users/lockUser',
+  NQV_GET_ACCOUNT_BY_ID_API: apiUrl + '/api/v1/accounts/getAccountById',
   LOGIN_API: apiUrl + '/api/auth/login',
   GOOGLE_LOGIN_API: apiUrl + '/api/auth/google',
-  DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json'
+  DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
+  api_url_shipping: apiUrl + '/api/v1/payments/update',
+  api_url_order_status_1: apiUrl + 'api/v1/payments/find-by-list-id',
 };

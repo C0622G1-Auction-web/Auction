@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Product} from '../../model/product/product';
 import {environment} from '../../../environments/environment';
 import {Auction} from '../../model/auction/auction';
+import {PageAuctionProductHistory} from "../../model/auction/page-auction-product-history";
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,16 @@ export class AuctionService {
    */
   addNewAuction(auction: Auction): Observable<Auction> {
     return this._httpClient.post<Auction>(environment.API_URL_AUCTION, auction);
+  }
+
+  /**
+   * Created by: AnhTDQ,
+   * Date created: 16/12/2022
+   * Function:  show list product of user
+   * @return Page prodcut
+   */
+
+  findAll(id: number, curPage: number): Observable<PageAuctionProductHistory> {
+    return this._httpClient.get<PageAuctionProductHistory>(environment.api_url_product_auction_history + id + '?page=' + curPage);
   }
 }

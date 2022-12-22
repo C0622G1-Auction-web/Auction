@@ -1,4 +1,4 @@
-<div class="app container">
+  <div class="app container">
   <div class="my__slide">
     <div class="container-fluid">
       <div class="row mt-2">
@@ -49,38 +49,18 @@
         </div>
         <div class="col-lg-2 sidebar__right">
           <div class="my__card w-100" style="border: none;">
-            <div class="my__card__body">
-              <p class="d-flex justify-content-between">
-                <span><i class="fa-solid fa-crown text-warning"></i> 1</span>
-                <span class="text-danger">đ 90.000.000</span>
+            <div class="my__card__body mb-2" *ngFor="let product of natedProduct; let i = index">
+              <p class="d-flex justify-content-between mb-2">
+                <span class="">{{i + 1}}<i class="mx-2 fa-solid fa-crown text-warning"></i></span>
+                <span class="product__price--one text-danger">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></span>
               </p>
-            </div>
-            <img
-              src="https://gomtruongan.vn/uploads/products/15082022074910/bat-tu-bao-ty-huu-da-ngoc-hoang-long-kem-de-co-nho_15082022074910.jpg"
-              height="120px" class="d-block w-100" alt="">
-
-          </div>
-          <div class="my__card w-100" style="border: none;">
-            <div class="my__card__body">
-              <p class="d-flex justify-content-between">
-                <span><i class="fa-solid fa-crown text-warning"></i> 2</span>
-                <span class="text-danger">đ 80.000.000</span>
+              <p class="d-flex flex-wrap justify-content-between">
+                <span title="{{product?.name}}" class="card__title--one">{{product?.name}}</span>
               </p>
+              <img
+                src="{{product.imgUrlProducts[0]?.url}}"
+                class="d-block w-100" alt="">
             </div>
-            <img
-              src="https://gomtruongan.vn/uploads/products/11032021094801/dieu-bat-men-ran-hoa-sen-boc-dong_11032021094801.jpg"
-              height="120px" class="d-block w-100" alt="">
-          </div>
-          <div class="my__card w-100" style="border: none;">
-            <div class="my__card__body">
-              <p class="d-flex justify-content-between">
-                <span><i class="fa-solid fa-crown text-warning"></i> 3</span>
-                <span class="text-danger">đ 80.000.000</span>
-              </p>
-            </div>
-            <img
-              src="https://gomtruongan.vn/uploads/products/11032021075646/dieu-bat-men-ran-boc-dong-son-thuy_11032021075646.jpg"
-              height="120px" class="d-block w-100" alt="">
           </div>
         </div>
       </div>

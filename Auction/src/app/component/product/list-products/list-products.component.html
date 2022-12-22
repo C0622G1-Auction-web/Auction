@@ -38,7 +38,7 @@
     </div>
 
     <div class="col-lg-10" id="content">
-      <h1 class="mt-5">Danh sách sản phẩm</h1>
+      <h1 class="mt-5">Danh Sách Sản Phẩm</h1>
       <hr>
       <div class="row" id="search-row">
         <form *ngIf="rfSearch" [formGroup]="rfSearch"
@@ -121,14 +121,14 @@
           <thead>
           <tr>
             <th width=30%>Tên Sản phẩm</th>
-            <th>Chủng loại</th>
-            <th width=10%>Người đăng</th>
-            <th width=10%>Giá ban đầu (VNĐ)</th>
-            <th width=10%>Trạng thái duyệt</th>
+            <th width=11%>Chủng loại</th>
+            <th width=11%>Người đăng</th>
+            <th width=11%>Giá ban đầu (VNĐ)</th>
+            <th width=11%>Trạng thái duyệt</th>
             <th width=10%>Ngày đấu giá</th>
-            <th width=10%>Tình trạng</th>
-            <th>Sửa</th>
-            <th class="text-center">
+            <th width=11%>Tình trạng</th>
+            <th width=6%>Sửa</th>
+            <th class="text-center" width=10>
               <button class="btn " (click)="addAllToDelete()">
                 <i class="fa-regular fa-trash-can delete-group-icon"></i>
               </button>
@@ -138,19 +138,24 @@
           <tbody>
           <tr *ngFor="let item of pageProducts.content">
             <td><a type="button" class="view"
-                   [routerLink]="item.reviewStatusId == 2 ? ['/auction/',item.id] :['/products/review/',item.id]">
+                   [routerLink]="item.reviewStatusId == 2 ? ['/auction-detail/',item.id] :['/products/review/',item.id]">
               <span class="text-decoration-underline">{{item.name}}</span></a>
             </td>
             <td>{{item.category}}</td>
             <td>{{item.userName}}</td>
             <td class="text-end">{{item.initialPrice | number}}</td>
             <td>{{item.reviewStatus}}</td>
-            <td class="text-end">{{item.startTime | date : 'dd/MM/y H:mm:ss'}}</td>
+            <td class="text-end">{{item.startTime}}</td>
             <td>{{item.auctionStatus}}</td>
-            <td class="text-center"><a [routerLink]="['/product/edit/',item.id]">
-              <i class="fa-regular fa-pen-to-square edit-icon"></i></a></td>
+            <td class="text-center">
+              <button [routerLink]="['/product/edit/',item.id]" style="border: none"
+                      [disabled]="item.auctionStatus != 'Chưa đấu giá'">
+                <i class="fa-regular fa-pen-to-square edit-icon"
+                   [style]="item.auctionStatus == 'Chưa đấu giá'? 'color: green': 'color:#6E6766'"></i></button>
+            </td>
             <td class="text-center">
               <input class="delete-checkbox" [checked]="deleteIds.includes(item.id)" type="checkbox"
+                     [disabled]="item.auctionStatus == 'Đã đấu giá thành công' || item.auctionStatus == 'Đang đấu giá'"
                      (click)="addToDelete(item.id)"/>
             </td>
           </tr>
@@ -169,20 +174,30 @@
               <ul class="pagination">
                 <li class="page-item"><a class="page-link"
                                          [ngClass]="pageProducts.first ? 'disabled': ''"
-                                         (click)="gotoPage(0)">Trang đầu</a></li>
-                <li class="page-item"><a class="page-link"
-                                         [ngClass]="pageProducts.first ? 'disabled': ''"
-                                         (click)="gotoPage(pageProducts.number - 1)">Trang trước</a>
+                                         (click)="gotoPage(0)"> << </a></li>
+                <li class="page-item" *ngIf="pageProducts.number - 2 > 0">
+                  <a class="page-link" (click)="gotoPage(pageProducts.number - 3)">{{pageProducts.number - 2}}</a>
                 </li>
-                <li class="page-item active"><a class="page-link">
-                  {{pageProducts.number + 1}}/{{pageProducts.totalPages}}</a></li>
+                <li class="page-item" *ngIf="pageProducts.number - 1 > 0">
+                  <a class="page-link" (click)="gotoPage(pageProducts.number - 2)">{{pageProducts.number - 1}}</a>
+                </li>
+                <li class="page-item" *ngIf="pageProducts.number > 0">
+                  <a class="page-link" (click)="gotoPage(pageProducts.number   - 1)">{{pageProducts.number}}</a></li>
+
+                <li class="page-item active"><a class="page-link">{{pageProducts.number + 1}}</a></li>
+
+                <li class="page-item" *ngIf="pageProducts.number + 2 <= pageProducts.totalPages">
+                  <a class="page-link" (click)="gotoPage(pageProducts.number + 1)">{{pageProducts.number + 2}}</a>
+                </li>
+                <li class="page-item" *ngIf="pageProducts.number + 3 <= pageProducts.totalPages">
+                  <a class="page-link" (click)="gotoPage(pageProducts.number + 2)">{{pageProducts.number + 3}}</a>
+                </li>
+                <li class="page-item" *ngIf="pageProducts.number + 4 <= pageProducts.totalPages">
+                  <a class="page-link" (click)="gotoPage(pageProducts.number + 3)">{{pageProducts.number + 4}}</a>
+                </li>
                 <li class="page-item"><a class="page-link"
                                          [ngClass]="pageProducts.last ? 'disabled': ''"
-                                         (click)="gotoPage(pageProducts.number + 1)">Trang sau</a>
-                </li>
-                <li class="page-item"><a class="page-link"
-                                         [ngClass]="pageProducts.last ? 'disabled': ''"
-                                         (click)="gotoPage(pageProducts.totalPages - 1)">Trang cuối</a>
+                                         (click)="gotoPage(pageProducts.totalPages - 1)"> >> </a>
                 </li>
               </ul>
             </nav>
@@ -212,8 +227,9 @@
                 aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        Xoá sản phẩm:
         <div *ngFor="let item of deleteProducts">
-          Xóa sản phẩm <strong style="color: red">{{item.name}}</strong>?
+          <strong style="color: red">{{item.name}}</strong>?
         </div>
         <div class="modal-footer">
           <button id="deleteCancel" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ bỏ</button>

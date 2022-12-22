@@ -77,6 +77,10 @@ export class ChatUserComponent implements OnInit {
 
 
     }
+    this.form = this.formBuilder.group({
+      'message': ['', [Validators.required]],
+      'username': [this.username]
+    });
 
     const dbRef = firebase.database().ref('/chat/' + this.username);
     dbRef.on('value', (snapshot: any) => {

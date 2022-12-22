@@ -1,3 +1,8 @@
+/*Create by QuangND
+Component for chat of visitor in web
+Create date 21/12/2022
+* */
+
 import { Component, OnInit } from '@angular/core';
 import firebase from "firebase";
 import {FirebaseApp} from "@angular/fire";
@@ -20,16 +25,14 @@ export class ChatVisitorComponent implements OnInit {
   db: Database;
   form: FormGroup;
   idVisitor:string;
-  username = 'Visitor';
+  username = 'Khách';
   message = '';
-  chatInfor: Chat;
   chats: Chat[] = [];
-  constructor(private formBuilder: FormBuilder,
-              private _visitorService: ChatVisitorService) {
+  constructor(private formBuilder: FormBuilder,) {
     this.app = initializeApp(environment.firebaseConfig);
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
-      'username': ['Visitor']
+      'username': ['Khách']
     });
     firebase.database().ref('chat').child('khach').remove();
   }
@@ -37,8 +40,6 @@ export class ChatVisitorComponent implements OnInit {
   ngOnInit(): void {
     const idVisitor= uuidv4();
     this.idVisitor= idVisitor.toString();
-    this._visitorService.setlistVisitor(this.idVisitor)
-    console.log(this._visitorService.listVisitor());
     const dbRef = firebase.database().ref('chat').child('khach').child(idVisitor);
     dbRef.on('value', (snapshot: any) => {
       this.chats = [];
@@ -46,6 +47,7 @@ export class ChatVisitorComponent implements OnInit {
       for (let id in data) {
         this.chats.push(data[id])
       }
+      this.autoScroll();
     })
   }
 
@@ -60,6 +62,8 @@ export class ChatVisitorComponent implements OnInit {
       'message': ['', [Validators.required]],
       'username': [chat.username],
     });
+    this.heiht();
+    this.autoScroll();
 
   }
   openForm() {
@@ -70,5 +74,18 @@ export class ChatVisitorComponent implements OnInit {
   closeForm() {
     document.getElementById("myForm").style.display = "none";
   }
+  autoScroll() {
+    setTimeout(function () {
+      document.getElementById('scroll').scrollTop = document.getElementById('scroll').scrollHeight;
+    }, 300)
+  }
 
+  heiht() {
+    setTimeout(function () {
+      document.querySelectorAll("textarea").forEach(value => {
+        console.log('height', value.scrollHeight);
+        value.setAttribute("style", "height:" + value.scrollHeight + "px;overflow-y:hidden;");
+      });
+    });
+  }
 }

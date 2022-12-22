@@ -45,16 +45,12 @@
   color: white;
   background-color: brown;
 }
-.avatar{
-  font-size: 35px;
-  width: 3em;
-  height: 3em;
+.alo{
+  width: 150px!important;
+  height: 150px!important;
   border-radius: 50%;
-  background: #008578;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.avatar::after{
-  content: attr(data-label);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
 }

@@ -1,208 +1,400 @@
 <form *ngIf="updateUserForm" [formGroup]="updateUserForm" (ngSubmit)="updateUser(id)">
-<div  style="background-color: #eee">
-  <div class="container">
-    <div class="borderFull">
-      <div class="row" style="padding:32px 0">
-        <div class="profile" style="background-color: white;border-radius: 20px">
-          <div class="bgd d-flex align-items-center w-50">
-            <div class="h-100 w-100"
-                 style="background-size: cover; background: url('https://i.pinimg.com/736x/43/69/a0/4369a065ab04219b041ef2cd23387255.jpg') no-repeat;border-top-left-radius: 20px; border-bottom-left-radius: 20px">
-            </div>
-          </div>
-          <div class="w-50 p-3">
-            <div class="row">
-              <div class="text-center">
-                <div class="row mb-3" style="font-size: 20px">
-                  <h3>Sửa hồ sơ cá nhân</h3>
-                </div>
-              </div>
-              <div class="col-lg-3"></div>
-            </div>
-            <div class="row" style="height: 10px"></div>
-            <div class="row">
-              <div class="col-lg-3" style="padding-left: 42%;">
-                <input  type="file" id="file" style=" font-size: 35px;width: 3em;height: 3em;border-radius: 50%;background: #008578;"
-                        #userPhoto
-                        multiple
-                        (change)="showPreview($event)"
-                        name="image"
-                        autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
-              </div>
-              <div *ngFor=" let item of imgs">
-                <img style="height: 200px; width: 200px" src="{{item}}">
+  <div style="background-color: #eee">
+    <div class="container">
+      <div class="borderFull">
+        <div class="row" style="padding:32px 0">
+          <div class="profile" style="background-color: white;border-radius: 20px">
+            <div class="bgd d-flex align-items-center w-50">
+              <div class="h-100 w-100"
+                   style=" background: url('https://images.pexels.com/photos/904616/pexels-photo-904616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat; background-size: cover; border-top-left-radius: 20px; border-bottom-left-radius: 20px">
               </div>
             </div>
-            <div class="row" style="height: 25px"></div>
-            <div class="row">
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class="form-floating flex-grow-1">
-                    <input type="text" class="form-control" id="floatingFistName"
-                           placeholder="Tên đăng nhập"
-                           aria-label="Tên đăng nhập" aria-describedby="basic-addon2" formControlName="firstName">
-                    <label for="floatingFistName">Họ</label>
+            <div class="p-3" style="width: 60vw">
+              <div class="row">
+                <div class="text-center">
+                  <div class="row mb-3" style="font-size: 20px">
+                    <h3>Sửa Hồ Sơ Cá Nhân</h3>
                   </div>
-                  <span class="input-group-text" id="basic-addon14"><i
-                    class="fa-solid fa-user"></i></span>
                 </div>
+                <div class="col-lg-3"></div>
               </div>
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class=" form-floating flex-grow-1">
-                    <input type="text" class="form-control" id="floatingName"
-                           placeholder="Name"formControlName="lastName">
-                    <label for="floatingName">Tên</label>
+              <div class="row" style="height: 10px"></div>
+              <div class="row">
+                <div class="col-lg-3" style="padding-left: 35%;">
+                  <input hidden type="file"
+                         #userPhoto
+                         multiple
+                         (change)="showPreview($event)"
+                         name="image"
+                         autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
+                </div>
+                <div id="avartar__my" (click)="render($event)" [style.background-image]="'url('+avt+')'"
+                     style="width: 150px; height: 150px;border-radius: 50%; display: block; background-repeat: no-repeat;background-size: cover;">
+                </div>
+                <div class="row" style="height: 25px"></div>
+                <div class="row">
+                  <input formControlName="id" hidden>
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group ">
+                      <div class="form-floating flex-grow-1">
+                        <input type="text" class="form-control" formControlName="firstName" id="floatingFistName"
+                               placeholder="Ho" aria-label="Ho"
+                               aria-describedby="basic-addon2"
+                               [ngClass]="(updateUserForm.controls['firstName'].touched)?
+                      updateUserForm.controls['firstName'].invalid?'is-invalid':'is-valid':''">
+                        <label for="floatingFistName">Họ</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon14"><i
+                        class="fa-solid fa-user"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.controls['firstName'].hasError('required') &&
+                                     updateUserForm.controls['firstName'].touched" style="color: red">
+                      Tên không được bỏ trống
+                    </div>
+                    <div *ngIf="updateUserForm.controls['firstName'].hasError('pattern') &&
+                                     updateUserForm.controls['firstName'].touched" style="color: red">
+                      Tên phải đúng định dạng
+                    </div>
+                    <div *ngIf="updateUserForm.controls['firstName'].hasError('minlength') &&
+                                     updateUserForm.controls['firstName'].touched" style="color: red">
+                      Tên không được quá ngắn
+                    </div>
+                    <div *ngIf="updateUserForm.controls['firstName'].hasError('maxlength') &&
+                                     updateUserForm.controls['firstName'].touched" style="color: red">
+                      Tên không được quá dài
+                    </div>
                   </div>
-                  <span class="input-group-text" id="basic-addon2"><i
-                    class="fa-solid fa-user"></i></span>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class="form-floating flex-grow-1">
-                    <input type="text" class="form-control" id="floatingLogin"
-                           placeholder="Tên đăng nhập"
-                           aria-label="Tên đăng nhập" aria-describedby="basic-addon2"
-                     formControlName="username">
-                    <label for="floatingLogin">Tên đăng nhập</label>
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group ">
+                      <div class=" form-floating flex-grow-1">
+                        <input type="text" class="form-control" id="floatingName"
+                               placeholder="Name" formControlName="lastName"
+                               [ngClass]="(updateUserForm.controls['lastName'].touched)?
+                             updateUserForm.controls['lastName'].invalid?'is-invalid':'is-valid':''">
+                        <label for="floatingName">Tên</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon2"><i
+                        class="fa-solid fa-user"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.controls['lastName'].hasError('required') &&
+                                     updateUserForm.controls['lastName'].touched" style="color: red">
+                      Họ không được bỏ trống
+                    </div>
+                    <div *ngIf="updateUserForm.controls['lastName'].hasError('pattern') &&
+                                     updateUserForm.controls['lastName'].touched" style="color: red">
+                      Họ phải đúng định dạng
+                    </div>
+                    <div *ngIf="updateUserForm.controls['lastName'].hasError('minlength') &&
+                                     updateUserForm.controls['lastName'].touched" style="color: red">
+                      Họ không được quá ngắn
+                    </div>
+                    <div *ngIf="updateUserForm.controls['lastName'].hasError('maxlength') &&
+                                     updateUserForm.controls['lastName'].touched" style="color: red">
+                      Họ không được quá dài
+                    </div>
                   </div>
-                  <span class="input-group-text" id="basic-addon1"><i
-                    class="fa-solid fa-user"></i></span>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class="form-floating flex-grow-1">
-                    <input type="email" class="form-control" id="floatingEmail"
-                           placeholder="Email"
-                           aria-label="Email" aria-describedby="basic-addon2"
-                    formControlName="email">
-                    <label for="floatingEmail">Email</label>
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group ">
+                      <div class="form-floating flex-grow-1">
+                        <input disabled type="text" class="form-control" id="floatingLogin"
+                               placeholder="Tên đăng nhập"
+                               aria-label="Tên đăng nhập" aria-describedby="basic-addon2"
+                               formControlName="username"
+                               [ngClass]="(updateUserForm.controls['username'].touched)?
+                      (updateUserForm.controls['username'].invalid || updateUserForm.errors?.areEqual)?'is-invalid':'is-valid':''">
+                        <label for="floatingLogin">Tên đăng nhập</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon1"><i
+                        class="fa-solid fa-user"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.errors?.areEqual && updateUserForm.controls['username'].touched"
+                         style="color: red">
+                      Tên đăng nhập đã tồn tại
+                    </div>
+                    <div *ngIf="updateUserForm.controls['username'].hasError('required') &&
+                                     updateUserForm.controls['username'].touched" style="color: red">
+                      Tên đăng nhập không được bỏ trống
+                    </div>
+                    <div *ngIf="updateUserForm.controls['username'].hasError('pattern') &&
+                                     updateUserForm.controls['username'].touched" style="color: red">
+                      Tên đăng nhập phải đúng định dạng
+                    </div>
+                    <div *ngIf="updateUserForm.controls['username'].hasError('minlength') &&
+                                     updateUserForm.controls['username'].touched" style="color: red">
+                      Tên đăng nhập không được quá ngắn
+                    </div>
+                    <div *ngIf="updateUserForm.controls['username'].hasError('maxlength') &&
+                                     updateUserForm.controls['username'].touched" style="color: red">
+                      Tên đăng nhập không được quá dài
+                    </div>
                   </div>
-                  <span class="input-group-text" id="basic-addon3"><i
-                    class="fa-solid fa-envelope"></i></span>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class="form-floating flex-grow-1">
-                    <input type="text" class="form-control" id="floatingPhone"
-                           placeholder="PhoneNumber"
-                           aria-label="PhoneNumber" aria-describedby="basic-addon2" formControlName="phone">
-                    <label for="floatingPhone">Số điện thoại</label>
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group ">
+                      <div class="form-floating flex-grow-1">
+                        <input disabled type="email" class="form-control" id="floatingEmail"
+                               placeholder="Email"
+                               aria-label="Email" aria-describedby="basic-addon2"
+                               formControlName="email"
+                               [ngClass]="(updateUserForm.controls['email'].touched)?
+                             (updateUserForm.controls['email'].invalid||updateUserForm.errors?.isExist)?'is-invalid':'is-valid':''">
+                        <label for="floatingEmail">Email</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon3"><i
+                        class="fa-solid fa-envelope"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.errors?.isExist && updateUserForm.controls['email'].touched"
+                         style="color: red">
+                      Email đã tồn tại
+                    </div>
+                    <div *ngIf="updateUserForm.controls['email'].hasError('required') &&
+                                     updateUserForm.controls['email'].touched" style="color: red">
+                      Email không được bỏ trống
+                    </div>
+                    <div *ngIf="updateUserForm.controls['email'].hasError('pattern') &&
+                                     updateUserForm.controls['email'].touched" style="color: red">
+                      Email phải đúng định dạng
+                    </div>
                   </div>
-                  <span class="input-group-text" id="basic-addon5"><i
-                    class="fa-solid fa-phone-flip"></i></span>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class=" form-floating flex-grow-1">
-                    <input type="text" class="form-control" id="floatingDateOfBirth"
-                           placeholder="DateOfBirth" formControlName="birthDay">
-                    <label for="floatingDateOfBirth">Ngày sinh</label>
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group">
+                      <div class="form-floating flex-grow-1">
+                        <input type="text" class="form-control" id="floatingPhone"
+                               placeholder="PhoneNumber"
+                               aria-label="PhoneNumber" aria-describedby="basic-addon2"
+                               formControlName="phone"
+                               [ngClass]="(updateUserForm.controls['phone'].touched)?
+                             updateUserForm.controls['phone'].invalid?'is-invalid':'is-valid':''">
+                        <label for="floatingPhone">Số điện thoại</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon5"><i
+                        class="fa-solid fa-phone-flip"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.controls['phone'].hasError('required') &&
+                                     updateUserForm.controls['phone'].touched" style="color: red">
+                      Số điện thoại không được bỏ trống
+                    </div>
+                    <div *ngIf="updateUserForm.controls['phone'].hasError('pattern') &&
+                                     updateUserForm.controls['phone'].touched" style="color: red">
+                      Số điện thoại phải đúng định dạng
+                    </div>
                   </div>
-                  <span class="input-group-text" id="basic-addon4"><i
-                    class="fa-regular fa-calendar"></i></span>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <div>
-                  <select class="form-control"id="city" aria-label=".form-select-sm" >
-                    <option formControlName="city" value="city" selected>Chọn tỉnh thành</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div>
-                  <select class="form-control" id="district" aria-label=".form-select-sm">
-                    <option value="" selected>Chọn quận huyện</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div>
-                  <select class="form-control" id="ward" aria-label=".form-select-sm">
-                    <option value="" selected>Chọn phường xã</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class="form-floating flex-grow-1">
-                    <input type="text" class="form-control" id="floatingAddress"
-                           placeholder="Address"
-                           aria-label="Address" aria-describedby="basic-addon2" formControlName="detailAddress">
-                    <label for="floatingAddress">Địa chỉ chi tiết</label>
+                  ​
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group ">
+                      <div class=" form-floating flex-grow-1">
+                        <input type="date" class="form-control" id="floatingDateOfBirth"
+                               placeholder="DateOfBirth"
+                               formControlName="birthDay"
+                               [ngClass]="(updateUserForm.controls['birthDay'].touched)?
+                             (updateUserForm.controls['birthDay'].invalid|| updateUserForm.errors?.checkBirthDay)?'is-invalid':'is-valid':''">
+                        <label for="floatingDateOfBirth">Ngày sinh</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon4"><i
+                        class="fa-regular fa-calendar"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.controls['birthDay'].hasError('required') &&
+                                     updateUserForm.controls['birthDay'].touched" style="color: red">
+                      Ngày sinh không được bỏ trống
+                    </div>
+                    <div *ngIf="updateUserForm.errors?.checkBirthDay"
+                         style="color: red">
+                      Bạn chưa đủ 18 tuổi
+                    </div>
                   </div>
-                  <span class="input-group-text" id="basic-addon7"><i
-                    class="fa-solid fa-location-dot"></i></span>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class="form-floating flex-grow-1">
-                    <input type="text" class="form-control" id="floatingIdCard"
-                           placeholder="IdCard" formControlName="idCard">
-                    <label for="floatingIdCard">CMND</label>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div>
+                      <input *ngIf="status == 0; else city1" (click)="changStatusCity1()" type="text"
+                             class="form-control" id="city1"
+                             formControlName="city"
+                             [ngClass]="(updateUserForm.controls['city'].touched)?
+                             updateUserForm.controls['city'].invalid?'is-invalid':'is-valid':''">
+                      <ng-template #city1>
+                        <div>
+                          <select formControlName="city" (change)="selectCity()" class="form-control" id="city"
+                                  aria-label=".form-select-sm">
+                            <option *ngFor="let x of cities" [ngValue]="x.id">{{x.name}}</option>
+                          </select>
+                          <div *ngIf="updateUserForm.controls['city'].hasError('required') &&
+                                     updateUserForm.controls['city'].touched" style="color: red">
+                            Tỉnh không được bỏ trống
+                          </div>
+                        </div>
+                      </ng-template>
+                    </div>
                   </div>
-                  <span class="input-group-text" id="basic-addon6"><i
-                    class="fa-regular fa-id-card"></i></span>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class=" input-group mb-3">
-                  <div class="form-floating flex-grow-1">
-                    <input type="password" class="form-control" id="floatingPassword"
-                           placeholder="name@example.com"
-                           aria-label="name@example.com" aria-describedby="basic-addon2" formControlName="password">
-                    <label for="floatingPassword">Mật khẩu hiện tại</label>
+                  <div class="col-lg-4">
+                    <input *ngIf="status == 0; else district1" (click)="changStatusDistrict1()" type="text"
+                           class="form-control" id="district1"
+                           formControlName="district"
+                           [ngClass]="(updateUserForm.controls['district'].touched)?
+                             updateUserForm.controls['district'].invalid?'is-invalid':'is-valid':''">
+                    <ng-template #district1>
+                      <div>
+                        <select formControlName="district" (change)="selectDistrict()" class="form-control"
+                                id="district"
+                                aria-label=".form-select-sm">
+                          <option value="">Chọn quận huyện</option>
+                          <option *ngFor="let x of districts" [ngValue]="x.id">{{x.name}}</option>
+                        </select>
+                        <div *ngIf="updateUserForm.controls['district'].hasError('required') &&
+                                updateUserForm.controls['district'].touched" style="color: red">
+                          Quận không được bỏ trống
+                        </div>
+                      </div>
+                    </ng-template>
                   </div>
-                  <span class="input-group-text" id="basic-addon8"><i
-                    class="fa-solid fa-lock"></i></span>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class="form-floating flex-grow-1">
-                    <input type="password" class="form-control" id="floatingVerification"
-                           placeholder="name@example.com"
-                           aria-label="name@example.com" aria-describedby="basic-addon2">
-                    <label for="floatingVerification">Mật khẩu mới</label>
+                  <div class="col-lg-4">
+                    <input *ngIf="status == 0; else ward1" (click)="changStatusTown1()" type="text" class="form-control"
+                           id="ward1"
+                           formControlName="town"
+                           [ngClass]="(updateUserForm.controls['town'].touched)?
+                             updateUserForm.controls['town'].invalid?'is-invalid':'is-valid':''">
+                    <ng-template #ward1>
+                      <div>
+                        <select formControlName="town" (change)="selectWard()" class="form-control" id="ward"
+                                aria-label=".form-select-sm">
+                          <option *ngFor="let x of wards" [ngValue]="x.id">{{x.name}}</option>
+                        </select>
+                        <div *ngIf="updateUserForm.controls['town'].hasError('required') &&
+                                     updateUserForm.controls['town'].touched" style="color: red">
+                          Phường không được bỏ trống
+                        </div>
+                      </div>
+                    </ng-template>
                   </div>
-                  <span class="input-group-text" id="basic-addon10"><i
-                    class="fa-solid fa-key"></i></span>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div class=" input-group mb-3">
-                  <div class="form-floating flex-grow-1">
-                    <input type="password" class="form-control" id="floatingConfirmVerification"
-                           placeholder="Mã xác minh">
-                    <label for="floatingConfirmVerification">Xác nhận mật khẩu</label>
+                <div class="row mt-3">
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group ">
+                      <div class="form-floating flex-grow-1">
+                        <input type="text" class="form-control" id="floatingAddress"
+                               placeholder="Address"
+                               aria-label="Address" aria-describedby="basic-addon2"
+                               formControlName="detailAddress"
+                               [ngClass]="(updateUserForm.controls['detailAddress'].touched)?
+                             updateUserForm.controls['detailAddress'].invalid?'is-invalid':'is-valid':''">
+                        <label for="floatingAddress">Địa chỉ chi tiết</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon7"><i
+                        class="fa-solid fa-location-dot"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.controls['detailAddress'].hasError('required') &&
+                                     updateUserForm.controls['detailAddress'].touched" style="color: red">
+                      Địa chỉ chi tiết không được bỏ trống
+                    </div>
+                    <div *ngIf="updateUserForm.controls['detailAddress'].hasError('pattern') &&
+                                     updateUserForm.controls['detailAddress'].touched" style="color: red">
+                      Địa chỉ chi tiết không đúng định dạng
+                    </div>
+                    <div *ngIf="updateUserForm.controls['detailAddress'].hasError('minlength') &&
+                                     updateUserForm.controls['detailAddress'].touched" style="color: red">
+                      Địa chỉ không được quá ngắn
+                    </div>
+                    <div *ngIf="updateUserForm.controls['detailAddress'].hasError('maxlength') &&
+                                     updateUserForm.controls['detailAddress'].touched" style="color: red">
+                      Địa chỉ không được quá dài
+                    </div>
                   </div>
-                  <span class="input-group-text" id="basic-addon11"><i
-                    class="fa-solid fa-circle-check"></i></span>
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group ">
+                      <div class="form-floating flex-grow-1">
+                        <input type="text" class="form-control" id="floatingIdCard"
+                               placeholder="IdCard"
+                               formControlName="idCard"
+                               [ngClass]="(updateUserForm.controls['idCard'].touched)?
+                                                                  updateUserForm.controls['idCard'].invalid?'is-invalid':'is-valid':''">
+                        <label for="floatingIdCard">CMND</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon6"><i
+                        class="fa-regular fa-id-card"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.controls['idCard'].hasError('required') &&
+                                     updateUserForm.controls['idCard'].touched" style="color: red">
+                      CMND không được bỏ trống
+                    </div>
+                    <div *ngIf="updateUserForm.controls['idCard'].hasError('pattern') &&
+                                     updateUserForm.controls['idCard'].touched" style="color: red">
+                      CMND không đúng định dạng
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="row" style="height: 10px"></div>
-            <div class="row">
-              <div class="d-flex ">
-                <button type="submit" class="btn btn-primary mx-2">Cập nhật</button>
-                <button type="reset" class="btn btn-warning">Đặt lại</button>
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group">
+                      <div class="form-floating flex-grow-1">
+                        <input type="password" class="form-control" id="floatingVerification"
+                               placeholder="name@example.com"
+                               aria-label="name@example.com" aria-describedby="basic-addon2" formControlName="password"
+                               [ngClass]="(updateUserForm.controls['password'].touched)?
+                                                                  updateUserForm.controls['password'].invalid?'is-invalid':'is-valid':''">
+                        <label for="floatingVerification">Mật khẩu mới</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon10"><i
+                        class="fa-solid fa-key"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.controls['password'].hasError('required') &&
+                                     updateUserForm.controls['password'].touched" style="color: red">
+                      Mật khẩu không được bỏ trống
+                    </div>
+                    <div *ngIf="updateUserForm.controls['password'].hasError('pattern') &&
+                                     updateUserForm.controls['password'].touched" style="color: red">
+                      Mật khẩu không đúng định dạng
+                    </div>
+                    <div *ngIf="updateUserForm.controls['password'].hasError('minlength') &&
+                                     updateUserForm.controls['password'].touched" style="color: red">
+                      Mật khẩu không được quá ngắn
+                    </div>
+                    <div *ngIf="updateUserForm.controls['password'].hasError('maxlength') &&
+                                     updateUserForm.controls['password'].touched" style="color: red">
+                      Mật khẩu không được quá dài
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <div class=" input-group ">
+                      <div class="form-floating flex-grow-1">
+                        <input type="password" class="form-control" id="floatingConfirmPassword"
+                               placeholder="ConfirmPassword" formControlName="confirmPassword"
+                               [ngClass]="(updateUserForm.controls['confirmPassword'].touched)?
+                                                                 ( updateUserForm.controls['confirmPassword'].invalid||updateUserForm.errors?.reConfirmPass)?'is-invalid':'is-valid':''">
+                        <label for="floatingConfirmPassword">Nhập lại mật khẩu</label>
+                      </div>
+                      <span class="input-group-text" id="basic-addon9"><i class="fa-solid fa-key"></i></span>
+                    </div>
+                    <div *ngIf="updateUserForm.controls['confirmPassword'].hasError('required') &&
+                                     updateUserForm.controls['confirmPassword'].touched" style="color: red">
+                      Mật khẩu mới không được bỏ trống
+                    </div>
+                    <div
+                      *ngIf="updateUserForm.hasError('reConfirmPass') && updateUserForm.controls['confirmPassword'].touched"
+                      style="color: red">
+                      Mật khẩu mới không trùng khớp
+                    </div>
+                    <div *ngIf="updateUserForm.controls['confirmPassword'].hasError('minlength') &&
+                                     updateUserForm.controls['confirmPassword'].touched" style="color: red">
+                      Mật khẩu không được quá ngắn
+                    </div>
+                    <div *ngIf="updateUserForm.controls['confirmPassword'].hasError('maxlength') &&
+                                     updateUserForm.controls['confirmPassword'].touched" style="color: red">
+                      Mật khẩu không được quá dài
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="height: 10px"></div>
+                <div class="row">
+                  <div class="d-flex ">
+                    <button type="submit" class="btn btn-primary mx-2">Cập
+                      nhật
+                    </button>
+                    <button (click)="resetForm()" style="margin-left: 15px" type="button" class="btn btn-warning">Đặt lại</button>
+
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -210,5 +402,4 @@
       </div>
     </div>
   </div>
-</div>
 </form>

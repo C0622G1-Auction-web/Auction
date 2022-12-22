@@ -42,3 +42,22 @@ input[type="checkbox"] {
 .text-orange{
   color: #fa6132;
 }
+body{
+  font-family: 'Roboto', sans-serif;
+}
+.max-lines {
+  display: block;/* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 5.4em;
+  line-height: 1.8em;
+}
+.title {
+  display: block;/* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 1.8em;
+  line-height: 1.8em;
+}

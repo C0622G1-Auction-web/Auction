@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {TransactionService} from "../../service/transaction/transaction.service";
 import {Router} from "@angular/router";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {BehaviorSubject, Observable} from "rxjs";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PageTransaction} from "../../model/transaction/page-transaction";
 import {TransactionAuction} from "../../model/transaction/transaction";
+import {NotificationService} from "../../service/notification/notification.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-transaction',
@@ -20,7 +21,10 @@ export class TransactionComponent implements OnInit {
 
   constructor(private _transactionService: TransactionService,
               private _router: Router,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: FormBuilder,
+              private _notificationService: NotificationService,
+              private _titleService: Title) {
+    this._titleService.setTitle("Quản lý giao dịch")
   }
 
   /**
@@ -44,6 +48,7 @@ export class TransactionComponent implements OnInit {
     this._transactionService.findAll(this.rfSearch.value, pageNumber).subscribe(
       data => {
         this.pageTransaction = data;
+        console.log(data);
       }
     );
   }
@@ -55,11 +60,19 @@ export class TransactionComponent implements OnInit {
    */
   createSearchForm() {
     this.rfSearch = this._formBuilder.group({
-      userPost: [''],
-      userBuying: [''],
+      userPost: ['', [
+        Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{1,50}$"),
+        Validators.maxLength(50)
+      ]],
+      userBuying: ['', [
+        Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{1,50}$"),
+        Validators.maxLength(50)
+      ]],
       nameProduct: [''],
-      currentPrice: [''],
-      auctionStatus: ['']
+      currentPrice: ['', [
+        Validators.pattern("^[0-9]{0,20}"),
+        Validators.maxLength(20)]],
+      paymentStatus: ['']
     });
   }
 
@@ -85,21 +98,21 @@ export class TransactionComponent implements OnInit {
   addAllToDelete() {
     this.checkedAll = true;
     for (let value of this.pageTransaction.content) {
-      if (!this.deleteIds.includes(value.id)) {
+      if (!this.deleteIds.includes(value.paymentId)) {
         this.checkedAll = false;
         break;
       }
     }
     if (this.checkedAll) {
       for (let value of this.pageTransaction.content) {
-        const index = this.deleteIds.indexOf(value.id, 0);
+        const index = this.deleteIds.indexOf(value.paymentId, 0);
         this.deleteIds.splice(index, 1);
       }
     } else {
       for (let value of this.pageTransaction.content) {
-        const index = this.deleteIds.indexOf(value.id, 0);
+        const index = this.deleteIds.indexOf(value.paymentId, 0);
         if (index == -1) {
-          this.deleteIds.push(value.id);
+          this.deleteIds.push(value.paymentId);
         }
       }
     }
@@ -110,16 +123,16 @@ export class TransactionComponent implements OnInit {
     this._transactionService.findByListId(this.deleteIds).subscribe(data => {
       this.deleteTransaction = data;
     }, error => {
-      // this._notificationService.showErrorNotification('');
+      this._notificationService.showErrorNotification('Không tìm thấy mã giao dịch');
     });
   }
 
 
   delete() {
     this._transactionService.deleteByListId(this.deleteIds).subscribe(data => {
-      // this._notificationService.showSuccessNotification('Xoá thành công!');
+      this._notificationService.showSuccessNotification('Xoá thành công!');
     }, error => {
-      // this._notificationService.showErrorNotification('Có lỗi khi xoá');
+      this._notificationService.showErrorNotification('Có lỗi khi xoá');
     }, () => {
       this.ngOnInit();
     });

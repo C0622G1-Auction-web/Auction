@@ -1,23 +1,23 @@
-<app-header></app-header>
+
 <div class="container">
   <div class="borderFull">
     <div class="row">
       <div class="register">
         <div class="container">
           <div class="row text-center">
-            <h1>Duyệt sản phẩm</h1>
+            <h1>Duyệt Sản Phẩm</h1>
           </div>
-          <div class="row" *ngIf="product">
+          <div class="row" *ngIf="product && imgs">
             <div class="col-6">
               <div class="row" id="img-col">
                 <div class="col-lg-12 d-flex justify-content-center align-items-center">
                   <div class="mt-2 card card-body w-50" style="border: solid; color: green">
                     <img id="image__main{{1}}" height="500" src="{{imgs[0]?.url}}" class="d-block w-100 card-img"
-                         alt="">
+                         alt="{{product.name}}">
                     <ul class="carousel__images d-flex justify-content-center">
                       <li value="{{j}}" class="image__item img-selected{{1}}" *ngFor="let img of imgs,let j = index;">
                         <img (click)="changeImage($event, 1, j)" class="d-block w-100" height="50" src="{{img.url}}"
-                             width="" alt="">
+                             width="" alt="{{product.name}}">
                       </li>
                     </ul>
                   </div>
@@ -30,7 +30,7 @@
                   <table id="customer_table" class="table table-striped table-bordered">
                     <tr>
                       <td width="28%">Tên sản phẩm</td>
-                      <td width="72%">{{product.name}}</td>
+                      <td width="72%"><strong>{{product.name}}</strong></td>
                     </tr>
                     <tr>
                       <td>Thông tin người đăng</td>
@@ -46,19 +46,19 @@
                     </tr>
                     <tr>
                       <td>Giá ban đầu</td>
-                      <td>{{product.initialPrice | number}} VNĐ</td>
+                      <td>{{product.initialPrice | number}}<sup>đ</sup></td>
                     </tr>
                     <tr>
                       <td>Bước giá</td>
-                      <td>{{product.priceStep | number}}  VNĐ</td>
+                      <td>{{product.priceStep | number}}<sup>đ</sup></td>
                     </tr>
                     <tr>
                       <td>Bắt đầu đấu giá</td>
-                      <td>{{product.startTime | date : 'dd/MM/y hh:mm:ss a'}}</td>
+                      <td>{{product.startTime | date : 'dd/MM/y H:mm:ss'}}</td>
                     </tr>
                     <tr>
                       <td>Kết thúc đấu giá</td>
-                      <td>{{product.endTime | date : 'dd/MM/y hh:mm:ss a'}}</td>
+                      <td>{{product.endTime | date : 'dd/MM/y H:mm:ss'}}</td>
                     </tr>
                     <tr>
                       <td>Thông tin chi tiết</td>
@@ -70,7 +70,6 @@
                       <td>{{reason.reason}}
                       </td>
                     </tr>
-
                     <tr *ngIf="invalidProduct && product.reviewStatusId != 3">
                       <td><label for="reason-input">Lý do khoá</label></td>
                       <td>
@@ -121,4 +120,3 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>

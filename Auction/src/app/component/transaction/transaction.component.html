@@ -1,33 +1,33 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-2 sidebar__left">
+    <div class="col-lg-2 sidebar__left" id="side-bar">
       <div>
         <nav>
           <ul class="menu">
             <li class="menu__item">
-              <a class="menu__link" href="#">
+              <a class="menu__link" routerLink="/home">
                 <i class="menu__icon fa fa-home"></i>
                 Trang chủ
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="menu__item">
-              <a class="menu__link" href="#">
+              <a class="menu__link" routerLink="/products">
                 <i class="menu__icon fa-solid fa-book"></i>
                 Quản lý sản phẩm
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="menu__item">
-              <a class="menu__link" href="#">
+              <a class="menu__link" routerLink="/user/list">
                 <i class="menu__icon fa-solid fa-user-pen"></i>
                 Quản lý nhân viên
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="menu__item">
-              <a class="menu__link" href="#">
-                <i class="menu__icon fa-solid fa-handshake"></i>
+            <li class="menu__item active">
+              <a class="menu__link" routerLink="/transaction">
+                <i class="menu__icon fa-solid fa-handshake "></i>
                 Quản lý giao dịch
                 <span class="sr-only">(current)</span>
               </a>
@@ -35,9 +35,11 @@
           </ul>
         </nav>
       </div>
+
+
     </div>
     <div class="col-lg-10">
-      <h1 style="text-align: center;" class="mt-5 mb-5">Quản lý giao dịch</h1>
+      <h3 style="text-align: center;" class="mt-3 mb-3">Quản Lý Giao Dịch</h3>
       <div class="row" id="search-row">
         <form *ngIf="rfSearch" [formGroup]="rfSearch"
               (ngSubmit)="findAll(0)">
@@ -45,41 +47,87 @@
             <div class="col-4">
               <div class="form-floating mb-4 form-inp">
                 <input type="text" placeholder="Người đăng" id="floatingPost" formControlName="userPost"
-                       class="form-control form-control-underlined"/>
-                <label for="floatingPost">Người đăng</label>
+                       class="form-control form-control-underlined form-select-underlined"
+                       [ngClass]="(rfSearch.controls['userPost'].touched)?
+                       rfSearch.controls['userPost'].invalid?'is-invalid':'is-valid':''"/>
+                <label for="floatingBuying">Người đăng</label>
+                <div *ngIf="rfSearch.controls['userPost'].hasError('maxlength') &&
+                   rfSearch.controls['userPost'].touched" style="color: red">
+                  Tên người đăng tối đa 50 ký tự.
+                </div>
+                <div *ngIf="rfSearch.controls['userPost'].hasError('pattern') &&
+                   rfSearch.controls['userPost'].touched &&
+                  !rfSearch.controls['userPost'].hasError('maxlength')" style="color: red">
+                  Tên người đăng không được chứa số hay ký tự đặc biệt.
+                </div>
               </div>
             </div>
             <div class="col-4">
               <div class="form-floating mb-4 form-inp">
                 <input type="text" placeholder="Người mua" id="floatingBuying" formControlName="userBuying"
-                       class="form-control form-control-underlined"/>
+                       class="form-control form-control-underlined form-select-underlined"
+                       [ngClass]="(rfSearch.controls['userBuying'].touched)?
+                       rfSearch.controls['userBuying'].invalid?'is-invalid':'is-valid':''"/>
                 <label for="floatingBuying">Người mua</label>
+                <div *ngIf="rfSearch.controls['userBuying'].hasError('maxlength') &&
+                   rfSearch.controls['userBuying'].touched" style="color: red">
+                  Tên người mua tối đa 50 ký tự.
+                </div>
+                <div *ngIf="rfSearch.controls['userBuying'].hasError('pattern') &&
+                   rfSearch.controls['userBuying'].touched &&
+                  !rfSearch.controls['userBuying'].hasError('maxlength')" style="color: red">
+                  Tên người mua không được chứa số hay ký tự đặc biệt.
+                </div>
               </div>
             </div>
             <div class="col-4">
-            <div class="form-floating mb-4 form-inp">
-              <input type="text" placeholder="Tên sản phẩm" id="floatingName" formControlName="nameProduct"
-                     class="form-control form-control-underlined"/>
-              <label for="floatingName">Tên sản phẩm</label>
+              <div class="form-floating mb-4 form-inp">
+                <input type="text" placeholder="Tên sản phẩm" id="floatingName" formControlName="nameProduct"
+                       class="form-control form-control-underlined form-select-underlined"
+                       [ngClass]="(rfSearch.controls['nameProduct'].touched)?
+                       rfSearch.controls['nameProduct'].invalid?'is-invalid':'is-valid':''"/>
+                <label for="floatingName">Tên sản phẩm</label>
+                <div *ngIf="rfSearch.controls['nameProduct'].hasError('maxlength') &&
+                   rfSearch.controls['nameProduct'].touched" style="color: red">
+                  Tên sản phẩm tối đa 50 ký tự.
+                </div>
+                <div *ngIf="rfSearch.controls['nameProduct'].hasError('pattern') &&
+                   rfSearch.controls['nameProduct'].touched &&
+                  !rfSearch.controls['nameProduct'].hasError('maxlength')" style="color: red">
+                  Tên sản phẩm không được chứa số hay ký tự đặc biệt.
+                </div>
+              </div>
             </div>
-          </div>
           </div>
           <div class="row">
             <div class="col-4">
               <div class="form-floating mb-4 form-inp">
                 <input type="text" placeholder="Thành tiền" id="floatingMoney" formControlName="currentPrice"
-                       class="form-control form-control-underlined"/>
+                       class="form-control form-control-underlined form-select-underlined"
+                       [ngClass]="(rfSearch.controls['currentPrice'].touched)?
+                       rfSearch.controls['currentPrice'].invalid?'is-invalid':'is-valid':''"/>
                 <label for="floatingMoney">Thành tiền</label>
+                <div *ngIf="rfSearch.controls['currentPrice'].hasError('maxlength') &&
+                   rfSearch.controls['currentPrice'].touched" style="color: red">
+                  Độ dài của tiền <20.
+                </div>
+                <div *ngIf="rfSearch.controls['currentPrice'].hasError('pattern') &&
+                   rfSearch.controls['currentPrice'].touched &&
+                  !rfSearch.controls['currentPrice'].hasError('maxlength')" style="color: red">
+                  Giá tiền phải là số nguyên dương (>0).
+                </div>
               </div>
             </div>
             <div class="col-4">
               <div class="form-floating mb-4 form-inp">
-                <select class="form-select form-select-underlined" id="floatingStatus" formControlName="auctionStatus">
-                  <option value="">---- Tình trạng ----</option>
-                  <option value="0"> Thành công</option>
-                  <option value="1"> Thất bại</option>
+                <select class="form-select form-select-underlined form-select-underlined" id="floatingPaymentStatus"
+                        formControlName="paymentStatus">
+                  <option value="">- Tình trạng thanh toán -</option>
+                  <option value="1">Thanh toán thành công</option>
+                  <option value="2">Đang chờ thanh toán</option>
+                  <option value="0">Thanh toán thất bại</option>
                 </select>
-                <label for="floatingStatus">Tình trạng</label>
+                <label for="floatingPaymentStatus">Tình trạng</label>
               </div>
             </div>
             <div class="col-4" id="form-btn">
@@ -87,79 +135,96 @@
                 <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả
               </button>
               <button class="btn btn-success" (click)="resetFormAndData()">
-                Reset bộ lọc
+                Làm mới
               </button>
             </div>
           </div>
         </form>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card border-black">
-            <div class="card-body">
-              <table id="customer_table" class="table table-striped table-bordered"
-                     *ngIf="pageTransaction != null">
-                <thead>
-                <tr>
-                  <th>STT</th>
-                  <th>Mã giao dịch</th>
-                  <th>Thời gian đấu giá thành công</th>
-                  <th>Người đăng</th>
-                  <th>Người mua</th>
-                  <th>Tên sản phẩm</th>
-                  <th>Thành tiền(vnđ)</th>
-                  <th>Tình trạng giao dịch</th>
-                  <th class="text-center">
-                    <button class="btn" (click)="addAllToDelete()">
-                      <i class="fa-regular fa-trash-can delete-group-icon"></i>
-                    </button>
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of pageTransaction.content ; let i = index">
-                  <td class="text-end">{{i + 1}}</td>
-                  <td class="text-end">{{item.id}}</td>
-                  <td class="text-end">{{item.auctionDay}}</td>
-                  <td>{{item.userPost}}</td>
-                  <td>{{item.userBuying}}</td>
-                  <td>{{item.productName}}</td>
-                  <td class="text-end">{{item.currentPrice}}</td>
-                  <td>{{item.auctionStatus}}</td>
-                  <td class="text-center">
-                    <input class="delete-checkbox" [checked]="deleteIds.includes(item.id)" type="checkbox"
-                           (click)="addToDelete(item.id)"/>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-              <h3 id="null-result-noti" *ngIf="pageTransaction == null">Không tìm thấy kết quả phù hợp</h3>
-            </div>
-          </div>
-        </div>
+
+      <div class="row" id="list-row">
+        <table id="customer_table" class="table table-striped table-bordered"
+               *ngIf="pageTransaction != null">
+          <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã giao dịch</th>
+            <th>Thời gian đấu giá</th>
+            <th>Người đăng</th>
+            <th>Người mua</th>
+            <th>Tên sản phẩm</th>
+            <th>Thành tiền(VNĐ)</th>
+            <th>Tình trạng giao dịch</th>
+            <th class="text-center" width=10>
+              <button class="btn " (click)="addAllToDelete()">
+                <i class="fa-regular fa-trash-can delete-group-icon" style="color: red"></i>
+              </button>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of pageTransaction.content ; let i = index">
+            <td class="text-end">{{i + 1}}</td>
+            <td class="text-end">{{item.paymentId}}</td>
+            <td class="text-end">{{item.auctionDay | date : 'dd/MM/y H:mm:ss'}}</td>
+            <td>{{item.userPost}}</td>
+            <td>{{item.userBuying}}</td>
+            <td>{{item.productName}}</td>
+            <td class="text-end">{{item.currentPrice | number}}</td>
+            <td>
+              <p *ngIf="item.paymentStatus == 1 && item.deleteStatus === true">Thành công</p>
+              <p *ngIf="item.paymentStatus == 0 && item.deleteStatus === false" style="color: red">Thất bại</p>
+              <p *ngIf="item.paymentStatus == 1 && item.deleteStatus === false">Đang chờ</p>
+            </td>
+            <td class="text-center">
+              <input  class="delete-checkbox" [checked]="deleteIds.includes(item.paymentId)" type="checkbox"
+                      (click)="addToDelete(item.paymentId) "
+                      [disabled]="item.paymentStatus == 1 && item.deleteStatus === true || item.paymentStatus == 1 && item.deleteStatus === false" />
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <h3 id="null-result-noti" *ngIf="pageTransaction == null">Không tìm thấy kết quả phù hợp</h3>
       </div>
+
+
+      <!-- Phân trang -->
+      <div class="d-flex justify-content-between" id="last-row">
         <div *ngIf="pageTransaction">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item"><a class="page-link"
                                        [ngClass]="pageTransaction.first ? 'disabled': ''"
-                                       (click)="gotoPage(0)">First</a></li>
-              <li class="page-item"><a class="page-link"
-                                       [ngClass]="pageTransaction.first ? 'disabled': ''"
-                                       (click)="gotoPage(pageTransaction.number - 1)">Previous</a>
+                                       (click)="gotoPage(0)"> << </a></li>
+              <li class="page-item" *ngIf="pageTransaction.number - 2 > 0">
+                <a class="page-link" (click)="gotoPage(pageTransaction.number - 3)">{{pageTransaction.number - 2}}</a>
               </li>
-              <li class="page-item active"><a class="page-link">
-                {{pageTransaction.number + 1}}/{{pageTransaction.totalPages}}</a></li>
+              <li class="page-item" *ngIf="pageTransaction.number - 1 > 0">
+                <a class="page-link" (click)="gotoPage(pageTransaction.number - 2)">{{pageTransaction.number - 1}}</a>
+              </li>
+              <li class="page-item" *ngIf="pageTransaction.number > 0">
+                <a class="page-link" (click)="gotoPage(pageTransaction.number   - 1)">{{pageTransaction.number}}</a>
+              </li>
+
+              <li class="page-item active"><a class="page-link">{{pageTransaction.number + 1}}</a></li>
+
+              <li class="page-item" *ngIf="pageTransaction.number + 2 <= pageTransaction.totalPages">
+                <a class="page-link" (click)="gotoPage(pageTransaction.number + 1)">{{pageTransaction.number + 2}}</a>
+              </li>
+              <li class="page-item" *ngIf="pageTransaction.number + 3 <= pageTransaction.totalPages">
+                <a class="page-link" (click)="gotoPage(pageTransaction.number + 2)">{{pageTransaction.number + 3}}</a>
+              </li>
+              <li class="page-item" *ngIf="pageTransaction.number + 4 <= pageTransaction.totalPages">
+                <a class="page-link" (click)="gotoPage(pageTransaction.number + 3)">{{pageTransaction.number + 4}}</a>
+              </li>
               <li class="page-item"><a class="page-link"
                                        [ngClass]="pageTransaction.last ? 'disabled': ''"
-                                       (click)="gotoPage(pageTransaction.number + 1)">Next</a>
-              </li>
-              <li class="page-item"><a class="page-link"
-                                       [ngClass]="pageTransaction.last ? 'disabled': ''"
-                                       (click)="gotoPage(pageTransaction.totalPages - 1)">Last</a>
+                                       (click)="gotoPage(pageTransaction.totalPages - 1)"> >> </a>
               </li>
             </ul>
           </nav>
+        </div>
+        <div>
           <button class="btn btn-danger" data-bs-toggle="modal"
                   (click)="sendToDeleteGroupModal()" data-bs-target="#deleteGroupModal"
                   [disabled]="deleteIds.length == 0">
@@ -167,32 +232,34 @@
           </button>
         </div>
       </div>
+
     </div>
   </div>
 
-
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteGroupModal" tabindex="-1" role="dialog"
-     aria-labelledby="deleteModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Xóa giao dịch</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div *ngFor="let item of deleteTransaction">
-          Xóa giao dịch <strong style="color: red">{{item.id}}</strong>?
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteGroupModal" tabindex="-1" role="dialog"
+       aria-labelledby="deleteModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Xóa giao dịch</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
         </div>
-        <div class="modal-footer">
-          <button id="deleteCancel" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ bỏ</button>
-          <button id="deleteAccept" class="btn btn-warning" data-bs-dismiss="modal"
-                  (click)="delete()">Xác nhận</button>
+        <div class="modal-body">
+          Xoá giao dịch có mã giao dịch và tên sản phẩm là:
+          <div *ngFor="let item of deleteTransaction">
+            <strong style="color: red">{{item.paymentId}} và {{item.productName}}</strong>?
+          </div>
+          <div class="modal-footer">
+            <button id="deleteCancel" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ bỏ</button>
+            <button id="deleteAccept" class="btn btn-warning" data-bs-dismiss="modal"
+                    (click)="delete()">Xác nhận
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

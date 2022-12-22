@@ -63,36 +63,61 @@ a {
   position: relative;
 }
 
-.user__info:hover .btn__logout{
+.user__info:hover .user__info__group{
   display: flex;
   flex-direction: column;
 }
 
-.btn__logout {
+.user__info__group {
   position: absolute;
-  top: 100%;
+  top: 118%;
   right: 0;
-  width: 150px;
+  width: 100%;
   display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(245, 245, 245, 0.66);
+  background-color: aliceblue !important;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
-  padding: 8px 0;
-  border-radius: 2px;
-;
+  padding: 0 8px;
+  border-radius: 4px;
+  z-index: 10;
 }
 
-.b__logout {
+.user__info__group::after {
+  content: "";
+  display: block;
+  height: 12px;
+  width: 100%;
+  z-index: 11;
+  position: absolute;
+  top: -8px;
   border: none;
-  border: 1px solid white;
+  background-color: transparent;
+  left: 0;
+}
+.up__info {
+  position: absolute;
+  top: -9px;
+  right: 8px;
+  color: aliceblue;
+}
+
+.user__info__item {
+  border: none;
   background-color: #fa5d2f;
   color: white;
   padding: 4px 8px;
-  width: 90%;
+  width: 100%;
   text-align: center;
   cursor: pointer;
   border-radius: 4px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.user__info__item span {
+  font-size: 14px;
 }
 .b__logout:hover {
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);

@@ -89,7 +89,6 @@ app-header{
 
 h1 {
   text-align: center;
-  color: blue;
 }
 
 #content {
@@ -130,7 +129,7 @@ h1 {
 }
 
 #form-btn .btn {
-  margin-left: 3%;
+  margin-left: 5%;
   margin-top: 5%;
 }
 

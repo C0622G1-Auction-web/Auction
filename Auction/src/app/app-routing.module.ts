@@ -27,14 +27,25 @@ import {UserUpdateComponent} from "./component/user/user-update/user-update.comp
 import {LoginComponent} from "./security/login/login.component";
 import {UserGuard} from "./security/guard/user.guard";
 import {AdminGuard} from "./security/guard/admin.guard";
+import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
+import {AccountForgotPassComponent} from "./security/account-forgot-pass/account-forgot-pass.component";
+import {ResetPasswordComponent} from "./security/reset-password/reset-password.component";
+import {LoginGuard} from "./security/guard/login.guard";
+import {ProductListComponent} from "./component/product/product-list/product-list.component";
+import {
+  AuctionProductHistoryComponent
+} from "./component/auction/auction-product-history/auction-product-history.component";
+import {PaymentReceiptComponent} from "./component/payment/payment-receipt/payment-receipt.component";
+import {ChatVisitorComponent} from "./component/chat/chat-visitor/chat-visitor.component";
+
 
 const routes: Routes = [
   {path: 'products', component: ListProductsComponent, canActivate: [AdminGuard]},
-  {path: 'products/review/:id',component: ProductReviewComponent, canActivate: [AdminGuard]},
+  {path: 'products/review/:id', component: ProductReviewComponent, canActivate: [AdminGuard]},
   {path: 'product/create', component: ProductAddComponent, canActivate: [AdminGuard]},
   {path: "product/edit/:id", component: ProductEditComponent, canActivate: [AdminGuard]},
   {path: "home", component: HomeComponent},
-  {path: "",component: HomeComponent},
+  {path: "", component: HomeComponent},
   {path: 'transaction', component: TransactionComponent},
   {path: 'transaction', component: TransactionComponent},
   {path: 'user/list', component: UserListComponent, canActivate: [AdminGuard]},
@@ -43,18 +54,26 @@ const routes: Routes = [
   {path: 'user/lockaccount', component: LockaccountUserComponent, canActivate: [AdminGuard]},
   {path: 'product/add', component: ProductAddComponent, canActivate: [AdminGuard]},
   {path: 'auction/product/add', component: AuctionProductAddComponent, canActivate: [UserGuard]},
-  {path: 'confirmAddress', component: AddressPaymentComponent},
+  {path: 'receipt', component: PaymentReceiptComponent},
   {path: 'methodPayment', component: MethodPaymentComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
   {path: 'guide', component: GuideListComponent},
   {path: 'guide/edit/:id', component: GuideEditComponent, canActivate: [AdminGuard]},
   {path: 'guide/add', component: GuideAddComponent, canActivate: [AdminGuard]},
   {path: 'chat/user', component: ChatUserComponent},
   {path: 'chat/support', component: ChatAdminComponent, canActivate: [AdminGuard]},
   {path: "auction-detail/:productId", component: AuctionProductDetailComponent},
-  {path: "user/create", component: UserCreateComponent, canActivate: [AdminGuard]},
-  {path: 'user/update/:id', component: UserUpdateComponent, canActivate: [AdminGuard]},
+  {path: "user/create", component: UserCreateComponent},
+  {path: 'user/update/:id', component: UserUpdateComponent, canActivate: [UserGuard]},
   {path: 'registerWithGoogle', component: RegisterWithGoogleComponent},
+  {path: 'cart', component: PaymentCartComponent, canActivate: [UserGuard]},
+  {path: 'account/forgot_password', component: AccountForgotPassComponent, canActivate: [LoginGuard]},
+  {path: 'account/reset_password', component: ResetPasswordComponent},
+  {path: 'historyProduct', component: ProductListComponent, canActivate: [UserGuard]},
+  {path: 'historyAuctionProduct', component: AuctionProductHistoryComponent, canActivate: [UserGuard]},
+  {path: 'user/add', component: UserAddComponent},
+  {path: 'user/lock/:id', component: LockaccountUserComponent},
+  {path: 'chat/visitor', component: ChatVisitorComponent}
 ];
 
 @NgModule({

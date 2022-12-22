@@ -8,32 +8,22 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 const URL_API = `${environment.api_url_order_status}`;
 const API_URL_RECEIPT = `${environment.api_url_order_status}`;
-import { Injectable } from '@angular/core';
+const API_URL_RECEIPT_1 = `${environment.api_url_order_status_1}`;
+const API_URL_SHIPPING = `${environment.api_url_shipping}`;
+import {Injectable} from '@angular/core';
+import {PaymentAddressDto} from "../../dto/payment-address-dto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
-  idArray: number [] = [1, 2, 8];
 
-  // tslint:disable-next-line:variable-name
+  idArray: number[];
+
   constructor(private _httpClient: HttpClient,
-              // tslint:disable-next-line:variable-name
               private _toastrService: ToastrService,
-              // tslint:disable-next-line:variable-name
               private _router: Router,
-              // tslint:disable-next-line:variable-name
               private _activateRoute: ActivatedRoute) {
-  }
-
-  /**
-   * Create by: ChauPTM
-   * Date created: 16/12/2022
-   * Function: to find payment by List id
-   * @return product list dto
-   */
-  findPaymentList(): Observable<PaymentDto[]> {
-    return this._httpClient.post<PaymentDto[]>(API_URL_RECEIPT, this.idArray);
   }
 
   /**
@@ -70,6 +60,24 @@ export class PaymentService {
 
   getPaymentList(userId: string): Observable<PaymentDto[]> {
     return this._httpClient.get<PaymentDto[]>(API_URL_RECEIPT + '/' + userId + '/list');
+  }
+
+  getIdList() {
+    return this.idArray;
+  }
+
+  /**
+   * Create by: ChauPTM
+   * Date created: 16/12/2022
+   * Function: to find payment by List id
+   * @return product list dto
+   */
+  findPaymentList(idList: number[]): Observable<PaymentAddressDto[]> {
+    return this._httpClient.post<PaymentAddressDto[]>(API_URL_RECEIPT_1, idList);
+  }
+
+  updateShipDescription(payments: any[]): Observable<any> {
+    return this._httpClient.post<any>(API_URL_SHIPPING, payments);
   }
 
 }

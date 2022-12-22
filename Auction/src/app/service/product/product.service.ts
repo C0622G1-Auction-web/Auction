@@ -14,6 +14,7 @@ import {catchError} from 'rxjs/operators';
 import {ProductDto} from '../../model/product/iProduct_dto';
 import {ImgDetailDto} from "../../model/product/img-detail-dto";
 import {PageProductDto} from "../../model/product/page-product-dto";
+import {PageProductHistory} from "../../model/product/dto/page-product-history";
 
 
 
@@ -160,7 +161,7 @@ export class ProductService {
     return this._httpClient.get<Reason>(environment.api_url_get_reason + id);
   }
 
-  findByIdd(id: number): Observable<Product> {
+  findById(id): Observable<Product> {
     return this._httpClient.get<Product>(environment.productUrl + "/" + id)
 
   }
@@ -182,4 +183,19 @@ export class ProductService {
   getImgsByProductId(id: number): Observable<ImgDetailDto[]> {
     return this._httpClient.get<ImgDetailDto[]>(environment.api_url_get_imgs + id);
   }
+
+  /**
+   * Created: AnhTDQ
+   * Function: show page product
+   * Date: 15/11/2022
+   */
+  findAllProduct(id: number, curPage: number): Observable<PageProductHistory> {
+    return this._httpClient.get<PageProductHistory>(environment.api_url_product_history_list+ id + '?page=' + curPage);
+  }
+
+  cancelProduct(id: number): Observable<void> {
+    console.log('okokoko')
+    return this._httpClient.get<void>(environment.api_url_product_auction_history + id);
+  }
+
 }

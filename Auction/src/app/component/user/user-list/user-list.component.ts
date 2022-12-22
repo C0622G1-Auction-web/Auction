@@ -34,6 +34,7 @@ export class UserListComponent implements OnInit {
               private _toast: ToastrService,
               private _notificationService: NotificationService,
               private _titleService: Title,
+              private _router: Router,
   ) {
     this._titleService.setTitle("Quản lý thành viên");
   }
@@ -44,13 +45,13 @@ export class UserListComponent implements OnInit {
         this.userTypeList = data
         this.rfSearch = this._formBuilder.group({
           idSearch: ['',
-            [Validators.pattern("\\d{9}")]],
+            [Validators.pattern("^([0-9]{0,10})")]],
           nameSearch: ['',
-            [Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
+            [Validators.pattern("^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{1,30}$")]],
           addressSearch: ['',
-            [Validators.pattern("^[a-zA-Z0-9,_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
+            [Validators.pattern("^[a-zA-Z0-9,_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{1,30}$")]],
           emailSearch: ['',
-            [Validators.pattern("^[a-zA-Z0-9,_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{2,30}$")]],
+            [Validators.pattern("^[a-zA-Z0-9,_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]{1,30}$")]],
           userTypeSearch: [''],
         });
         this.unlockIds = [];
@@ -122,19 +123,36 @@ export class UserListComponent implements OnInit {
     this._userService.findUserEditById(id).subscribe(data => {
       this.user = data;
     })
-    this.unlockIds = [id];
-    this.sendToUnlockGroupModal();
+    if (this.user.account.statusLock) {
+      this._notificationService.showWarningNotification('Tài khoản hiện đã bị khoá')
+    } else {
+      this.unlockIds = [id];
+      this.sendToUnlockGroupModal();
+    }
+
   }
 
 
   unlock() {
-    this._userService.unlock(this.unlockIds).subscribe(data => {
-      this._notificationService.showSuccessNotification('Mở khoá thành công!');
-      this.ngOnInit();
-    });
+    for (let i = 0; i < this.unlockIds.length; i++) {
+      if (!this.unlockIds[i]){
+        this._notificationService.showWarningNotification('Tài khoản hiện không bị khoá')
+      }else {
+        this._userService.unlock(this.unlockIds).subscribe(data => {
+          this._notificationService.showSuccessNotification('Mở khoá thành công!');
+        });
+      }
+    }
+    this.ngOnInit();
   }
 
   resetFormAndData() {
     this.ngOnInit()
+  }
+
+  lockUser() {
+    let idString =  this.unlockIds.join(',');
+    console.log(idString);
+    this._router.navigate(['/user/lock', idString]);
   }
 }

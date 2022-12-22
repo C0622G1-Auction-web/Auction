@@ -33,8 +33,6 @@ import {
 import {
   InfomationAuctionSellerComponent
 } from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
-import {AccountForgotPassComponent} from './component/account-forgot-pass/account-forgot-pass.component';
-import {AccountResetPassComponent} from './component/account-reset-pass/account-reset-pass.component';
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
 import {ListProductsComponent} from './component/product/list-products/list-products.component';
@@ -42,7 +40,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
 import {TransactionComponent} from './component/transaction/transaction.component';
-import {LockaccountUserComponent} from './component/user/lockaccount-user/lockaccount-user.component';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from 'src/environments/environment';
@@ -58,12 +55,20 @@ import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import {LoginComponent} from "./security/login/login.component";
 import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
 import {PaymentReceiptComponent} from "./component/payment/payment-receipt/payment-receipt.component";
+import { AccountForgotPassComponent } from './security/account-forgot-pass/account-forgot-pass.component';
+import {CustomPipePipe} from "./component/product/product-list/pipe";
+import { AuctionProductHistoryComponent } from './component/auction/auction-product-history/auction-product-history.component';
+import {LockaccountUserComponent} from "./component/user/lockaccount-user/lockaccount-user.component";
+import { ChatVisitorComponent } from './component/chat/chat-visitor/chat-visitor.component';
 
 const googleLoginOptions = {
   scope: 'profile email',
   plugin_name: 'login'
 };
 
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,14 +94,11 @@ const googleLoginOptions = {
     VerificationComponent,
     VerifyResetPasswordComponent,
     TransactionComponent,
-    LockaccountUserComponent,
     RegisterWithGoogleComponent,
     AuctionComponent,
     AuctionProductDetailComponent,
     InfomationAuctionBuyerComponent,
     InfomationAuctionSellerComponent,
-    AccountForgotPassComponent,
-    AccountResetPassComponent,
     AddressPaymentComponent,
     MethodPaymentComponent,
     TransactionComponent,
@@ -110,7 +112,13 @@ const googleLoginOptions = {
     UserCreateComponent,
     LoginComponent,
     PaymentCartComponent,
-    PaymentReceiptComponent
+    PaymentReceiptComponent,
+    AccountForgotPassComponent,
+    CustomPipePipe,
+    AuctionProductHistoryComponent,
+    LockaccountUserComponent,
+    UserAddComponent,
+    ChatVisitorComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -144,5 +152,4 @@ const googleLoginOptions = {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

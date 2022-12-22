@@ -143,3 +143,10 @@ li {
   right: 200px;
   margin-right: 8px;
 }
+
+.render__description img{
+  display: block;
+  width: 100%;
+  border: 3px solid red;
+
+}

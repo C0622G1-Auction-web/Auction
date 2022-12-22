@@ -1,36 +1,40 @@
-<div class="container">
-  <ul style="min-height: 500px; margin-top: 100px" class="list-group">
-    <li class="list-group-item active" style="width: 30%" aria-current="true">List Chat</li>
-    <div *ngFor="let item of userchat">
-      <li  class="list-group-item " style="width: 30%" (click)="chooseUser(item)">{{item}}</li>
-    </div>
-  </ul>
-  <div  class="chatbox" id="myForm">
-    <div class="chatbox__header d-flex justify-content-between">
-      <p>Tư vấn viên</p>
-    </div>
-    <div *ngIf="itemUser==userchat[check]">
-      <div  class="chatbox__body" id="scroll">
-        <div class="me__box" *ngFor="let chat of chats">
-          <span class="user_name">{{chat.username}}</span>
-          <span class="date-time">{{chat.timestamp | date:'dd/MM/yyyy HH:mm:ss'}}</span>
-          <textarea readonly *ngIf="chat.username !=='admin'" class="user__message">
+<ul style="min-height: 500px; margin-top: 100px" class="list-group">
+  <li class="list-group-item active" style="width: 30%" aria-current="true">List Chat</li>
+  <div *ngFor="let item of userchat">
+    <li  class="list-group-item " style="width: 30%" (click)="chooseUser(item)">{{item}}</li>
+  </div>
+</ul>
+<ul style="min-height: 500px; margin-top: 100px" class="list-group">
+  <li class="list-group-item active" style="width: 30%" aria-current="true">List Chat</li>
+  <div *ngFor="let itemVisitor of listChatInforVisitor;let i = index">
+    <li  class="list-group-item " style="width: 30%" (click)="chooseVisitor(itemVisitor)">khach{{i}}</li>
+  </div>
+</ul>
+<div  class="chatbox" id="myForm">
+  <div class="chatbox__header d-flex justify-content-between">
+    <p>Tư vấn viên</p>
+  </div>
+  <div *ngIf="itemUser===userchat[check]||itemUser===listChatInforVisitor[check]">
+    <div  class="chatbox__body" id="scroll">
+      <div class="me__box" *ngFor="let chat of chats">
+        <span class="user_name">{{chat.username}}</span>
+        <span class="date-time">{{chat.timestamp | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+        <textarea readonly *ngIf="chat.username !=='admin'" class="user__message">
         {{chat.message}}
       </textarea>
-          <textarea readonly *ngIf="chat.username ==='admin'" class="me__message">
+        <textarea readonly *ngIf="chat.username ==='admin'" class="me__message">
         {{chat.message}}
       </textarea>
-        </div>
       </div>
     </div>
-    <div class="chatbox__Footer">
-      <form [formGroup]="form" *ngIf="form" (ngSubmit)="onChatSubmit(form.value)" action="" class="form__input__message">
-        <input formControlName="message" type="text" class="input__mesage" placeholder="Tư vấn..." [readOnly]="itemUser==''">
-        <button style="border:solid whitesmoke 0.1px;background-color: white  " [disabled]="!form.valid" class="send" (click)="onChatSubmit(form.value)">
-          <i class="fa-solid fa-paper-plane"></i>
-        </button>
-      </form>
-    </div>
-  </div>
 
+  </div>
+  <div class="chatbox__Footer">
+    <form [formGroup]="form" *ngIf="form" (ngSubmit)="onChatSubmit(form.value)" action="" class="form__input__message">
+      <input formControlName="message" type="text" class="input__mesage" placeholder="Tư vấn..." [readOnly]="itemUser==''">
+      <button style="border:solid whitesmoke 0.1px;background-color: white  " [disabled]="!form.valid" class="send" (click)="onChatSubmit(form.value)">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
 </div>

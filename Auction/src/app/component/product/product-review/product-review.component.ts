@@ -47,29 +47,25 @@ export class ProductReviewComponent implements OnInit {
    */
   getInfo() {
     const id = +this._activatedRoute.snapshot.params.id;
-
     this._productService.getImgsByProductId(id).subscribe(data => {
       this.imgs = data;
     }, err => {
       this._notificationService.showErrorNotification('Có lỗi khi tải hình ảnh sản phẩm!');
+      this.imgs = [{
+        url:''
+      }];
     });
-
     this._productService.getReason(id).subscribe(data => {
-      console.log('ly do' + data);
       this.reason = data;
       this.reason.productId = id;
-      console.log(this.reason);
     });
-
     this._productService.findByDtoId(id).subscribe(data => {
-      console.log('spham' + data);
       this.product = data;
       this.invalidProduct = this.product.reviewStatusId == 3;
-      console.log(this.invalidProduct);
     }, error => {
       this._notificationService.showErrorNotification('Có lỗi khi tải thông tin sản phẩm!');
+      this.router.navigateByUrl('/products');
     });
-
   }
 
   /**

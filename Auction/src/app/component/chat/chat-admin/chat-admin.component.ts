@@ -27,14 +27,15 @@ export class ChatAdminComponent implements OnInit {
   message = '';
   chats: Chat[] = [];
   chatInfor: Chat;
+  chatInforVisitor: Chat;
+  listChatInforVisitor: string[] = [];
   itemUser: string = '';
   check: number;
-  // userNamejs: string[];
+  checkUser: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private _toast: ToastrService,
-              // private _visitor: ChatVisitorService,
-              private _userService:UserService) {
+              private _userService: UserService) {
     this.app = initializeApp(environment.firebaseConfig);
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
@@ -47,8 +48,13 @@ export class ChatAdminComponent implements OnInit {
     chat.timestamp = new Date().toString();
     chat.id = uuidv4();
     this.chats = [];
-    firebase.database().ref('chat').child(this.itemUser.toString()).push(chat);
-    console.log(this.chats)
+    if (this.checkUser) {
+      firebase.database().ref('chat').child(this.itemUser.toString()).push(chat);
+      console.log(this.chats)
+    } else {
+      firebase.database().ref('chat/khach').child(this.itemUser.toString()).push(chat);
+      console.log(this.chats)
+    }
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
       'username': [chat.username],
@@ -59,29 +65,25 @@ export class ChatAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // document.querySelectorAll('li').forEach(value => {
-    //   this.userNamejs.push(value.innerText);
-    // })
-    // console.log(this.userNamejs);
-    this.userchat = ['son', 'giang'];
-    this._userService.getAllUserChat().subscribe(data=>{
-      for (let i = 0; i < data.length ; i++) {
+    this.userchat = ['LHT', 'giang'];
+    this._userService.getAllUserChat().subscribe(data => {
+      console.log(data);
+      for (let i = 0; i < data.length; i++) {
         this.userchat.push(data[i].account.username)
       }
-      console.log('user chat: ', this.userchat);
-      for (let i = 0; i < this.userchat.length ; i++) {
-        const dbRef = firebase.database().ref('/chat/'+this.userchat[i]);
+      for (let i = 0; i < this.userchat.length; i++) {
+        const dbRef = firebase.database().ref('chat').child(this.userchat[i]);
         dbRef.once('value', (snapshot) => {
           const data = snapshot.val();
           for (let id in data) {
-            this.chatInfor=data[id]
+            this.chatInfor = data[id]
+            console.log(this.chatInfor)
           }
-          console.log('chat info', this.chatInfor);
-          if(this.chatInfor != undefined) {
-            if(this.chatInfor?.username!='admin') {
-              this._toast.success('New Message From ' + this.chatInfor.username, 'receive',{
-                timeOut: 1000
-              });
+          if (this.chatInfor.username != undefined) {
+            if (this.chatInfor.username != 'admin') {
+              this._toast.success('New Message From ' + this.chatInfor.username, 'receive', {
+                timeOut: 2000
+              })
             }
           }
         })
@@ -90,25 +92,30 @@ export class ChatAdminComponent implements OnInit {
       alert('loi')
     })
     console.log(this.userchat);
-    for (let i = 0; i < this.userchat.length ; i++) {
-      const dbRef = firebase.database().ref('chat').child(this.userchat[i]);
+    const dbb = firebase.database().ref('chat/khach');
+    dbb.once('value', (snapshot) => {
+      const data = snapshot.val()
+      for (let k in data) {
+        this.listChatInforVisitor.push(k);
+      }
+      console.log(this.listChatInforVisitor)
+    })
+    for (let i = 0; i < this.listChatInforVisitor.length; i++) {
+      const dbRef = firebase.database().ref('chat/khach').child(this.listChatInforVisitor[i]);
       dbRef.once('value', (snapshot) => {
         const data = snapshot.val();
         for (let id in data) {
-          this.chatInfor=data[id]
+          this.chatInforVisitor = data[id]
+          console.log(this.chatInforVisitor.username)
         }
-        if(this.chatInfor.username!='admin') {
-          this._toast.success('New Message From ' + this.chatInfor.username, 'receive',{
-            timeOut: 2000
+        if (this.chatInforVisitor.username != 'admin') {
+          console.log(this.chatInforVisitor.username)
+          this._toast.success('New Message From visitor ' + this.chatInforVisitor.username, 'receive', {
+            timeOut: 3000
           })
         }
       })
     }
-    const dbb =firebase.database().ref('chat/khach');
-    dbb.once('value',(snapshot)=>{
-      const data=snapshot.val()
-      console.log(data)
-    })
   }
 
   autoScroll() {
@@ -135,6 +142,12 @@ export class ChatAdminComponent implements OnInit {
         break
       }
     }
+    for (let i = 0; i < this.listChatInforVisitor.length; i++) {
+      if (item === this.listChatInforVisitor[i]) {
+        this.check = i;
+        break;
+      }
+    }
     console.log(this.userchat[this.check])
     console.log(item);
     console.log(this.itemUser)
@@ -149,6 +162,34 @@ export class ChatAdminComponent implements OnInit {
       this.heiht();
       this.itemUser = item;
       console.log(this.chats)
+      this.checkUser = true;
+    })
+  }
+
+  chooseVisitor(item: string) {
+    this.chats = [];
+    this.itemUser = item;
+    for (let i = 0; i < this.listChatInforVisitor.length; i++) {
+      if (item === this.listChatInforVisitor[i]) {
+        this.check = i;
+        break;
+      }
+    }
+    console.log(this.listChatInforVisitor[this.check])
+    console.log(item);
+    console.log(this.itemUser)
+    const dbRef = firebase.database().ref('chat/khach');
+    dbRef.on('value', (snapshot) => {
+      this.chats = [];
+      const data = snapshot.child(item).val();
+      for (let id in data) {
+        this.chats.push(data[id])
+      }
+      this.autoScroll();
+      this.heiht();
+      this.itemUser = item;
+      console.log(this.chats)
+      this.checkUser = false;
     })
   }
 }
