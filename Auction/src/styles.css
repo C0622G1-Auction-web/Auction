@@ -18,7 +18,7 @@ Date created: 13/12/2022
 .form-control-underlined, form-select-underlined {
   border-width: 0;
   border-bottom-width: 1px;
-  border-radius: 0;
+  border-radius: 5px;
   padding-left: 0;
 }
 

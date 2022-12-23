@@ -91,7 +91,7 @@ export class ProductService {
    */
   getPageProductRoleAdmin(searchProduct: any, pageNumber): Observable<PageProductDto> {
     return this._httpClient.post<PageProductDto>(
-      environment.api_url_products + '?page=' + pageNumber,
+      environment.api_url_products + '?page=' + pageNumber + '&sort=reviewStatusId,startTime',
       searchProduct);
   }
 

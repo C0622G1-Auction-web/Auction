@@ -64,9 +64,8 @@ export class ListProductsComponent implements OnInit {
    */
   searchByRoleAdmin(pageNumber: number) {
     this._productService.getPageProductRoleAdmin(this.rfSearch.value, pageNumber).subscribe(data => {
-      console.log('okok')
-      console.log(data)
       this.pageProducts = data;
+      ;
     }, error => {
       this._notificationService.showErrorNotification('Không thể kết nối đến Server.');
     });
@@ -128,21 +127,27 @@ export class ListProductsComponent implements OnInit {
   addAllToDelete() {
     this.checkedAll = true;
     for (let value of this.pageProducts.content) {
-      if (!this.deleteIds.includes(value.id)) {
-        this.checkedAll = false;
-        break;
+      if (value.auctionStatus == 'Chưa đấu giá' || value.auctionStatus == 'Đã đấu giá thất bại') {
+        if (!this.deleteIds.includes(value.id)) {
+          this.checkedAll = false;
+          break;
+        }
       }
     }
     if (this.checkedAll) {
       for (let value of this.pageProducts.content) {
-        const index = this.deleteIds.indexOf(value.id, 0);
-        this.deleteIds.splice(index, 1);
+        if (value.auctionStatus == 'Chưa đấu giá' || value.auctionStatus == 'Đã đấu giá thất bại') {
+          const index = this.deleteIds.indexOf(value.id, 0);
+          this.deleteIds.splice(index, 1);
+        }
       }
     } else {
       for (let value of this.pageProducts.content) {
-        const index = this.deleteIds.indexOf(value.id, 0);
-        if (index == -1) {
-          this.deleteIds.push(value.id);
+        if (value.auctionStatus == 'Chưa đấu giá' || value.auctionStatus == 'Đã đấu giá thất bại') {
+          const index = this.deleteIds.indexOf(value.id, 0);
+          if (index == -1) {
+            this.deleteIds.push(value.id);
+          }
         }
       }
     }
