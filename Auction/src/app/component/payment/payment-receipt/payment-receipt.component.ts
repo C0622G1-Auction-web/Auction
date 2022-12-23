@@ -6,7 +6,7 @@ import {FormBuilder} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {render} from "creditcardpayments/creditCardPayments";
 import html2canvas from "html2canvas";
-import * as jsPDF from "jspdf";
+import {jsPDF} from 'jspdf';
 import {Title} from "@angular/platform-browser";
 
 
@@ -47,7 +47,7 @@ export class PaymentReceiptComponent implements OnInit {
       for (let i = 0; i < data.length; i++) {
         this.paymentBill += +data[i].productPrice;
       }
-      this.paypal = (this.paymentBill / 23725).toFixed(2);
+      this.paypal = (this.paymentBill / 237250000).toFixed(2);
     }, error => {
       this._paymentService.showErrorMessage('Không thể lấy danh sách');
     });
@@ -57,8 +57,7 @@ export class PaymentReceiptComponent implements OnInit {
     html2canvas(document.getElementById('content')).then(canvas => {
       console.log(canvas);
       const contentDataURL = canvas.toDataURL('image/png');
-      // @ts-ignore
-      let pdf = new jsPDF('p', 'mm', 'a4');
+      let pdf = new jsPDF('p', 'mm', 'A4');
       let width = pdf.internal.pageSize.getWidth();
       let height = canvas.height * width / canvas.width;
       pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height)
@@ -76,7 +75,7 @@ export class PaymentReceiptComponent implements OnInit {
         onApprove: (details) => {
           this._paymentService.showSuccessMessage("Thanh toán thành công");
           this.display = 'none';
-          this.displayButton = 'block';
+          this.goToPay2();
         }
       }
     );

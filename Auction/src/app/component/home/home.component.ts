@@ -1,11 +1,9 @@
-import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../service/product/product.service";
 import {PageProduct} from "../../model/product/page-product";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Category} from "../../model/product/category";
 import {CategoryService} from "../../service/product/category.service";
-import {ImgUrlProduct} from "../../model/product/img-url-product";
-import {formatCurrency, getCurrencySymbol} from "@angular/common";
 import {UserService} from "../../service/user/user.service";
 import {SocketService} from "../../service/socket/socket.service";
 import {Title} from "@angular/platform-browser";
@@ -50,6 +48,7 @@ export class HomeComponent implements OnInit {
     this.gotoPage(this.rfSearch.value);
     this.selectedChangImage();
     this.getTop();
+    this.runcountDowDate();
 
   }
 
@@ -100,6 +99,15 @@ export class HomeComponent implements OnInit {
     this.gotoPage(this.rfSearch.value);
   }
 
+  /**
+   * Created: SangDD
+   * date: 18/12/2022
+   * @param categoryId
+   * @param rangePrice
+   * @param productAuctionStatus
+   * @param name is product name
+   */
+
   setValueAuctionProductStatusSearch(categoryId: any,
                                      rangePrice: any,
                                      productAuctionStatus: string,
@@ -120,8 +128,8 @@ export class HomeComponent implements OnInit {
    * Created: SangDD
    * date: 18/12/2022
    * @param event
-   * @param i
-   * @param j
+   * @param i, image main
+   * @param j, image sub
    */
   changeImage(event: any, i: any, j: number) {
     const src = event.target.src;
@@ -136,6 +144,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * Created: SangDD
+   * Date: 18/12/2022
+   * function: highlight img được chọn
+   */
   selectedChangImage() {
     setTimeout(()=> {
       const imgF = document.querySelectorAll('.carousel__images');
@@ -157,6 +170,41 @@ export class HomeComponent implements OnInit {
     this._productService.setProductDetailId(id);
     this._route.navigate(['auction-detail', id]);
     console.log('bat dau truyen ', id);
+  }
+
+  runcountDowDate(){
+    var countDownDate = new Date("2022-12-24 23:59:59").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+      // Get today's date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Output the result in an element with id="demo"
+      document.querySelectorAll(".time").forEach(e => {
+        e.innerHTML = `<span class="time__hh mx-2">${hours} : </span>` +
+          `<span class="time__mm mx-2">${minutes} :</span>` +
+          `<span class="time__ss mx-2">${seconds}</span>`;
+      });
+
+      // If the count down is over, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = `<span class="time__hh mx-2">0 : </span>` +
+          `<span class="time__mm mx-2">0 :</span>` +
+          `<span class="time__ss mx-2">0</span>`;
+      }
+    }, 1000);
   }
 }
 
