@@ -83,7 +83,6 @@ export class ProductReviewComponent implements OnInit {
         ]]
       })
     } else {
-      console.log(this.reason);
       this._productService.writeReason(this.reason).subscribe(data => {
         this._notificationService.showSuccessNotification('Đã lưu lý do khoá!');
       },);
@@ -127,7 +126,6 @@ export class ProductReviewComponent implements OnInit {
   selectedChangImage() {
     setTimeout(() => {
       const imgF = document.querySelectorAll('.carousel__images');
-      console.log(imgF);
       imgF.forEach(value => {
         value.children[0].classList.add('actived');
       });

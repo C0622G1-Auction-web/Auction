@@ -62,7 +62,7 @@
                     </tr>
                     <tr>
                       <td>Thông tin chi tiết</td>
-                      <td>{{product.description}}
+                      <td [innerHTML]="product.description">
                       </td>
                     </tr>
                     <tr *ngIf="product.reviewStatusId == 3">

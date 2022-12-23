@@ -93,7 +93,6 @@ h1 {
 
 #content {
   padding-bottom: 3%;
-  margin-left:16%
 }
 
 
@@ -114,7 +113,7 @@ h1 {
 .form-select-underlined {
   border-width: 0;
   border-bottom-width: 1px;
-  border-radius: 0;
+  border-radius: 5px;
   padding-left: 13px;
 }
 
@@ -124,13 +123,13 @@ h1 {
 }
 
 #form-floating-price {
-  width: 100%;
-  margin-left: 0;
+  width: 80%;
+  margin-left: 10%;
 }
 
 #form-btn .btn {
-  margin-left: 5%;
-  margin-top: 5%;
+  margin-left: 10%;
+  margin-top: 3%;
 }
 
 /*End-Search*/

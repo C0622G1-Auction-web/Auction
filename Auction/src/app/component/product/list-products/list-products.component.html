@@ -1,214 +1,175 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-2 sidebar__left" id="side-bar">
-      <div>
-        <nav>
-          <ul class="menu">
-            <li class="menu__item">
-              <a class="menu__link" routerLink="/home">
-                <i class="menu__icon fa fa-home"></i>
-                Trang chủ
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="menu__item active">
-              <a class="menu__link" routerLink="/products">
-                <i class="menu__icon fa-solid fa-book"></i>
-                Quản lý sản phẩm
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a class="menu__link" routerLink="/user/list">
-                <i class="menu__icon fa-solid fa-user-pen"></i>
-                Quản lý nhân viên
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a class="menu__link" routerLink="/transaction">
-                <i class="menu__icon fa-solid fa-handshake"></i>
-                Quản lý giao dịch
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-
-    <div class="col-lg-10" id="content">
-      <h1 class="mt-5">Danh Sách Sản Phẩm</h1>
-      <hr>
-      <div class="row" id="search-row">
-        <form *ngIf="rfSearch" [formGroup]="rfSearch"
-              (ngSubmit)="searchByRoleAdmin(0)">
-          <div class="row">
-            <div class="col-4">
-              <div class="form-floating mb-4 form-inp">
-                <input type="text" placeholder="Tên sản phẩm" id="floatingName"
-                       class="form-control form-control-underlined"
-                       formControlName="productName"/>
-                <label for="floatingName">Tên sản phẩm</label>
-                <div *ngIf="rfSearch.controls['productName'].hasError('maxlength') &&
+  <div class="row" id="content">
+    <h1 class="mt-5">Danh Sách Sản Phẩm</h1>
+    <hr>
+    <div class="row" id="search-row">
+      <form *ngIf="rfSearch" [formGroup]="rfSearch"
+            (ngSubmit)="searchByRoleAdmin(0)">
+        <div class="row">
+          <div class="col-4">
+            <div class="form-floating mb-4 form-inp">
+              <input type="text" placeholder="Tên sản phẩm" id="floatingName"
+                     class="form-control form-control-underlined"
+                     formControlName="productName"/>
+              <label for="floatingName">Tên sản phẩm</label>
+              <div *ngIf="rfSearch.controls['productName'].hasError('maxlength') &&
                    rfSearch.controls['productName'].touched" style="color: red">
-                  Tên sản phẩm tối đa 50 ký tự.
-                </div>
+                Tên sản phẩm tối đa 50 ký tự.
               </div>
             </div>
-            <div class="col-4">
-              <div class="form-floating mb-4 form-inp">
-                <input type="text" placeholder="Người đăng" id="floatingSeller"
-                       class="form-control form-control-underlined"
-                       formControlName="sellerName"/>
-                <label for="floatingSeller">Người đăng</label>
-                <div *ngIf="rfSearch.controls['sellerName'].hasError('maxlength') &&
+          </div>
+          <div class="col-4">
+            <div class="form-floating mb-4 form-inp">
+              <input type="text" placeholder="Người đăng" id="floatingSeller"
+                     class="form-control form-control-underlined"
+                     formControlName="sellerName"/>
+              <label for="floatingSeller">Người đăng</label>
+              <div *ngIf="rfSearch.controls['sellerName'].hasError('maxlength') &&
                    rfSearch.controls['sellerName'].touched" style="color: red">
-                  Tên người đăng tối đa 25 ký tự.
-                </div>
-                <div *ngIf="rfSearch.controls['sellerName'].hasError('pattern') &&
+                Tên người đăng tối đa 25 ký tự.
+              </div>
+              <div *ngIf="rfSearch.controls['sellerName'].hasError('pattern') &&
                    rfSearch.controls['sellerName'].touched &&
                   !rfSearch.controls['sellerName'].hasError('maxlength')" style="color: red">
-                  Tên người đăng sai định dạng.
-                </div>
-              </div>
-            </div>
-            <div class="col-4" id="form-btn">
-              <button class="btn btn-primary" type="submit" [disabled]="rfSearch.invalid">
-                <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả
-              </button>
-              <button class="btn btn-success" (click)="resetFormAndData()">
-                Làm mới bộ lọc
-              </button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-4">
-              <div class="form-floating mb-4 form-inp">
-                <select class="form-select form-select-underlined" id="floatingCategory"
-                        formControlName="categoryName">
-                  <option value="">---- Tất cả ----</option>
-                  <option *ngFor="let item of categories" [value]="item.name">{{item.name}}</option>
-                </select>
-                <label for="floatingCategory">Loại sản phẩm</label>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-floating mb-4 form-inp">
-                <select class="form-select form-select-underlined" id="floatingAuctionStatus"
-                        formControlName="auctionStatusName">
-                  <option value="">----- Tất cả -----</option>
-                  <option *ngFor="let item of auctionStatus" [value]="item.name">{{item.name}}</option>
-                </select>
-                <label for="floatingAuctionStatus">Tình trạng đấu giá</label>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-floating mb-4" id="form-floating-price">
-                <select class="form-select form-select-underlined" id="floatingPrice"
-                        formControlName="priceRange">
-                  <option *ngFor="let item of priceRanges" [value]="item.id">{{item.name}}</option>
-                </select>
-                <label for="floatingPrice">Giá sản phẩm</label>
+                Tên người đăng sai định dạng.
               </div>
             </div>
           </div>
-        </form>
-      </div>
-      <div class="row" id="list-row">
-        <table id="customer_table" class="table table-striped table-bordered"
-               *ngIf="pageProducts != null">
-          <thead>
-          <tr>
-            <th width=30%>Tên Sản phẩm</th>
-            <th width=11%>Chủng loại</th>
-            <th width=11%>Người đăng</th>
-            <th width=11%>Giá ban đầu (VNĐ)</th>
-            <th width=11%>Trạng thái duyệt</th>
-            <th width=10%>Ngày đấu giá</th>
-            <th width=11%>Tình trạng</th>
-            <th width=6%>Sửa</th>
-            <th class="text-center" width=10>
-              <button class="btn " (click)="addAllToDelete()">
-                <i class="fa-regular fa-trash-can delete-group-icon"></i>
-              </button>
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of pageProducts.content">
-            <td><a type="button" class="view"
-                   [routerLink]="item.reviewStatusId == 2 ? ['/auction-detail/',item.id] :['/products/review/',item.id]">
-              <span class="text-decoration-underline">{{item.name}}</span></a>
-            </td>
-            <td>{{item.category}}</td>
-            <td>{{item.userName}}</td>
-            <td class="text-end">{{item.initialPrice | number}}</td>
-            <td>{{item.reviewStatus}}</td>
-            <td class="text-end">{{item.startTime}}</td>
-            <td>{{item.auctionStatus}}</td>
-            <td class="text-center">
-              <button [routerLink]="['/product/edit/',item.id]" style="border: none"
-                      [disabled]="item.auctionStatus != 'Chưa đấu giá'">
-                <i class="fa-regular fa-pen-to-square edit-icon"
-                   [style]="item.auctionStatus == 'Chưa đấu giá'? 'color: green': 'color:#6E6766'"></i></button>
-            </td>
-            <td class="text-center">
-              <input class="delete-checkbox" [checked]="deleteIds.includes(item.id)" type="checkbox"
-                     [disabled]="item.auctionStatus == 'Đã đấu giá thành công' || item.auctionStatus == 'Đang đấu giá'"
-                     (click)="addToDelete(item.id)"/>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-        <h3 *ngIf="pageProducts == null" id="null-result-noti">Không tìm thấy kết quả phù hợp.</h3>
-        <!--            Phân trang-->
-        <div class="d-flex justify-content-between" id="last-row">
-          <div>
-            <a routerLink="/product/create" class="btn btn-primary" role="button">
-              <i class="fa-solid fa-square-plus"></i> Thêm sản phẩm
-            </a>
-          </div>
-          <div *ngIf="pageProducts">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item"><a class="page-link"
-                                         [ngClass]="pageProducts.first ? 'disabled': ''"
-                                         (click)="gotoPage(0)"> << </a></li>
-                <li class="page-item" *ngIf="pageProducts.number - 2 > 0">
-                  <a class="page-link" (click)="gotoPage(pageProducts.number - 3)">{{pageProducts.number - 2}}</a>
-                </li>
-                <li class="page-item" *ngIf="pageProducts.number - 1 > 0">
-                  <a class="page-link" (click)="gotoPage(pageProducts.number - 2)">{{pageProducts.number - 1}}</a>
-                </li>
-                <li class="page-item" *ngIf="pageProducts.number > 0">
-                  <a class="page-link" (click)="gotoPage(pageProducts.number   - 1)">{{pageProducts.number}}</a></li>
-
-                <li class="page-item active"><a class="page-link">{{pageProducts.number + 1}}</a></li>
-
-                <li class="page-item" *ngIf="pageProducts.number + 2 <= pageProducts.totalPages">
-                  <a class="page-link" (click)="gotoPage(pageProducts.number + 1)">{{pageProducts.number + 2}}</a>
-                </li>
-                <li class="page-item" *ngIf="pageProducts.number + 3 <= pageProducts.totalPages">
-                  <a class="page-link" (click)="gotoPage(pageProducts.number + 2)">{{pageProducts.number + 3}}</a>
-                </li>
-                <li class="page-item" *ngIf="pageProducts.number + 4 <= pageProducts.totalPages">
-                  <a class="page-link" (click)="gotoPage(pageProducts.number + 3)">{{pageProducts.number + 4}}</a>
-                </li>
-                <li class="page-item"><a class="page-link"
-                                         [ngClass]="pageProducts.last ? 'disabled': ''"
-                                         (click)="gotoPage(pageProducts.totalPages - 1)"> >> </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div>
-            <button class="btn btn-danger" data-bs-toggle="modal"
-                    (click)="sendToDeleteGroupModal()" data-bs-target="#deleteGroupModal"
-                    [disabled]="deleteIds.length == 0">
-              <i class="fa-regular fa-trash-can delete-icon"></i> Xoá
+          <div class="col-4" id="form-btn">
+            <button class="btn btn-primary" type="submit" [disabled]="rfSearch.invalid">
+              <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả
+            </button>
+            <button class="btn btn-success" (click)="resetFormAndData()">
+              Làm mới bộ lọc
             </button>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-floating mb-4 form-inp">
+              <select class="form-select form-select-underlined" id="floatingCategory"
+                      formControlName="categoryName">
+                <option value="">---- Tất cả ----</option>
+                <option *ngFor="let item of categories" [value]="item.name">{{item.name}}</option>
+              </select>
+              <label for="floatingCategory">Loại sản phẩm</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating mb-4 form-inp">
+              <select class="form-select form-select-underlined" id="floatingAuctionStatus"
+                      formControlName="auctionStatusName">
+                <option value="">----- Tất cả -----</option>
+                <option *ngFor="let item of auctionStatus" [value]="item.name">{{item.name}}</option>
+              </select>
+              <label for="floatingAuctionStatus">Tình trạng đấu giá</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating mb-4" id="form-floating-price">
+              <select class="form-select form-select-underlined" id="floatingPrice"
+                      formControlName="priceRange">
+                <option *ngFor="let item of priceRanges" [value]="item.id">{{item.name}}</option>
+              </select>
+              <label for="floatingPrice">Giá sản phẩm</label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row" id="list-row">
+      <table id="customer_table" class="table table-striped table-bordered"
+             *ngIf="pageProducts != null">
+        <thead>
+        <tr>
+          <th width=30%>Tên Sản phẩm</th>
+          <th width=8%>Chủng loại</th>
+          <th width=15%>Người đăng</th>
+          <th width=8%>Giá ban đầu (VNĐ)</th>
+          <th width=11%>Trạng thái duyệt</th>
+          <th width=10%>Ngày đấu giá</th>
+          <th width=15%>Tình trạng</th>
+          <th width=7%>Sửa</th>
+          <th class="text-center" width=10>
+            <button class="btn " (click)="addAllToDelete()">
+              <i class="fa-regular fa-trash-can delete-group-icon"></i>
+            </button>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of pageProducts.content">
+          <td><a type="button" class="view"
+                 [routerLink]="item.reviewStatusId == 2 && item.auctionStatus != 'Đã đấu giá thất bại' ? ['/auction-detail/',item.id] :['/products/review/',item.id]">
+            <span class="text-decoration-underline">{{item.name}}</span></a>
+          </td>
+          <td>{{item.category}}</td>
+          <td>{{item.userName}}</td>
+          <td class="text-end">{{item.initialPrice | number}}</td>
+          <td>{{item.reviewStatus}}</td>
+          <td>{{item.startTime | date:'dd/MM/yyyy H:mm:ss'}}</td>
+          <td>{{item.auctionStatus}}</td>
+          <td class="text-center">
+            <button [routerLink]="['/product/edit/',item.id]" style="border: none"
+                    [disabled]="item.auctionStatus != 'Chưa đấu giá'">
+              <i class="fa-regular fa-pen-to-square edit-icon"
+                 [style]="item.auctionStatus == 'Chưa đấu giá'? 'color: green': 'color:#6E6766'"></i></button>
+          </td>
+          <td class="text-center">
+            <input class="delete-checkbox" [checked]="deleteIds.includes(item.id)" type="checkbox"
+                   [disabled]="item.auctionStatus == 'Đã đấu giá thành công' || item.auctionStatus == 'Đang đấu giá'"
+                   (click)="addToDelete(item.id)"/>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <h3 *ngIf="pageProducts == null" id="null-result-noti">Không tìm thấy kết quả phù hợp.</h3>
+      <!--            Phân trang-->
+      <div class="d-flex justify-content-between" id="last-row">
+        <div>
+          <a routerLink="/product/create" class="btn btn-primary" role="button">
+            <i class="fa-solid fa-square-plus"></i> Thêm sản phẩm
+          </a>
+        </div>
+        <div *ngIf="pageProducts">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link"
+                                       [ngClass]="pageProducts.first ? 'disabled': ''"
+                                       (click)="gotoPage(0)"> << </a></li>
+              <li class="page-item" *ngIf="pageProducts.number - 2 > 0">
+                <a class="page-link" (click)="gotoPage(pageProducts.number - 3)">{{pageProducts.number - 2}}</a>
+              </li>
+              <li class="page-item" *ngIf="pageProducts.number - 1 > 0">
+                <a class="page-link" (click)="gotoPage(pageProducts.number - 2)">{{pageProducts.number - 1}}</a>
+              </li>
+              <li class="page-item" *ngIf="pageProducts.number > 0">
+                <a class="page-link" (click)="gotoPage(pageProducts.number   - 1)">{{pageProducts.number}}</a></li>
+
+              <li class="page-item active"><a class="page-link">{{pageProducts.number + 1}}</a></li>
+
+              <li class="page-item" *ngIf="pageProducts.number + 2 <= pageProducts.totalPages">
+                <a class="page-link" (click)="gotoPage(pageProducts.number + 1)">{{pageProducts.number + 2}}</a>
+              </li>
+              <li class="page-item" *ngIf="pageProducts.number + 3 <= pageProducts.totalPages">
+                <a class="page-link" (click)="gotoPage(pageProducts.number + 2)">{{pageProducts.number + 3}}</a>
+              </li>
+              <li class="page-item" *ngIf="pageProducts.number + 4 <= pageProducts.totalPages">
+                <a class="page-link" (click)="gotoPage(pageProducts.number + 3)">{{pageProducts.number + 4}}</a>
+              </li>
+              <li class="page-item"><a class="page-link"
+                                       [ngClass]="pageProducts.last ? 'disabled': ''"
+                                       (click)="gotoPage(pageProducts.totalPages - 1)"> >> </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div>
+          <button class="btn btn-danger" data-bs-toggle="modal"
+                  (click)="sendToDeleteGroupModal()" data-bs-target="#deleteGroupModal"
+                  [disabled]="deleteIds.length == 0">
+            <i class="fa-regular fa-trash-can delete-icon"></i> Xoá
+          </button>
         </div>
       </div>
     </div>
