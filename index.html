@@ -63,6 +63,15 @@
     var global = window;
   }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
+<script>
+  // As a plugin
+  Vue.use(VueMask.VueMaskPlugin);
 
-<script src="runtime-es2015.c6b28e774452392cadd2.js" type="module"></script><script src="runtime-es5.c6b28e774452392cadd2.js" nomodule defer></script><script src="polyfills-es5.9bec5fb4024c3fb4334a.js" nomodule defer></script><script src="polyfills-es2015.1f913f16a2d346cc8bdc.js" type="module"></script><script src="main-es2015.ea22b6af965276ad49b4.js" type="module"></script><script src="main-es5.ea22b6af965276ad49b4.js" nomodule defer></script></body>
+  // Or as a directive
+  Vue.directive('mask', VueMask.VueMaskDirective);
+</script>
+
+<script src="runtime-es2015.c6b28e774452392cadd2.js" type="module"></script><script src="runtime-es5.c6b28e774452392cadd2.js" nomodule defer></script><script src="polyfills-es5.9bec5fb4024c3fb4334a.js" nomodule defer></script><script src="polyfills-es2015.1f913f16a2d346cc8bdc.js" type="module"></script><script src="main-es2015.b18c863a9f39ac54c72d.js" type="module"></script><script src="main-es5.b18c863a9f39ac54c72d.js" nomodule defer></script></body>
 </html>
