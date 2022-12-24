@@ -8,7 +8,6 @@ import * as  SockJS from 'sockjs-client';
 import {Product} from "../../model/product/product";
 import {Subject} from "rxjs";
 import {ProductService} from "../product/product.service";
-import {User} from "../../model/user/user";
 import {PageProduct} from "../../model/product/page-product";
 import {AuctionDto} from "../../dto/auction-dto";
 
@@ -16,6 +15,7 @@ import {AuctionDto} from "../../dto/auction-dto";
   providedIn: 'root'
 })
 export class SocketService implements OnInit {
+
   stompClient: any;
   auctionPageByProductId: PageAuctionByProductId;
   auction: Auction;
@@ -23,66 +23,87 @@ export class SocketService implements OnInit {
   auctionSubject: Subject<Auction> = new Subject<Auction>();
   productIdDetail: any;
   listAuctionSubject: Subject<PageAuctionByProductId> = new Subject<PageAuctionByProductId>()
-  pageHome: Subject<PageProduct> = new Subject<PageProduct>();
+  auctionDetailSubject: Subject<AuctionDto> = new Subject<AuctionDto>();
+  auctionDetail: AuctionDto;
+  currentHighestAuctionId: number;
+
 
   constructor(private _auctionService: AuctionService,
               private _productService: ProductService) {
-
-    // this.productIdDetail = this._productService.getProductDetailId();
-    // console.log('2 constructor');
-    // console.log('product id Contructor', this.productIdDetail);
-    // this.getAllAuction();
-
   }
 
   ngOnInit() {
   }
 
+
+  /**
+   * Created: TienBM
+   * Date: 18/12/2022
+   * function: connect to topic to through stompClient
+   */
   connect() {
     const ws = new SockJS("http://localhost:8080/ws")
     this.stompClient = Stomp.over(ws);
-    console.log('00ooooo', this.stompClient);
     this.stompClient.connect({}, () => {
       this.stompClient.subscribe('/topic/auction', data => {
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-        console.log('data', data);
         const auctionDto = JSON.parse(data.body);
-        console.log('JSON-auction', auctionDto);
         this.auctionSubject.next(auctionDto);
-        // this.listAuctionSubject.next(data);
         this.getAllAuction(this.productIdDetail);
-        if (this.auctionPageByProductId.content.filter(newAuction => newAuction.id === auctionDto.id)[0]) {
-          return;
-        } else {
-          this.auctionPageByProductId.content.unshift(auctionDto);
-          this.auctionPageByProductId.content.pop();
-        }
       })
     })
   }
 
-
+  /**
+   * Created: TienBM
+   * Date: 18/12/2022
+   * function: get All page auction by product id
+   * param: productIdDetail
+   */
   getAllAuction(productIdDetail?: number) {
-    console.log('productIdDetail: ' + productIdDetail);
     this._auctionService.getAuctionPageByProductId(productIdDetail ?? this.productIdDetail, 0).subscribe(
       data => {
         this.listAuctionSubject.next(data);
         this.auctionPageByProductId = data;
-        console.log('data', data);
+        this.getAuctionDetail(this.productIdDetail);
       });
   }
 
+  getAuctionDetail(productIdDetail?: number) {
+    this._auctionService.getAuctionDetailByProductId(productIdDetail ?? this.productIdDetail).subscribe(
+      data => {
+        this.auctionDetailSubject.next(data);
+        this.auctionDetail = data;
+        this.currentHighestAuctionId = data.userId;
+      }
+    )
+  }
 
+
+  /**
+   * Created: TienBM
+   * Date: 18/12/2022
+   * function: disconnect from stompClient
+   */
   disconnect() {
     if (this.stompClient != null) {
       this.stompClient.disconnect();
     }
   }
 
+  /**
+   * Created: TienBM
+   * Date: 18/12/2022
+   * function: create auction using websocket  to through stompClient
+   */
   createAuctionUsingWebsocket(auctionDto: AuctionDto) {
     this.stompClient.send('/app/auctions', {}, JSON.stringify(auctionDto));
   }
 
+  /**
+   * Created: TienBM
+   * Date: 18/12/2022
+   * function: change produt id detail
+   */
   setProductIdDetail(id: any) {
     this.productIdDetail = id;
   }

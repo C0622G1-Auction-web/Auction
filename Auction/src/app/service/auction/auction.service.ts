@@ -40,6 +40,17 @@ export class AuctionService {
   /**
    * Created by: TienBM,
    * Date created: 16/12/2022
+   * Function:  Get Auction By Product Id
+   * @param idProduct, pageNumber
+   * @return page auction if productId and pageNumber exist or error if does not exist
+   */
+  getAuctionDetailByProductId(idProduct: number): Observable<any> {
+    return this._httpClient.get(environment.API_URL_AUCTION + '/auction/' + idProduct);
+  }
+
+  /**
+   * Created by: TienBM,
+   * Date created: 16/12/2022
    * Function:  Add New Auction
    * @return auction if auction valid or error if invalid
    */

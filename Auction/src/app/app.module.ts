@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, LOCALE_ID, DEFAULT_CURRENCY_CODE, Pipe} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './component/header/header.component';
@@ -24,15 +24,9 @@ import {ProductReviewComponent} from './component/product/product-review/product
 import {VerificationComponent} from './security/verification/verification.component';
 import {VerifyResetPasswordComponent} from './security/verify-reset-password/verify-reset-password.component';
 import {AuctionComponent} from './component/auction/auction.component';
-import {
-  AuctionProductDetailComponent
-} from './component/auction/auction-product-detail/auction-product-detail.component';
-import {
-  InfomationAuctionBuyerComponent
-} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
-import {
-  InfomationAuctionSellerComponent
-} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
+import {AuctionProductDetailComponent} from './component/auction/auction-product-detail/auction-product-detail.component';
+import {InfomationAuctionBuyerComponent} from './component/auction/infomation-auction-buyer/infomation-auction-buyer.component';
+import {InfomationAuctionSellerComponent} from './component/auction/infomation-auction-seller/infomation-auction-seller.component';
 import {AddressPaymentComponent} from './component/payment/address-payment/address-payment.component';
 import {MethodPaymentComponent} from './component/payment/method-payment/method-payment.component';
 import {ListProductsComponent} from './component/product/list-products/list-products.component';
@@ -55,16 +49,22 @@ import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import {LoginComponent} from "./security/login/login.component";
 import {PaymentCartComponent} from "./component/payment/payment-cart/payment-cart.component";
 import {PaymentReceiptComponent} from "./component/payment/payment-receipt/payment-receipt.component";
-import { AccountForgotPassComponent } from './security/account-forgot-pass/account-forgot-pass.component';
+import {AccountForgotPassComponent} from './security/account-forgot-pass/account-forgot-pass.component';
 import {CustomPipePipe} from "./component/product/product-list/pipe";
-import { AuctionProductHistoryComponent } from './component/auction/auction-product-history/auction-product-history.component';
+import {AuctionProductHistoryComponent} from './component/auction/auction-product-history/auction-product-history.component';
 import {LockaccountUserComponent} from "./component/user/lockaccount-user/lockaccount-user.component";
-import { ChatVisitorComponent } from './component/chat/chat-visitor/chat-visitor.component';
+import {ChatVisitorComponent} from './component/chat/chat-visitor/chat-visitor.component';
+import {NgxCurrencyModule} from "ngx-currency";
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+registerLocaleData(localeDe);
+
 
 const googleLoginOptions = {
   scope: 'profile email',
   plugin_name: 'login'
 };
+
 
 // @ts-ignore
 // @ts-ignore
@@ -131,9 +131,18 @@ const googleLoginOptions = {
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SocialLoginModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxCurrencyModule,
   ],
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'de-DE'
+    },
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: ' đ '
+    },
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -152,4 +161,5 @@ const googleLoginOptions = {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -2,7 +2,10 @@
 <div>
   <div>
     <div>
-      <table class="table" style="font-size: 14px">
+      <ng-template #pageAuctionIsEmpty>
+        <p class="nothing-auction">Chưa có đấu giá nào</p>
+      </ng-template>
+      <table class="table" style="font-size: 14px" *ngIf="auctionPageByProductId?.content.length > 0; else pageAuctionIsEmpty">
         <thead class="table-light">
         <tr class="border-top">
           <th>STT</th>
@@ -11,25 +14,17 @@
           <th>Thành Viên</th>
         </tr>
         </thead>
-        <tbody *ngIf="auctionPageByProductId?.content.length > 0; else pageAuctionIsEmpty">
+        <tbody>
         <tr *ngFor="let item of auctionPageByProductId.content; let i = index" [ngClass]="i==0 && auctionPageByProductId.pageable.pageNumber == 0? 'my__active' : ''">
           <td>{{i+1}}</td>
-          <td>{{item.currentPrice}}</td>
+          <td class="">{{item.currentPrice|currency}}</td>
           <td class="text-center">{{item.auctionTime}}</td>
           <td>{{item.fullName |titlecase}}</td>
         </tr>
         </tbody>
-        <ng-template #pageAuctionIsEmpty>
-          <tbody>
-          <tr>
-            <td colspan="3">
-              <p class="text-danger">Chưa có đấu giá nào</p>
-            </td>
-          </tr>
-          </tbody>
-        </ng-template>
+
       </table>
-      <div class="d-flex justify-content-left">
+      <div class="d-flex justify-content-center">
         <nav aria-label="Page navigation example" class="d-flex justify-content-end">
           <ul class="my__pagination" *ngIf="auctionPageByProductId">
             <li class="my__page-item pointer" [ngClass]="auctionPageByProductId.number == 0 ? 'disabled': ''">

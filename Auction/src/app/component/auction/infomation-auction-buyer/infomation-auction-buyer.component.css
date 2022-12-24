@@ -34,3 +34,21 @@
   color: white;
   background-color: #e74c3c;
 }
+.product__price::first-letter {
+  right: 200px;
+  margin-right: 8px;
+}
+.currency__title::first-letter {
+  color: transparent;
+}
+.nothing-auction {
+  text-align: center;
+  font-family: 'roboto', sans-serif;
+  font-weight: 500;
+  color: #e74c3c;
+  font-size: 28px;
+  margin-top: 16px;
+  width: 100%;
+  text-transform: capitalize;
+}
+

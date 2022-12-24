@@ -28,10 +28,12 @@
     "firebase": "^8.10.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
+    "ngx-currency": "^3.0.0",
     "ngx-toastr": "^12.1.0",
     "rxjs": "~6.5.4",
     "socketjs-client": "^1.0.2",
     "sweetalert2": "^11.6.16",
+    "text-mask-addons": "^3.8.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

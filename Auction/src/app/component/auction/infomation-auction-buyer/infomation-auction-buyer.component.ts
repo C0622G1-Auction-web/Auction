@@ -3,6 +3,7 @@ import {AuctionService} from "../../../service/auction/auction.service";
 import {PageAuctionByProductId} from "../../../model/auction/page-auction-by-product-id";
 import {ActivatedRoute} from "@angular/router";
 import {SocketService} from "../../../service/socket/socket.service";
+import {Auction} from "../../../model/auction/auction";
 
 @Component({
   selector: 'app-infomation-auction-buyer',
@@ -10,33 +11,22 @@ import {SocketService} from "../../../service/socket/socket.service";
   styleUrls: ['./infomation-auction-buyer.component.css']
 })
 export class InfomationAuctionBuyerComponent implements OnInit {
+
   auctionPageByProductId: PageAuctionByProductId
   idProductDetail;
-
+  auctionDetailByProductId : Auction;
 
   constructor(private _auctionService: AuctionService,
               private _acRoute: ActivatedRoute,
               private _socketService: SocketService) {
+    this.idProductDetail = this._acRoute.snapshot.params.productId;
+    this._socketService.setProductIdDetail(this.idProductDetail);
     this._socketService.getAllAuction(this.idProductDetail);
   }
 
   ngOnInit(): void {
-    this.idProductDetail = this._acRoute.snapshot.params.productId;
-    console.log('idProduct',this.idProductDetail);
-    // this._auctionService.getAuctionPageByProductId(this.idProductDetail, 0).subscribe(
-    //   data => {
-    //     this.auctionPageByProductId = data;
-    //   }, error => {
-    //     console.log('Chưa có đấu giá nào...')
-    //   }
-    // );
-    // this._socketService.getAllAuction(this.idProductDetail);
     this._socketService.connect();
-    console.log('idddđ', this.idProductDetail);
-    this._socketService.setProductIdDetail(this.idProductDetail);
-    this._socketService.listAuctionSubject.subscribe(data =>
-    {
-      console.log('data moi   : ', data);
+    this._socketService.listAuctionSubject.subscribe(data => {
       this.auctionPageByProductId = data
     });
   }

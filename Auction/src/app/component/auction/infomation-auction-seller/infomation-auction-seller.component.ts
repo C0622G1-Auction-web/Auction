@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuctionService} from "../../../service/auction/auction.service";
-import {Auction} from "../../../model/auction/auction";
 import {Product} from "../../../model/product/product";
-import {User} from "../../../model/user/user";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

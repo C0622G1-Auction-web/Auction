@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuctionService} from "../../../service/auction/auction.service";
 import {Product} from "../../../model/product/product";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
@@ -8,6 +8,10 @@ import {SocketService} from "../../../service/socket/socket.service";
 import {TokenService} from "../../../service/security/token.service";
 import {Account} from "../../../model/account/account";
 import {User} from "../../../model/user/user";
+import {Title} from "@angular/platform-browser";
+import {AuctionDto} from "../../../dto/auction-dto";
+import {valueReferenceToExpression} from "@angular/compiler-cli/src/ngtsc/annotations/src/util";
+import {NotificationService} from "../../../service/notification/notification.service";
 
 
 @Component({
@@ -15,8 +19,12 @@ import {User} from "../../../model/user/user";
   templateUrl: './auction-product-detail.component.html',
   styleUrls: ['./auction-product-detail.component.css']
 })
-export class AuctionProductDetailComponent implements OnInit {
 
+
+export class AuctionProductDetailComponent implements OnInit, OnDestroy {
+  intervalList = [];
+  styleForTime = "display: inline-block; text-align: center; min-width: 66px; font-size: 50px;font-weight: 500;color: #E74C3C;border-radius: 4px;background: #f5f5f5;padding: 4px;box-shadow: 1px 1px 2px rgba(213, 31, 31, 0.35);";
+  styleForTimeDot = "display: block; font-size: 50px;font-weight: 500;color: #E74C3C; margin: 0 8px";
   changeBuyer: boolean = true;
   changeSeller: boolean = false;
   productDetail: Product;
@@ -32,19 +40,25 @@ export class AuctionProductDetailComponent implements OnInit {
   amount;
   userId: number = 0;
   currentUser: User;
+  currentHighestAuction: AuctionDto;
+  auctionable: number;
+  editMask: any;
+
 
   constructor(private _auctionService: AuctionService,
               private _formBuilder: FormBuilder,
               private _acRoute: ActivatedRoute,
               private _socketService: SocketService,
-              private _tokenService: TokenService) {
+              private _tokenService: TokenService,
+              private _titleService: Title,
+              private _notification: NotificationService) {
+    this._titleService.setTitle("Đấu giá");
     this.idProductDetail = this._acRoute.snapshot.params.productId;
     this._socketService.setProductIdDetail(this.idProductDetail);
-    this._socketService.getAllAuction(this.idProductDetail);
-    this.auctionPageByProductId = this._socketService.auctionPageByProductId;
   }
 
   ngOnInit(): void {
+
     if (this._tokenService.isLogged()) {
       this.checkLogin = true;
       this.currentAccount = JSON.parse(this._tokenService.getAccount());
@@ -60,6 +74,8 @@ export class AuctionProductDetailComponent implements OnInit {
       this.userId = this.currentUser.id;
 
     }
+
+
     this._auctionService.getAuctionByProductId(this.idProductDetail).subscribe(
       data => {
         this.productDetail = data;
@@ -69,10 +85,10 @@ export class AuctionProductDetailComponent implements OnInit {
           productId: +this.idProductDetail
         }, {validators: [this.checkAuctionPrice]})
         this.selectedChangImage();
-      }
-    )
-    // this._socketService.getAllAuction(this.idProductDetail);
-    // console.log('list',this._socketService.getAllAuction(this.idProductDetail));
+
+        this.runCountDowDate(new Date(this.productDetail.endTime).getTime());
+      });
+
 
     this._socketService.auctionSubject.subscribe(data => {
       this.productDetail = {
@@ -82,7 +98,9 @@ export class AuctionProductDetailComponent implements OnInit {
 
       this.rfAuction.get('currentPrice').setValue(data.currentPrice);
 
-    })
+    });
+    this.checkAuction();
+
 
   }
 
@@ -137,7 +155,6 @@ export class AuctionProductDetailComponent implements OnInit {
         userId: this.userId,
         productId: this.idProductDetail
       })
-      // this.stateExistsSync('currentPrice');
       this.checkAuctionPrice(this.rfAuction);
     }
 
@@ -158,7 +175,6 @@ export class AuctionProductDetailComponent implements OnInit {
         productId: +this.idProductDetail
       })
       this.checkAuctionPrice(this.rfAuction);
-
     }
   }
 
@@ -179,34 +195,41 @@ export class AuctionProductDetailComponent implements OnInit {
     return null;
   }
 
+
   /**
    * Created by: TienBM,
    * Date created: 16/12/2022
    * Function: Auction
    */
   onAuction() {
-    // this._auctionService.addNewAuction(this.rfAuction.value).subscribe(
-    //   data => {
-    //     this.newAuction = data;
-    //     // Tự động reload
-    //     // this._router.navigate(['/auction-detail',7]).then(() => {
-    //     //   location.reload();
-    //     // })
-    //     document.getElementById('auto-reload').click();
-    //     this.ngOnInit();
-    //   }
-    // )
-
-    this._socketService.createAuctionUsingWebsocket(
-      {
-        ...this.rfAuction.value,
-        productId: +this.rfAuction.value.productId
-      });
-    this._socketService.connect();
+    this.checkAuction();
+    this._socketService.createAuctionUsingWebsocket(this.rfAuction.value);
     document.getElementById('auto-reload').click();
     this.ngOnInit();
   }
 
+
+  checkAuction() {
+    this._socketService.auctionDetailSubject.subscribe(
+      data => {
+        this.currentHighestAuction = data;
+        if (this.currentHighestAuction.userId === this.currentUser.id) {
+          this.auctionable = 1;
+        } else {
+          this.auctionable = 0;
+        }
+      }
+    );
+  }
+
+
+  /**
+   * Created: SangDD
+   * date: 18/12/2022
+   * @param event
+   * @param i, image main
+   * @param j, image sub
+   */
   changeImage(event: any, i: any, j: number) {
     const src = event.target.src;
     const imgs = document.querySelectorAll('.img-selected' + i);
@@ -220,6 +243,11 @@ export class AuctionProductDetailComponent implements OnInit {
     });
   }
 
+  /**
+   * Created: SangDD
+   * Date: 18/12/2022
+   * function: highlight image selected
+   */
   selectedChangImage() {
     setTimeout(() => {
       const imgF = document.querySelectorAll('.carousel__images');
@@ -228,4 +256,62 @@ export class AuctionProductDetailComponent implements OnInit {
       });
     }, 500)
   }
+
+  runCountDowDate(countDownDate: any){
+    console.log('lisst :', this.intervalList);
+    let me = this;
+
+
+    let selectorTime = '.time-';
+    if(countDownDate) {
+      let countDow = setInterval(function() {
+
+        // Get today's date and time
+        let now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        let distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.querySelectorAll(selectorTime).forEach(e => {
+          if (distance > 0) {
+            e.innerHTML =
+              `<span style="${me.styleForTime}"
+                  class="time__dd">
+                  ${days} Ngày
+              </span>` +
+              `<span style="${me.styleForTimeDot}" class="mx-1">:</span>` +
+              `<span style="${me.styleForTime}" class="time__hh red__color">
+                             ${hours}
+              </span>` +
+              `<span style="${me.styleForTimeDot}" class="mx-1">:</span>` +
+              `<span style="${me.styleForTime}" class="time__mm">${minutes}</span>` +
+              `<span style="${me.styleForTimeDot}" class="mx-1">:</span>` +
+              `<span style="${me.styleForTime}" class="time__ss">${seconds}</span>`;
+          } else {
+            clearInterval(countDow);
+            e.innerHTML =
+              `<span style=" font-size: 42px; font-weight: 500;   font-family: 'Roboto', sans-serif; text-transform: capitalize; color: #1c1d1d">Hết thời gian</span>`;
+          }
+        });
+      });
+      this.intervalList.push(countDow);
+      console.log('list push', this.intervalList);
+    } else {
+      console.log('Gio co van de, yeu cau sua database');
+    }
+  }
+
+  ngOnDestroy(): void {
+    if(this.intervalList.length > 0) {
+      for(let i = 0 ; i < this.intervalList.length; i ++) {
+        clearInterval(this.intervalList[i]);
+      }
+    }
+  }
+
 }
