@@ -27,8 +27,9 @@ export class GuideEditComponent implements OnInit {
   imgs: ImgUrlGuideDto[] = [];
   imgCreate: any[] = [];
   idImageList: number[] = [];
-  messageCreate: String;
+  messageCreate: string='';
   id: number;
+  readImage:any[];
 
   constructor(private _guideService: GuideService,
               private _formBuilder: FormBuilder,
@@ -36,7 +37,7 @@ export class GuideEditComponent implements OnInit {
               private _imgUrlGuideService: ImgUrlGuideService,
               private _activatedRouter: ActivatedRoute,
               private _toastService: ToastrService,
-              private _route:Router) {
+              private _route: Router) {
   }
 
   ngOnInit(): void {
@@ -45,6 +46,12 @@ export class GuideEditComponent implements OnInit {
       this._imgUrlGuideService.getListImage(this.id).subscribe(data => {
         console.log(data)
         this.imgs = data;
+      },error => {
+        this._toastService.success('Không tìm thấy dữ liệu', 'Update image Guide!', {
+          positionClass: 'toast-top-right',
+          timeOut: 3000,
+        })
+        this._route.navigateByUrl('/guide')
       })
     })
     this._guideService.getGuideById(this.id).subscribe(data => {
@@ -54,6 +61,12 @@ export class GuideEditComponent implements OnInit {
         title: [data.title, [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.pattern('^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ0-9,.?! ]*$')]],
         content: [data.content, [Validators.required, Validators.minLength(30), Validators.maxLength(2000)]]
       })
+    }, error => {
+      this._toastService.success('Không tìm thấy dữ liệu', 'Update Guide!', {
+        positionClass: 'toast-bottom-right',
+        timeOut: 3000,
+      })
+      this._route.navigateByUrl('/guide')
     })
   }
 
@@ -61,69 +74,81 @@ export class GuideEditComponent implements OnInit {
   @return a notification successfull update
   * */
   updateGuide() {
-    if (this.editGuideForm.valid) {
-      this.guide = this.editGuideForm.value;
-      console.log(this.editGuideForm.value)
-      this._guideService.update(this.guide).subscribe(data => {
-        if (this.imgCreate.length !== 0) {
-          for (let i = 0; i < this.imgCreate.length; i++) {
-            const image: ImgUrlGuideDto = {
-              url: this.imgCreate[i],
-              guideId: this.guide.id
-            };
-            console.log(image);
-            this._imgUrlGuideService.create(image).subscribe(() => {
-              console.log('SUCCESSFULLY CREATE');
-            })
-          }
-        }
-        this._toastService.success('Cập nhật hướng dẫn thành công', 'Update Guide!', {
-            positionClass: 'toast-bottom-right',
-            timeOut: 4000,
-          }
-        )
-        this._route.navigateByUrl("/guide")
-      })
-      if (this.idImageList.length !== 0) {
-        for (let j = 0; j < this.idImageList.length; j++) {
-          console.log(this.idImageList[j])
-          this.deleteImageById(this.idImageList[j])
-        }
+    if (this.selectedImages.length !== 0) {
+      for (let i = 0; i < this.readImage.length; i++) {
+        let selectedImage = this.readImage[i];
+        const n = Date.now();
+        const filePath = `RoomsImages/${n}`;
+        const fileRef = this._storage.ref(filePath);
+        this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              this.imgCreate.push(url);
+              this.messageCreate = "";
+            });
+          })
+        ).subscribe(() => {
+        });
       }
     }
+    setTimeout(()=>{
+      if (this.editGuideForm.valid) {
+        this.guide = this.editGuideForm.value;
+        console.log(this.editGuideForm.value)
+        this._guideService.update(this.guide).subscribe(data => {
+          if (this.imgCreate.length !== 0) {
+            for (let i = 0; i < this.imgCreate.length; i++) {
+              const image: ImgUrlGuideDto = {
+                url: this.imgCreate[i],
+                guideId: this.guide.id
+              };
+              console.log(image);
+              this._imgUrlGuideService.create(image).subscribe(() => {
+                console.log('SUCCESSFULLY CREATE');
+              })
+            }
+          }
+          this._toastService.success('Cập nhật hướng dẫn thành công', 'Update Guide!', {
+              positionClass: 'toast-bottom-right',
+              timeOut: 3000,
+            }
+          )
+          this._route.navigateByUrl("/guide")
+        })
+        if (this.idImageList.length !== 0) {
+          for (let j = 0; j < this.idImageList.length; j++) {
+            console.log(this.idImageList[j])
+            this.deleteImageById(this.idImageList[j])
+          }
+        }
+      }
+    },1000)
   }
+
   /*Function loading image and show image of guide using firebas storage
   * */
   showPreview(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedImages = event.target.files;
-    } else {
-      this.selectedImages = [];
-    }
-    console.log(this.selectedImages);
-    if (this.selectedImages.length !== 0) {
-      setTimeout(() => {
-        this.messageCreate = "Đang tải ảnh vui lòng đợi......."
-        for (let i = 0; i < this.selectedImages.length; i++) {
-          let selectedImage = this.selectedImages[i];
-          const n = Date.now();
-          const filePath = `RoomsImages/${n}`;
-          const fileRef = this._storage.ref(filePath);
-          this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
-            finalize(() => {
-              fileRef.getDownloadURL().subscribe(url => {
-                this.imgCreate.push(url);
-                this.messageCreate = "";
-              });
-            })
-          ).subscribe(() => {
-          });
+    this.messageCreate = '';
+    let files = event.target.files;
+    this.readImage = files;
+    if ((files.length+this.selectedImages.length+this.imgs.length) < 6) {
+      for (let file of files) {
+        if (file.size > 1048576) {
+          this.messageCreate = 'Dung lượng ảnh vượt quá 1Mb.';
+          this.selectedImages = [];
+          break;
         }
-      }, 3000)
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.selectedImages.push(e.target.result);
+          console.log(this.selectedImages)
+        }
+        reader.readAsDataURL(file);
+      }
+    } else {
+      this.messageCreate = "Vui lòng không chọn quá 5 ảnh.";
+      this.selectedImages=[];
     }
-    console.log(this.imgCreate)
   }
 
   /*
@@ -139,7 +164,7 @@ export class GuideEditComponent implements OnInit {
 * Fuction delete  new image  temporary
 * */
   deleteImageNew(i: number) {
-    this.imgCreate.splice(i, 1)
+    this.selectedImages.splice(i, 1)
     console.log(i)
   }
 
@@ -152,7 +177,8 @@ export class GuideEditComponent implements OnInit {
 
   resetEditForm() {
     this.ngOnInit();
-    this.imgCreate=[];
+    this.selectedImages = [];
+    this.messageCreate='';
   }
 
 }
