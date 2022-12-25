@@ -1,7 +1,18 @@
 <div>
-  <div class="container h-100 d-flex flex-column">
-    <div class="row d-flex me-5 ms-auto">
-      <div class="boxed shadow-md h-100 ms-auto">
+  <div class="container-fluid h-100 d-flex flex-column">
+    <div class="row">
+      <div class="col-lg-3 h-100 mt-2" style="margin-right: 240px">
+        <iframe
+          width="680"
+          height="875"
+          src="https://www.youtube.com/embed/Ru4Jbmh7bcQ?rel=0&autoplay=1"
+          title="Avatar 2 - Trailer mới nhất - Vietsub"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="boxed col-lg-9 shadow-md h-100">
         <form
           *ngIf="formCreateProduct"
           class="form"
@@ -11,7 +22,7 @@
           <fieldset>
             <legend>
               <div class="mt-2 text-center">
-                <h1><strong>Yêu Cầu Đấu Giá</strong></h1>
+                <h1>Yêu Cầu Đấu Giá</h1>
               </div>
             </legend>
           </fieldset>
@@ -23,7 +34,7 @@
                 height="20"
               ></object>
               <label for="name" class="ms-2"
-              >Tên sản phẩm<span style="color: red"> (*)</span>:</label
+                >Tên sản phẩm<span style="color: red"> (*)</span>:</label
               >
             </div>
             <input
@@ -33,29 +44,37 @@
               class="form-control"
               placeholder="Nhập tên sản phẩm"
               [ngClass]="
-                      formCreateProduct.controls['name'].touched
-                        ? formCreateProduct.controls['name'].invalid
-                          ? 'is-invalid'
-                          : 'is-valid'
-                        : ''
-                    "
+                formCreateProduct.controls['name'].touched
+                  ? formCreateProduct.controls['name'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              "
             />
             <div class="invalid-feedback">
               <div
                 *ngIf="
-                        formCreateProduct.controls['name'].errors?.required &&
-                        formCreateProduct.controls['name'].touched
-                      "
+                  formCreateProduct.controls['name'].errors?.required &&
+                  formCreateProduct.controls['name'].touched
+                "
               >
                 Không được để trống.
               </div>
               <div
                 *ngIf="
-                        formCreateProduct.controls['name'].errors?.maxlength &&
-                        formCreateProduct.controls['name'].touched
-                      "
+                  formCreateProduct.controls['name'].errors?.maxlength &&
+                  formCreateProduct.controls['name'].touched
+                "
               >
-                Tên sản phẩm không được nhiều hơn 255 kí tự!
+                Tên sản phẩm không được nhiều hơn 255 kí tự.
+              </div>
+              <div
+                *ngIf="
+                  formCreateProduct.controls['name'].errors?.pattern &&
+                  formCreateProduct.controls['name'].touched
+                "
+              >
+                Tên sản phẩm không được chứa kí tự đặc biệt.
               </div>
             </div>
           </div>
@@ -67,8 +86,7 @@
                 height="20"
               ></object>
               <label class="ms-2" for="initialPrice"
-              >Giá ban đầu(VND)<span style="color: red"> (*)</span
-              >:</label
+                >Giá ban đầu (VND)<span style="color: red"> (*)</span>:</label
               >
             </div>
             <input
@@ -78,340 +96,352 @@
               class="form-control"
               placeholder="Nhập giá ban đầu"
               [ngClass]="
-                      formCreateProduct.controls['initialPrice'].touched
-                        ? formCreateProduct.controls['initialPrice'].invalid
-                          ? 'is-invalid'
-                          : 'is-valid'
-                        : ''
-                    "
+                formCreateProduct.controls['initialPrice'].touched
+                  ? formCreateProduct.controls['initialPrice'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              "
             />
             <div class="invalid-feedback">
               <div
                 *ngIf="
-                        formCreateProduct.controls['initialPrice'].errors
-                          ?.required &&
-                        formCreateProduct.controls['initialPrice'].touched
-                      "
+                  formCreateProduct.controls['initialPrice'].errors?.required &&
+                  formCreateProduct.controls['initialPrice'].touched
+                "
               >
                 Không được để trống.
               </div>
-              <div>
-
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  formCreateProduct.controls['initialPrice'].hasError('pattern')
+                "
+                style="color: red"
+              >
+                Giá ban đầu phải là số nguyên dương lớn hơn 0.
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  formCreateProduct.controls['initialPrice'].errors?.max &&
+                  formCreateProduct.controls['initialPrice'].touched
+                "
+              >
+                c
+              </div>
+              <div
+                *ngIf="
+                  formCreateProduct.controls['initialPrice'].errors?.pattern &&
+                  formCreateProduct.controls['initialPrice'].touched
+                "
+              >
+                Giá sản phẩm không được chứa kí tự đặc biệt và chữ cái.
               </div>
             </div>
-            <div class="mb-2">
-              <div class="d-flex align-items-center mb-2">
-                <object
-                  data="assets/icons/money-increase.svg"
-                  width="20"
-                  height="20"
-                ></object>
-                <label class="ms-2" for="priceStep"
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/money-increase.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label class="ms-2" for="priceStep"
                 >Mỗi lần tăng ít nhất<span style="color: red"> (*)</span
                 >:</label
-                >
-              </div>
-              <div class="input-group">
-                <select
-                  id="priceStep"
-                  formControlName="priceStep"
-                  class="form-select w-50"
-                >
-                  <option value="">Chon bước giá</option>
-                  <option
-                    *ngFor="let item of priceStepList"
-                    [value]="item.id"
-                  >
-                    {{ item.step }}
-                  </option>
-                </select>
-              </div>
-              <div
-                *ngIf="
-                      formCreateProduct.controls['priceStep'].errors
-                        ?.required &&
-                      formCreateProduct.controls['priceStep'].touched
-                    "
               >
-                    <span style="color: red"
-                    >Vui lòng chọn bước giá để đấu giá.
-                    </span>
-              </div>
             </div>
-            <div class="mb-2">
-              <div class="d-flex align-items-center mb-2">
-                <object
-                  data="assets/icons/category.svg"
-                  width="20"
-                  height="20"
-                ></object>
-                <label class="ms-2" for="category"
+            <div class="input-group">
+              <select
+                id="priceStep"
+                formControlName="priceStep"
+                class="form-select w-50"
+              >
+                <option value="">Chon bước giá</option>
+                <option
+                  *ngFor="let item of priceStepList"
+                  [value]="item.id"
+                >
+                  {{ item.step | currency:'VND'}}
+                </option>
+              </select>
+            </div>
+            <div class="invalid-feedback"
+              *ngIf="
+                formCreateProduct.controls['priceStep'].errors
+                  ?.required &&
+                formCreateProduct.controls['priceStep'].touched
+              "
+            >
+              <span style="color: red"
+                >Vui lòng chọn bước giá để đấu giá.
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/category.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label class="ms-2" for="category"
                 >Chủng loại<span style="color: red">(*)</span>:</label
-                >
-              </div>
-              <div class="input-group">
-                <select
-                  id="category"
-                  formControlName="category"
-                  class="form-select w-50"
-                >
-                  <option value="">Chủng loại</option>
-                  <option
-                    *ngFor="let item of categoryList"
-                    [value]="item.id"
+              >
+            </div>
+            <div class="input-group">
+              <select
+                id="category"
+                formControlName="category"
+                class="form-select w-50"
+              >
+                <option value="">Chủng loại</option>
+                <option *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                formCreateProduct.controls['category'].errors?.required &&
+                formCreateProduct.controls['category'].touched
+              "
+            >
+              <span style="color: red">Vui lòng chọn chủng loại sản phẩm.</span>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/image.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label class="ms-2" for="image"
+                >Hình ảnh sản phẩm<span style="color: red">(*)</span>:</label
+              >
+            </div>
+            <input
+              id="image"
+              #file
+              style="width: 60%"
+              type="file"
+              multiple
+              class="form-control"
+              (change)="showPreview($event)"
+              formControlName="imageProduct"
+              [ngClass]="
+                formCreateProduct.controls['imageProduct'].touched
+                  ? formCreateProduct.controls['imageProduct'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              "
+            />
+            <div
+              *ngIf="
+                formCreateProduct.controls['imageProduct'].errors?.required &&
+                formCreateProduct.controls['imageProduct'].touched
+              "
+            >
+              <span *ngIf="!formCreateProduct.controls['imageProduct'].value" style="color: red">Vui lòng chọn ảnh để đấu giá. </span>
+            </div>
+            <div *ngIf="messageImage != ''">{{ messageImage }}</div>
+            <div
+              class="d-flex justify-content-left"
+              style="overflow-x: scroll; margin-top: 8px"
+            >
+              <div
+                *ngFor="let img of img; let i = index"
+                style="margin-right: 8px"
+              >
+                <div style="position: relative">
+                  <img class="d-block" style="height: 84px" src="{{ img }}" />
+                  <span
+                    class="remove_img"
+                    (click)="deleteImageNew(i)"
+                    aria-label="Close"
+                    style="width: 28px"
                   >
-                    {{ item.name }}
-                  </option>
-                </select>
+                    <object
+                      style="justify-items: center"
+                      data="assets/icons/garbage.svg"
+                      width="20"
+                      height="20"
+                    ></object>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/information.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label class="ms-2" for="description"
+                >Thông tin chi tiết<span style="color: red">(*)</span>:</label
+              >
+            </div>
+            <ckeditor
+              id="description"
+              [editor]="Editor"
+              formControlName="description"
+              (ready)="onReady($event)"
+              class="form-control"
+              [ngClass]="
+                formCreateProduct.controls['description'].touched
+                  ? formCreateProduct.controls['description'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              "
+            ></ckeditor>
+            <div class="invalid-feedback">
+              <div
+                *ngIf="
+                  formCreateProduct.controls['description'].errors?.required &&
+                  formCreateProduct.controls['description'].touched
+                "
+              >
+                Không được để trống.
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/hour-end.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label for="startTime" class="form-label ms-2"
+                >Thời gian bắt đầu<span style="color: red"> (*)</span>:</label
+              >
+            </div>
+            <input
+              id="startTime"
+              type="datetime-local"
+              class="form-control"
+              formControlName="startTime"
+              [ngClass]="
+                formCreateProduct.controls['startTime'].touched
+                  ? formCreateProduct.controls['startTime'].invalid ||
+                    formCreateProduct.errors?.checkStartTime
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              "
+            />
+            <div class="invalid-feedback">
+              <div
+                *ngIf="
+                  formCreateProduct.errors?.checkStartTime &&
+                  formCreateProduct.controls['startTime'].touched
+                "
+              >
+                Ngày bắt đầu đấu giá không được nhỏ hơn ngày hiện tại và phải
+                cách sau 3 ngày.
               </div>
               <div
                 *ngIf="
-                      formCreateProduct.controls['category'].errors?.required &&
-                      formCreateProduct.controls['category'].touched
-                    "
+                  formCreateProduct.controls['startTime'].errors?.required &&
+                  formCreateProduct.controls['startTime'].touched
+                "
               >
-                    <span style="color: red"
-                    >Vui lòng chọn chủng loại sản phẩm.</span
-                    >
+                Không được để trống.
               </div>
             </div>
-            <div class="mb-2">
-              <div class="d-flex align-items-center mb-2">
-                <object
-                  data="assets/icons/image.svg"
-                  width="20"
-                  height="20"
-                ></object>
-                <label class="ms-2" for="image"
-                >Hình ảnh sản phẩm<span style="color: red">(*)</span
-                >:</label
-                >
-              </div>
-              <input
-                id="image"
-                #file
-                style="width: 60%"
-                type="file"
-                multiple
-                class="form-control"
-                (change)="showPreview($event)"
-                formControlName="imageProduct"
-                [ngClass]="
-                      formCreateProduct.controls['imageProduct'].touched
-                        ? formCreateProduct.controls['imageProduct'].invalid
-                          ? 'is-invalid'
-                          : 'is-valid'
-                        : ''
-                    "
-              />
+          </div>
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/hour-start.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label for="endTime" class="form-label ms-2"
+                >Thời gian kết thúc<span style="color: red"> (*)</span>:</label
+              >
+            </div>
+            <input
+              id="endTime"
+              type="datetime-local"
+              class="form-control"
+              formControlName="endTime"
+              [ngClass]="
+                formCreateProduct.controls['endTime'].touched
+                  ? formCreateProduct.controls['endTime'].invalid ||
+                    formCreateProduct.errors?.checkEndTime
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              "
+            />
+            <div class="invalid-feedback">
               <div
                 *ngIf="
-                      formCreateProduct.controls['imageProduct'].errors
-                        ?.required &&
-                      formCreateProduct.controls['imageProduct'].touched
-                    "
+                  formCreateProduct.errors?.checkEndTime &&
+                  formCreateProduct.controls['endTime'].touched
+                "
               >
-                    <span style="color: red"
-                    >Vui lòng chọn ảnh để đấu giá.
-                    </span>
+                Ngày kết thúc đấu giá không được nhỏ hơn ngày bắt đầu đấu giá và
+                không được đấu giá quá 30 ngày.
               </div>
-              <div *ngIf="messageImage != ''">{{ messageImage }}</div>
               <div
-                class="d-flex justify-content-left"
-                style="overflow-x: scroll; margin-top: 8px"
+                *ngIf="
+                  formCreateProduct.controls['endTime'].errors?.required &&
+                  formCreateProduct.controls['endTime'].touched
+                "
               >
-                <div
-                  *ngFor="let img of img; let i = index"
-                  style="margin-right: 8px"
-                >
-                  <div style="position: relative">
-                    <img
-                      class="d-block"
-                      style="height: 84px"
-                      src="{{ img }}"
-                    />
-                    <span
-                      class="remove_img"
-                      (click)="deleteImageNew(i)"
-                      aria-label="Close"
-                    >
-                          <object
-                            data="assets/icons/garbage.svg"
-                            width="20"
-                            height="20"
-                          ></object>
-                        </span>
-                  </div>
-                </div>
+                Không được bỏ trống.
               </div>
             </div>
-            <div class="mb-2">
-              <div class="d-flex align-items-center mb-2">
-                <object
-                  data="assets/icons/information.svg"
-                  width="20"
-                  height="20"
-                ></object>
-                <label class="ms-2" for="description"
-                >Thông tin chi tiết<span style="color: red">(*)</span
-                >:</label
-                >
-              </div>
-              <ckeditor
-                id="description"
-                [editor]="Editor"
-                formControlName="description"
-                (ready)="onReady($event)"
-                class="form-control"
-                [ngClass]="
-                      formCreateProduct.controls['description'].touched
-                        ? formCreateProduct.controls['description'].invalid
-                          ? 'is-invalid'
-                          : 'is-valid'
-                        : ''
-                    "
-              ></ckeditor>
-              <div class="invalid-feedback">
-                <div
-                  *ngIf="
-                        formCreateProduct.controls['description'].errors
-                          ?.required &&
-                        formCreateProduct.controls['description'].touched
-                      "
-                >
-                  Không được để trống.
-                </div>
-              </div>
-            </div>
-            <div class="mb-2">
-              <div class="d-flex align-items-center mb-2">
-                <object
-                  data="assets/icons/hour-end.svg"
-                  width="20"
-                  height="20"
-                ></object>
-                <label for="startTime" class="form-label ms-2"
-                >Thời gian bắt đầu<span style="color: red"> (*)</span
-                >:</label
-                >
-              </div>
-              <input
-                id="startTime"
-                type="datetime-local"
-                class="form-control"
-                formControlName="startTime"
-                [ngClass]="
-                      formCreateProduct.controls['startTime'].touched
-                        ? formCreateProduct.controls['startTime'].invalid ||
-                          formCreateProduct.errors?.checkStartTime
-                          ? 'is-invalid'
-                          : 'is-valid'
-                        : ''
-                    "
-              />
-              <div class="invalid-feedback">
-                <div
-                  *ngIf="
-                        formCreateProduct.errors?.checkStartTime &&
-                        formCreateProduct.controls['startTime'].touched
-                      "
-                >
-                  Ngày bắt đầu đấu giá không được nhỏ hơn ngày hiện tại và phải cách sau 3 ngày.
-                </div>
-                <div
-                  *ngIf="
-                        formCreateProduct.controls['startTime'].errors
-                          ?.required &&
-                        formCreateProduct.controls['startTime'].touched
-                      "
-                >
-                  Không được để trống.
-                </div>
-              </div>
-            </div>
-            <div class="mb-2">
-              <div class="d-flex align-items-center mb-2">
-                <object
-                  data="assets/icons/hour-start.svg"
-                  width="20"
-                  height="20"
-                ></object>
-                <label for="endTime" class="form-label ms-2"
-                >Thời gian kết thúc<span style="color: red"> (*)</span
-                >:</label
-                >
-              </div>
-              <input
-                id="endTime"
-                type="datetime-local"
-                class="form-control"
-                formControlName="endTime"
-                [ngClass]="
-                      formCreateProduct.controls['endTime'].touched
-                        ? formCreateProduct.controls['endTime'].invalid ||
-                          formCreateProduct.errors?.checkEndTime
-                          ? 'is-invalid'
-                          : 'is-valid'
-                        : ''
-                    "
-              />
-              <div class="invalid-feedback">
-                <div
-                  *ngIf="
-                        formCreateProduct.errors?.checkEndTime &&
-                        formCreateProduct.controls['endTime'].touched
-                      "
-                >
-                  Ngày kết thúc đấu giá không được nhỏ hơn ngày bắt đầu đấu
-                  giá và không được đấu giá quá 30 ngày.
-                </div>
-                <div
-                  *ngIf="
-                        formCreateProduct.controls['endTime'].errors
-                          ?.required &&
-                        formCreateProduct.controls['endTime'].touched
-                      "
-                >
-                  Không được bỏ trống.
-                </div>
-              </div>
-            </div>
-            <div class="d-flex mt-3 mb-2 w-100">
-              <button
-                type="submit"
-                class="btn btn-primary d-flex justify-content-center"
-                style="margin-right: 4px;"
-              >
-                <object
-                  data="assets/icons/legal-hammer.svg"
-                  width="20"
-                  height="20"
-                  class="me-2 slide"
-                ></object>
-                <p>Đấu giá sản phẩm</p>
-              </button>
-              <button
-                type="reset"
-                (click)="(resetForm(file))"
-                class="btn btn-outline btn-outline-primary d-flex justify-content-center"
-                style="margin-left: 684px;"
-              >
-                <object
-                  data="assets/icons/back.svg"
-                  width="20"
-                  height="20"
-                  class="me-2 slide"
-                ></object>
-                <p>Nhập lại</p>
-              </button>
-            </div>
+          </div>
+
+          <div class="d-flex mt-3 mb-2 w-100">
+            <button
+              type="submit"
+              class="btn btn-primary d-flex justify-content-center"
+              style="margin-right: 4px"
+            >
+              <object
+                data="assets/icons/legal-hammer.svg"
+                width="20"
+                height="20"
+                class="me-2 slide"
+              ></object>
+              <p>Đấu giá sản phẩm</p>
+            </button>
+            <button
+              type="reset"
+              (click)="resetForm(file)"
+              class="btn btn-outline btn-outline-primary d-flex justify-content-center"
+              style="margin-left: 684px"
+            >
+              <object
+                data="assets/icons/back.svg"
+                width="20"
+                height="20"
+                class="me-2 slide"
+              ></object>
+              <p>Nhập lại</p>
+            </button>
           </div>
         </form>
         <div class="mb-2">
-                <span style="font-size: 15px; margin-left: 380px;" class="fst-italic">
-                  Trường có dấu <span style="color: red"> (*)</span> là bắt
-                  buộc,không được bỏ trống.
-                </span>
+          <span style="font-size: 15px; margin-left: 380px" class="fst-italic">
+            Trường có dấu <span style="color: red"> (*)</span> là bắt buộc,không
+            được bỏ trống.
+          </span>
         </div>
       </div>
     </div>

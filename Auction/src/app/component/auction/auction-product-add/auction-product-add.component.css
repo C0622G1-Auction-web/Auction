@@ -1,5 +1,4 @@
 * {
-  font-family: "Noto Sans", serif !important;
   box-sizing: border-box !important;
   border: 0;
   font-size: 16px;
@@ -7,7 +6,7 @@
   vertical-align: baseline;
 }
 h1 {
-  font-size: 32px;
+  font-size: 40px;
 }
 
 ul, li, p {
@@ -24,7 +23,7 @@ body {
   border: 3px solid;
   border-image-slice: 1;
   border-color: rgb(189, 214, 236);
-  padding: 0px 20px;
+  padding: 0px 12px;
   border-radius: 8px;
   background-color: transparent;
   box-shadow: 4px 2px 4px 1px rgb(238, 243, 247);
@@ -115,7 +114,7 @@ input[type="file"]:hover::file-selector-button {
   width: 50px;
 }
 .remove_img {
-  padding: 3px;
+  padding: 4px;
   position: absolute;
   bottom: 0;
   right: 0;
