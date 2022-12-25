@@ -8,7 +8,7 @@
                                     <i [routerLink]="['home']" class="fa-brands fa-suse"></i>
                                 </span>
           </li>
-          <li [routerLink]="['/products']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item" (click)="topTop()">
+          <li [routerLink]="['/products']" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="menu__item">
                                 <span class="menu__link ">
                                     Quản lý sản phẩm
                                 </span>
@@ -22,14 +22,7 @@
           <li [routerLink]="['auction/product/add']" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="menu__item">
             <span class="menu__link ">Đấu Giá Sản phẩm</span>
           </li>
-          <li [routerLink]="['/cart']" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="menu__item">
-            <span class="menu__link" routerLink="/cart">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <p class="badge badge-light" style="position: relative;
-bottom: 12px; right: 6px">{{cartSize}}</p>
-              Giỏ Hàng
-            </span>
-          </li>
+
           <li class="menu__item">
                                 <span class="menu__link">
                                     <i class="fa-solid fa-circle-question mx-1"></i>
@@ -47,9 +40,37 @@ bottom: 12px; right: 6px">{{cartSize}}</p>
             Đăng nhập
           </button>
         </div>
-        <div *ngIf="checkLogin">
-          <div class="user__info">
-            <span class="mx-2 text-white"><span style="font-size: 14px">Xin chào</span> {{nameUser}}</span>
+        <div *ngIf="checkLogin" class="d-flex align-items-end">
+          <div class="user__nofication mx-2">
+            <i style="display: {{display}}" class="user__ex fa-solid fa-caret-up position-absolute"></i>
+            <span style="cursor: pointer" class="nofication" (click)="showNofication()">
+              <i class="fa-regular fa-bell"></i>
+              <p class="badge badge-light" style="position: relative;
+                bottom: 12px; right: 6px">
+                {{notificationSize}}
+              </p>
+            </span>
+            <div style="display: {{display}}" class="nofication__user" *ngIf="nofications?.length > 0">
+              <div class="nofication__item" *ngFor="let nofication of nofications">
+                <p *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" style="font-size: 12px; color: black; margin-bottom: -4px">{{nofication.user.lastName}}</p>
+                <p *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" style="font-size: 12px; color: black; margin-bottom: -4px">Admin</p>
+                <p class="nofication__link" [ngClass]="nofication.status == 2 ? 'noficationed': ''"  style="padding-left: 8px;" (click)="noficationed(nofication)" routerLink="{{nofication.link}}">{{nofication.message}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="user__cart" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'">
+            <span class="text-white" style="cursor: pointer" routerLink="/cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <p class="badge badge-light" style="position: relative;
+                bottom: 12px; right: 6px">{{cartSize}}
+              </p>
+            </span>
+          </div>
+          <div class="user__info ">
+            <div class="mx-2">
+              <p class="text-white" style="font-size: 12px; margin-bottom: -4px">Xin chào</p>
+              <p class="text-white"> {{nameUser}}</p>
+            </div>
             <img src="{{currentUser.avatar}}" class="avatar">
               <ul class="user__info__group">
                 <i class=" up__info fa-solid fa-caret-up"></i>
@@ -70,7 +91,6 @@ bottom: 12px; right: 6px">{{cartSize}}</p>
                 </li>
               </ul>
           </div>
-
         </div>
       </div>
     </div>
@@ -86,7 +106,7 @@ bottom: 12px; right: 6px">{{cartSize}}</p>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <p class="nav-link">Trang trủ</p>
+          <p class="nav-link">Trang chủ</p>
 
         </li>
         <li class="nav-item">

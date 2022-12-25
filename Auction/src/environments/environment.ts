@@ -73,6 +73,8 @@ export const environment = {
   NQV_GET_ACCOUNT_BY_ID_API: 'http://localhost:8080/api/v1/accounts/getAccountById',
   api_url_shipping: 'http://localhost:8080/api/v1/payments/update',
   api_url_payment: 'http://localhost:8080/api/v1/payments/updates',
+  URL_API_GETNOFICATION_BY_USER: 'http://localhost:8080/api/v1/nofications'
+
 };
 
 /*

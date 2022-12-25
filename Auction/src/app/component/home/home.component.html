@@ -53,7 +53,7 @@
             <div class="my__card__body mb-2" *ngFor="let product of natedProduct; let i = index">
               <p class="d-flex justify-content-between mb-2">
                 <span class="">{{i + 1}}<i class="mx-2 fa-solid fa-crown text-warning"></i></span>
-                <span class="product__price--one text-danger">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></span>
+                <span class="product__price--one text-danger">{{product.initialPrice| currency:'VND'}}</span>
               </p>
               <p class="d-flex flex-wrap justify-content-between my__link" routerLink="/auction-detail/{{product.id}}">
                 <span title="{{product?.name}}" class="card__title--one">{{product?.name}}</span>
@@ -152,7 +152,7 @@
                   product.auctionStatus?.id == 3 ?'auctioned':''">
                     {{product.auctionStatus.name}}
                   </span>
-              <p class="product__price">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></p>
+              <p class="product__price">{{product.initialPrice| currency:'VND'}}</p>
               <p class="mt-2 time time-{{i}}">
               </p>
               <div class="modal__product">

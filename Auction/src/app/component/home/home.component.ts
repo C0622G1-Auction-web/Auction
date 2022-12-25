@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from "../../service/product/product.service";
 import {PageProduct} from "../../model/product/page-product";
 import {FormBuilder, FormGroup} from "@angular/forms";
@@ -9,6 +9,7 @@ import {SocketService} from "../../service/socket/socket.service";
 import {Title} from "@angular/platform-browser";
 import {Router} from "@angular/router";
 import {interval} from "rxjs";
+import {typeSourceSpan} from "@angular/compiler";
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ import {interval} from "rxjs";
 })
 
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   pageProducts: PageProduct;
   rfSearch: FormGroup;
   categorys: Category[];
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
               private _route: Router) { }
 
   ngOnInit(): void {
+    console.log('iniiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
     this._titleService.setTitle('Trang Chủ');
     this.rfSearch = this._formBuilder.group({
       name: [''],
@@ -113,7 +115,7 @@ export class HomeComponent implements OnInit {
   setValueAuctionProductStatusSearch(categoryId: any,
                                      rangePrice: any,
                                      productAuctionStatus: string,
-                                     name: string ) {
+                                     name: string) {
     this.clearInterValList();
     if(this.isSelectedAuction == productAuctionStatus) {
       productAuctionStatus = '';
@@ -176,20 +178,18 @@ export class HomeComponent implements OnInit {
 
   runCountDowTime(products){
       let endTime: any;
+      let startTime: any;
       for(let i = 0; i < products.totalElements; i++) {
         endTime = products.content[i]?.endTime;
-        console.log('end time: ', i , endTime);
-        console.log('endteime get time', i, new Date(endTime).getTime() - new Date().getTime());
-        this.runCountDowDate(new Date(endTime).getTime(), i);
+        startTime = products.content[i]?.startTime;
+        this.runCountDowDate(new Date(startTime).getTime(), new Date(endTime).getTime(), i);
       }
   }
 
-  runCountDowDate(countDownDate: any, i: any){
+  runCountDowDate( startTime, countDownDate: any, i: any){
     let selectorTime = '.time-' + i;
     if(countDownDate) {
         let countDow = setInterval(function() {
-
-          // Get today's date and time
           let now = new Date().getTime();
 
           // Find the distance between now and the count down date
@@ -201,16 +201,16 @@ export class HomeComponent implements OnInit {
           let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
           let seconds = Math.floor((distance % (1000 * 60)) / 1000);
           document.querySelectorAll(selectorTime).forEach(e => {
-            if (distance > 0) {
+            if (distance > 0  && startTime <= now) {
               e.innerHTML =
-                `<span style="
+                  `<span style="
                     min-width:30px;
                     text-align: center;
                     border: 1px solid red;
                     padding: 2px;
                     border-radius: 3px;"
                     class="time__dd">
-                    ${days} Ngày
+                    ${days} ngày
                 </span>` +
                 `<span class="mx-1">:</span>` +
                 `<span style="min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__hh red__color">${hours}</span>` +
@@ -218,13 +218,18 @@ export class HomeComponent implements OnInit {
                 `<span style="min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__mm">${minutes}</span>` +
                 `<span class="mx-1">:</span>` +
                 `<span style="min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__ss">${seconds}</span>`;
+            } else if(distance > 0  && startTime > now){
+              let days = Math.floor((startTime - now) / (1000 * 60 * 60 * 24));
+              clearInterval(countDow);
+              e.innerHTML =
+                `<span style=" width: 100%; min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__hh">Còn ${days} ngày sẽ mở đấu giá</span>`;
             } else {
               clearInterval(countDow);
               e.innerHTML =
-              `<span class="time__hh mx-2" style="color: #95abb9">Hết thời gian</span>`;
+                `<span style=" width: 100%; min-width:30px; text-align: center; border: 1px solid #95abb9; padding: 2px; border-radius: 3px; color: #95abb9;" class="time__hh mx-2">Hết thời gian</span>`;
             }
           });
-        });
+        }, );
         this.intervalList.push(countDow);
       } else {
         console.log('Gio co van de, yeu cau sua database');
@@ -240,5 +245,9 @@ export class HomeComponent implements OnInit {
       this.intervalList = [];
     }
   }
+  ngOnDestroy() {
+    this.clearInterValList();
+  }
+
 }
 
