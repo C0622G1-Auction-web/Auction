@@ -24,48 +24,40 @@ export class PaymentReceiptComponent implements OnInit {
   description: string;
   payments: ShipDescription[] = [];
   display = '';
-  displayButton = 'none';
+  isShown: boolean = true;
 
+// tslint:disable-next-line:variable-name
   constructor(private _paymentService: PaymentService,
               private _formBuilder: FormBuilder,
               private _router: Router,
-              private _titleService: Title,
+              private _toast: Title,
               private _activateRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this._titleService.setTitle('Thanh toán');
+    this._toast.setTitle('Hóa đơn');
     this.idList = this._paymentService.getIdList();
     this.findPaymentList();
+
   }
 
   findPaymentList() {
     this._paymentService.findPaymentList(this.idList).subscribe(data => {
-      console.log(data);
       this.paymentList = data;
       this.paymentBill = 49000;
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < data.length; i++) {
         this.paymentBill += +data[i].productPrice;
       }
-      this.paypal = (this.paymentBill / 237250000).toFixed(2);
+      this.paypal = (this.paymentBill / 23725000).toFixed(2);
+
+      console.log(this.paypal);
     }, error => {
       this._paymentService.showErrorMessage('Không thể lấy danh sách');
     });
   }
 
-  convertToPDF() {
-    html2canvas(document.getElementById('content')).then(canvas => {
-      console.log(canvas);
-      const contentDataURL = canvas.toDataURL('image/png');
-      let pdf = new jsPDF('p', 'mm', 'A4');
-      let width = pdf.internal.pageSize.getWidth();
-      let height = canvas.height * width / canvas.width;
-      pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height)
-      pdf.save('Hóa đơn.pdf');
-    });
-  }
-
-  renderPayPalBtn(){
+  renderPayPalBtn() {
     document.getElementById("paypalBtn").innerHTML = '<div id="paypalButtons" style="margin-left: 300px"></div>';
     render(
       {
@@ -76,9 +68,23 @@ export class PaymentReceiptComponent implements OnInit {
           this._paymentService.showSuccessMessage("Thanh toán thành công");
           this.display = 'none';
           this.goToPay2();
+          this.successPayment();
         }
       }
     );
+  }
+
+
+  convertToPDF() {
+    html2canvas(document.getElementById('content')).then(canvas => {
+      console.log(canvas);
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      let width = pdf.internal.pageSize.getWidth();
+      let height = canvas.height * width / canvas.width;
+      pdf.addImage(contentDataURL, 'JPG', 0, 0, width, height)
+      pdf.save('Hóa đơn.pdf');
+    });
   }
 
   goToPay() {
@@ -100,9 +106,28 @@ export class PaymentReceiptComponent implements OnInit {
     this.renderPayPalBtn();
   }
 
+  successPayment() {
+    for (const item of this.paymentList) {
+      let shipDes = {
+        "id": item.id,
+      }
+      this.payments.push(shipDes);
+    }
+    this._paymentService.updatePaymentStatus(this.payments).subscribe(data => {
+    }, error => {
+      this._paymentService.showErrorMessage('Giao dịch thất bại');
+    })
+  };
+
   goToPay2() {
     // @ts-ignore
     document.querySelector('.pills-contact-tab').click();
+  }
+  changeDisplay(){
+    this.isShown = false;
+  }
+  changeDisplay1(){
+    this.isShown = true;
   }
 
 }

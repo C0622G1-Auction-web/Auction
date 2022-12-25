@@ -8,6 +8,7 @@ import {UserService} from "../../service/user/user.service";
 import {SocketService} from "../../service/socket/socket.service";
 import {Title} from "@angular/platform-browser";
 import {Router} from "@angular/router";
+import {interval} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   auctionStatusId = '';
   isSelectedAuction = '';
   natedProduct: any;
+  intervalList = [];
 
   constructor(private _productService: ProductService,
               private _formBuilder: FormBuilder,
@@ -45,11 +47,10 @@ export class HomeComponent implements OnInit {
     this._categoryService.getListCategory().subscribe(data => {
       this.categorys = data;
     });
+
     this.gotoPage(this.rfSearch.value);
     this.selectedChangImage();
     this.getTop();
-    this.runcountDowDate();
-
   }
 
   /**
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit {
       if(!this.natedProduct) {
         this.natedProduct = data.content.slice(0, 4);
       }
-      console.log(data);
+      this.runCountDowTime(data);
     });
     this.pageHasNext = 0;
   }
@@ -79,6 +80,7 @@ export class HomeComponent implements OnInit {
       data.content.forEach(value => {
         this.pageProducts.content.push(value);
       });
+      this.runCountDowTime(this.pageProducts);
     });
   }
 
@@ -112,6 +114,7 @@ export class HomeComponent implements OnInit {
                                      rangePrice: any,
                                      productAuctionStatus: string,
                                      name: string ) {
+    this.clearInterValList();
     if(this.isSelectedAuction == productAuctionStatus) {
       productAuctionStatus = '';
     }
@@ -147,7 +150,7 @@ export class HomeComponent implements OnInit {
   /**
    * Created: SangDD
    * Date: 18/12/2022
-   * function: highlight img được chọn
+   * function: highlight image selected
    */
   selectedChangImage() {
     setTimeout(()=> {
@@ -169,42 +172,73 @@ export class HomeComponent implements OnInit {
   setValueProductId(id: any) {
     this._productService.setProductDetailId(id);
     this._route.navigate(['auction-detail', id]);
-    console.log('bat dau truyen ', id);
   }
 
-  runcountDowDate(){
-    var countDownDate = new Date("2022-12-24 23:59:59").getTime();
-
-    // Update the count down every 1 second
-    var x = setInterval(function() {
-
-      // Get today's date and time
-      var now = new Date().getTime();
-
-      // Find the distance between now and the count down date
-      var distance = countDownDate - now;
-
-      // Time calculations for days, hours, minutes and seconds
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // Output the result in an element with id="demo"
-      document.querySelectorAll(".time").forEach(e => {
-        e.innerHTML = `<span class="time__hh mx-2">${hours} : </span>` +
-          `<span class="time__mm mx-2">${minutes} :</span>` +
-          `<span class="time__ss mx-2">${seconds}</span>`;
-      });
-
-      // If the count down is over, write some text
-      if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("demo").innerHTML = `<span class="time__hh mx-2">0 : </span>` +
-          `<span class="time__mm mx-2">0 :</span>` +
-          `<span class="time__ss mx-2">0</span>`;
+  runCountDowTime(products){
+      let endTime: any;
+      for(let i = 0; i < products.totalElements; i++) {
+        endTime = products.content[i]?.endTime;
+        console.log('end time: ', i , endTime);
+        console.log('endteime get time', i, new Date(endTime).getTime() - new Date().getTime());
+        this.runCountDowDate(new Date(endTime).getTime(), i);
       }
-    }, 1000);
+  }
+
+  runCountDowDate(countDownDate: any, i: any){
+    let selectorTime = '.time-' + i;
+    if(countDownDate) {
+        let countDow = setInterval(function() {
+
+          // Get today's date and time
+          let now = new Date().getTime();
+
+          // Find the distance between now and the count down date
+          let distance = countDownDate - now;
+
+          // Time calculations for days, hours, minutes and seconds
+          let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          document.querySelectorAll(selectorTime).forEach(e => {
+            if (distance > 0) {
+              e.innerHTML =
+                `<span style="
+                    min-width:30px;
+                    text-align: center;
+                    border: 1px solid red;
+                    padding: 2px;
+                    border-radius: 3px;"
+                    class="time__dd">
+                    ${days} Ngày
+                </span>` +
+                `<span class="mx-1">:</span>` +
+                `<span style="min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__hh red__color">${hours}</span>` +
+                `<span class="mx-1">:</span>` +
+                `<span style="min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__mm">${minutes}</span>` +
+                `<span class="mx-1">:</span>` +
+                `<span style="min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__ss">${seconds}</span>`;
+            } else {
+              clearInterval(countDow);
+              e.innerHTML =
+              `<span class="time__hh mx-2" style="color: #95abb9">Hết thời gian</span>`;
+            }
+          });
+        });
+        this.intervalList.push(countDow);
+      } else {
+        console.log('Gio co van de, yeu cau sua database');
+      }
+  }
+
+  clearInterValList() {
+    if(this.intervalList.length > 0) {
+      this.intervalList.forEach(value => {
+        console.log('xoa gio');
+        clearInterval(value);
+      })
+      this.intervalList = [];
+    }
   }
 }
 

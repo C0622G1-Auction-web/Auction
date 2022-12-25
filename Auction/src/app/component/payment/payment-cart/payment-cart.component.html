@@ -15,23 +15,22 @@
       <div class="main-part">
         <div class="row bg-orange text-light ms-0 me-0" style="padding-top: 2px; padding-bottom: 6px">
           <div class="w-50 float-start" style="padding-left: 2%; padding-top: 3px">
-            <span><button class="btn text-light" (click)="addAllToCart()" style="border: none; margin-right: 6px"><i
-              style="font-size: x-large" class="fa-regular fa-square-plus"></i></button><span class="h4">Sản phẩm</span></span>
+            <span><button class="btn text-light" (click)="addAllToCart()" style="border: none; margin-right: 6px"><i style="font-size: x-large" class="fa-regular fa-square-check"></i></button><span class="h4">Sản phẩm</span></span>
           </div>
         </div>
 
         <div class="row bg-light text-orange mt-2 mb-2 ms-0 me-0">
-          <div style="padding-left: 2%" *ngIf="paymentList.length!=0">
-            Sản phẩm sẽ được giao vào {{shippingDate|date:'dd/MM/yyyy'}}
+          <div *ngIf="paymentList.length!=0">
+            <p class="text-center m-0 p-0 h5">Sản phẩm sẽ được giao từ ngày {{shippingPreviousDate|date:'dd/MM/yyyy'}} đến ngày {{shippingNextDate|date:'dd/MM/yyyy'}}</p>
           </div>
           <div style="padding-left: 2%" class="h5" *ngIf="paymentList.length==0">
-            Không có sản phẩm trong giỏ hàng, hãy tham gia đấu giá.
+            <p class="text-center m-0 p-0">Không có sản phẩm trong giỏ hàng, hãy tham gia đấu giá.</p>
           </div>
 
         </div>
         <form>
-          <label>
-            <div *ngFor="let item of paymentList, index as i">
+          <div *ngFor="let item of paymentList, index as i">
+            <label>
               <!--Bắt đầu ảnh-->
               <div class="card mb-3  border shadow-lg ">
                 <div class="row g-0">
@@ -39,6 +38,7 @@
                     <input class="delete-checkbox" [checked]="paymentListId.includes(item.id)" type="checkbox"
                            (click)="addToCart(item.id)"/>
                   </div>
+
                   <div class="col-md-4 mt-2">
                     <img
                       src="{{item.productImage}}"
@@ -46,9 +46,9 @@
                   </div>
                   <div class="col-md-7">
                     <div class="card-body">
-                      <h5 class="card-title text-orange fw-bold title"
-                          title="{{item.productName}}">{{item.productName}}</h5>
-                      <p class="max-lines"> {{item.description}}...</p>
+                      <h5 class="card-title text-orange fw-bold title" style="cursor: pointer"
+                          title="{{item.productName}}" routerLink="/auction-detail/{{item.productId}}">{{item.productName}}</h5>
+                      <span class="max-lines"> {{item.description}}</span><span>...</span>
 
                       <div class="clearfix">
                         <h6 class="col-5 float-start"><span class="text-orange">Số lượng:</span> x1
@@ -58,13 +58,15 @@
                       </div>
                     </div>
                   </div>
+
                 </div>
 
               </div>
 
               <!--hết ảnh-->
-            </div>
-          </label>
+            </label>
+          </div>
+
         </form>
       </div>
     </div>
@@ -131,6 +133,6 @@
   </div>
   <div class="col-lg-4">
     <div class="h5">Thay đổi đơn hàng?</div>
-    <div class="text-muted">Gọi cho chúng tôi theo số (028)-362-222-222</div>
+    <div class="text-muted">Gọi cho chúng tôi theo số 0909.999.999</div>
   </div>
 </div>

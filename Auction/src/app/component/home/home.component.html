@@ -49,12 +49,13 @@
         </div>
         <div class="col-lg-2 sidebar__right">
           <div class="my__card w-100" style="border: none;">
+            <p class="my__card__heading">Sản phẩm mới</p>
             <div class="my__card__body mb-2" *ngFor="let product of natedProduct; let i = index">
               <p class="d-flex justify-content-between mb-2">
                 <span class="">{{i + 1}}<i class="mx-2 fa-solid fa-crown text-warning"></i></span>
                 <span class="product__price--one text-danger">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></span>
               </p>
-              <p class="d-flex flex-wrap justify-content-between">
+              <p class="d-flex flex-wrap justify-content-between my__link" routerLink="/auction-detail/{{product.id}}">
                 <span title="{{product?.name}}" class="card__title--one">{{product?.name}}</span>
               </p>
               <img
@@ -100,9 +101,10 @@
               </li>
               <li class="category__item mb-2" [ngClass]="auctionStatusId == '3' ? 'active' : ''">
                 <span (click)="setValueAuctionProductStatusSearch(categoryIDSearch,
-                                                      rfSearch.value.rangePrice,
-                                                      '3',
-                                                      rfSearch.value.name)" class="category_text">
+                       rfSearch.value.rangePrice,
+                      '3',
+                       rfSearch.value.name)"
+                      class="category_text">
                     Đã kết thúc
                 </span>
               </li>
@@ -151,12 +153,7 @@
                     {{product.auctionStatus.name}}
                   </span>
               <p class="product__price">{{product.initialPrice| currency:'VND'}} <sup>đ</sup></p>
-              <p class="time">
-                <span class="time__hh mx-2">09</span>
-                <span class=" mx-2">:</span>
-                <span class="time__hh mx-2">09</span>
-                <span class=" mx-2">:</span>
-                <span class="time__hh mx-2">09</span>
+              <p class="mt-2 time time-{{i}}">
               </p>
               <div class="modal__product">
                 <button (click)="setValueProductId(product.id)" *ngIf="product.auctionStatus?.id == 1"
