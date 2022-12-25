@@ -34,7 +34,7 @@
   <div class="row bg bg-light">
     <div class="col-lg-7 mt-5 ">
       <div class=" card card-body">
-        <h3 class=" alert text-center" style="background: #E74C3C;color: white">{{productDetail.name}}</h3>
+        <h3 class=" alert text-center" style="background: #E74C3C;color: white">{{productDetail.name|titlecase}}</h3>
         <div class="d-flex justify-content-center">
           <img id="image__main{{1}}" src="{{productDetail?.imgUrlProducts[0]?.url}}"
                class="d-block w-75 card-img text-center" alt="">
@@ -143,22 +143,26 @@
 
               <input hidden formControlName="productId">
 
-              <input id="formattedNumberField"
+              <input [readOnly]="auctionable === 1"
                      currencyMask formControlName="currentPrice"
-                     [options]="{ prefix: '',suffix :' đ',precision :2, thousands:'.', decimal :','}"
+                     [options]="{ prefix: '',suffix :' đ',precision :2, thousands:'.', decimal :',',max:'999999999999',min:'0',allowNegative :false}"
                      class="form-control w-100" [value]="rfAuction.value.currentPrice| currency" type="text"
                      style="font-size: 24px; font-weight: bold; text-align: right"
                      [ngClass]="rfAuction.errors?.checkAuctionPrice && rfAuction.controls.currentPrice.touched ?'is-invalid':''">
               <div class="invalid-feedback">
                 <div
-                  *ngIf="rfAuction.errors?.checkAuctionPrice && rfAuction.controls['currentPrice'].touched">
+                  *ngIf="rfAuction.errors?.checkAuctionPrice && auctionable !== 1  && rfAuction.controls['currentPrice'].touched">
                   <p class="text-center">Giá Đấu Phải Lớn Hơn Giá Hiện Tại Một Bước Giá</p>
                 </div>
               </div>
+              <div class="top-auction" *ngIf="auctionable === 1">
+                <p class="text-center">Giá Bạn Đưa Ra Hiện Tại Là Cao Nhất</p>
+              </div>
+
 
               <div class="w-100 d-flex mt-3">
                 <button class="btn btn-danger w-25" type="button" style="font-size: 25px"
-                        (click)="reduceAuctionPriceByPriceStep()" [disabled]="rfAuction.invalid">-
+                        (click)="reduceAuctionPriceByPriceStep()" [disabled]="rfAuction.invalid || auctionable === 1">-
                 </button>
                 <button type="button" class="hammer btn btn-danger w-50 mx-2"
                         style="font-size: 25px;font-weight: bold" data-bs-toggle="modal"
@@ -220,12 +224,6 @@
     </div>
   </div>
 </div>
-<script>
-  var fnf = document.getElementById("formattedNumberField");
-  fnf.addEventListener('keyup', function (evt) {
-    var n = parseInt(this.value.replace(/\D/g, ''), 10);
-    fnf.value = n.toLocaleString();
-  }, false);
-</script>
+
 
 

@@ -41,6 +41,7 @@ export class ProductEditComponent implements OnInit {
   imgCreate: any[] = [];
   checkUser = "";
   messageEdit = "";
+  readFile: any[] = [];
 
   constructor(private _formBuilder: FormBuilder,
               private _productService: ProductService,
@@ -68,11 +69,11 @@ export class ProductEditComponent implements OnInit {
       this._productService.findById(this.id).subscribe(product => {
         this.productFind = product;
         console.log(product)
-        this._userService.findUserById(product.user.id).subscribe(user => {
+        this._userService.findUserByAccount(product.user.account.username).subscribe(user => {
           this.userFind = user;
           console.log(user)
           this.checkUser = "Mã người đăng: " + this.userFind.id + "\n" + "Tên người đăng: " + this.userFind.firstName + " " + this.userFind.lastName;
-          this.formEditProduct.patchValue({user: this.userFind.id})
+          this.formEditProduct.patchValue({user: this.userFind.account.username})
         });
         this._imageProductService.getListImgProductId(this.productFind.id).subscribe(value => {
           this.imgs = value;
@@ -89,10 +90,10 @@ export class ProductEditComponent implements OnInit {
           category: [product.category.id],
           reviewStatus: [product.reviewStatus.id],
           auctionStatus: [product.auctionStatus.id],
-          user: [product.user.id, [Validators.required, Validators.pattern('\\d+')]],
-          imageProduct: ["", [Validators.required]],
+          user: [product.user.id, [Validators.required]],
+          imageProduct: [1, [Validators.required]],
         }, {validators: [checkStartTime, checkEndTime]});
-      },error => {
+      }, error => {
         this._toast.error("Lỗi trang !")
       });
     });
@@ -110,11 +111,11 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
-  findUserById(testNum) {
+  findUserByAccount(testNum) {
     testNum.setAttribute('disabled', true);
-    this._userService.findUserById(testNum.value).subscribe(data => {
+    this._userService.findUserByAccount(testNum.value).subscribe(data => {
       this.userFind = data;
-      this.formEditProduct.patchValue({user: this.userFind.id})
+      this.formEditProduct.patchValue({user: this.userFind.account.username})
       this.checkUser = "Mã người đăng: " + this.userFind.id + "\n" + "Tên người đăng: " + this.userFind.firstName + " " + this.userFind.lastName;
     }, error => {
       this.userFind = null;
@@ -123,58 +124,71 @@ export class ProductEditComponent implements OnInit {
   }
 
   showPreview(event: any) {
-    this.messageEdit = "Đang tải ảnh vui lòng đợi........";
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedFile = event.target.files;
-    } else {
-      this.selectedFile = [];
-    }
-    console.log(this.selectedFile);
-    if (this.selectedFile.length !== 0) {
-      for (let i = 0; i < this.selectedFile.length; i++) {
-        let selectedImage = this.selectedFile[i];
-        const n = Date.now();
-        const filePath = `RoomsImages/${n}`;
-        const fileRef = this._storage.ref(filePath);
-        this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe(url => {
-              this.messageEdit = ""
-              this.imgCreate.push(url);
-            });
-          })
-        ).subscribe(() => {
-        });
+    this.messageEdit = '';
+    let files = event.target.files;
+    this.readFile = event.target.files;
+    if ((files.length + this.imgs.length) < 6) {
+      for (let file of files) {
+        if (file.size > 1048576) {
+          this.messageEdit = 'Dung lượng ảnh vượt quá 1Mb';
+          this.selectedFile = [];
+          break;
+        }
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.selectedFile.push(e.target.result);
+          console.log(this.selectedFile)
+        }
+        reader.readAsDataURL(file);
       }
-      console.log(this.imgCreate)
+    } else {
+      this.messageEdit = "Vui lòng không chọn quá 5 ảnh.";
+      this.selectedFile = [];
     }
   }
 
   updateProduct(id) {
     if (this.formEditProduct.valid && this.userFind != null) {
-      this.productDto = this.formEditProduct.value;
-      console.log(this.productDto)
-      this._productService.update(this.productDto, id).subscribe(data => {
-        if (this.imgCreate.length !== 0) {
-          for (let i = 0; i < this.imgCreate.length; i++) {
-            const image: ImgUrlProductDto = {
-              url: this.imgCreate[i],
-              product: data.id
-            };
-            this._imageProductService.create(image).subscribe(() => {
-            });
-          }
-        }
-      });
-      if (this.idImageList.length !== 0) {
-        for (let j = 0; j < this.idImageList.length; j++) {
-          this.deleteImageById(this.idImageList[j])
+      if (this.readFile.length != 0) {
+        for (let i = 0; i < this.readFile.length; i++) {
+          let selectedImage = this.readFile[i];
+          const n = Date.now();
+          const filePath = `RoomsImages/${n}`;
+          const fileRef = this._storage.ref(filePath);
+          this._storage.upload(filePath, selectedImage).snapshotChanges().pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().subscribe(url => {
+                this.messageEdit = ""
+                this.imgCreate.push(url);
+              });
+            })
+          ).subscribe(() => {
+          });
         }
       }
-      this._toast.success("Cập nhật sản phẩm thành công!");
-      this._router.navigateByUrl("/products")
+      setTimeout(() => {
+        this.formEditProduct.patchValue({user: this.userFind.id})
+        this.productDto = this.formEditProduct.value;
+        this._productService.update(this.productDto, id).subscribe(data => {
+          if (this.imgCreate.length !== 0) {
+            for (let i = 0; i < this.imgCreate.length; i++) {
+              const image: ImgUrlProductDto = {
+                url: this.imgCreate[i],
+                product: data.id
+              };
+              this._imageProductService.create(image).subscribe(() => {
+              });
+            }
+          }
+          if (this.idImageList.length !== 0) {
+            for (let j = 0; j < this.idImageList.length; j++) {
+              this.deleteImageById(this.idImageList[j])
+            }
+          }
+          this._toast.success("Cập nhật sản phẩm thành công!");
+          this._router.navigateByUrl("/products")
+        });
+      }, 2000)
     } else {
       this._toast.error("Cập nhật sản phẩm thất bại!");
     }
@@ -183,12 +197,12 @@ export class ProductEditComponent implements OnInit {
   deleteImage(i, img) {
     this.idImageList.push(img.id);
     this.imgs.splice(i, 1);
-    this._toast.error("Bạn đã xóa 1 ảnh!")
+    this._toast.error("Bạn đã xóa 1 ảnh!");
   }
 
   deleteImageNew(index) {
-    this.imgCreate.splice(index, 1)
-    this._toast.error("Bạn đã xóa 1 ảnh!")
+    this.selectedFile.splice(index, 1)
+    this._toast.error("Bạn đã xóa 1 ảnh!");
   }
 
   deleteImageById(id: number) {
@@ -197,13 +211,14 @@ export class ProductEditComponent implements OnInit {
   }
 
   resetFindUserById(testNum) {
-    testNum.removeAttribute('disabled')
+    testNum.removeAttribute('disabled');
   }
 
   resetForm(file) {
     this.ngOnInit();
-    this.imgCreate = [];
-    file.value ="";
+    this.selectedFile = [];
+    file.value = "";
+    this.messageEdit = '';
   }
 
   onReady(editor) {

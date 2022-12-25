@@ -10,14 +10,14 @@
 
       <div class="row">
         <label for="title" class="form-label">Chủ đề (<span style="color: red">*</span>)</label>
-        <input formControlName="title" id="title" type="text" placeholder=" Chọn chủ đề" class="form-control"
+        <input formControlName="title" id="title" type="text" class="form-control"
                [ngClass]="guideForm.controls['title'].touched && guideForm.controls['title'].invalid?'is-invalid':guideForm.controls['title'].touched && guideForm.controls['title'].valid ?'is-valid':''"/>
         <div class="invalid-feedback">
           <div *ngIf="guideForm.controls['title'].errors?.required">
             <span>Chủ đề không được bỏ trống.</span>
           </div>
           <div *ngIf="guideForm.controls['title'].errors?.minlength||guideForm.controls['title'].errors?.maxlength">
-            <span>Tên chủ đề quá dài hoặc quá ngắn<10-100>.</span>
+            <span>Tên chủ đề quá dài hoặc quá ngắn từ 10 đến 100 ký tự.</span>
           </div>
           <div *ngIf="guideForm.controls['title'].errors?.pattern">
             <span>Tên chủ đề không được chứa ký tự đặc biệt.</span>
@@ -28,7 +28,7 @@
       <div class="row">
         <label for="floatingTextarea">Nội dung (<span style="color: red">*</span>)</label>
 
-        <ckeditor [editor]="Editor" formControlName="content" class="form-control" rows="6" placeholder="Ghi nội dung ở đây"
+        <ckeditor [editor]="Editor" formControlName="content" class="form-control" rows="6" placeholder="Ghi nội dung ở đây" style="resize: none"
                   id="floatingTextarea"
                   [ngClass]="guideForm.controls['content'].touched && guideForm.controls['content'].invalid?'is-invalid':guideForm.controls['content'].touched && guideForm.controls['content'].valid ?'is-valid':''"></ckeditor>
         <div class="invalid-feedback">
@@ -37,7 +37,7 @@
           </div>
           <div
             *ngIf="guideForm.controls['content'].errors?.minlength||guideForm.controls['content'].errors?.maxlength">
-            <span>Nội dung quá dài hoặc quá ngắn <30-2000>.</span>
+            <span>Nội dung quá dài hoặc quá ngắn từ 30 đến 2000 ký tự.</span>
           </div>
         </div>
       </div>
@@ -52,9 +52,9 @@
                name="image"
                autocomplete="off" class="custom-file-input form-control" id="inputGroupFile01">
       </div>
-      <div class="d-flex justify-content-left" style="overflow-x: scroll; margin-top: 20px ">
-        <p *ngIf="messageCreate!=''">{{messageCreate}}</p>
-        <div *ngFor=" let item of imgCreate, let i = index">
+      <p style="color: #dc3545; font-size: 14px" *ngIf="messageCreate!=''">{{messageCreate}}</p>
+      <div *ngIf="selectedImages.length!=0" class="d-flex justify-content-left" style="overflow-x: scroll; margin-top: 20px ">
+        <div *ngFor=" let item of selectedImages, let i = index">
           <div style="position: relative">
             <img class="d-block" style="height: 84px" src="{{item}}">
             <span class="remove_img" (click)="deleteImageNew(i); file.value = ''"
@@ -68,7 +68,7 @@
         <button  class="btn btn-primary" style="width: 48%" (click)="resetForm(); file.value=''">
           Đặt Lại
         </button>
-        <button class="btn btn-primary" style="width: 48%" type="submit" [disabled]="!guideForm.valid ">
+        <button class="btn btn-primary" style="width: 48%" type="submit" [disabled]="!guideForm.valid || messageCreate!='' ">
           Thêm Hướng dẫn
         </button>
       </div>

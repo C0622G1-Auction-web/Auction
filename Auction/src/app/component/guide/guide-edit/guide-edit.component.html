@@ -19,7 +19,7 @@
           </div>
           <div
             *ngIf="editGuideForm.controls['title'].errors?.minlength||editGuideForm.controls['title'].errors?.maxlength">
-            <span>Tên chủ đề quá dài hoặc quá ngắn<10-100>.</span>
+            <span>Tên chủ đề quá dài hoặc quá ngắn 10 đến 100 ký tự.</span>
           </div>
           <div *ngIf="editGuideForm.controls['title'].errors?.pattern">
             <span>Tên chủ đề không được chứa ký tự đặc biệt.</span>
@@ -37,7 +37,7 @@
           </div>
           <div
             *ngIf="editGuideForm.controls['content'].errors?.minlength||editGuideForm.controls['content'].errors?.maxlength">
-            <span>Nội dung quá dài hoặc quá ngắn<30-2000>.</span>
+            <span>Nội dung quá dài hoặc quá ngắn từ 30 đến 2000 ký tự.</span>
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
         <label class="form-label">Sửa hình ảnh(Thêm hoặc xóa)</label>
         <input class="form-control" type="file" accept="image/png, image/gif, image/jpeg" #file multiple (change)="showPreview($event)">
         <div class="d-flex justify-content-left" style="overflow-x: scroll; margin-top: 20px ">
-          <span *ngIf="messageCreate!=''">{{messageCreate}}</span>
+          <span style="color: #dc3545; font-size: 14px" *ngIf="messageCreate!=''">{{messageCreate}}</span>
           <div *ngFor=" let item of imgs,let i = index" style="margin-right: 10px">
             <div style="position: relative">
               <img class="d-block" style="height: 84px" src="{{item.url}}">
@@ -56,7 +56,7 @@
       </span>
             </div>
           </div>
-          <div *ngFor="let img of imgCreate,let i = index" style="margin-right: 10px">
+          <div *ngFor="let img of selectedImages,let i = index" style="margin-right: 10px">
             <div style="position: relative">
               <img class="d-block" style="height: 84px" src="{{img}}">
               <span class="remove_img" (click)="deleteImageNew(i);file.value=''"
@@ -72,7 +72,7 @@
         <button  class="btn btn-primary" style="width: 48%" type="button"  (click)="resetEditForm()" >
           Đặt Lại
         </button>
-        <button class="btn btn-primary" style="width: 48%" type="submit" [disabled]="!editGuideForm.valid ">
+        <button class="btn btn-primary" style="width: 48%" type="submit" [disabled]="!editGuideForm.valid || messageCreate!='' ">
           Sửa Hướng dẫn
         </button>
       </div>

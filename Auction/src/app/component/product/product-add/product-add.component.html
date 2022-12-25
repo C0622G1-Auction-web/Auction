@@ -31,7 +31,7 @@
       <div class="mb-2">
         <div class="d-flex mb-2 mt-3 w-100">
           <object data="assets/icons/icon-people.svg" width="20" height="20"></object>
-          <label for="user" class="form-label ms-2">Mã người đăng<span style="color: red">(*)</span>:</label>
+          <label for="user" class="form-label ms-2">Tên tài khoản<span style="color: red">(*)</span>:</label>
         </div>
         <div class="d-flex align-items-center mb-2">
           <input id="user" #testNum style="width: 50%" type="text" class="form-control" formControlName="user"
@@ -39,7 +39,7 @@
                    && formCreateProduct.controls['user'].invalid?'is-invalid':formCreateProduct.controls['user'].touched
                    && formCreateProduct.controls['user'].valid ?'is-valid':''"/>
           <button type="button" class="btn btn-primary d-flex justify-content-center mx-3"
-                  (click)="findUserById(testNum)">
+                  (click)="findUserByAccount(testNum)">
             <object data="assets/icons/check-people.svg" width="20" height="20"
                     class="me-2 slide"></object>
             Kiểm tra
@@ -53,10 +53,6 @@
         <div *ngIf="formCreateProduct.controls['user'].errors?.required
         && (formCreateProduct.controls['user'].touched)">
           Không được bỏ trống.
-        </div>
-        <div *ngIf="formCreateProduct.controls['user'].errors?.pattern
-        && (formCreateProduct.controls['user'].touched)">
-          Không đúng định dạng số.
         </div>
       </div>
       <div class="mb-2">
@@ -76,8 +72,8 @@
           <object data="assets/icons/dollar.svg" width="20" height="20"></object>
           <label for="initialPrice" class="form-label ms-2">Giá ban đầu<span style="color: red">(*)</span>:</label>
         </div>
-        <input id="initialPrice" type="text" class="form-control" formControlName="initialPrice"
-               [ngClass]="formCreateProduct.controls['initialPrice'].touched
+        <input  id="initialPrice" type="text" class="form-control" formControlName="initialPrice"
+                [ngClass]="formCreateProduct.controls['initialPrice'].touched
                  && formCreateProduct.controls['initialPrice'].invalid?'is-invalid':formCreateProduct.controls['initialPrice'].touched
                  && formCreateProduct.controls['initialPrice'].valid ?'is-valid':''"/>
         <div class="invalid-feedback">
@@ -157,7 +153,7 @@
       </div>
       <div *ngIf="messageCreate !=''">{{messageCreate}}</div>
       <div class="d-flex justify-content-left" style="overflow-x: scroll">
-        <div *ngFor="let img of imgs,let i = index" style="margin-right: 8px">
+        <div *ngFor="let img of selectedFile,let i = index" style="margin-right: 8px">
           <div style="position: relative">
             <img class="d-block" style="height: 84px" src="{{img}}">
             <span class="remove_img" (click)="deleteImageNew(i)"

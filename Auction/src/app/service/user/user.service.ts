@@ -67,7 +67,7 @@ export class UserService {
    * Date created: 16/12/2022
    * @return User
    */
-  findUserById(value: number): Observable<User> {
+  findUserByAccount(value: string): Observable<User> {
     return this._httpClient.get<User>(environment.userUrl + "/find/" + value);
   }
 
