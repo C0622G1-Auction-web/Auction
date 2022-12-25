@@ -73,6 +73,8 @@ export class ProductAddComponent implements OnInit {
   checkUser: string;
   text: string;
   listCheckImage: any[] = [];
+  initialPrice: any;
+  readFile: any[] = [];
 
   constructor(private _formBuilder: FormBuilder,
               private _productService: ProductService,
@@ -99,50 +101,12 @@ export class ProductAddComponent implements OnInit {
   }
 
   addNewProduct() {
-    if (this.formCreateProduct.valid && this.imgs.length != 0 && this.userFind != null) {
+    if (this.formCreateProduct.valid && this.userFind != null) {
+      this.formCreateProduct.patchValue({user: this.userFind.id})
       this.productDto = this.formCreateProduct.value;
       console.log(this.formCreateProduct.value)
-      this._productService.save(this.productDto).subscribe(data => {
-        if (this.imgs.length !== 0) {
-          for (let i = 0; i < this.imgs.length; i++) {
-            const image: ImgUrlProductDto = {
-              url: this.imgs[i],
-              product: data.id
-            };
-            this._imageProductService.create(image).subscribe(() => {
-            })
-          }
-        }
-        this._toast.success("Thêm mới sản phẩm thành công!");
-        this._route.navigateByUrl("/products");
-      });
-    } else {
-      this._toast.error("Thêm mới sản phẩm thất bại!");
-    }
-  }
-
-  findUserById(testNum) {
-    testNum.setAttribute('disabled', true);
-    this._userService.findUserById(testNum.value).subscribe(data => {
-      this.userFind = data;
-      this.formCreateProduct.patchValue({user: this.userFind.id})
-      this.checkUser = "Mã người đăng: " + this.userFind.id + "\n" + "Tên người đăng: " + this.userFind.firstName + " " + this.userFind.lastName;
-    }, error => {
-      this.userFind = null;
-      this.checkUser = "Không tìm thấy thông tin người đăng!"
-    })
-  }
-
-  showPreview(event: any) {
-    this.messageCreate = "Đang tải ảnh vui lòng đợi........";
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedFile = event.target.files;
-    }
-    if (this.selectedFile.length !== 0) {
-      for (let i = 0; i < this.selectedFile.length; i++) {
-        let selectedImage = this.selectedFile[i];
+      for (let i = 0; i < this.readFile.length; i++) {
+        let selectedImage = this.readFile[i];
         const n = Date.now();
         const filePath = `RoomsImages/${n}`;
         const fileRef = this._storage.ref(filePath);
@@ -156,16 +120,78 @@ export class ProductAddComponent implements OnInit {
         ).subscribe(() => {
         });
       }
+      setTimeout(() => {
+        this._productService.save(this.productDto).subscribe(data => {
+          if (this.imgs.length !== 0) {
+            for (let i = 0; i < this.imgs.length; i++) {
+              const image: ImgUrlProductDto = {
+                url: this.imgs[i],
+                product: data.id
+              };
+              this._imageProductService.create(image).subscribe(() => {
+              })
+            }
+          }
+          this._toast.success("Thêm mới sản phẩm thành công!");
+          this._route.navigateByUrl("/products");
+        });
+      }, 2000)
+    } else {
+      this._toast.error("Thêm mới sản phẩm thất bại!");
+    }
+  }
+
+  findUserByAccount(testNum) {
+    testNum.setAttribute('disabled', true);
+    this._userService.findUserByAccount(testNum.value).subscribe(data => {
+      this.userFind = data;
+      this.formCreateProduct.patchValue({user: this.userFind.account.username})
+      this.checkUser = "Mã người đăng: " + this.userFind.id + "\n" + "Tên người đăng: " + this.userFind.firstName + " " + this.userFind.lastName;
+    }, error => {
+      this.userFind = null;
+      this.checkUser = "Không tìm thấy thông tin người đăng!"
+    })
+  }
+
+  showPreview(event: any) {
+    this.messageCreate = '';
+    let files = event.target.files;
+    this.readFile = event.target.files;
+    if ((files.length + this.selectedFile.length) < 6) {
+      for (let file of files) {
+        if (file.size > 1048576) {
+          this.messageCreate = 'Dung lượng ảnh vượt quá 1Mb';
+          this.formCreateProduct.patchValue({imageProduct: []})
+          this.selectedFile = [];
+          break;
+        }
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.selectedFile.push(e.target.result);
+          console.log(this.selectedFile)
+        }
+        reader.readAsDataURL(file);
+      }
+    } else {
+      this.messageCreate = "Vui lòng không chọn quá 5 ảnh.";
+      this.formCreateProduct.patchValue({imageProduct: []})
+      this.selectedFile = [];
     }
   }
 
   deleteImageNew(index) {
-    this.imgs.splice(index, 1);
-    this._toast.error("Bạn đã xóa 1 ảnh!")
+    if (this.selectedFile.length == 1) {
+      this.selectedFile.splice(index, 1);
+      this._toast.error("Bạn đã xóa 1 ảnh!");
+      this.formCreateProduct.controls["imageProduct"].setValue([]);
+    } else {
+      this.selectedFile.splice(index, 1);
+      this._toast.error("Bạn đã xóa 1 ảnh!");
+    }
   }
 
   resetFindUserById(testNum) {
-    testNum.removeAttribute('disabled')
+    testNum.removeAttribute('disabled');
   }
 
 
@@ -181,13 +207,15 @@ export class ProductAddComponent implements OnInit {
       registerDay: [],
       priceStep: ["", [Validators.required]],
       category: ["", [Validators.required]],
-      user: ["", [Validators.required, Validators.pattern('\\d+')]]
+      user: ["", [Validators.required]]
     }, {validators: [checkStartTime, checkEndTime]});
   }
 
   resetForm(file) {
     this.ngOnInit();
-    this.imgs = [];
+    this.selectedFile = [];
     file.value = "";
+    this.checkUser = "";
+    this.messageCreate = '';
   }
 }
