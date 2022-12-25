@@ -34,11 +34,8 @@ a {
   font-size: 24px;
   text-align: right;
   color: #f51902;
-  position: absolute;
-  top: 184px;
-  right: 0;
-  left: 0;
   margin: 0;
+  padding-right: 8px;
   background: rgba(255, 189, 190, 0.27);
 
 }
@@ -105,8 +102,15 @@ a {
 }
 .sidebar__right::-webkit-scrollbar {
   display: none;
+  font-size: 20px;
 }
-
+.my__card__heading {
+  color: #FFFFFF;
+  padding: 4px 8px;
+  border-radius: 0 25px 0 0;
+  text-transform: capitalize;
+  background-color: #f3734c;
+}
 .filter {
   padding-top: 12px;
   width: 100%;
@@ -272,7 +276,7 @@ select::-ms-expand {
 .card__title {
   padding-bottom: 4px;
   color: #4d5154;
-  font-size: 14px !important;
+  font-size: 16px !important;
   overflow: hidden;
   -webkit-line-clamp: 2;
   display: -webkit-box;
@@ -294,17 +298,20 @@ select::-ms-expand {
 }
 
 .time, .timed {
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 16px;
   color: #e74c3c;
   display: flex;
+  font-weight: 700;
   justify-content: center;
+  align-items: center;
 }
-
 .product {
   position: relative;
 }
-
+.my__link:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
 .card-body {
  padding: 0 8px 8px 8px;
 }

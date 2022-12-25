@@ -25,6 +25,8 @@
           <li [routerLink]="['/cart']" *ngIf="checkLogin && accountRole != 'ROLE_ADMIN'" class="menu__item">
             <span class="menu__link" routerLink="/cart">
               <i class="fa-solid fa-cart-shopping"></i>
+              <p class="badge badge-light" style="position: relative;
+bottom: 12px; right: 6px">{{cartSize}}</p>
               Giỏ Hàng
             </span>
           </li>

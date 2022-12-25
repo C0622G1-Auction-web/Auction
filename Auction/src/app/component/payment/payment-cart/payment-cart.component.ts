@@ -23,7 +23,8 @@ export class PaymentCartComponent implements OnInit {
   total = 0;
   shipping = 49000;
   date = new Date();
-  shippingDate = this.date.setDate(this.date.getDate() + 5);
+  shippingNextDate = this.date.setDate(this.date.getDate() + 5);
+  shippingPreviousDate = this.date.setDate(this.date.getDate() - 3);
   currentUser: User;
 
   constructor(private _paymentService: PaymentService,

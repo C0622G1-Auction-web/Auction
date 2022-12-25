@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {User} from "../../model/user/user";
 import {TokenService} from "../../service/security/token.service";
 import {Router} from "@angular/router";
+import {PaymentService} from "../../service/payment/payment.service";
+import {PaymentDto} from "../../dto/payment-dto";
 
 @Component({
   selector: 'app-header',
@@ -14,14 +16,18 @@ export class HeaderComponent implements OnInit {
   checkLogin = false;
   accountRole: string;
   currentUser: User;
+  paymentList: PaymentDto[];
+  cartSize: number;
 
   constructor(
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private _paymentService: PaymentService
   ) {
   }
 
   ngOnInit(): void {
+
     if (this.tokenService.isLogged()) {
       this.checkLogin = true;
       this.currentUser = JSON.parse(this.tokenService.getUser());
@@ -32,6 +38,20 @@ export class HeaderComponent implements OnInit {
           this.accountRole = "ROLE_ADMIN"
         }
       }
+    }
+
+    this._paymentService.getPaymentList(String(this.currentUser?.id)).subscribe(data => {
+      this.paymentList = data;
+      if (this.paymentList != undefined) {
+        this.cartSize = this.paymentList.length;
+      }
+    }, err => {
+      console.log(err);
+    }, () => {
+      console.log('done');
+    });
+    if (this.paymentList === undefined) {
+      this.cartSize = 0;
     }
   }
 

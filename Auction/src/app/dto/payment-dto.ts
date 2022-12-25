@@ -13,6 +13,7 @@ export interface PaymentDto {
   productImage?: string;
   productName?: string;
   productPrice?: number;
+  productId?: number;
   totalBill?: number;
 }
 

@@ -10,6 +10,7 @@ const URL_API = `${environment.api_url_order_status}`;
 const API_URL_RECEIPT = `${environment.api_url_order_status}`;
 const API_URL_RECEIPT_1 = `${environment.api_url_order_status_1}`;
 const API_URL_SHIPPING = `${environment.api_url_shipping}`;
+const API_URL_PAYMENT = `${environment.api_url_payment}`;
 import {Injectable} from '@angular/core';
 import {PaymentAddressDto} from "../../dto/payment-address-dto";
 
@@ -78,6 +79,10 @@ export class PaymentService {
 
   updateShipDescription(payments: any[]): Observable<any> {
     return this._httpClient.post<any>(API_URL_SHIPPING, payments);
+  }
+
+  updatePaymentStatus(payments: any[]): Observable<any>{
+    return this._httpClient.post<any>(API_URL_PAYMENT, payments);
   }
 
 }

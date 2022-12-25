@@ -72,6 +72,7 @@ export const environment = {
   NQV_LOCK_ACCOUNT:'http://localhost:8080/api/v1/users/lockUser',
   NQV_GET_ACCOUNT_BY_ID_API: 'http://localhost:8080/api/v1/accounts/getAccountById',
   api_url_shipping: 'http://localhost:8080/api/v1/payments/update',
+  api_url_payment: 'http://localhost:8080/api/v1/payments/updates',
 };
 
 /*

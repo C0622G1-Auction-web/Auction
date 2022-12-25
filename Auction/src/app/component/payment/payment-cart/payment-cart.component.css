@@ -61,3 +61,6 @@ body{
   max-height: 1.8em;
   line-height: 1.8em;
 }
+.pointer {
+  cursor: pointer;
+}
