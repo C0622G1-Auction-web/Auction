@@ -145,7 +145,7 @@
 
               <input [readOnly]="auctionable === 1"
                      currencyMask formControlName="currentPrice"
-                     [options]="{ prefix: '',suffix :' đ',precision :2, thousands:'.', decimal :',',max:'999999999999',min:'0',allowNegative :false}"
+                     [options]="{prefix: '',suffix :' đ',precision :2, thousands:'.', decimal :',',max:'999999999999',min:'0',allowNegative :false}"
                      class="form-control w-100" [value]="rfAuction.value.currentPrice| currency" type="text"
                      style="font-size: 24px; font-weight: bold; text-align: right"
                      [ngClass]="rfAuction.errors?.checkAuctionPrice && rfAuction.controls.currentPrice.touched ?'is-invalid':''">
