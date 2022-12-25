@@ -178,13 +178,6 @@ export class AuctionProductAddComponent implements OnInit {
     );
   }
 
-  findUserById(value) {
-    this._userService.findUserById(value).subscribe((data) => {
-      this.userFind = data;
-      this.formCreateProduct.patchValue({ user: this.userFind.id });
-      console.log(this.userFind);
-    });
-  }
 
   showPreview(event: any) {
     this.messageImage = "Đang tải ảnh vui lòng đợi một lát";
