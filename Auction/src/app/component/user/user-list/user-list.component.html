@@ -1,52 +1,13 @@
 <div class="container-fluid" style="height: 100%">
 
   <div class="row">
-
-    <div class="col-lg-2 sidebar__left">
-      <div>
-        <nav>
-          <ul class="menu">
-            <li class="menu__item">
-              <a class="menu__link" routerLink="/home">
-                <i class="menu__icon fa fa-home"></i>
-                Trang chủ
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a class="menu__link" routerLink="/products">
-                <i class="menu__icon fa-solid fa-book"></i>
-                Quản lý sản phẩm
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a class="menu__link" routerLink="/user/list">
-                <i class="menu__icon fa-solid fa-user-pen"></i>
-                Quản lý nhân viên
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a class="menu__link" routerLink="/transaction">
-                <i class="menu__icon fa-solid fa-handshake"></i>
-                Quản lý giao dịch
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-
-    <div class="col-lg-10">
-      <h1 class="mt-5" style="text-align: center">Quản lý thành viên</h1>
+    <div class="col-lg-12">
+      <h1 class="mt-5" style="text-align: center">Quản Lý Thành Viên</h1>
       <hr class="mb-5">
-
       <div class="mt-2 row">
         <form *ngIf="rfSearch " [formGroup]="rfSearch"
               (ngSubmit)="goToPage(0)">
-          <div class="row" style="height: 70px">
+          <div class="row" >
             <div class="col-2">
 
               <div class="form-floating mb-4">
@@ -109,47 +70,58 @@
                   hạng:</label>
               </div>
             </div>
-            <div class="col-1 ">
-              <input class="btn btn-info myMT" type="submit" [disabled]="!rfSearch.valid" value="Lọc kết quả"/>
-              <input class="btn btn-success myMT " type="button" value="Hoàn tác lọc" (click)="resetFormAndData()"/>
+            <div class="col-2 ">
+              <button type="submit" class="btn btn-primary myMT btn0" data-bs-toggle="modal"
+                      [disabled]="!rfSearch.valid" >
+                <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả
+              </button>
             </div>
           </div>
         </form>
 
-        <div class="row">
+        <div class="row" style="height: 50px">
+          <div class="col-1">
+            <button class="btn btn-primary btn0" data-bs-toggle="modal" routerLink="/user/add">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
           <div class="col-2">
-            <button class="btn btn-primary" data-bs-toggle="modal"
+            <button class="btn btn-primary btn0" data-bs-toggle="modal"
                     (click)="sendToUnlockGroupModal()" data-bs-target="#deleteGroupModal"
                     [disabled]="unlockIds.length == 0">
               <i class="fa-solid fa-unlock"></i> Mở khoá
             </button>
           </div>
           <div class="col-2">
-            <button class="btn btn-danger" data-bs-toggle="modal" (click)="lockUser()">
-
+            <button class="btn btn-danger btn0 " data-bs-toggle="modal" (click)="lockUser()"
+                    [disabled]="unlockIds.length == 0" >
               <i class="fa-solid fa-lock"></i> Khoá
             </button>
           </div>
+          <div class="col-5">
+          </div>
           <div class="col-2">
-            <button class="btn btn-primary" data-bs-toggle="modal" routerLink="/user/add">
-              <i class="fa-solid fa-user-plus"></i> Thêm mới
+            <button class="btn btn-success" data-bs-toggle="modal"
+                    style="margin-left: 19px"
+                    [disabled]="!rfSearch.valid" (click)="resetFormAndData()" >
+              <i class="fa-solid fa-rotate-left"></i> Hoàn tác lọc
             </button>
           </div>
         </div>
-
         <div class=" mt-4 row container" style="padding-left: 2%;">
           <table class="  mt-2 table table-striped table-bordered">
             <thead>
             <tr>
               <th>STT</th>
               <th>Tên thành viên</th>
-              <th> Địa chỉ</th>
+              <th style="width: 268px"> Địa chỉ</th>
               <th>Xếp hạng</th>
               <th>Email</th>
               <th>SĐT</th>
-              <th width="111px">Tính năng</th>
+              <th> Sửa </th>
+              <th width="131px"> Trạng thái </th>
               <th class="text-center">
-                <input type="checkbox" (click)="addAllToUnlock()">
+                <input type="checkbox" (click)="addAllToUnlock()" >
               </th>
             </tr>
             </thead>
@@ -162,22 +134,21 @@
               <td>{{x.email}}</td>
               <td>{{x.phone}}</td>
               <td>
-                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#modalDelete"
-                        [routerLink]="['/user/edit',x.id]"><i class="fa-solid fa-pen-to-square"
-                                                              style="color: darkgoldenrod"></i>
+                <a  [routerLink]="['/user/edit',x.id]">
+                  <i class="fa-solid fa-pen-to-square"
+                     style="color: darkgoldenrod ; padding-left: 20px"></i>
+                </a>
+              </td>
+              <td>
+                <button *ngIf="!x.account.statusLock ; else no" type="button" class="btn "
+                        data-bs-toggle="modal"  data-bs-target="#modalUnlock"
+                        (click)="modalById(x.id)"><p style="color: red">Đang khoá</p>
                 </button>
-                |
-                <button *ngIf="x.account.statusLock ; else no" type="button" class="btn "
-                        data-bs-toggle="modal" data-bs-target="#modalLock"
-                        (click)="modalById(x.id)"><i style="color: red" class="fa-solid fa-lock "> </i>
-                </button>
-
                 <ng-template #no>
-                  <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#modalUnlock"
-                          (click)="modalById(x.id)"><i style="color: #0088ff" class="fa-solid fa-unlock"></i>
+                  <button type="button" class="btn btn0 " data-bs-toggle="modal"
+                          (click)="modalById1(x.id)"><p style="color: #0088ff">Bình thường</p>
                   </button>
                 </ng-template>
-
               </td>
               <td class="text-center">
                 <input class="delete-checkbox" type="checkbox" [checked]="unlockIds.includes(x.id)"

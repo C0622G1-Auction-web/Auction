@@ -215,120 +215,133 @@
         <div class="tab-pane fade mb-3 " id="pills-contact" role="tabpanel"
              aria-labelledby="pills-contact-tab" tabindex="0">
           <!--          New Content-->
-          <div class="container-fluid mb-3" id="content">
+          <div class="container mb-3" id="content">
             <div class="row ">
-              <div class="row">
-                <div class="col-12 mt-3" style="text-align: center">
-                  <h1>HÓA ĐƠN</h1>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6 mt-2" style="border: 1px dotted #250303; text-align: center">
-                  <p>Mã vận đơn: RA0126D{{paymentList[0].id}}</p>
-                </div>
-                <div class="col-6 mt-2" style="border: 1px dotted #250303; text-align: center">
-                  <p>Mã vận đơn: RA0126D{{paymentList[0].id}}</p>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-6" style="border: 1px dotted #250303;">
-                  <strong>Từ: </strong> <br> Đấu giá C06 Company <br> 280 Trần Hưng Đạo, Hải Châu, TP. Đà Nẵng.
-                </div>
-                <div class="col-6 " style="border: 1px dotted #250303;">
-                  <strong>Đến: </strong> <br> {{paymentList[0].firstName + " " + paymentList[0].lastName }} <br>
-                  {{paymentList[0].detailAddress + ", " + paymentList[0].district + ", " + paymentList[0].city + ", " +
-                paymentList[0].country}}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 " style="text-align: center; border: 1px dotted #250303;">
-                  <h2>180-G-05-{{paymentList[0].id}}</h2>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 " style="border: 1px dotted #250303;">
-                  <table class="table mt-3 mb-3 ms-0">
-                    <thead>
-                    <tr class="mt-3 mb-3 ms-0">
-                      <th>Sản phẩm</th>
-                      <th style="text-align: center">Số lượng</th>
-                      <th style="text-align: right">Giá/ Từng phần</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="mt-3 mb-3" *ngFor="let x of paymentList">
-                      <td>{{x.productName}}</td>
-                      <td style="text-align: center;">1</td>
-                      <td style="text-align: right"> {{x.productPrice | number}}<sup><i
-                        class="fa-solid fa-dong-sign"></i></sup>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2">Giao hàng</td>
-                      <td style="text-align: right">49,000<sup><i class="fa-solid fa-dong-sign"></i></sup></td>
-                    </tr>
-                    <tr *ngIf="paymentBill">
-                      <td><strong>Tổng</strong></td>
-                      <td style="text-align: center;">{{paymentList.length}}</td>
-                      <td style="text-align: right"><strong> {{paymentBill | number}}<sup><i
-                        class="fa-solid fa-dong-sign"></i></sup>
-                      </strong></td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 " style="border: 1px dotted #250303;">
-                  <p>Nếu bạn không chuyển khoản số tiền chính xác, hoặc kết hợp nhiều đơn hàng, vui lòng
-                    gửi bản sao phiếu thanh toán cùng số đơn hàng (ORD00A{{paymentList[0].id}}) tới</p>
-                  <p><i class="fa-solid fa-envelope"></i> Email: support@codegym.com | <i
-                    class="fa-brands fa-facebook"></i> Facebook</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 " style="border: 1px dotted #250303;">
-                  <div class="mt-2 mb-2 "><strong>Kiểm tra tên sản phẩm và đối chiếu Mã vận đơn/ Mã đơn hàng trên ứng
-                    dụng
-                    Auction Web trước khi nhận hàng (Lưu ý: Một số sản phẩm có thể bị ẩn do danh sách quá dài)</strong>
-                  </div>
-                  <div class="mt-2 mb-2 ">Để nhận được xử lý đơn hàng nhanh nhất vui lòng điền số hóa đơn hoặc tài
-                    khoản trong mục "reference" khi chuyển khoản hoặc có thể liên hệ qua hotline 090.999.999
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12 mt-3" style="text-align: center">
+                    <h1>HÓA ĐƠN</h1>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-8 " style="border: 1px dotted #250303;">
-                  - Đơn hàng đã được thanh toán thông qua PAYPAL <br>- Đơn vị vận chuyển ECONOMY DELIVERY <br>- Khách
-                  hàng
-                  theo đõi mã vận đơn RA0126D{{paymentList[0].id}} để theo dõi quá trình vận chuyển của đơn hàng <br>-
-                  Chỉ định giao hàng: Không đồng kiểm. Chuyển hoàn sau 3 lần phát. Lưu kho tối đa 5 ngày
-                </div>
-                <div class="col-4 " style="border: 1px dotted #250303;">
-                  Khối lượng tối đa: 810 g <br> <strong>Chữ ký người nhận</strong><br>(Xác nhận hàng nguyeen vẹn, không
-                  móp/méo, bể/vỡ)
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6 " style="border: 1px dotted #250303;">
-                  <div class="mt-3 ps-3 p-0 mb-3">
-                    <h6>Chi tiết đơn hàng</h6>
-                    <p>Thanh toán chuyển tới: Asia Commerical Bank</p>
-                    <p>Số tài khoản: 244972449</p>
+                <div class="row">
+                  <div class="col-6" style="border: 1px dotted #250303; text-align: center">
+                    <div class="mt-3 mb-3">
+                      Mã vận đơn: RA0126D{{paymentList[0].id}}
+                    </div>
+                  </div>
+                  <div class="col-6 " style="border: 1px dotted #250303; text-align: center">
+                    <div class="mt-3 mb-3">
+                      Mã đơn hàng: ORD00A{{paymentList[0].id}}
+                    </div>
                   </div>
                 </div>
-                <div class="col-6 " style="border: 1px dotted #250303;">
-                  <div class="mt-3 ps-3 pe-3 p-0 mb-3">
-                    <h6>Thông tin khác</h6>
-                    <p>Giấy phép DKKD số: 2090130</p>
-                    <p>Hỗ trợ khách hàng: 090.999.999</p>
-                    <p>Liên hệ phòng kinh doanh: <a href="#">support@codegym.com</a></p>
+                <div class="row">
+                  <div class="col-6 " style="border: 1px dotted #250303;">
+                    <div class="mt-3 mb-3">
+                      <strong>Từ: </strong> <br> Đấu giá C06 Company <br> 280 Trần Hưng Đạo, Hải Châu, TP. Đà Nẵng.
+                    </div>
+                  </div>
+                  <div class="col-6 " style="border: 1px dotted #250303;">
+                    <div class="mt-3 mb-3">
+                      <strong>Đến: </strong> <br> {{paymentList[0].firstName + " " + paymentList[0].lastName }} <br>
+                      {{paymentList[0].detailAddress + ", " + paymentList[0].district + ", " + paymentList[0].city + ", " +
+                    paymentList[0].country}}
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 " style="text-align: center; border: 1px dotted #250303;">
+                    <div class="mt-3 mb-3">
+                      <h2>022-G-{{paymentList.length}}-{{paymentList[0].id}}</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 " style="border: 1px dotted #250303;">
+                    <table class="table mt-3 mb-3">
+                      <thead>
+                      <tr class="mt-3 mb-3 ms-0">
+                        <th>Sản phẩm</th>
+                        <th style="text-align: center">Số lượng</th>
+                        <th style="text-align: right">Giá/ Từng phần</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr class="mt-3 mb-3" *ngFor="let x of paymentList">
+                        <td>{{x.productName}}</td>
+                        <td style="text-align: center;">1</td>
+                        <td style="text-align: right"> {{x.productPrice | number}}<sup><i
+                          class="fa-solid fa-dong-sign"></i></sup>
+                        </td>
+                      </tr>
+                      <tr class="mt-3 mb-3" >
+                        <td colspan="2">Giao hàng</td>
+                        <td style="text-align: right">49,000<sup><i class="fa-solid fa-dong-sign"></i></sup></td>
+                      </tr>
+                      <tr class="mt-3 mb-3" *ngIf="paymentBill">
+                        <td><strong>Tổng</strong></td>
+                        <td style="text-align: center;">{{paymentList.length}}</td>
+                        <td style="text-align: right"><strong> {{paymentBill | number}}<sup><i
+                          class="fa-solid fa-dong-sign"></i></sup>
+                        </strong></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 " style="border: 1px dotted #250303;">
+                    <div class="mt-3 mb-3" style="text-align: center">
+                      Nếu bạn không chuyển khoản số tiền chính xác, hoặc kết hợp nhiều đơn hàng, vui lòng
+                      gửi bản sao phiếu thanh toán cùng số đơn hàng (ORD00A{{paymentList[0].id}}) tới
+                    </div>
+                    <div class="mt-3 mb-3" style="text-align: center">
+                      <i class="fa-solid fa-envelope"></i> Email: support@codegym.com | <i
+                      class="fa-brands fa-facebook"></i> Facebook
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 " style="border: 1px dotted #250303;">
+                    <div class="mt-3 mb-3 " style="text-align: center"><strong>Kiểm tra tên sản phẩm và đối chiếu Mã vận đơn/ Mã đơn hàng trên ứng
+                      dụng Đấu giá C06 trước khi nhận hàng <br>(Lưu ý: Một số sản phẩm có thể bị ẩn do danh sách quá dài)</strong>
+                    </div>
+                    <div class="mt-3 mb-3 " style="text-align: center">Để nhận được xử lý đơn hàng nhanh nhất vui lòng điền số hóa đơn hoặc tài
+                      khoản trong mục "reference" khi chuyển khoản hoặc có thể liên hệ qua hotline 090.999.999
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-7 " style="border: 1px dotted #250303;">
+                    <div class="mt-3 mb-3">
+                      Đơn hàng đã được thanh toán thông qua PAYPAL <br>Đơn vị vận chuyển ECONOMY DELIVERY <br>Khách
+                      hàng theo đõi mã vận đơn RA0126D{{paymentList[0].id}} để theo dõi quá trình vận chuyển của đơn hàng <br>Chỉ định giao hàng: Không đồng kiểm. Chuyển hoàn sau 3 lần phát. Lưu kho tối đa 5 ngày
+                    </div>
+                  </div>
+                  <div class="col-5 " style="border: 1px dotted #250303;">
+                    <div class="mt-4 mb-3" style="text-align: center">
+                      <strong>Chữ ký người nhận</strong><br>(Xác nhận hàng nguyên vẹn, không
+                      móp/méo, bể/vỡ)
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 " style="border: 1px dotted #250303;">
+                    <div class="mt-3 mb-3">
+                      <strong>Chi tiết đơn hàng</strong><br>Thanh toán chuyển tới: Asia Commerical Bank <br>Số tài khoản: 244972449
+                    </div>
+                  </div>
+                  <div class="col-6 " style="border: 1px dotted #250303;">
+                    <div class="mt-3 mb-3">
+                      <strong>Thông tin khác</strong><br>Giấy phép DKKD số: 2090130 <br>Hỗ trợ khách hàng: 090.999.999 <br>Liên hệ phòng kinh doanh: <a href="#">daugiac06@support.com</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <!--          button print-->
           <div class="row" style="display: flex; justify-content: center;  align-items: center">
             <button type="button" class="btn btn-primary"
                     style="background-color: #d53422;border-color: #d53422; width: 150px;"
@@ -339,6 +352,8 @@
         </div>
       </div>
     </div>
+
+    <!--    Card about support-->
     <div class="col-lg-3 col-md-12 col-sm-12 mt-5 ">
       <div class="row">
         <div class="card mb-3 px-0" style="border-color: #fa6132;">
@@ -368,119 +383,135 @@
   <div class="modal-dialog">
     <div class="modal-content" style="border-color: #fff;">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" style="margin-left: 200px" id="exampleModalLabel">Bạn Có Muốn In Hóa Đơn
+        <h1 class="modal-title fs-5" style="margin-left: 250px" id="exampleModalLabel">Bạn Có Muốn In Hóa Đơn
           Không?</h1>
       </div>
       <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 mt-3" style="text-align: center">
-              <h1>HÓA ĐƠN</h1>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6 mt-2" style="border: 1px dotted #250303; text-align: center">
-              <p>Mã vận đơn: RA0126D{{paymentList[0].id}}</p>
-            </div>
-            <div class="col-6 mt-2" style="border: 1px dotted #250303; text-align: center">
-              <p>Mã vận đơn: RA0126D{{paymentList[0].id}}</p>
+        <div class="container-fluid">
+          <div class="row ">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12 mt-3" style="text-align: center">
+                  <h1>HÓA ĐƠN</h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6" style="border: 1px dotted #250303; text-align: center">
+                  <div class="mt-3 mb-3">
+                    Mã vận đơn: RA0126D{{paymentList[0].id}}
+                  </div>
+                </div>
+                <div class="col-6 " style="border: 1px dotted #250303; text-align: center">
+                  <div class="mt-3 mb-3">
+                    Mã đơn hàng: ORD00A{{paymentList[0].id}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 " style="border: 1px dotted #250303;">
+                  <div class="mt-3 mb-3">
+                    <strong>Từ: </strong> <br> Đấu giá C06 Company <br> 280 Trần Hưng Đạo, Hải Châu, TP. Đà Nẵng.
+                  </div>
+                </div>
+                <div class="col-6 " style="border: 1px dotted #250303;">
+                  <div class="mt-3 mb-3">
+                    <strong>Đến: </strong> <br> {{paymentList[0].firstName + " " + paymentList[0].lastName }} <br>
+                    {{paymentList[0].detailAddress + ", " + paymentList[0].district + ", " + paymentList[0].city + ", " +
+                  paymentList[0].country}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 " style="text-align: center; border: 1px dotted #250303;">
+                  <div class="mt-3 mb-3">
+                    <h2>022-G-{{paymentList.length}}-{{paymentList[0].id}}</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 " style="border: 1px dotted #250303;">
+                  <table class="table mt-3 mb-3">
+                    <thead>
+                    <tr class="mt-3 mb-3 ms-0">
+                      <th>Sản phẩm</th>
+                      <th style="text-align: center">Số lượng</th>
+                      <th style="text-align: right">Giá/ Từng phần</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="mt-3 mb-3" *ngFor="let x of paymentList">
+                      <td>{{x.productName}}</td>
+                      <td style="text-align: center;">1</td>
+                      <td style="text-align: right"> {{x.productPrice | number}}<sup><i
+                        class="fa-solid fa-dong-sign"></i></sup>
+                      </td>
+                    </tr>
+                    <tr class="mt-3 mb-3" >
+                      <td colspan="2">Giao hàng</td>
+                      <td style="text-align: right">49,000<sup><i class="fa-solid fa-dong-sign"></i></sup></td>
+                    </tr>
+                    <tr class="mt-3 mb-3" *ngIf="paymentBill">
+                      <td><strong>Tổng</strong></td>
+                      <td style="text-align: center;">{{paymentList.length}}</td>
+                      <td style="text-align: right"><strong> {{paymentBill | number}}<sup><i
+                        class="fa-solid fa-dong-sign"></i></sup>
+                      </strong></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 " style="border: 1px dotted #250303;">
+                  <div class="mt-3 mb-3" style="text-align: center">
+                    Nếu bạn không chuyển khoản số tiền chính xác, hoặc kết hợp nhiều đơn hàng, vui lòng
+                    gửi bản sao phiếu thanh toán cùng số đơn hàng (ORD00A{{paymentList[0].id}}) tới
+                  </div>
+                  <div class="mt-3 mb-3" style="text-align: center">
+                    <i class="fa-solid fa-envelope"></i> Email: support@codegym.com | <i
+                    class="fa-brands fa-facebook"></i> Facebook
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 " style="border: 1px dotted #250303;">
+                  <div class="mt-3 mb-3 " style="text-align: center"><strong>Kiểm tra tên sản phẩm và đối chiếu Mã vận đơn/ Mã đơn hàng trên ứng
+                    dụng Đấu giá C06 trước khi nhận hàng <br>(Lưu ý: Một số sản phẩm có thể bị ẩn do danh sách quá dài)</strong>
+                  </div>
+                  <div class="mt-3 mb-3 " style="text-align: center">Để nhận được xử lý đơn hàng nhanh nhất vui lòng điền số hóa đơn hoặc tài
+                    khoản trong mục "reference" khi chuyển khoản hoặc có thể liên hệ qua hotline 090.999.999
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7 " style="border: 1px dotted #250303;">
+                  <div class="mt-3 mb-3">
+                    Đơn hàng đã được thanh toán thông qua PAYPAL <br>Đơn vị vận chuyển ECONOMY DELIVERY <br>Khách
+                    hàng theo đõi mã vận đơn RA0126D{{paymentList[0].id}} để theo dõi quá trình vận chuyển của đơn hàng <br>Chỉ định giao hàng: Không đồng kiểm. Chuyển hoàn sau 3 lần phát. Lưu kho tối đa 5 ngày
+                  </div>
+                </div>
+                <div class="col-5 " style="border: 1px dotted #250303;">
+                  <div class="mt-4 mb-3" style="text-align: center">
+                    <strong>Chữ ký người nhận</strong><br>(Xác nhận hàng nguyên vẹn, không
+                    móp/méo, bể/vỡ)
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 " style="border: 1px dotted #250303;">
+                  <div class="mt-3 mb-3">
+                    <strong>Chi tiết đơn hàng</strong><br>Thanh toán chuyển tới: Asia Commerical Bank <br>Số tài khoản: 244972449
+                  </div>
+                </div>
+                <div class="col-6 " style="border: 1px dotted #250303;">
+                  <div class="mt-3 mb-3">
+                    <strong>Thông tin khác</strong><br>Giấy phép DKKD số: 2090130 <br>Hỗ trợ khách hàng: 090.999.999 <br>Liên hệ phòng kinh doanh: <a href="#">daugiac06@support.com</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-6" style="border: 1px dotted #250303;">
-              <strong>Từ: </strong> <br> Đấu giá C06 Company <br> 280 Trần Hưng Đạo, Hải Châu, TP. Đà Nẵng.
-            </div>
-            <div class="col-6 " style="border: 1px dotted #250303;">
-              <strong>Đến: </strong> <br> {{paymentList[0].firstName + " " + paymentList[0].lastName }} <br>
-              {{paymentList[0].detailAddress + ", " + paymentList[0].district + ", " + paymentList[0].city + ", " +
-            paymentList[0].country}}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 " style="text-align: center; border: 1px dotted #250303;">
-              <h2>180-G-05-{{paymentList[0].id}}</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 " style="border: 1px dotted #250303;">
-              <table class="table mt-3 mb-3 ms-0">
-                <thead>
-                <tr class="mt-3 mb-3 ms-0">
-                  <th>Sản phẩm</th>
-                  <th style="text-align: center">Số lượng</th>
-                  <th style="text-align: right">Giá/ Từng phần</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="mt-3 mb-3" *ngFor="let x of paymentList">
-                  <td>{{x.productName}}</td>
-                  <td style="text-align: center;">1</td>
-                  <td style="text-align: right"> {{x.productPrice | number}}<sup><i
-                    class="fa-solid fa-dong-sign"></i></sup>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">Giao hàng</td>
-                  <td style="text-align: right">49,000<sup><i class="fa-solid fa-dong-sign"></i></sup></td>
-                </tr>
-                <tr *ngIf="paymentBill">
-                  <td><strong>Tổng</strong></td>
-                  <td style="text-align: center;">{{paymentList.length}}</td>
-                  <td style="text-align: right"><strong> {{paymentBill | number}}<sup><i
-                    class="fa-solid fa-dong-sign"></i></sup>
-                  </strong></td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 " style="border: 1px dotted #250303;">
-              <p><strong>Nếu bạn không chuyển khoản số tiền chính xác, hoặc kết hợp nhiều đơn hàng, vui lòng
-                gửi bản sao phiếu thanh toán cùng số đơn hàng (ORD00A{{paymentList[0].id}}) tới</strong></p>
-              <p><i class="fa-solid fa-envelope"></i> Email: support@codegym.com | <i
-                class="fa-brands fa-facebook"></i> Facebook</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12 " style="border: 1px dotted #250303;">
-              <div class="mt-2 mb-2 "><strong>Kiểm tra tên sản phẩm và đối chiếu Mã vận đơn/ Mã đơn hàng trên ứng dụng
-                Auction Web trước khi nhận hàng (Lưu ý: Một số sản phẩm có thể bị ẩn do danh sách quá dài)</strong>
-              </div>
-              <div class="mt-2 mb-2 ">Để nhận được xử lý đơn hàng nhanh nhất vui lòng điền số hóa đơn hoặc tài
-                khoản trong mục "reference" khi chuyển khoản hoặc có thể liên hệ qua hotline 090.999.999
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8 " style="border: 1px dotted #250303;">
-              - Đơn hàng đã được thanh toán thông qua PAYPAL <br>- Đơn vị vận chuyển ECONOMY DELIVERY <br>- Khách hàng
-              theo đõi mã vận đơn RA0126D{{paymentList[0].id}} để theo dõi quá trình vận chuyển của đơn hàng <br>- Chỉ
-              định giao hàng: Không đồng kiểm. Chuyển hoàn sau 3 lần phát. Lưu kho tối đa 5 ngày
-            </div>
-            <div class="col-4 " style="border: 1px dotted #250303;">
-              Khối lượng tối đa: 810 g <br> <strong>Chữ ký người nhận</strong><br>(Xác nhận hàng nguyeen vẹn, không
-              móp/méo, bể/vỡ)
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6 " style="border: 1px dotted #250303;">
-              <div class="mt-3 ps-3 p-0 mb-3">
-                <h6>Chi tiết đơn hàng</h6>
-                <p>Thanh toán chuyển tới: Asia Commerical Bank</p>
-                <p>Số tài khoản: 244972449</p>
-              </div>
-            </div>
-            <div class="col-6 " style="border: 1px dotted #250303;">
-              <div class="mt-3 ps-3 pe-3 p-0 mb-3">
-                <h6>Thông tin khác</h6>
-                <p>Giấy phép DKKD số: 2090130</p>
-                <p>Hỗ trợ khách hàng: 090.999.999</p>
-                <p>Liên hệ phòng kinh doanh: <a href="#">support@codegym.com</a></p>
-              </div>
-            </div>
-          </div>
         </div>
 
       </div>
@@ -493,4 +524,3 @@
     </div>
   </div>
 </div>
-

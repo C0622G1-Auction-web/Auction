@@ -98,21 +98,27 @@ export class TransactionComponent implements OnInit {
   addAllToDelete() {
     this.checkedAll = true;
     for (let value of this.pageTransaction.content) {
-      if (!this.deleteIds.includes(value.paymentId)) {
-        this.checkedAll = false;
-        break;
+      if (value.paymentStatus == 0 && value.deleteStatus == 0) {
+        if (!this.deleteIds.includes(value.paymentId)) {
+          this.checkedAll = false;
+          break;
+        }
       }
     }
     if (this.checkedAll) {
       for (let value of this.pageTransaction.content) {
-        const index = this.deleteIds.indexOf(value.paymentId, 0);
-        this.deleteIds.splice(index, 1);
+        if (value.paymentStatus == 0 && value.deleteStatus == 0) {
+          const index = this.deleteIds.indexOf(value.paymentId, 0);
+          this.deleteIds.splice(index, 1);
+        }
       }
     } else {
       for (let value of this.pageTransaction.content) {
-        const index = this.deleteIds.indexOf(value.paymentId, 0);
-        if (index == -1) {
-          this.deleteIds.push(value.paymentId);
+        if (value.paymentStatus == 0 && value.deleteStatus == 0) {
+          const index = this.deleteIds.indexOf(value.paymentId, 0);
+          if (index == -1) {
+            this.deleteIds.push(value.paymentId);
+          }
         }
       }
     }

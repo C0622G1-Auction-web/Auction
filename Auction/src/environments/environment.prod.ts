@@ -55,6 +55,7 @@ export const environment = {
   NQV_LOCK_ACCOUNT:apiUrl + '/api/v1/users/lockUser',
   NQV_GET_ACCOUNT_BY_ID_API: apiUrl + '/api/v1/accounts/getAccountById',
   api_url_payment: apiUrl + '/api/v1/payments/updates',
+  URL_API_GETNOFICATION_BY_USER: apiUrl +'/api/v1/nofications',
   LOGIN_API: apiUrl + '/api/auth/login',
   GOOGLE_LOGIN_API: apiUrl + '/api/auth/google',
   DIA_GIOI_VIETNAM_API: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',

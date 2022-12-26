@@ -1,42 +1,6 @@
 <div class="container-fluid" style="background-color: #eee  ;height: 100vh">
   <div class="row">
-
-    <div class="col-lg-2 sidebar__left" style="height: 100vh">
-      <nav>
-        <ul class="menu">
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa fa-home"></i>
-              Trang chủ
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa-solid fa-book"></i>
-              Quản lý sản phẩm
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa-solid fa-user-pen"></i>
-              Quản lý nhân viên
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a class="menu__link" href="#">
-              <i class="menu__icon fa-solid fa-handshake"></i>
-              Quản lý giao dịch
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="container col-10" style="width: 75%">
+    <div class="container col-12" style="width: 75%">
       <div class="borderFull">
         <div class="row" style="padding:32px 0">
           <div class="profile row" style="background-color: white;border-radius: 20px">
@@ -135,8 +99,6 @@
                                (rfUser.controls['birthDay'].errors ? 'is-invalid' : 'is-valid') : '' ">
                         <label for="floatingDateOfBirth">Ngày sinh</label>
                       </div>
-                      <!--                      <span style="z-index: 2" class="input-group-text" id="basic-addon5"><i-->
-                      <!--                        class="fa-regular fa-calendar"></i></span>-->
                     </div>
                     <div *ngIf="rfUser.controls['birthDay'].hasError('required')
                              && rfUser.controls['birthDay'].touched" style="color: red">
@@ -199,67 +161,75 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-6">
-                    <div class="form-floating mt-3">
-                      <input *ngIf="status ==0; else city1" type="text" class="form-control" id="city1" required
-                             formControlName="city" (click)="changStatusCity1()"
-                             [ngClass]="(rfUser.controls['email'].touched) ?
-                               (rfUser.controls['email'].errors ? 'is-invalid' : 'is-valid') : '' ">
-                      <label for="city1">Tỉnh/Thành :</label>
-                      <ng-template #city1>
-                        <select formControlName="city"  (change)="selectCity()"
-                                class="form-control" id="city"
-                                aria-label=".form-select-sm">
-                          <option value="">Chọn Tỉnh/Thành</option>
-                          <option *ngFor="let x of cities" [ngValue]="x.id">{{x.name}}</option>
-                        </select>
-                        <label class="d-flex justify-content-start"
-                               for="city">Tỉnh/Thành :</label>
-                        <div *ngIf="rfUser.controls['city'].hasError('required')
+                    <div class=" input-group mt-3">
+                      <div class="form-floating flex-grow-1">
+                        <input *ngIf="status ==0; else city1" type="text" class="form-control" id="city1" required
+                               formControlName="city" (click)="changStatusCity1()"
+                               [ngClass]="(rfUser.controls['city'].touched) ?
+                               (rfUser.controls['city'].errors ? 'is-invalid' : 'is-valid') : '' ">
+                        <label for="city1">Tỉnh/Thành :</label>
+                        <ng-template #city1>
+                          <select formControlName="city" (change)="selectCity()"
+                                  class="form-control" id="city"
+                                  aria-label=".form-select-sm">
+                            <option value="">Chọn Tỉnh/Thành</option>
+                            <option *ngFor="let x of cities" [ngValue]="x.id">{{x.name}}</option>
+                          </select>
+                          <label class="d-flex justify-content-start"
+                                 for="city">Tỉnh/Thành :</label>
+
+                        </ng-template>
+                      </div>
+                      <span class="input-group-text" id="basic-addon10">
+                        <i class="fa-solid fa-address-card"></i></span>
+                    </div>
+                    <div *ngIf="rfUser.controls['city'].hasError('required')
                              && rfUser.controls['city'].touched" style="color: red">
-                          Tỉnh/Thành không được bỏ trống.
-                        </div>
-                      </ng-template>
+                      Tỉnh/Thành không được bỏ trống.
                     </div>
                   </div>
+
                   <div class="col-lg-6">
-                    <div class="form-floating mt-3">
-                      <input *ngIf="status == 0; else district1" type="text" class="form-control" id="district1"
-                             required
-                             formControlName="district" (click)="changStatusDistrict1()"
-                             value="{{rfUser.value.district}}"
-                             [ngClass]="(rfUser.controls['district'].touched) ?
+                    <div class=" input-group mt-3">
+                      <div class="form-floating flex-grow-1">
+                        <input *ngIf="status == 0; else district1" type="text" class="form-control" id="district1"
+                               required
+                               formControlName="district" (click)="changStatusDistrict1()"
+                               [ngClass]="(rfUser.controls['district'].touched) ?
                                (rfUser.controls['district'].errors ? 'is-invalid' : 'is-valid') : '' ">
-                      <label for="district1">Huyện/Quận :</label>
-                      <ng-template #district1>
-                        <select formControlName="district" (change)="selectDistrict()"
-                                class="form-control" id="district"
-                                aria-label=".form-select-sm">
-                          <option value="">Chọn Huyện/Quận</option>
-                          <option *ngFor="let x of districts" [ngValue]="x.id">{{x.name}}</option>
-                        </select>
-                        <label class="d-flex justify-content-start"
-                               for="district">Huyện/Quận :</label>
-                        <div *ngIf="rfUser.controls['district'].hasError('required') &&
+                        <label for="district1">Huyện/Quận :</label>
+                        <ng-template #district1>
+                          <select formControlName="district" (change)="selectDistrict()"
+                                  class="form-control" id="district"
+                                  aria-label=".form-select-sm">
+                            <option value="">Chọn Huyện/Quận</option>
+                            <option *ngFor="let x of districts" [ngValue]="x.id">{{x.name}}</option>
+                          </select>
+                          <label class="d-flex justify-content-start"
+                                 for="district">Huyện/Quận :</label>
+
+                        </ng-template>
+                      </div>
+                      <span class="input-group-text" id="basic-addon11">
+                        <i class="fa-regular fa-address-book"></i></span>
+                    </div>
+                    <div *ngIf="rfUser.controls['district'].hasError('required') &&
                               rfUser.controls['district'].touched" style="color: red">
-                          Huyện/Quận thành không được bỏ trống.
-                        </div>
-                      </ng-template>
+                      Huyện/Quận thành không được bỏ trống.
                     </div>
                   </div>
+
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-5 ">
-
-                    <div class="form-floating ">
-                      <div class="form-floating mt-3">
+                  <div class="col-lg-6">
+                    <div class=" input-group mt-3">
+                      <div class="form-floating flex-grow-1">
                         <input *ngIf="status ==0 ; else town1" type="text" class="form-control" id="town1" required
                                formControlName="town" (click)="changStatusTown1()"
-
-                               [ngClass]="(rfUser.controls['email'].touched) ?
-                               (rfUser.controls['email'].errors ? 'is-invalid' : 'is-valid') : '' ">
+                               [ngClass]="(rfUser.controls['town'].touched) ?
+                               (rfUser.controls['town'].errors ? 'is-invalid' : 'is-valid') : '' ">
                         <label for="town1">Xã/Phường :</label>
-
                         <ng-template #town1>
                           <select formControlName="town" (change)="selectWard()"
                                   class="form-control" id="ward"
@@ -269,16 +239,18 @@
                           </select>
                           <label class="d-flex justify-content-start"
                                  for="ward">Xã/Phường :</label>
-                          <div *ngIf="rfUser.controls['town'].hasError('required') &&
-                     rfUser.controls['town'].touched" style="color: red">
-                            Xã/Phường thành không được bỏ trống.
-                          </div>
-                        </ng-template>
 
+                        </ng-template>
                       </div>
+                      <span class="input-group-text" id="basic-addon0"><i
+                        class="fa-solid fa-location-dot"></i></span>
+                    </div>
+                    <div *ngIf="rfUser.controls['town'].hasError('required') &&
+                     rfUser.controls['town'].touched" style="color: red">
+                      Xã/Phường thành không được bỏ trống.
                     </div>
                   </div>
-                  <div class="col-lg-7">
+                  <div class="col-lg-6">
                     <div class=" input-group mt-3">
                       <div class="form-floating flex-grow-1">
                         <input type="text" class="form-control" id="floatingAddress" required
@@ -286,13 +258,13 @@
                                [ngClass]="(rfUser.controls['detailAddress'].touched) ?
                                (rfUser.controls['detailAddress'].errors ? 'is-invalid' : 'is-valid') : '' ">
                         <label for="floatingAddress">Địa chỉ chi tiết</label>
-                        <div *ngIf="rfUser.controls['detailAddress'].hasError('required')
-                             && rfUser.controls['detailAddress'].touched" style="color: red">
-                          Địa chỉ chi tiết không được bỏ trống.
-                        </div>
                       </div>
-                      <span class="input-group-text" id="basic-addon9"><i
-                        class="fa-solid fa-location-dot"></i></span>
+                      <span class="input-group-text" id="basic-addon9">
+                      <i class="fa-solid fa-map-location-dot"></i></span>
+                    </div>
+                    <div *ngIf="rfUser.controls['detailAddress'].hasError('required')
+                             && rfUser.controls['detailAddress'].touched" style="color: red">
+                      Địa chỉ chi tiết không được bỏ trống.
                     </div>
                   </div>
                 </div>
@@ -303,10 +275,8 @@
                     <button type="button" (click)="reset(id)" class="btn btn-warning">Đặt lại</button>
                   </div>
                 </div>
-
               </form>
             </div>
-
           </div>
         </div>
       </div>

@@ -131,8 +131,8 @@
   </form>
   <div class="content">
     <div class="container-fluid">
-      <div class="row" style="margin: 0 -24px;" *ngIf="pageProducts">
-        <div class="col-lg-3 col-sm-6 col-12 col-md-4 mb-4"
+      <div class="row" style="margin: 0 -24px;" *ngIf="pageProducts; else nodata">
+        <div class="col-lg-3 col-sm-6 col-6 col-md-4 mb-4"
              *ngFor="let product of pageProducts.content, let i = index;">
           <div class="card product">
             <img id="image__main{{i}}" height="226" src="{{product.imgUrlProducts[0]?.url}}"
@@ -173,6 +173,14 @@
           </div>
         </div>
       </div>
+      <ng-template #nodata>
+        <div class="row">
+          <div class="col-lg-12 col-12 col-sm-12 col-md-12 d-flex justify-content-center flex-wrap">
+            <p class="w-100 text-center" style="font-size: 24px; color: #f3734c;">Không có sản phẩm nào!</p>
+            <img class="d-block" style="width: 40%" src="../../../assets/payment_image/nodata.png" alt="">
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
   <div class="more mt-2 mb-2 d-flex justify-content-center">

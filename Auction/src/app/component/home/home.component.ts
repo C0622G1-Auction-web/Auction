@@ -213,16 +213,16 @@ export class HomeComponent implements OnInit, OnDestroy {
                     ${days} ngày
                 </span>` +
                 `<span class="mx-1">:</span>` +
-                `<span style="min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__hh red__color">${hours}</span>` +
+                `<span style="min-width:30px; text-align: center; border: 1px solid #fa4c17; padding: 2px; border-radius: 3px" class="time__hh red__color">${hours}</span>` +
                 `<span class="mx-1">:</span>` +
-                `<span style="min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__mm">${minutes}</span>` +
+                `<span style="min-width:30px; text-align: center; border: 1px solid #fa4c17;; padding: 2px; border-radius: 3px" class="time__mm">${minutes}</span>` +
                 `<span class="mx-1">:</span>` +
-                `<span style="min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__ss">${seconds}</span>`;
+                `<span style="min-width:30px; text-align: center; border: 1px solid #fa4c17;; padding: 2px; border-radius: 3px" class="time__ss">${seconds}</span>`;
             } else if(distance > 0  && startTime > now){
               let days = Math.floor((startTime - now) / (1000 * 60 * 60 * 24));
               clearInterval(countDow);
               e.innerHTML =
-                `<span style=" width: 100%; min-width:30px; text-align: center; border: 1px solid red; padding: 2px; border-radius: 3px" class="time__hh">Còn ${days} ngày sẽ mở đấu giá</span>`;
+                `<span style=" width: 100%; min-width:30px; text-align: center; border: 1px solid #fa4c17;; padding: 2px; border-radius: 3px" class="time__hh">Còn ${days} ngày sẽ mở đấu giá</span>`;
             } else {
               clearInterval(countDow);
               e.innerHTML =

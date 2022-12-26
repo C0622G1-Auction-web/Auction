@@ -7,7 +7,7 @@
         <div class="card shadow-lg" style="box-sizing: border-box">
           <div class="card-body">
 
-            <h1 class="mb-5 mt-2 text-primary h2 text-center">Đăng Nhập</h1>
+            <h1 class="mb-5 mt-2 h2 text-center">Đăng Nhập</h1>
 
             <form [formGroup]="rfLogin" (ngSubmit)="login()">
               <div class="form-floating mb-4">
@@ -53,14 +53,14 @@
                 </div>
                 <div class="col-5">
                   <span routerLink="/account/forgot_password" class="float-end mb-1">
-                    Quên mật khẩu?
+                    Quên mật khẩu
                   </span>
                 </div>
               </div>
 
               <div class="row form-floating mb-4">
                 <div class="col-12">
-                  <button [disabled]="rfLogin.invalid" type="submit" class="btn btn-primary" style="width: 100%">
+                  <button [disabled]="rfLogin.invalid" type="submit" class="btn btn-primary" style="width: 100%; background-image: linear-gradient(to bottom right, #fa6132, #d74836)">
                     Đăng Nhập
                   </button>
                 </div>

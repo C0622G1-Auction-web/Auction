@@ -124,10 +124,9 @@ img.center {
   background: url("../../../../assets/payment_image/logo_print.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 #pills-contact {
   display: block;
-  padding: 12px 0 0 24px;
 }

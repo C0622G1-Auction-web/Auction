@@ -66,7 +66,7 @@ export class UserListComponent implements OnInit {
     this._userService.searchBy(this.rfSearch.value, 0).subscribe(data => {
       this.pageUsers = data;
       console.log("list" + this.pageUsers.content)
-      for (let i = 0; i <this.pageUsers.content.length ; i++) {
+      for (let i = 0; i < this.pageUsers.content.length; i++) {
         console.log("list:" + this.pageUsers.content[i].account.username)
       }
     });
@@ -119,25 +119,32 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  modalById(id: number): void {
+  modalById1(id: number): void {
     this._userService.findUserEditById(id).subscribe(data => {
       this.user = data;
-    })
+    });
     if (this.user.account.statusLock) {
-      this._notificationService.showWarningNotification('Tài khoản hiện đã bị khoá')
+      this._notificationService.showWarningNotification('Tài khoản hiện đang mở');
     } else {
       this.unlockIds = [id];
       this.sendToUnlockGroupModal();
     }
+  }
 
+  modalById(id: number): void {
+    this._userService.findUserEditById(id).subscribe(data => {
+      this.user = data;
+      this.unlockIds = [id];
+      this.sendToUnlockGroupModal();
+    });
   }
 
 
   unlock() {
     for (let i = 0; i < this.unlockIds.length; i++) {
-      if (!this.unlockIds[i]){
-        this._notificationService.showWarningNotification('Tài khoản hiện không bị khoá')
-      }else {
+      if (!this.unlockIds[i]) {
+        this._notificationService.showWarningNotification('Tài khoản hiện không bị khoá');
+      } else {
         this._userService.unlock(this.unlockIds).subscribe(data => {
           this._notificationService.showSuccessNotification('Mở khoá thành công!');
         });
@@ -151,7 +158,7 @@ export class UserListComponent implements OnInit {
   }
 
   lockUser() {
-    let idString =  this.unlockIds.join(',');
+    let idString = this.unlockIds.join(',');
     console.log(idString);
     this._router.navigate(['/user/lock', idString]);
   }

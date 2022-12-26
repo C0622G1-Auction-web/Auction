@@ -10,7 +10,10 @@
 .carousel-indicators button.thumbnail:not(.active) {
   opacity: 0.7;
 }
-
+.product__description img{
+  display: block;
+  width: 100%;
+}
 .carousel-indicators {
   position: static;
 }

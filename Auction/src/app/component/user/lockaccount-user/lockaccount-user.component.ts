@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AccountService} from "../../../service/account/account.service";
 import {Title} from "@angular/platform-browser";
 import {NotificationService} from "../../../service/notification/notification.service";
+import {Account} from "../../../model/account/account";
 
 @Component({
   selector: 'app-lockaccount-user',

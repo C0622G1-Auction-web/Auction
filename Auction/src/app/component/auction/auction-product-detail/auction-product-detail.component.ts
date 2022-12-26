@@ -12,6 +12,7 @@ import {Title} from "@angular/platform-browser";
 import {AuctionDto} from "../../../dto/auction-dto";
 import {valueReferenceToExpression} from "@angular/compiler-cli/src/ngtsc/annotations/src/util";
 import {NotificationService} from "../../../service/notification/notification.service";
+import {style} from "@angular/animations";
 
 
 @Component({
@@ -65,7 +66,7 @@ export class AuctionProductDetailComponent implements OnInit, OnDestroy {
       const roles = this._tokenService.getRole();
       for (let i = 0; i < roles.length; i++) {
         if (roles[i] === "ROLE_ADMIN") {
-          this.accountRole = "ROLE_ADMIN"
+          this.accountRole = "ROLE_ADMIN";
         }
       }
 
@@ -83,12 +84,15 @@ export class AuctionProductDetailComponent implements OnInit, OnDestroy {
           currentPrice: this.productDetail.maxCurrentPrice,
           userId: this.userId,
           productId: +this.idProductDetail
-        }, {validators: [this.checkAuctionPrice]})
+        }, {validators: [this.checkAuctionPrice]});
         this.selectedChangImage();
-
         this.runCountDowDate(new Date(this.productDetail.endTime).getTime());
       });
-
+    setTimeout(function () {
+      document.querySelectorAll('.product__description img').forEach(value => {
+        value.classList.add('d-block', 'w-100');
+      });
+    }, 300);
 
     this._socketService.auctionSubject.subscribe(data => {
       this.productDetail = {
