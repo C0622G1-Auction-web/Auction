@@ -80,7 +80,7 @@ export class UserService {
   saveaddAcountUser(user: User):
     Observable<User> {
     console.log(user);
-    return this._httpClient.post<User>('http://localhost:8080/api/user/v1/add', user);
+    return this._httpClient.post<User>(environment.apiUrl + '/api/user/v1/add', user);
   }
 
 
@@ -117,7 +117,7 @@ export class UserService {
    * Date: 21/12/2022
    */
   getAllUserChat():Observable<User[]>{
-    return  this._httpClient.get<User[]>('http://localhost:8080/api/v1/users/getAll');
+    return  this._httpClient.get<User[]>(environment.apiUrl + '/api/v1/users/getAll');
   }
   findAllUser(): Observable<User[]> {
     return this._httpClient.get<User[]>(environment.uri_api_find_all_user_v1)

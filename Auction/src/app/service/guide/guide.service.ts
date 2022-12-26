@@ -28,7 +28,7 @@ export class GuideService {
   }
 
   findImageGuide(id: number): Observable<ImgUrlGuideDto[]> {
-    return this._httpClient.get<ImgUrlGuideDto[]>('http://localhost:8080/api/v1/guide/image/find/' + id);
+    return this._httpClient.get<ImgUrlGuideDto[]>(environment.apiUrl + '/api/v1/guide/image/find/' + id);
   }
 
 }

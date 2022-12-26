@@ -10,6 +10,7 @@ import {Subject} from "rxjs";
 import {ProductService} from "../product/product.service";
 import {PageProduct} from "../../model/product/page-product";
 import {AuctionDto} from "../../dto/auction-dto";
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,7 @@ export class SocketService implements OnInit {
    * function: connect to topic to through stompClient
    */
   connect() {
-    const ws = new SockJS("http://localhost:8080/ws")
+    const ws = new SockJS(environment.apiUrl + '/ws');
     this.stompClient = Stomp.over(ws);
     this.stompClient.connect({}, () => {
       this.stompClient.subscribe('/topic/auction', data => {

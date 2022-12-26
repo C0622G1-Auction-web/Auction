@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {LockAccount} from "../../model/account/lock-account";
 import {User} from "../../model/user/user";
 import { environment } from 'src/environments/environment';
-const API_URL = 'http://localhost:8080/api/v1/accounts/';
+const API_URL = environment.apiUrl + '/api/v1/accounts/';
 
 @Injectable({
   providedIn: 'root'
