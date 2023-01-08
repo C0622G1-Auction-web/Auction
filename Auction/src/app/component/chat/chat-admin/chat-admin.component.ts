@@ -9,6 +9,7 @@ import Database = firebase.database.Database;
 import initializeApp = firebase.initializeApp;
 import {ToastrService} from "ngx-toastr";
 import {UserService} from "../../../service/user/user.service";
+import {User} from '../../../model/user/user';
 
 
 @Component({
@@ -19,6 +20,9 @@ import {UserService} from "../../../service/user/user.service";
 export class ChatAdminComponent implements OnInit {
 
   userchat: string[] = [];
+  userList: User[];
+  userSelected: User;
+  userSelectedStr: string;
   title = 'firechat';
   app: FirebaseApp;
   db: Database;
@@ -50,10 +54,10 @@ export class ChatAdminComponent implements OnInit {
     this.chats = [];
     if (this.checkUser) {
       firebase.database().ref('chat/user').child(this.itemUser.toString()).push(chat);
-      console.log(this.chats)
+      console.log(this.chats);
     } else {
       firebase.database().ref('chat/khach').child(this.itemUser.toString()).push(chat);
-      console.log(this.chats)
+      console.log(this.chats);
     }
     this.form = this.formBuilder.group({
       'message': ['', [Validators.required]],
@@ -66,9 +70,10 @@ export class ChatAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this._userService.getAllUserChat().subscribe(data => {
-      console.log(data);
+      console.log('asdadsadsadadsa: ', data);
+      this.userList = data;
       for (let i = 0; i < data.length; i++) {
-        this.userchat.push(data[i].account.username)
+        this.userchat.push(data[i].account.username);
       }
       for (let i = 0; i < this.userchat.length; i++) {
         const dbRef = firebase.database().ref('chat/user').child(this.userchat[i]);
@@ -76,29 +81,29 @@ export class ChatAdminComponent implements OnInit {
           const data = snapshot.val();
           for (let id in data) {
             this.chatInfor = data[id]
-            console.log(this.chatInfor)
+            console.log('sang: ', this.chatInfor);
           }
           if (this.chatInfor.username != undefined) {
             if (this.chatInfor.username != 'admin') {
-              this._toast.success('New Message From ' + this.chatInfor.username, 'receive', {
-                timeOut: 2000
-              })
+              const a = document.querySelector('.' + this.chatInfor.username);
+              a.classList.add('active');
+              a.click();
+              this.userSelectedStr = this.chatInfor.username;
             }
           }
-        })
+        });
       }
     }, error => {
-      alert('loi')
-    })
-    console.log(this.userchat);
+      alert('loi');
+    });
     const dbb = firebase.database().ref('chat/khach');
     dbb.once('value', (snapshot) => {
       const data = snapshot.val()
       for (let k in data) {
         this.listChatInforVisitor.push(k);
       }
-      console.log(this.listChatInforVisitor)
-    })
+      console.log(this.listChatInforVisitor);
+    });
     for (let i = 0; i < this.listChatInforVisitor.length; i++) {
       const dbRef = firebase.database().ref('chat/khach').child(this.listChatInforVisitor[i]);
       dbRef.once('value', (snapshot) => {
@@ -111,16 +116,16 @@ export class ChatAdminComponent implements OnInit {
           console.log(this.chatInforVisitor.username)
           this._toast.success('New Message From visitor ' + this.chatInforVisitor.username, 'receive', {
             timeOut: 3000
-          })
+          });
         }
-      })
+      });
     }
   }
 
   autoScroll() {
     setTimeout(function () {
       document.getElementById('scroll').scrollTop = document.getElementById('scroll').scrollHeight;
-    }, 100)
+    }, 200);
   }
 
   heiht() {
@@ -132,13 +137,25 @@ export class ChatAdminComponent implements OnInit {
     });
   }
 
+  clearSelected() {
+    document.querySelectorAll('.user__item').forEach((value, key) => {
+      value.classList.remove('selected');
+    });
+  }
   chooseUser(item: string) {
+    this.clearSelected();
+    document.querySelector('.' + item).classList.add('selected');
+    this.userList.forEach(value => {
+      if (value.account.username === item) {
+        this.userSelected = value;
+      }
+    });
     this.chats = [];
     this.itemUser = item;
     for (let i = 0; i < this.userchat.length; i++) {
       if (item === this.userchat[i]) {
         this.check = i;
-        break
+        break;
       }
     }
     for (let i = 0; i < this.listChatInforVisitor.length; i++) {
@@ -147,9 +164,9 @@ export class ChatAdminComponent implements OnInit {
         break;
       }
     }
-    console.log(this.userchat[this.check])
+    console.log(this.userchat[this.check]);
     console.log(item);
-    console.log(this.itemUser)
+    console.log(this.itemUser);
     const dbRef = firebase.database().ref('chat/user');
     dbRef.on('value', (snapshot) => {
       this.chats = [];
@@ -162,7 +179,7 @@ export class ChatAdminComponent implements OnInit {
       this.itemUser = item;
       console.log(this.chats)
       this.checkUser = true;
-    })
+    });
   }
 
   chooseVisitor(item: string) {
@@ -176,19 +193,19 @@ export class ChatAdminComponent implements OnInit {
     }
     console.log(this.listChatInforVisitor[this.check])
     console.log(item);
-    console.log(this.itemUser)
+    console.log(this.itemUser);
     const dbRef = firebase.database().ref('chat/khach');
     dbRef.on('value', (snapshot) => {
       this.chats = [];
       const data = snapshot.child(item).val();
       for (let id in data) {
-        this.chats.push(data[id])
+        this.chats.push(data[id]);
       }
       this.autoScroll();
       this.heiht();
       this.itemUser = item;
-      console.log(this.chats)
+      console.log(this.chats);
       this.checkUser = false;
-    })
+    });
   }
 }

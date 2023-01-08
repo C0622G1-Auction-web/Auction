@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+.boxed {
+  border: 5px solid;
+  border-image-slice: 1;
+  border-color: aliceblue;
+  padding: 5px;
+  border-radius: 20px;
+  box-shadow: 1px 1px aliceblue;
+}
+
+tr td {
+  height: 50px;
+}
