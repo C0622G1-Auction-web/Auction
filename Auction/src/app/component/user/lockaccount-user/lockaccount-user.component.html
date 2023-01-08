@@ -1,70 +1,104 @@
-<form style="margin-top: 30px; max-width: 450px; padding-bottom: 5px; background-color: #fdf7ed"
-      class=" container-fluid shadow"
-      [formGroup]="rfLockAccount" *ngIf="rfLockAccount" (ngSubmit)="lock()">
-  <div class="row text-center mt-5">
-    <h2 style="margin-top: 10px">Khóa Thành Viên</h2>
-  </div>
-  <div class="mb-2" style="margin-top:20px">
-    <label for="select_id"> Vui Lòng chọn ID<span style="color:red">(*)</span>:</label>
-    <select id="select_id" (change)="hanDlerLock($event)" class="form-control" style="width: 150px"
-            formArrayName="accountId"
-            [ngClass]="(rfLockAccount.controls['startDay'].touched)?(rfLockAccount.controls['startDay'].invalid) ? 'is-invalid':'is-valid':''">
-      <option selected value="0">----Chọn ID----</option>
-      <option *ngFor="let idLock of idListR" [value]="idLock">{{idLock}}</option>
-      <div class="invalid-feedback">
-        <div *ngIf="rfLockAccount.controls['startDay'].errors?.required && rfLockAccount.controls['startDay'].touched">
-          Không được để trống.
+<div class="container mb-5 mt-5">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="boxed col-lg-8 shadow-lg">
+      <form *ngIf="rfLockAccount" [formGroup]="rfLockAccount" (ngSubmit)="lockAccountUser()">
+        <div class="mt-4 text-center">
+          <h1>Khóa thành viên</h1>
         </div>
-      </div>
-    </select>
-  </div>
-  <div style="margin-top: 20px" class="mb-3">
-    <label for="startday">
-      Ngày bắt đầu khóa:<span style="color:red">(*)</span>
-    </label>
-    <input class="form-control" type="date" style="margin-right: 10px" id="startday" formControlName="startDay"
-           [ngClass]="(rfLockAccount.controls['startDay'].touched)?(rfLockAccount.controls['startDay'].invalid) ? 'is-invalid':'is-valid':''">
-    <div class="invalid-feedback">
-      <div *ngIf="rfLockAccount.controls['startDay'].errors?.required && rfLockAccount.controls['startDay'].touched">
-        Không được để trống.
+        <div class="mt-5  text-center">
+          <table>
+            <tr>
+              <td style="width: 222px">
+                <label for="select_id"> Vui Lòng chọn ID<span style="color:red ">(*)</span>:</label>
+              </td>
+              <td>
+                <select id="select_id" (change)="hanDlerLock($event)" class="form-control" style="width: 350px" >
+                  <option value="">----Chọn ID----</option>
+                  <option *ngFor="let idLock of idListR" [value]="idLock">{{idLock}}</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="startDay" class="form-label">Thời gian bắt đầu khóa:(<span
+                style="color: red">*</span>):</label></td>
+              <td><input type="date" class="form-control" formControlName="startDay" id="startDay" style="width: 350px"
+                         [ngClass]="(rfLockAccount.controls['startDay'].touched)?(rfLockAccount.controls['startDay'].invalid|| rfLockAccount.errors?.checkStartDay)?'is-invalid':'is-valid':''">
+                <div class="invalid-feedback">
+                  <div *ngIf="rfLockAccount.controls['startDay'].errors?.required && rfLockAccount.controls['startDay'].touched">
+                    Không được để trống.
+                  </div>
+                  <div *ngIf="rfLockAccount.errors?.checkStartDay"
+                       style="color: red">
+                    Thời gian bắt đầu khóa phải lớn hơn  thời gian hiện tại.
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="endDay" class="form-label ">Thời gian kết thúc khóa:(<span
+                style="color: red">*</span>):</label></td>
+              <td><input type="date" class="form-control" formControlName="endDay" id="endDay" style="width: 350px"
+                         [ngClass]="(rfLockAccount.controls['endDay'].touched)?(rfLockAccount.controls['endDay'].invalid|| rfLockAccount.errors?.checkendDay)?'is-invalid':'is-valid':''">
+                <div class="invalid-feedback">
+                  <div *ngIf="rfLockAccount.controls['endDay'].errors?.required && rfLockAccount.controls['endDay'].touched">
+                    Không được để trống.
+                  </div>
+                  <div *ngIf="rfLockAccount.errors?.checkendDay"
+                       style="color: red">
+                    Thời gian kết thúc khóa phải lớn hơn thời gian bắt đầu khóa.
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="reason" class="form-label ">Lí do muốn xóa(<span style="color: red">*</span>):</label>
+              </td>
+              <td>
+                <textarea type="text" class=" form-control" formControlName="reason" id="reason"
+                          [ngClass]="(rfLockAccount.controls['reason'].touched)? rfLockAccount.controls['reason'].invalid?'is-invalid':'is-valid':''">
+            </textarea>
+                <div class="invalid-feedback">
+                  <div
+                    *ngIf="rfLockAccount.controls['reason'].errors?.required && rfLockAccount.controls['reason'].touched">
+                    Không được để trống.
+                  </div>
+                  <div *ngIf="rfLockAccount.controls['reason'].hasError('minlength') &&
+                                     rfLockAccount.controls['reason'].touched" style="color: red">
+                    Lý do không được quá ngắn
+                  </div>
+                  <div *ngIf="rfLockAccount.controls['reason'].hasError('maxlength') &&
+                                     rfLockAccount.controls['reason'].touched" style="color: red">
+                    Lý do không được quá dài
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="form-label  ">Bạn thực sự muốn khóa có tài khoản(<span
+                  style="color: red">*</span>):</label>
+              </td>
+              <td><span style="color: red; font-size: 20px">{{account?.username}}</span></td>
+            </tr>
+          </table>
+        </div>
+        <div class="text-center mb-4" style="margin-top:20px">
+          <button type="submit" class="btn btn-primary" [disabled]="!this.rfLockAccount.valid"
+                  style="margin-right: 10px">Khóa thành viên
+          </button>
+          <a routerLink="/user/list">
+            <button class="btn btn-primary" style="margin-right: 10px">Hủy</button>
+          </a>
+          <button type="reset" class="btn btn-primary">Nhập lại</button>
+        </div>
+      </form>
+      <div class="mb-2">
+        <span style="font-size: 15px" class="fst-italic">Trường có dấu ( <span style="color: red">*</span> ) là bắt buộc, không được bỏ trống.</span>
       </div>
     </div>
-  </div>
-  <div class="mb-3">
-    <label for="endday">Ngày kết thúc khóa:<span style="color:red">(*)</span></label>
-    <input class="form-control" type="date" style="margin-right: 10px" id=endday formControlName="endDay"
-           [ngClass]="(rfLockAccount.controls['endDay'].touched)?(rfLockAccount.controls['endDay'].invalid) ? 'is-invalid':'is-valid':''">
-    <div class="invalid-feedback">
-      <div *ngIf="rfLockAccount.controls['endDay'].errors?.required && rfLockAccount.controls['endDay'].touched">
-        Không được để trống.
-      </div>
+    <div class="col-lg-2">
     </div>
   </div>
-  <div class="mb-2">
-    <label for="reason"> Lí do bị khóa:<span style="color:red">(*)</span></label>
-    <textarea class="form-control" formControlName="reason" id="reason"
-              [ngClass]="(rfLockAccount.controls['reason'].touched)?(rfLockAccount.controls['reason'].invalid) ? 'is-invalid':'is-valid':''">
-    </textarea>
-
-    <div class="invalid-feedback">
-      <div *ngIf="rfLockAccount.controls['reason'].errors?.required && rfLockAccount.controls['reason'].touched">
-        Không được để trống
-      </div>
-    </div>
-  </div>
-  <div class="mb-2" *ngIf="account">
-    Bạn có thực sự muốn khóa tài khoản: <span style="color: red; font-size: 20px">{{account?.username}}</span>
-  </div>
-  <div hidden>
-    <input formControlName="accountId">
-  </div>
-  <div class=" text-center mb-4" style="margin-top: 20px">
-    <button type="submit" [disabled]="!this.rfLockAccount.valid" class="btn btn-primary"
-            style="margin-right: 10px">Khóa
-    </button>
-    <a routerLink="user/list'">
-      <button class="btn btn-primary">Hủy</button>
-    </a>
-  </div>
-  <span style="font-size: 15px" class="fst-italic">Trường có dấu <span style="color: red">*</span> là bắt buộc, không được bỏ trống.</span>
-</form>
+</div>
