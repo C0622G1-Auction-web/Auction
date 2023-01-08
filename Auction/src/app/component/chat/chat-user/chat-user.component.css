@@ -102,6 +102,7 @@ p{
   height: 50vh;
   padding: 10px;
   padding-top: 32px;
+  margin-bottom: 12px;
   overflow-y: scroll;
 }
 
