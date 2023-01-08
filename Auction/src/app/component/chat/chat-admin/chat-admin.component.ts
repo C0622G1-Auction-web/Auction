@@ -87,7 +87,7 @@ export class ChatAdminComponent implements OnInit {
             if (this.chatInfor.username != 'admin') {
               const a = document.querySelector('.' + this.chatInfor.username);
               a.classList.add('active');
-              a.click();
+              this.autoClickChat(a);
               this.userSelectedStr = this.chatInfor.username;
             }
           }
@@ -121,7 +121,9 @@ export class ChatAdminComponent implements OnInit {
       });
     }
   }
-
+  autoClickChat(a: any) {
+    a.click();
+  }
   autoScroll() {
     setTimeout(function () {
       document.getElementById('scroll').scrollTop = document.getElementById('scroll').scrollHeight;
